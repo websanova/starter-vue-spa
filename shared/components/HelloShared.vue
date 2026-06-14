@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { cn } from "@shared/lib/utils"
+  import { cn } from "@shared/lib/utils"
 
-defineProps<{
-  message: string
-}>()
+  defineProps<{
+    message: string
+  }>()
 </script>
 
 <template>

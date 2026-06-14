@@ -92,6 +92,7 @@
 
 ## Project
 - Always use 2 spaces for indenting.
+- In Vue SFCs, indent `<script>` and `<style>` block content one level (2 spaces), not flush to column 0.
 - Doc blocks must always use multi-line `/** */` format, never single-line above any function, variable, or type.
 - Doc block prose must read as plain sentences. No dashes of any kind (em, en, or double hyphen) as punctuation.
 - Never align variable assignments or object properties with extra spaces. One space on each side of `=` and `:`.

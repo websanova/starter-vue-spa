@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HelloShared from "@shared/components/HelloShared.vue"
-import { Button } from "@shared/components/ui/button"
-import { Rocket } from "lucide-vue-next"
+  import HelloShared from "@shared/components/HelloShared.vue"
+  import { Button } from "@shared/components/ui/button"
+  import { Rocket } from "lucide-vue-next"
 </script>
 
 <template>
