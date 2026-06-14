@@ -9,3 +9,9 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 - [Docker Setup](docs/docker-setup.md)
 - [Dev Commands](docs/dev-commands.md)
+
+## Features
+
+- **Dev Environment**
+  - Dockerized (Node 22)
+  - `./run` script for container commands
