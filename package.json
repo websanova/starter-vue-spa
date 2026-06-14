@@ -1,0 +1,19 @@
+{
+    "name": "starter-vue-spa",
+    "private": true,
+    "version": "0.0.0",
+    "workspaces": [
+        "app",
+        "admin"
+    ],
+    "scripts": {
+        "dev:app": "cross-env VITE_APP_NAME=app yarn workspace @starter/app dev",
+        "dev:admin": "cross-env VITE_APP_NAME=admin yarn workspace @starter/admin dev",
+        "build:app": "cross-env VITE_APP_NAME=app yarn workspace @starter/app build",
+        "build:admin": "cross-env VITE_APP_NAME=admin yarn workspace @starter/admin build",
+        "build": "yarn build:app && yarn build:admin"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3"
+    }
+}
