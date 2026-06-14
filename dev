@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case "$1" in
+    install) docker compose exec app yarn install ;;
+    app) shift; docker compose exec app yarn workspace app run "$@" ;;
+    admin) shift; docker compose exec admin yarn workspace admin run "$@" ;;
+    yarn) shift; docker compose exec app yarn "$@" ;;
+    sh) shift; docker compose exec "$1" sh ;;
+    *) echo "Usage: ./dev {install|app|admin|yarn|sh} [args]" ;;
+esac
