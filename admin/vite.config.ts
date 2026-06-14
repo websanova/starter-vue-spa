@@ -15,8 +15,11 @@ export default defineConfig(({ mode }) => {
             }
         },
         server: {
-            host: env.VITE_HOST || "localhost",
-            port: Number(env.VITE_PORT) || 5174
+            host: env.VITE_HOST || "0.0.0.0",
+            port: Number(env.VITE_PORT) || 5174,
+            watch: {
+                usePolling: true
+            }
         }
     }
 })
