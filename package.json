@@ -7,13 +7,27 @@
         "admin"
     ],
     "scripts": {
-        "dev:app": "cross-env VITE_APP_NAME=app yarn workspace @starter/app dev",
-        "dev:admin": "cross-env VITE_APP_NAME=admin yarn workspace @starter/admin dev",
-        "build:app": "cross-env VITE_APP_NAME=app yarn workspace @starter/app build",
-        "build:admin": "cross-env VITE_APP_NAME=admin yarn workspace @starter/admin build",
-        "build": "yarn build:app && yarn build:admin"
+        "dev:app": "yarn workspace app run dev",
+        "dev:admin": "yarn workspace admin run dev",
+        "build:app": "yarn workspace app run build",
+        "build:admin": "yarn workspace admin run build",
+        "build": "yarn build:app && yarn build:admin",
+        "preview:app": "yarn workspace app run preview",
+        "preview:admin": "yarn workspace admin run preview"
+    },
+    "dependencies": {
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^2.6.0",
+        "vue": "^3.5.13",
+        "vue-router": "^4.5.0"
     },
     "devDependencies": {
-        "cross-env": "^7.0.3"
+        "@tailwindcss/vite": "^4.0.0",
+        "@vitejs/plugin-vue": "^5.2.1",
+        "tailwindcss": "^4.0.0",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.0",
+        "vue-tsc": "^2.2.0"
     }
 }
