@@ -6,5 +6,5 @@ case "$1" in
     admin) shift; docker compose exec admin yarn workspace admin run "$@" ;;
     yarn) shift; docker compose exec app yarn "$@" ;;
     sh) shift; docker compose exec "$1" sh ;;
-    *) echo "Usage: ./dev {install|app|admin|yarn|sh} [args]" ;;
+    *) echo "Usage: ./run {install|app|admin|yarn|sh} [args]" ;;
 esac

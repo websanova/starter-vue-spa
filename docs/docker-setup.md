@@ -11,7 +11,7 @@ automatically to avoid modifying `yarn.lock` without your say-so. Install them a
 restart.
 
 ```bash
-./dev install
+./run install
 docker compose restart
 ```
 
