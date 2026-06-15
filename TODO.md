@@ -1,46 +1,61 @@
 # TODO / Architecture Notes
 
-Working notes from the discussion on views, components, composables, and stores. Captures decisions and open items so the patterns are set before the app grows.
+Working notes from the discussion on structure, components, composables, and the data layer. Captures decisions so the patterns are set before the app grows. Rules in `.claude/rules/` enforce most of this; this file is the rationale and the open items.
 
-## Component layers (settled)
+## Structure (settled)
 
-- Three layers: primitives (`shared/components/ui/`, vendored shadcn, never hand-edited), composites (`shared/components/common/`, reusable, built from primitives), feature (app-level in `app/src/components/` or `admin/src/components/`).
-- There is no folder named `feature`. The app's own `src/components/` is the feature layer. Group feature components by domain subfolder from the start (e.g. `app/src/components/bookmarks/`).
-- Placement is decided by reuse, not by what a component is built from or how large it is. A fat widget is still `common/` if shared, app-level if app-bound. Composites stack with no depth limit.
-- Captured in `.claude/rules/components.md` and the external doc `04 - Component Architecture.md`.
+- Feature-based. Group by domain, not by file type. No top-level `services/`, `stores/`, `types/`, or `components/` folders.
+- Per app: `router/`, `views/` (route screens), `features/` (slices), plus optional `composables/` and `lib/` for the rare app-wide cross-feature code.
+- Feature slice anatomy: `features/<domain>/` with `types.ts`, `api/` (service + DTO + mapper), `model/` (store + composable), `ui/` (components). Intra-slice imports relative, `@shared` for infra.
+- See `.claude/rules/architecture.md`, `features.md`, `components.md`.
+
+## Components (settled)
+
+- Three layers: primitives (`shared/components/ui/`, vendored shadcn, never hand-edited), composites (`shared/components/common/`, reusable across apps), feature UI (`features/<domain>/ui/`, domain-bound).
+- Feature components live in the slice `ui/` segment, not an app-level `components/` folder. Placement decided by reuse, not by what a component is built from.
 
 ## Views (settled)
 
-- Views can use all three layers, not only feature components. The layering rule governs where components live, not what a view may import.
-- Views are thin orchestrators. They handle route concerns (read params, kick off loading), compose feature components, and pass props/handlers down.
-- No major logic in views. Data fetching, mutations, derived state, and business rules go into composables and stores. A healthy view reads like a table of contents: fetch, then compose.
-- Domain UI belongs in feature components, not inline in the view template.
+- Views can use all three component layers, not only feature components.
+- Views are thin orchestrators: route concerns, kick off loading, compose feature UI. No HTTP, no business logic, no domain UI inline. Logic goes to feature composables and stores.
 
 ## Data layer (settled)
 
-- Four layers, one direction. Service (HTTP) -> store (state) -> composable (orchestration) -> component/view (render).
-- Service: owns HTTP, one module per resource, the only place endpoint paths and fetch/axios live.
-- Store (Pinia): pure state container. Normalized data, derived getters, dumb mutations. No HTTP, transport-agnostic. Holds persisted state that must survive navigation (loading/loaded/fetchedAt live here, not in a component-scoped composable).
-- Composable (`use*`): orchestration glue. Wires service to store, exposes intent. Optional, add only when there is real orchestration. If a store action does the fetch instead, the composable can shrink or vanish; do not create empty pass-through composables.
-- `useApi(fn)`: generic async wrapper returning data/loading/error/execute. One instance per operation so each call has its own loading flag. For ephemeral calls; persisted state goes in the store.
+- One direction: service (`api/`) -> store (`model/store.ts`) -> composable (`model/use<Domain>.ts`) -> ui/view.
+- Service: owns HTTP, the only place endpoint paths and the wire shape live. Returns domain types.
+- Store (Pinia): pure state container. Normalized data, derived getters, dumb mutations, no HTTP. Holds persisted state (loading/loaded/fetchedAt) that must survive navigation.
+- Composable: orchestration glue, wires service to store, exposes intent. Optional; if a store action does the fetch instead, it can shrink. No empty pass-through composables.
+- `useApi(fn)`: generic async wrapper, one per operation so each call has its own loading flag. Ephemeral; persisted state goes in the store. Lives in `shared/composables`.
 
-## Composables are not all resource fetchers
+## DTO / domain split (settled)
 
-- Resource composables (`useBookmarks`) are one category. Others: UI/behavior (`useModal`, `useDebounce`), cross-cutting logic (`useAuth`, `usePermissions`), small utilities (often from VueUse).
+- DTO = raw API contract, file-local to the service, never exported. Domain type = yours, in `types.ts`. Mapper (`to<Domain>`) converts DTO to domain, always hand-written.
+- DTO can be generated from a backend OpenAPI/GraphQL spec; mapper and domain type stay hand-written. Needs the Laravel side to publish a spec, otherwise hand-write the DTO.
+
+## Shared vs app (settled)
+
+- Share mechanism, not meaning. `shared/` holds `http`, `useApi`, generic UI composables, and the `ui`/`common` component layers.
+- Domain code is per app. Bookmarks is fully separated: app and admin each own type, DTO, service, store, composable, UI. No shared bookmark code.
+- Standard backing this: group by feature, prefer duplication over a premature shared abstraction between diverging consumers. Shared domain types are justified only for a single stable contract (ideally generated).
+
+## Slice boundaries (settled)
+
+- Own lifecycle = own slice. Categories and tags are separate slices, not folded into bookmarks. A bookmark references them by type (`bookmark.category`, `bookmark.tags`), one-directional import.
+- Sub-actions stay in the owning slice. Favoriting lives in `features/bookmarks/api`, one method until it grows a cluster (then `api/favorites.ts`). Path shape never drives file structure.
+- Circular feature imports -> extract shared models to an `entities/` layer. Not needed yet.
 
 ## Rejected / deferred
 
-- No generic `useStore` or `apiStore` composable wrapping Pinia. Pinia is already the consistency layer; wrapping it fights typing and devtools.
-- For repeated store boilerplate, use a typed store factory (`createResourceStore<T>(id, api)`), not a runtime wrapper. Build it on the rule of three (after the third near-identical store) and give it escape hatches for per-resource getters/actions. Deferred until resources actually repeat.
-- `useApi`: prefer wrapping VueUse `useAsyncState` / `useFetch` over hand-rolling if reaching for more features. Current example is hand-rolled and dependency-free.
+- No generic `useStore`/`apiStore` composable wrapping Pinia. For repeated store boilerplate use a typed store factory (`createResourceStore<T>`), built on the rule of three with escape hatches. Deferred until stores repeat.
+- No shared base bookmark type with admin extending it. Chosen full separation per app.
 
 ## Open decisions
 
-- Caching semantics: hand-rolled store fields (loaded/fetchedAt) are enough for "keep last data + loading per resource." If real cache semantics are needed (keys, invalidation, background refetch, dedupe), evaluate a query layer (Pinia Colada, the official Pinia data layer, or TanStack Query) before hand-rolling. Decide before stores multiply.
-- State library: Pinia added for the example. Confirm it stays as the standard.
+- Caching: hand-rolled store fields (loaded/fetchedAt) suffice for "keep last data + loading." For real cache semantics (keys, invalidation, background refetch, dedupe), evaluate a query layer (Pinia Colada or TanStack Query) before hand-rolling. Decide before stores multiply.
+- State/data library: Pinia added. Confirm it stays standard. Query layer (Colada) still open.
+- DTO codegen: only if the API publishes an OpenAPI spec. Otherwise hand-write.
 
 ## Follow-ups
 
-- Run `./run install` (or `./run yarn install`) to install Pinia (added to `package.json`, not yet installed).
-- Example bookmark stack is wired but not consumed by any view yet. Add a demo view/feature component if a runnable example is wanted.
-- The bookmark API endpoints (`/bookmarks`, `/bookmarks/:id/favorite`) and `VITE_API_URL` are illustrative; no backend exists.
+- Run `./run install` to install Pinia (in `package.json`, not yet installed). `vue-tsc` will error on Pinia imports until then.
+- Bookmark slices are reference scaffolding: `BookmarkList`/`BookmarkRow` are simple divs, endpoints (`/bookmarks`, `/admin/bookmarks`) and `VITE_API_URL` are illustrative, no backend exists. Nothing consumes the slices in a view yet.
