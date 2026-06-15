@@ -6,5 +6,9 @@ case "$1" in
     admin) shift; docker compose exec admin yarn workspace admin run "$@" ;;
     yarn) shift; docker compose exec app yarn "$@" ;;
     sh) shift; docker compose exec "$1" sh ;;
+    up) docker compose up -d --force-recreate ;;
+    down) docker compose down ;;
+    restart) docker compose down && docker compose up -d --force-recreate ;;
+    logs) shift; docker compose logs -f "$@" ;;
     *) echo "Usage: ./run {install|app|admin|yarn|sh} [args]" ;;
 esac
