@@ -107,6 +107,7 @@
 - Doc blocks must always use multi-line `/** */` format, never single-line above any function, variable, or type.
 - Doc block prose must read as plain sentences. No dashes of any kind (em, en, or double hyphen) as punctuation.
 - Never align variable assignments or object properties with extra spaces. One space on each side of `=` and `:`.
+- Never hard-wrap prose in markdown or doc blocks. One line per paragraph or bullet, let it soft-wrap. No mid-sentence line breaks.
 
 ## Conventions
 - Detailed conventions are in `.claude/rules/` and load automatically when touching matching files. This summary provides general awareness for architecture questions.
