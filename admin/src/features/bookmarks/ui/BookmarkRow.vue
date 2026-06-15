@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import type { AdminBookmark } from "../types"
+  import type { Bookmark } from "../types"
 
   defineProps<{
-    bookmark: AdminBookmark
+    bookmark: Bookmark
   }>()
 
   defineEmits<{

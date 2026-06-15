@@ -1,12 +1,12 @@
 import { http } from "@shared/lib/http"
-import type { AdminBookmark, AdminBookmarkQuery } from "../types"
+import type { Bookmark, BookmarkQuery } from "../types"
 
 /**
 * Wire shape for the admin bookmark endpoint. Same base fields as the app plus
 * moderation data. Self-contained; the admin service owns its own contract and
 * does not share the app DTO.
 */
-interface AdminBookmarkDto {
+interface BookmarkDto {
   id: number
   title: string
   url: string
@@ -16,7 +16,7 @@ interface AdminBookmarkDto {
   created_at: string
 }
 
-function toAdminBookmark(dto: AdminBookmarkDto): AdminBookmark {
+function toBookmark(dto: BookmarkDto): Bookmark {
   return {
     id: dto.id,
     title: dto.title,
@@ -33,7 +33,7 @@ function toAdminBookmark(dto: AdminBookmarkDto): AdminBookmark {
 * the admin domain type.
 */
 export const bookmarksApi = {
-  list: async (params?: AdminBookmarkQuery) => (await http.get<AdminBookmarkDto[]>("/admin/bookmarks", { params })).map(toAdminBookmark),
-  get: async (id: number) => toAdminBookmark(await http.get<AdminBookmarkDto>(`/admin/bookmarks/${id}`)),
+  list: async (params?: BookmarkQuery) => (await http.get<BookmarkDto[]>("/admin/bookmarks", { params })).map(toBookmark),
+  get: async (id: number) => toBookmark(await http.get<BookmarkDto>(`/admin/bookmarks/${id}`)),
   remove: (id: number) => http.delete<void>(`/admin/bookmarks/${id}`)
 }

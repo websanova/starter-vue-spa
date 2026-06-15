@@ -1,7 +1,7 @@
 import { storeToRefs } from "pinia"
 import { useApi } from "@shared/composables/useApi"
 import { bookmarksApi } from "../api/bookmarks"
-import type { AdminBookmarkQuery } from "../types"
+import type { BookmarkQuery } from "../types"
 import { useBookmarksStore } from "./store"
 
 /**
@@ -17,7 +17,7 @@ export function useBookmarks() {
   const show = useApi(bookmarksApi.get)
   const destroy = useApi(bookmarksApi.remove)
 
-  async function load(params?: AdminBookmarkQuery, force = false) {
+  async function load(params?: BookmarkQuery, force = false) {
     if (loaded.value && !force) return items.value
     const data = await index.execute(params)
     store.setItems(data)

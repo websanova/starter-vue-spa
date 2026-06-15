@@ -1,6 +1,6 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
-import type { AdminBookmark } from "../types"
+import type { Bookmark } from "../types"
 
 /**
 * Persisted admin bookmark state. Pure state container, no HTTP. Holds the
@@ -8,13 +8,13 @@ import type { AdminBookmark } from "../types"
 * composable drives.
 */
 export const useBookmarksStore = defineStore("admin-bookmarks", () => {
-  const items = ref<AdminBookmark[]>([])
+  const items = ref<Bookmark[]>([])
   const loaded = ref(false)
   const fetchedAt = ref(0)
 
   const byId = computed(() => (id: number) => items.value.find((b) => b.id === id))
 
-  function setItems(next: AdminBookmark[]) {
+  function setItems(next: Bookmark[]) {
     items.value = next
     loaded.value = true
     fetchedAt.value = Date.now()
@@ -24,7 +24,7 @@ export const useBookmarksStore = defineStore("admin-bookmarks", () => {
     items.value = items.value.filter((b) => b.id !== id)
   }
 
-  function updateItem(id: number, patch: Partial<AdminBookmark>) {
+  function updateItem(id: number, patch: Partial<Bookmark>) {
     const item = items.value.find((b) => b.id === id)
     if (item) Object.assign(item, patch)
   }

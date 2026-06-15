@@ -1,4 +1,4 @@
-export interface AdminBookmark {
+export interface Bookmark {
   id: number
   title: string
   url: string
@@ -8,7 +8,7 @@ export interface AdminBookmark {
   createdAt: Date
 }
 
-export interface AdminBookmarkQuery {
+export interface BookmarkQuery {
   search?: string
   categoryId?: number
   ownerId?: number
