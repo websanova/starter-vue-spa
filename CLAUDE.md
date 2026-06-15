@@ -91,6 +91,17 @@
 - User instructions always override this file.
 
 ## Project
+- Starter/boilerplate project. Code should be clean, minimal, and well-structured as a reference for new projects.
+- This is a reference codebase. Patterns established here will be copied into production projects. Prioritize correct, scalable patterns over "good enough for the current size." Do not use project size as a reason to skip a pattern that would be standard in a larger Vue app.
+- When multiple approaches exist, prefer the one aligned with Vue/ecosystem convention and industry standard practice. If the simpler approach deviates from convention, mention the conventional approach and the tradeoff.
+- Stack: Vite 6, Vue 3 (Composition API, `<script setup>`), TypeScript (strict), Tailwind v4, Vue Router 4.
+- Monorepo via yarn workspaces. Two apps, `app` and `admin`, sharing a central `shared/` codebase. Build/dev through workspace scripts (`yarn dev:app`, `yarn build`, etc.).
+- UI primitives via shadcn-vue (built on reka-ui). Variants via cva + tailwind-merge + clsx. Icons via lucide-vue-next.
+- shadcn primitives in `shared/components/ui/` are vendored. Do not hand-edit them. Build app-specific pieces as composites in `shared/components/common/`. See `.claude/rules/components.md`.
+- SPA with client-side routing (Vue Router). No SSR.
+- TypeScript throughout, strict mode. Build runs `vue-tsc --noEmit` for typechecking.
+- Dev environment is Dockerized (Node 22). Use the `./run` script for container commands.
+
 - Always use 2 spaces for indenting.
 - In Vue SFCs, indent `<script>` and `<style>` block content one level (2 spaces), not flush to column 0.
 - Doc blocks must always use multi-line `/** */` format, never single-line above any function, variable, or type.
