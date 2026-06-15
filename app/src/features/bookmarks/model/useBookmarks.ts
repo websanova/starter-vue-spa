@@ -1,55 +1,48 @@
-import { storeToRefs } from "pinia"
-import { useApi } from "@shared/composables/useApi"
+import { computed, toValue, type MaybeRefOrGetter } from "vue"
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/vue-query"
+import { toAction } from "@shared/composables/toAction"
 import { bookmarksApi } from "../api/bookmarks"
 import type { Bookmark, BookmarkQuery } from "../types"
-import { useBookmarksStore } from "./store"
 
-/**
-* Orchestrates the bookmark resource. Wires the service to the store and
-* exposes intent to views. No HTTP here (that is the service) and no persisted
-* state here (that is the store). Each operation carries its own loading flag.
-*/
-export function useBookmarks() {
-  const store = useBookmarksStore()
-  const { items, loaded } = storeToRefs(store)
+export const bookmarkKeys = {
+  all: ["bookmarks"] as const,
+  lists: () => [...bookmarkKeys.all, "list"] as const,
+  list: (filters: BookmarkQuery) => [...bookmarkKeys.lists(), filters] as const
+}
 
-  const index = useApi(bookmarksApi.list)
-  const show = useApi(bookmarksApi.get)
-  const destroy = useApi(bookmarksApi.remove)
-  const favorite = useApi(bookmarksApi.favorite)
+export function useBookmarks(filters: MaybeRefOrGetter<BookmarkQuery> = {}) {
+  const client = useQueryClient()
+  const invalidate = () => client.invalidateQueries({ queryKey: bookmarkKeys.lists() })
 
-  async function load(params?: BookmarkQuery, force = false) {
-    if (loaded.value && !force) return items.value
-    const data = await index.execute(params)
-    store.setItems(data)
-    return data
-  }
+  const query = useQuery({
+    queryKey: computed(() => bookmarkKeys.list(toValue(filters))),
+    queryFn: () => bookmarksApi.list(toValue(filters)),
+    placeholderData: keepPreviousData
+  })
 
-  async function remove(id: number) {
-    await destroy.execute(id)
-    store.removeItem(id)
-  }
+  const create = useMutation({
+    mutationFn: bookmarksApi.create,
+    onSuccess: invalidate
+  })
 
-  async function toggleFavorite(bookmark: Bookmark) {
-    const next = !bookmark.favorited
-    store.updateItem(bookmark.id, { favorited: next })
+  const remove = useMutation({
+    mutationFn: bookmarksApi.remove,
+    onSuccess: invalidate
+  })
 
-    try {
-      await favorite.execute(bookmark.id, next)
-    } catch (e) {
-      store.updateItem(bookmark.id, { favorited: !next })
-      throw e
-    }
-  }
+  const favorite = useMutation({
+    mutationFn: (b: Bookmark) => bookmarksApi.favorite(b.id, !b.favorited),
+    onSuccess: invalidate
+  })
 
   return {
-    items,
-    load,
-    loading: index.loading,
-    show: show.execute,
-    showing: show.loading,
-    remove,
-    removing: destroy.loading,
-    toggleFavorite
+    bookmarks: computed(() => query.data.value ?? []),
+    loading: query.isLoading,
+    fetching: query.isFetching,
+    error: query.error,
+    refetch: query.refetch,
+    create: toAction(create),
+    remove: toAction(remove),
+    favorite: toAction(favorite)
   }
 }

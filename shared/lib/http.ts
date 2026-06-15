@@ -6,6 +6,21 @@ type RequestOptions = {
 const baseUrl = import.meta.env.VITE_API_URL ?? ""
 
 /**
+* Error thrown for any non 2xx response. Carries the status and the parsed
+* response body so callers can read validation errors and error codes instead
+* of scraping a string. The body is whatever the API returned, parsed as JSON.
+*/
+export class HttpError extends Error {
+  constructor(
+    public status: number,
+    public body: unknown
+  ) {
+    super(`Request failed: ${status}`)
+    this.name = "HttpError"
+  }
+}
+
+/**
 * Thin typed fetch wrapper. Owns base URL, JSON encoding, and error
 * normalization so services and stores never touch fetch directly. Swap the
 * internals for axios here without changing any call site.
@@ -25,7 +40,10 @@ async function request<T>(method: string, path: string, options: RequestOptions 
     body: options.body != null ? JSON.stringify(options.body) : undefined
   })
 
-  if (!res.ok) throw new Error(`Request failed: ${res.status} ${res.statusText}`)
+  if (!res.ok) {
+    const body = await res.json().catch(() => null)
+    throw new HttpError(res.status, body)
+  }
 
   return res.status === 204 ? (undefined as T) : await res.json()
 }

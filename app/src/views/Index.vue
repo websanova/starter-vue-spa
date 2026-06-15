@@ -2,6 +2,8 @@
   import HelloShared from "@shared/components/HelloShared.vue"
   import { Button } from "@shared/components/ui/button"
   import { Rocket } from "lucide-vue-next"
+  import BookmarkCreateForm from "../features/bookmarks/ui/BookmarkCreateForm.vue"
+  import BookmarkList from "../features/bookmarks/ui/BookmarkList.vue"
 </script>
 
 <template>
@@ -12,5 +14,8 @@
       <Rocket />
       Get started
     </Button>
+
+    <BookmarkCreateForm />
+    <BookmarkList class="w-full max-w-sm" />
   </main>
 </template>

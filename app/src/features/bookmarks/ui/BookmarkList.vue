@@ -2,19 +2,17 @@
   import { useBookmarks } from "../model/useBookmarks"
   import BookmarkRow from "./BookmarkRow.vue"
 
-  const { items, load, toggleFavorite, remove } = useBookmarks()
-
-  load()
+  const { bookmarks, favorite, remove } = useBookmarks()
 </script>
 
 <template>
   <div class="flex flex-col">
     <BookmarkRow
-      v-for="bookmark in items"
+      v-for="bookmark in bookmarks"
       :key="bookmark.id"
       :bookmark="bookmark"
-      @favorite="toggleFavorite"
-      @remove="remove"
+      @favorite="favorite.run"
+      @remove="remove.run"
     />
   </div>
 </template>

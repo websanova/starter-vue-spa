@@ -101,7 +101,6 @@
 - SPA with client-side routing (Vue Router). No SSR.
 - TypeScript throughout, strict mode. Build runs `vue-tsc --noEmit` for typechecking.
 - Dev environment is Dockerized (Node 22). Use the `./run` script for container commands.
-
 - Always use 2 spaces for indenting.
 - In Vue SFCs, indent `<script>` and `<style>` block content one level (2 spaces), not flush to column 0.
 - Doc blocks must always use multi-line `/** */` format, never single-line above any function, variable, or type.
