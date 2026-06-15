@@ -1,6 +1,6 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
-import type { Bookmark } from "@/types/bookmark"
+import type { Bookmark } from "../types"
 
 /**
 * Persisted bookmark state. Pure state container, no HTTP. Holds the cached

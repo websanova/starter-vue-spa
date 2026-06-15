@@ -1,5 +1,5 @@
 import { http } from "@shared/lib/http"
-import type { Bookmark, BookmarkQuery } from "@/types/bookmark"
+import type { Bookmark, BookmarkQuery } from "../types"
 
 /**
 * Wire shape for the app bookmark endpoint. Never leaves this file. Nothing

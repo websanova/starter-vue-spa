@@ -1,5 +1,5 @@
 import { http } from "@shared/lib/http"
-import type { AdminBookmark, AdminBookmarkQuery } from "@/types/bookmark"
+import type { AdminBookmark, AdminBookmarkQuery } from "../types"
 
 /**
 * Wire shape for the admin bookmark endpoint. Same base fields as the app plus

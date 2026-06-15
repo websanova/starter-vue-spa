@@ -1,6 +1,6 @@
 import { ref, computed } from "vue"
 import { defineStore } from "pinia"
-import type { AdminBookmark } from "@/types/bookmark"
+import type { AdminBookmark } from "../types"
 
 /**
 * Persisted admin bookmark state. Pure state container, no HTTP. Holds the

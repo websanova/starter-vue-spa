@@ -1,8 +1,8 @@
 import { storeToRefs } from "pinia"
 import { useApi } from "@shared/composables/useApi"
-import { bookmarksApi } from "@/services/bookmarks"
-import type { Bookmark, BookmarkQuery } from "@/types/bookmark"
-import { useBookmarksStore } from "@/stores/bookmarks"
+import { bookmarksApi } from "../api/bookmarks"
+import type { Bookmark, BookmarkQuery } from "../types"
+import { useBookmarksStore } from "./store"
 
 /**
 * Orchestrates the bookmark resource. Wires the service to the store and
