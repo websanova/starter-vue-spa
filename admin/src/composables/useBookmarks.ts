@@ -1,13 +1,13 @@
 import { storeToRefs } from "pinia"
 import { useApi } from "@shared/composables/useApi"
 import { bookmarksApi } from "@/services/bookmarks"
-import type { Bookmark, BookmarkQuery } from "@/types/bookmark"
+import type { AdminBookmarkQuery } from "@/types/bookmark"
 import { useBookmarksStore } from "@/stores/bookmarks"
 
 /**
-* Orchestrates the bookmark resource. Wires the service to the store and
-* exposes intent to views. No HTTP here (that is the service) and no persisted
-* state here (that is the store). Each operation carries its own loading flag.
+* Orchestrates the admin bookmark resource. Wires the service to the store and
+* exposes intent to views. No favorite action here; favoriting is a user
+* concern, the admin side manages and moderates.
 */
 export function useBookmarks() {
   const store = useBookmarksStore()
@@ -16,9 +16,8 @@ export function useBookmarks() {
   const index = useApi(bookmarksApi.list)
   const show = useApi(bookmarksApi.get)
   const destroy = useApi(bookmarksApi.remove)
-  const favorite = useApi(bookmarksApi.favorite)
 
-  async function load(params?: BookmarkQuery, force = false) {
+  async function load(params?: AdminBookmarkQuery, force = false) {
     if (loaded.value && !force) return items.value
     const data = await index.execute(params)
     store.setItems(data)
@@ -30,18 +29,6 @@ export function useBookmarks() {
     store.removeItem(id)
   }
 
-  async function toggleFavorite(bookmark: Bookmark) {
-    const next = !bookmark.favorited
-    store.updateItem(bookmark.id, { favorited: next })
-
-    try {
-      await favorite.execute(bookmark.id, next)
-    } catch (e) {
-      store.updateItem(bookmark.id, { favorited: !next })
-      throw e
-    }
-  }
-
   return {
     items,
     load,
@@ -49,7 +36,6 @@ export function useBookmarks() {
     show: show.execute,
     showing: show.loading,
     remove,
-    removing: destroy.loading,
-    toggleFavorite
+    removing: destroy.loading
   }
 }
