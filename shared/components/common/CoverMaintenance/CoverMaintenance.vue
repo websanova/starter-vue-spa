@@ -9,7 +9,7 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4">A new version is available. Refresh to update.</p>
+    <p class="mb-4">We are down for maintenance. Please check back shortly.</p>
 
     <Button @click="onRefresh">Refresh</Button>
   </CoverLoading>
