@@ -9,7 +9,7 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4">We are down for maintenance. Please check back shortly.</p>
+    <p class="mb-stack">We are down for maintenance. Please check back shortly.</p>
 
     <Button @click="onRefresh">Refresh</Button>
   </CoverLoading>

@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --spacing-gutter: 1.5rem;
+  --spacing-stack: 1rem;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

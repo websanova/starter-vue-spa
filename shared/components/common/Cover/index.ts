@@ -4,7 +4,7 @@ export { default as Cover } from "./Cover.vue"
 export { default as CoverContent } from "./CoverContent.vue"
 
 export const coverContentVariants = cva(
-  "w-full p-6",
+  "w-full p-gutter",
   {
     variants: {
       size: {
