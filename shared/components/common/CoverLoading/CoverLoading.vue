@@ -6,10 +6,12 @@
 <template>
   <Cover>
     <CoverContent>
-      <Starter class="h-20 w-20" />
+      <div class="text-center">
+        <Starter class="mx-auto h-20 w-20" />
 
-      <div v-if="$slots.default">
-        <slot />
+        <div v-if="$slots.default">
+          <slot />
+        </div>
       </div>
     </CoverContent>
   </Cover>

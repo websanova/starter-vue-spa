@@ -4,7 +4,7 @@ export { default as Cover } from "./Cover.vue"
 export { default as CoverContent } from "./CoverContent.vue"
 
 export const coverContentVariants = cva(
-  "flex w-full flex-col items-center gap-4 p-6 text-center",
+  "w-full p-6",
   {
     variants: {
       size: {
