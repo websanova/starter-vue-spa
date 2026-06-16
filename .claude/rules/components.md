@@ -34,10 +34,14 @@ Placement is decided by reuse, not by what a component is built from or how larg
 - A variation a primitive already supports via props/variants -> use the variant.
 - Specific to one domain -> the feature slice's `ui/` segment.
 - Composites stack. `common/` may compose `ui/` and other `common/` components, no depth limit.
-- Do not wrap prematurely. Inline a one-off `<Button><Icon/></Button>`. Promote to a `common/` composite when the same composition repeats across apps or carries real logic.
+- Placement is reuse, never what a component is built from. `Cover` composing nothing, `CoverLoading` composing `Cover`, and `ButtonIcon` composing two `ui/` primitives all land in `common/` because all three are shared across apps.
 
 ## File structure
 
-- **ui/** (shared primitives): keep the shadcn structure as generated (folder + `Component.vue` + `index.ts` with cva variants and barrel export). Leave it alone.
-- **common/** (shared composites): default to a single flat `.vue` file. No folder, no `index.ts`. Promote to a folder + `index.ts` only when it grows sub-components or its own variants/composable worth co-locating (e.g. `common/DataTable/` with sub-parts). Do not add an `index.ts` for a single-file component.
-- **feature ui/**: flat `.vue` files inside the slice's `ui/` segment (e.g. `features/bookmarks/ui/BookmarkList.vue`). The view imports the feature's composable from `model/`; UI never calls the service or holds persisted state.
+Always folders, never flat files. One component, one folder, from day one, single file or not. No promote-later. A consistent folder shape keeps the tree sorted and avoids rename churn when a component later grows sub-parts.
+
+Casing signals ownership. kebab = vendored/generated, leave it alone. PascalCase = authored by you. Files are always PascalCase in both layers (Vue style guide); only the folder casing differs, because the folder owner differs.
+
+- **ui/** (shared primitives): keep the shadcn structure as generated (kebab folder + `Component.vue` + `index.ts` with cva variants and barrel export, e.g. `ui/button/`). Vendored, leave it alone.
+- **common/** (shared composites): one PascalCase folder per component, always, with an `index.ts` barrel even for a single file (e.g. `common/Cover/` holding `Cover.vue` + `index.ts`). Multi-part components add siblings in the same folder (`common/Dialog/` with `Dialog.vue` + `DialogClose.vue`).
+- **feature ui/**: flat PascalCase `.vue` files inside the slice's `ui/` segment (e.g. `features/bookmarks/ui/BookmarkList.vue`). The view imports the feature's composable from `model/`; UI never calls the service or holds persisted state.
