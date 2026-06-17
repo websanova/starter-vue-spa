@@ -1,5 +1,12 @@
 import type { App } from "vue"
 import { createRouter as createVueRouter, createWebHistory, type Router } from "vue-router"
+
+// import * as auth from './interceptors/auth.js'
+// import * as i18n from './interceptors/i18n.js'
+// import * as content from './interceptors/content.js'
+// import * as preload from './interceptors/preload.js'
+// import * as scrollToTop from './interceptors/scrollToTop.js'
+
 import routes from "@routes"
 
 let instance: Router
@@ -14,6 +21,14 @@ function createRouter(app: App) {
     history: createWebHistory(),
     routes
   })
+
+  // NOTE: Order here matters
+  // instance.beforeEach(preload.beforeEach)
+  // instance.beforeEach(i18n.beforeEach)
+  // instance.beforeEach(auth.beforeEach)
+  // instance.beforeEach(content.beforeEach)
+  // instance.afterEach(content.afterEach)
+  // instance.afterEach(scrollToTop.afterEach)
 
   app.use(instance)
 }

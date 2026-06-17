@@ -1,0 +1,8 @@
+{
+  "cover": {
+    "loading": {
+      "maintenance": "App is down for maintenance.<br>We should be back up shortly.",
+      "update": "The app has been updated."
+    }
+  }
+}
