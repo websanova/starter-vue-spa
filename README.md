@@ -12,6 +12,10 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 ## Features
 
-- **Dev Environment**
-  - Dockerized (Node 22)
-  - `./run` script for container commands
+**Dev Environment**
+- Dockerized (Node 22)
+- `./run` script for container commands
+
+**Routing**
+- Load-state tiers (site / layout / page) driven by route meta
+- Named routes with `meta.site` / `meta.layout` inheritance
