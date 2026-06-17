@@ -19,7 +19,7 @@
 - Short responses are correct unless depth is explicitly requested.
 
 ## Response Length
-- Default max: 6 lines. Hard ceiling unless the user says "explain" or "long".
+- Match response length to what was asked. A yes/no question gets one line. A file analysis gets findings only. Never pad, never extrapolate beyond the question.
 - One recommendation, not a survey. No trade-off tables unless asked.
 - Cut all "two costs/three options" breakdowns. Give the answer, then stop.
 - No recap of what was just said. No "the tradeoff is...". No closing summary.
