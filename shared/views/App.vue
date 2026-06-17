@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import "@shared/assets/main.css"
 
-  // import {useCover} from 'SHR_CMP/core/useCover.js'
+  import { onMounted } from 'vue'
+  import { removeInitCover } from '@shared/lib/utils'
+
   // import {useUpdateRequired} from 'SHR_CMP/core/useUpdateRequired.js'
   // import {useLoaded} from 'SHR_CMP/core/useLoaded.js'
   // import {useMaintenanceMode} from 'SHR_CMP/core/useMaintenanceMode.js'
@@ -11,12 +13,13 @@
   // import CoverUpdate from 'SHR_CPT/util/CoverUpdate.vue'
   // import CptMeta from 'SHR_CPT/util/Meta.vue'
 
-  // const cover = useCover()
   // const maintenanceMode = useMaintenanceMode()
   // const updateRequired = useUpdateRequired()
   // const loaded = useLoaded()
 
-  // cover.remove()
+  onMounted(() => {
+    removeInitCover()
+  })
 </script>
 
 <template>
