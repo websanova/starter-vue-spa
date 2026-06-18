@@ -4,7 +4,6 @@ const TermsOfService = () => import('APP_VWS/base/TermsOfService.vue')
 
 export default [{
     path: '/',
-    name: 'base',
     component: Index,
     meta: {
         i18n: {

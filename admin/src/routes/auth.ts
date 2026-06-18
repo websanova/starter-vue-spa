@@ -3,7 +3,6 @@ const Login = () => import('APP_VWS/auth/Login.vue')
 
 export default [{
     path: '/',
-    name: 'auth',
     component: Index,
     meta: {
         auth: {

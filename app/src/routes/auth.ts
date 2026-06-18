@@ -19,7 +19,6 @@ const meta = {
 
 export default [{
     path: '/',
-    name: 'auth',
     component: Index,
     meta: {
         i18n: {
