@@ -1,8 +1,6 @@
-import type { RouteRecordRaw } from "vue-router"
-import Index from "@/views/Index.vue"
+import auth from './auth'
+import error from './error'
+import logout from './logout'
+import user from './user'
 
-const routes: RouteRecordRaw[] = [
-  { path: "/", name: "index", component: Index }
-]
-
-export default routes
+export default [...auth, ...logout, ...user, ...error]
