@@ -1,5 +1,5 @@
-// import { http } from "@shared/lib/http"
-// import { mapErrorKeys } from "@shared/lib/serverErrors"
+// import { http } from "@core/lib/http"
+// import { mapErrorKeys } from "@core/lib/serverErrors"
 // import type { Bookmark, BookmarkQuery, BookmarkInput } from "../types"
 
 // /**

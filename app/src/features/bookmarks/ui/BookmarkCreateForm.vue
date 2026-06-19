@@ -1,8 +1,8 @@
 <!-- <script setup lang="ts">
   import { useForm } from "vee-validate"
   import { toTypedSchema } from "@vee-validate/zod"
-  import { Button } from "@shared/components/ui/button"
-  import { applyServerErrors } from "@shared/lib/serverErrors"
+  import { Button } from "@core/components/ui/button"
+  import { applyServerErrors } from "@core/lib/serverErrors"
   import { useBookmarks } from "../model/useBookmarks"
   import { bookmarkSchema } from "../schema"
 

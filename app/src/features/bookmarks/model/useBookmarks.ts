@@ -1,6 +1,6 @@
 // import { computed, toValue, type MaybeRefOrGetter } from "vue"
 // import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/vue-query"
-// import { toAction } from "@shared/composables/toAction"
+// import { toAction } from "@core/composables/toAction"
 // import { bookmarksApi } from "../api/bookmarks"
 // import type { Bookmark, BookmarkQuery } from "../types"
 

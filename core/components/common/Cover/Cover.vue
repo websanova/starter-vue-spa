@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { HTMLAttributes } from "vue"
-  import { cn } from "@shared/lib/utils"
+  import { cn } from "@core/lib/utils"
 
   interface Props {
     class?: HTMLAttributes["class"]

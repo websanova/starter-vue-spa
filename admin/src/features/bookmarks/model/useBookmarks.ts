@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia"
-import { useApi } from "@shared/composables/useApi"
+import { useApi } from "@core/composables/useApi"
 import { bookmarksApi } from "../api/bookmarks"
 import type { BookmarkQuery } from "../types"
 import { useBookmarksStore } from "./store"

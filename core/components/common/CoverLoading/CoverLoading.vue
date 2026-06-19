@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { Starter } from "@shared/components/icons"
-  import { Cover, CoverContent } from "@shared/components/common/Cover"
+  import { Starter } from "@core/components/icons"
+  import { Cover, CoverContent } from "@core/components/common/Cover"
 </script>
 
 <template>

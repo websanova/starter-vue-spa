@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { HTMLAttributes } from "vue"
   import { type CoverContentVariants, coverContentVariants } from "."
-  import { cn } from "@shared/lib/utils"
+  import { cn } from "@core/lib/utils"
 
   interface Props {
     size?: CoverContentVariants["size"]

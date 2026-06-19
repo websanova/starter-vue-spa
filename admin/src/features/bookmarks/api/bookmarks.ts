@@ -1,4 +1,4 @@
-import { http } from "@shared/lib/http"
+import { http } from "@core/lib/http"
 import type { Bookmark, BookmarkQuery } from "../types"
 
 /**

@@ -5,10 +5,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@routes": ["./src/routes"],
-      "@shared/*": ["../shared/*"]
+      "@core/*": ["../core/*"]
     }
   },
-  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "../shared/**/*"],
+  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "../core/**/*"],
   "watchOptions": {
     "watchFile": "dynamicPriorityPolling",
     "watchDirectory": "dynamicPriorityPolling",

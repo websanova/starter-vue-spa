@@ -1,14 +1,14 @@
 <script setup lang="ts">
-  import "@shared/assets/main.css"
+  import "@core/assets/main.css"
 
   import { onMounted } from 'vue'
-  import { removeInitCover } from '@shared/lib/utils'
+  import { removeInitCover } from '@core/lib/utils'
 
-  // import {useUpdateRequired} from '@shared/composables/core/useUpdateRequired.js'
-  import { useLoaded } from '@shared/composables/core/useLoaded'
-  // import {useMaintenanceMode} from '@shared/composables/core/useMaintenanceMode.js'
+  // import {useUpdateRequired} from '@core/composables/core/useUpdateRequired.js'
+  import { useLoaded } from '@core/composables/core/useLoaded'
+  // import {useMaintenanceMode} from '@core/composables/core/useMaintenanceMode.js'
 
-  import { CoverLoading } from '@shared/components/common/CoverLoading'
+  import { CoverLoading } from '@core/components/common/CoverLoading'
   // import CoverMaintenance from '@share/components/util/CoverMaintenance.vue'
   // import CoverUpdate from '@share/components/util/CoverUpdate.vue'
   // import CptMeta from '@share/components/util/Meta.vue'

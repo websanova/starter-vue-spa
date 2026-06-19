@@ -1,8 +1,8 @@
 import { createApp } from "vue"
-import App from "@shared/views/App.vue"
-import { createQuery } from "@shared/plugins/query"
-import { createRouter } from "@shared/plugins/router"
-import { createStore } from "@shared/plugins/store"
+import App from "@core/views/App.vue"
+import { createQuery } from "@core/plugins/query"
+import { createRouter } from "@core/plugins/router"
+import { createStore } from "@core/plugins/store"
 
 createApp(App)
   .use(createQuery)

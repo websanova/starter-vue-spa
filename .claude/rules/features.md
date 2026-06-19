@@ -25,7 +25,7 @@ features/<domain>/
     <Domain>Row.vue
 ```
 
-- Intra-slice imports are relative (`../types`, `./store`, `../api/<domain>`). Use `@shared` only for shared infra. This keeps the slice portable.
+- Intra-slice imports are relative (`../types`, `./store`, `../api/<domain>`). Use `@core` only for shared infra. This keeps the slice portable.
 - The slice is self-contained: delete the folder and the whole feature goes with it.
 
 ## Segment responsibilities

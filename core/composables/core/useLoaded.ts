@@ -1,8 +1,8 @@
 import {computed} from 'vue'
-// import {useAuthStore} from '@shared/stores/core/useAuthStore'
-import {useContentStore} from '@shared/stores/core/useContentStore'
-// import {useI18nStore} from '@shared/stores/core/useI18nStore'
-// import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
+// import {useAuthStore} from '@core/stores/core/useAuthStore'
+import {useContentStore} from '@core/stores/core/useContentStore'
+// import {useI18nStore} from '@core/stores/core/useI18nStore'
+// import {useSettingsStore} from '@core/stores/core/useSettingsStore'
 
 export const useLoaded = function() {
     // const auth = useAuthStore()

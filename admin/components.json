@@ -5,15 +5,15 @@
   "tsConfigPath": "./tsconfig.json",
   "tailwind": {
     "config": "",
-    "css": "../shared/assets/main.css",
+    "css": "../core/assets/main.css",
     "baseColor": "neutral",
     "cssVariables": true
   },
   "aliases": {
-    "components": "@shared/components",
-    "utils": "@shared/lib/utils",
-    "ui": "@shared/components/ui",
-    "lib": "@shared/lib",
-    "composables": "@shared/composables"
+    "components": "@core/components",
+    "utils": "@core/lib/utils",
+    "ui": "@core/components/ui",
+    "lib": "@core/lib",
+    "composables": "@core/composables"
   }
 }
