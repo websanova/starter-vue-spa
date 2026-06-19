@@ -4,18 +4,18 @@
   import { onMounted } from 'vue'
   import { removeInitCover } from '@shared/lib/utils'
 
-  // import {useUpdateRequired} from 'SHR_CMP/core/useUpdateRequired.js'
-  // import {useLoaded} from 'SHR_CMP/core/useLoaded.js'
-  // import {useMaintenanceMode} from 'SHR_CMP/core/useMaintenanceMode.js'
+  // import {useUpdateRequired} from '@shared/composables/core/useUpdateRequired.js'
+  import { useLoaded } from '@shared/composables/core/useLoaded'
+  // import {useMaintenanceMode} from '@shared/composables/core/useMaintenanceMode.js'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
-  // import CoverMaintenance from 'SHR_CPT/util/CoverMaintenance.vue'
-  // import CoverUpdate from 'SHR_CPT/util/CoverUpdate.vue'
-  // import CptMeta from 'SHR_CPT/util/Meta.vue'
+  // import CoverMaintenance from '@share/components/util/CoverMaintenance.vue'
+  // import CoverUpdate from '@share/components/util/CoverUpdate.vue'
+  // import CptMeta from '@share/components/util/Meta.vue'
 
   // const maintenanceMode = useMaintenanceMode()
   // const updateRequired = useUpdateRequired()
-  // const loaded = useLoaded()
+  const { isSiteLoaded } = useLoaded()
 
   onMounted(() => {
     removeInitCover()
@@ -23,9 +23,17 @@
 </script>
 
 <template>
-  <!-- <CoverLoading /> -->
+  <template
+    v-if="!isSiteLoaded"
+  >
+    <CoverLoading />
+  </template>
 
-  <RouterView />
+  <template
+    v-else
+  >
+    <RouterView />
+  </template>
 
   <!-- <template
       v-if="maintenanceMode.state.isActive"
@@ -43,7 +51,7 @@
       v-else
   >
     <template
-        v-if="loaded.state.isSiteLoaded"
+        v-if="loaded.isSiteLoaded"
     >
       <cpt-meta />
 
@@ -54,7 +62,7 @@
         name="fade-out-cover"
     >
       <cpt-cover-loading
-          v-if="!loaded.state.isSiteLoaded"
+          v-if="!loaded.isSiteLoaded"
       />
     </Transition>
   </template> -->

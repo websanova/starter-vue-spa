@@ -1,10 +1,13 @@
 import type { RouteLocationNormalized } from "vue-router"
-import { useContentStore } from "@shared/stores/core/useContentStore.js"
+import { useContentStore } from "@shared/stores/core/useContentStore"
 
 declare module "vue-router" {
   interface RouteMeta {
-    site?: string
-    layout?: string
+    content?: {
+      site?: string
+      layout?: string
+      page?: string
+    }
   }
 }
 
@@ -23,9 +26,15 @@ const REVEAL_DELAY = 10
 export function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized): void {
   const content = useContentStore()
 
-  content.setIsLayoutLoaded(from.meta.layout === to.meta.layout)
-  content.setIsPageLoaded(from.name === to.name)
-  content.setIsSiteLoaded(from.meta.site === to.meta.site)
+  let toObj = {site: undefined, layout: undefined, page: to.name}
+  let frObj = {site: undefined, layout: undefined, page: from.name}
+
+  to.matched.forEach((obj) => { toObj = Object.assign(toObj, obj.meta.content || {}) })
+  from.matched.forEach((obj) => { frObj = Object.assign(frObj, obj.meta.content || {}) })
+
+  content.setIsLayoutLoaded(frObj.layout === toObj.layout)
+  content.setIsPageLoaded(frObj.page === toObj.page)
+  content.setIsSiteLoaded(frObj.site === toObj.site)
 
   if (
     to.path !== from.path &&

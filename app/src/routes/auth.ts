@@ -21,6 +21,9 @@ export default [{
     path: '/',
     component: Index,
     meta: {
+        content: {
+            site: 'auth',
+        },
         i18n: {
             site: ['site']
         },

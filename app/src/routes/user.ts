@@ -1,6 +1,7 @@
 const Account     = () => import('@/views/user/Account.vue')
 const Billing     = () => import('@/views/user/Billing.vue')
 const Index       = () => import('@/views/user/Index.vue')
+const Logout      = () => import('@/views/user/Logout.vue')
 const PaymentInfo = () => import('@/views/user/PaymentInfo.vue')
 const Plans       = () => import('@/views/user/Plans.vue')
 const Settings    = () => import('@/views/user/Settings.vue')
@@ -16,6 +17,9 @@ export default [{
         auth: {
             roles: true,
             redirect: {name: 'auth-login'}
+        },
+        content: {
+            site: 'user'
         },
         i18n: {
             site: ['site']
@@ -35,6 +39,19 @@ export default [{
         path: 'billing',
         name: 'user-billing',
         component: Billing,
+    }, {
+        path: '/logout',
+        name: 'user-logout',
+        component: Logout,
+        meta: {
+            auth: {
+                roles: true,
+                redirect: {name: 'auth-login'}
+            },
+            i18n: {
+                site: ['site']
+            },
+        }
     }, {
         path: 'payment-info',
         name: 'user-payment-info',

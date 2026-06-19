@@ -6,6 +6,9 @@ export default [{
     path: '/',
     component: Index,
     meta: {
+        content: {
+            site: 'error'
+        },
         i18n: {
            site: ['site'],
         },
