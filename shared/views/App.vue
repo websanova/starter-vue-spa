@@ -23,18 +23,6 @@
 </script>
 
 <template>
-  <template
-    v-if="!isSiteLoaded"
-  >
-    <CoverLoading />
-  </template>
-
-  <template
-    v-else
-  >
-    <RouterView />
-  </template>
-
   <!-- <template
       v-if="maintenanceMode.state.isActive"
   >
@@ -49,9 +37,9 @@
 
   <template
       v-else
-  >
+  >-->
     <template
-        v-if="loaded.isSiteLoaded"
+        v-if="isSiteLoaded"
     >
       <cpt-meta />
 
@@ -61,9 +49,9 @@
     <Transition
         name="fade-out-cover"
     >
-      <cpt-cover-loading
-          v-if="!loaded.isSiteLoaded"
+      <CoverLoading
+          v-if="!isSiteLoaded"
       />
     </Transition>
-  </template> -->
+  <!--</template> -->
 </template>
