@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
   import { useForm } from "vee-validate"
   import { toTypedSchema } from "@vee-validate/zod"
   import { Button } from "@shared/components/ui/button"
@@ -55,3 +55,4 @@
     </Button>
   </form>
 </template>
+ -->

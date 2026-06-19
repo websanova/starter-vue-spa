@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
   import type { Bookmark } from "../types"
 
   defineProps<{
@@ -17,3 +17,4 @@
     <div class="text-sm text-muted-foreground">{{ bookmark.url }}</div>
   </div>
 </template>
+ -->
