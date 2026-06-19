@@ -1,13 +1,13 @@
-const Account     = () => import('APP_VWS/user/Account.vue')
-const Billing     = () => import('APP_VWS/user/Billing.vue')
-const Index       = () => import('APP_VWS/user/Index.vue')
-const PaymentInfo = () => import('APP_VWS/user/PaymentInfo.vue')
-const Plans       = () => import('APP_VWS/user/Plans.vue')
-const Settings    = () => import('APP_VWS/user/Settings.vue')
-const Subscribe   = () => import('APP_VWS/user/Subscribe.vue')
-const Tasks       = () => import('APP_VWS/user/Tasks.vue')
-const Todos       = () => import('APP_VWS/user/Todos.vue')
-const Unsubscribe = () => import('APP_VWS/user/Unsubscribe.vue')
+const Account     = () => import('@/views/user/Account.vue')
+const Billing     = () => import('@/views/user/Billing.vue')
+const Index       = () => import('@/views/user/Index.vue')
+const PaymentInfo = () => import('@/views/user/PaymentInfo.vue')
+const Plans       = () => import('@/views/user/Plans.vue')
+const Settings    = () => import('@/views/user/Settings.vue')
+const Subscribe   = () => import('@/views/user/Subscribe.vue')
+const Tasks       = () => import('@/views/user/Tasks.vue')
+const Todos       = () => import('@/views/user/Todos.vue')
+const Unsubscribe = () => import('@/views/user/Unsubscribe.vue')
 
 export default [{
     path: '/u/',

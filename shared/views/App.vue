@@ -23,7 +23,9 @@
 </script>
 
 <template>
-  <CoverLoading />
+  <!-- <CoverLoading /> -->
+
+  <RouterView />
 
   <!-- <template
       v-if="maintenanceMode.state.isActive"

@@ -1,4 +1,4 @@
-const Logout = () => import('SHR_VWS/user/Logout.vue')
+const Logout = () => import('@/views/user/Logout.vue')
 
 export default [{
     path: '/logout',

@@ -1,6 +1,6 @@
-const Index          = () => import('APP_VWS/base/Index.vue')
-const PrivacyPolicy  = () => import('APP_VWS/base/PrivacyPolicy.vue')
-const TermsOfService = () => import('APP_VWS/base/TermsOfService.vue')
+const Index          = () => import('@/views/base/Index.vue')
+const PrivacyPolicy  = () => import('@/views/base/PrivacyPolicy.vue')
+const TermsOfService = () => import('@/views/base/TermsOfService.vue')
 
 export default [{
     path: '/',

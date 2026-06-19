@@ -1,6 +1,6 @@
-const Forbidden = () => import('SHR_VWS/error/Forbidden.vue')
-const Index     = () => import('SHR_VWS/error/Index.vue')
-const NotFound  = () => import('SHR_VWS/error/NotFound.vue')
+const Forbidden = () => import('@/views/error/Forbidden.vue')
+const Index     = () => import('@/views/error/Index.vue')
+const NotFound  = () => import('@/views/error/NotFound.vue')
 
 export default [{
     path: '/',

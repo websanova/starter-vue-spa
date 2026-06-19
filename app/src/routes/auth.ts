@@ -1,12 +1,12 @@
-const Impersonate         = () => import('APP_VWS/auth/Impersonate.vue')
-const Index               = () => import('APP_VWS/auth/Index.vue')
-const Login               = () => import('APP_VWS/auth/Login.vue')
-const PasswordResetSend   = () => import('APP_VWS/auth/PasswordResetSend.vue')
-const PasswordResetUpdate = () => import('APP_VWS/auth/PasswordResetUpdate.vue')
-const Register            = () => import('APP_VWS/auth/Register.vue')
-const Unsubscribe         = () => import('APP_VWS/auth/Unsubscribe.vue')
-const VerificationConfirm = () => import('APP_VWS/auth/VerificationConfirm.vue')
-const VerificationResend  = () => import('APP_VWS/auth/VerificationResend.vue')
+const Impersonate         = () => import('@/views/auth/Impersonate.vue')
+const Index               = () => import('@/views/auth/Index.vue')
+const Login               = () => import('@/views/auth/Login.vue')
+const PasswordResetSend   = () => import('@/views/auth/PasswordResetSend.vue')
+const PasswordResetUpdate = () => import('@/views/auth/PasswordResetUpdate.vue')
+const Register            = () => import('@/views/auth/Register.vue')
+const Unsubscribe         = () => import('@/views/auth/Unsubscribe.vue')
+const VerificationConfirm = () => import('@/views/auth/VerificationConfirm.vue')
+const VerificationResend  = () => import('@/views/auth/VerificationResend.vue')
 
 const meta = {
     auth: {

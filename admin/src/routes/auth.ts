@@ -1,5 +1,5 @@
-const Index = () => import('APP_VWS/auth/Index.vue')
-const Login = () => import('APP_VWS/auth/Login.vue')
+const Index = () => import('@/views/auth/Index.vue')
+const Login = () => import('@/views/auth/Login.vue')
 
 export default [{
     path: '/',
