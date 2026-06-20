@@ -1,27 +1,37 @@
+name: starter-vue-spa
+
 services:
     app:
         image: node:22-alpine
-        working_dir: /repo
+        working_dir: /repo/apps
         environment:
             APP: app
         entrypoint: sh /repo/docker/node/entrypoint.sh
         volumes:
             - .:/repo
-            - node_modules:/repo/node_modules
+            - node_modules:/repo/apps/node_modules
         ports:
             - "5173:5173"
 
     admin:
         image: node:22-alpine
-        working_dir: /repo
+        working_dir: /repo/apps
         environment:
             APP: admin
         entrypoint: sh /repo/docker/node/entrypoint.sh
         volumes:
             - .:/repo
-            - node_modules:/repo/node_modules
+            - node_modules:/repo/apps/node_modules
         ports:
             - "5174:5174"
+
+    node:
+        image: node:22-alpine
+        working_dir: /repo/apps
+        entrypoint: tail -f /dev/null
+        volumes:
+            - .:/repo
+            - node_modules:/repo/apps/node_modules
 
 volumes:
     node_modules:

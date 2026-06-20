@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@routes": ["./src/routes"],
+      "@packages/*": ["../../packages/*"]
+    }
+  },
+  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "../../packages/**/*"],
+  "watchOptions": {
+    "watchFile": "dynamicPriorityPolling",
+    "watchDirectory": "dynamicPriorityPolling",
+    "fallbackPolling": "dynamicPriority"
+  }
+}
