@@ -1,3 +1,4 @@
+import checker from "vite-plugin-checker"
 import { defineConfig, loadEnv } from "vite"
 import vue from "@vitejs/plugin-vue"
 import tailwindcss from "@tailwindcss/vite"
