@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { Button } from "@pacakges/components/ui/button"
-  import { CoverLoading } from "@pacakges/components/common/CoverLoading"
+  import { Button } from "@packages/components/ui/button"
+  import { CoverLoading } from "@packages/components/common/CoverLoading"
 
   function onRefresh() {
     window.location.reload()
