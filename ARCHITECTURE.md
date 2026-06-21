@@ -186,3 +186,398 @@ UI  -> no prefix those are just raw like Button or whatever.
 
 **shared**
 - these should never ever import anything from app/admin, only outwards, never inwards.
+
+
+
+## Chat GPT Analysis
+
+Here’s a **tight, practical analysis** of your architecture—focused on what’s solid, what’s risky, and what I’d change.
+
+---
+
+# 👍 What’s strong (keep this)
+
+### 1. Clear separation of concerns (mostly)
+
+You’ve got good boundaries:
+
+* `components/` → dumb UI
+* `features/` → behavior bundles
+* `views/` → orchestration
+* `composables/api` → API layer
+* `models/` → data shape
+* `shared/` → reuse
+
+👉 This is **very close to a clean layered architecture**, with a bit of FSD influence but not dogmatic. Good.
+
+---
+
+### 2. “Dumb components” rule
+
+This is one of your best decisions.
+
+* Components = props + emits only
+* No hidden logic, no side effects
+
+👉 This makes everything:
+
+* testable
+* swappable
+* predictable
+
+---
+
+### 3. API isolation (`composables/api`)
+
+You’re enforcing:
+
+* no logic
+* just endpoints + mapping
+
+👉 This is excellent. Prevents:
+
+* business logic leaking everywhere
+* tight coupling to backend
+
+---
+
+### 4. Orchestrator pattern (very good idea)
+
+Your:
+
+* `usePaginator`
+* `useInfinite`
+* `usePolling`
+
+👉 This is **high leverage abstraction** if done right.
+
+You’re basically building:
+
+> “tanstack query + app-specific behavior wrappers”
+
+That’s smart.
+
+---
+
+### 5. Shared vs App split
+
+Mirroring structure in `shared/` is clean:
+
+* promotes portability
+* avoids weird dependency chains
+
+---
+
+# ⚠️ Where things will break (or already will)
+
+### 1. “Everything is a composable” creep
+
+You’re overloading `useX`:
+
+You have:
+
+* actual composables (stateful)
+* factories (`useItemStore`)
+* adapters
+* orchestrators
+* wrappers
+
+👉 Problem:
+Developers won’t know:
+
+> “Does this create state? reuse state? wrap something?”
+
+#### Fix (important)
+
+Create naming clarity:
+
+| Type               | Example             |
+| ------------------ | ------------------- |
+| Composable (state) | `useBookmark()`     |
+| API                | `useBookmarkApi()`  |
+| Adapter            | `bookmarkAdapter`   |
+| Factory            | `createItemStore()` |
+| Orchestrator       | `useBookmarkList()` |
+
+👉 Drop blind `useX` everywhere.
+
+---
+
+### 2. Features vs Widgets confusion
+
+Right now:
+
+* features = logic bundles
+* widgets = grouped features
+* views = orchestrators
+
+But…
+
+👉 Widgets are basically **features with layout**
+
+This will get messy fast.
+
+#### Fix
+
+Pick one:
+
+**Option A (cleaner)**
+
+* `features/` = logic + UI bundles
+* `widgets/` = layout compositions only
+
+**Option B (better IMO)**
+Kill `widgets/`, and:
+
+* features can compose other features
+
+👉 Less mental overhead.
+
+---
+
+### 3. Services vs Composables overlap
+
+You have:
+
+* `services/polling`
+* `composables/orchestrator/usePolling`
+
+👉 That’s duplication waiting to happen.
+
+#### Fix
+
+Define rule:
+
+* **services/** = singleton / shared instances
+* **composables/** = per-component state
+
+Example:
+
+* `services/polling` → global polling engine
+* `usePolling()` → hook into it
+
+---
+
+### 4. Models layer is underpowered (for your goals)
+
+You mention mapping multiple APIs → good
+
+But right now:
+
+* it’s just types + mappers
+
+👉 Missing:
+
+* normalization strategy
+* ID consistency
+* partial vs full models
+
+#### Fix
+
+Enforce:
+
+```ts
+// models/bookmark/item.ts
+export interface BookmarkItem {}
+
+// models/bookmark/list.ts
+export interface BookmarkListItem {}
+
+// adapters
+toBookmarkItem()
+toBookmarkListItem()
+```
+
+👉 Never reuse the same type for list + item
+
+---
+
+### 5. Component explosion risk (you called it out)
+
+You already see it:
+
+> 80–90% same, slight differences
+
+Your current plan:
+
+> base + variants
+
+👍 correct direction
+
+#### But enforce this rule harder:
+
+* NO prop-driven mega components
+* prefer composition + slots
+
+---
+
+### 6. Naming system (prefixes like CptItemBookmark)
+
+Honestly?
+
+👉 This will get annoying fast.
+
+Modern Vue tooling already solves this:
+
+* folder structure
+* auto-import
+* IDE navigation
+
+#### Suggest:
+
+Drop prefixes, rely on:
+
+```
+components/item/Bookmark.vue
+```
+
+Import as:
+
+```ts
+import BookmarkItem from '@/components/item/Bookmark.vue'
+```
+
+Cleaner, less noise.
+
+---
+
+### 7. “Views orchestrate everything” — good but dangerous
+
+You’re enforcing:
+
+> nothing runs automatically
+
+That’s good for control, but:
+
+👉 Risk:
+
+* massive view files
+* wiring hell
+
+#### Fix
+
+Allow **feature-level orchestration**
+
+Example:
+
+* feature handles its own API call
+* exposes events/hooks
+
+Views:
+
+* configure, not wire everything
+
+---
+
+# 🧠 Architectural identity (what this actually is)
+
+You’ve built a hybrid of:
+
+* **Layered architecture**
+* **Feature-driven design (light)**
+* **Composable-first Vue pattern**
+* **TanStack Query wrapper system**
+
+👉 This is GOOD.
+
+But right now:
+
+> It’s a *framework*, not just an architecture
+
+Which means:
+
+* rules must be stricter
+* naming must be tighter
+
+---
+
+# 🔥 High-impact improvements (do these)
+
+### 1. Fix naming consistency
+
+Biggest win.
+
+---
+
+### 2. Simplify mental model
+
+Reduce layers:
+
+Current:
+
+```
+components
+features
+widgets
+views
+```
+
+Better:
+
+```
+components (dumb)
+features (smart)
+views (pages)
+```
+
+---
+
+### 3. Define strict rules for:
+
+* composables vs services
+* feature responsibilities
+* data flow direction
+
+---
+
+### 4. Introduce “data flow contract”
+
+Right now implicit.
+
+Make it explicit:
+
+```
+API → adapter → model → feature → component
+```
+
+Never skip layers.
+
+---
+
+### 5. Add “domain ownership”
+
+Right now everything is spread.
+
+Consider:
+
+```
+features/bookmark/
+  components/
+  composables/
+  models/
+```
+
+👉 reduces cross-folder jumping
+
+---
+
+# 🧾 Final verdict
+
+### Overall: **8/10 (very strong foundation)**
+
+**Strengths**
+
+* Thoughtful separation
+* Scalable ideas (orchestrators, adapters)
+* UI discipline
+
+**Weak points**
+
+* Naming inconsistency
+* Layer overlap (features/widgets/services)
+* Potential complexity creep
+
+---
+
+If you want next step:
+👉 I can refactor this into a **clean, enforceable rule set + folder structure v2** (minimal, strict, scalable).
