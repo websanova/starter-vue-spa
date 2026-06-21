@@ -91,6 +91,13 @@
 - We want to follow a more shadcn approach and built of lesser single root components (at leas that's the working idea). So when building something more complex like an Item, keep that in mind and try to keep it clean and of sub components for mix and match support (easier said than done).
 - Where things get tricky here, in particular with item components is that you'll end up having like 80 to 90 percent similar functionality, but then like different functionality, try not to get too crazy and better to build like on master ItemBookmark, with slots and then ItemBookmarkTypeA and ItemBookmarkTypeB, build them out, rather than having a million status flags by the item type, etc.
 
+Cpt -> Common Component (Component)
+Ftr -> Encapsulated Business Unit (Feature)
+Wgt -> Composite Multi-Feature Layout (Widget)
+Vws -> Top-Level Route Container (View)
+UI  -> no prefix those are just raw like Button or whatever.
+
+
 **./shared/components/**
 - Though these overlap the intent with shared is of course for for more reusability. In the app/admin the components will for the most part use building blocks already created here (probably this can be more of a hard rule, but we'll see how it goes).
 - Of course these should all be dummy components with props/emits only as well.
@@ -115,16 +122,16 @@
 - Vue convention, a composable is expected to return fresh, isolated state per component invocation.
 - On a side note, just using useXSomething does not mean composable, that is just another convention.
 
-**app/composables/api/**
+**./composables/api/**
 - Should all be setup with tan query/http and basically return that interface (at least that's the idea). Though we'll see how that goes in practice with live updates/removals of list items using optimistic, etc.
 - Idea here is to just have a mapping for the API without any logic. Basically we're just defining endpoints and methods and grouping them around general concepts like bookmarks. The exposed actions should be like useBookmarkCreate, useBookmarkDelete, useBookmarkRestore, useBookmarkDestroy, etc.
 - No special rules on the naming, they can be pretty much grouped up as you like or even in one flat file, in the end it's just importing what functions are needed, so it's just organizational.
 - Should have a barrel import anyway and if you wanna really use one file per, then do a subfolder like bookmark/create.ts, etc...
 
-**app/composables/helpers/**
+**./composables/helpers/**
 - These are kind of utility type functions, calling it "helpers" for now. The use case at the moment is a store factory that generates stores in a consistent format for items and item type displays. No need to constantly define these as they will pretty much all be the same (createItemStore, createItemsStore)
 
-**app/composables/orchestrator/**
+**./composables/orchestrator/**
 - Tries to solve the issue of a wrapper around the tan query response. Like if it's an index we'll likely want support for filters (pages, query, etc) and sorting (dir, by), refresh, etc. So we create some generic wrapper for reuse around that.
 - We can then also have something like useInfinite.ts for a forever/auto scroll type index.
 - Also there are cases we're for instance we'll want to poll for data, this comes up often and is generally wired up the same, so usePolling for something like that with a simple on/off function as all it exposes.
@@ -132,7 +139,7 @@
 - These are all just examples for now of what the adapters are for.
 - These will likely be in the shared/composables/adapter directory for reuse.
 
-**app/composables/support/**
+**./composables/support/**
 - For the lack of a better term (support for now), this is where some general use wrappers will go. For instance the useLoader to bootstrap the initial app load and covers.
 - It can be tricky to determine how to organize here sometimes, like do we create a useDarkMode wrapper around the useDarkModeStore or just use the store directly. In many cases a wrapper just pipes the store so it's really not necessary. So the idea for now is only use these when necessary. Like if you find yourself wiring up a bit too much or more than one store that's a good indicator you should just setup a a support composable.
 
@@ -169,10 +176,13 @@
 - for instance a bookmark name could be required, 255, alpha num, etc. Also could contain some custom logic all together, etc.
 - Will still need to look into how this works with back-end validation, say for unique email, etc...
 
-**app/views**
+**./views**
 - Basically the controllers wiring up features.
 
-**app/widgets**
+**./widgets**
 - There can be many sub views which you'll need to reuse, we'll call these widgets and they are just groupings of features. For instance you can think of a list of items in an admin list. It's common to have a full items list at root, but also an auto filtered one under user. The user one will be a completely different view, perhaps a subview under tabs in the single user section. Otherwise all the functionality for delete, restore, etc, would be 100% the same. It's basically just a filtered list.
 - At this point really we just need a separate composable to feed in for the index, perhaps different starting params, so there is a question of how to set that up in the widget. Perhaps the /user/items sort is different than the root /items sort. The endpoint will be different meaning we'll need a different composable. So do we wire it outside the widget and outside of features, breaking our lite rule, do we create some kind of feature wrappers around that itself, so that the views ultimately always use features, but we'll have some special features/widgets or something This is still an open question, but so far this idea may work, so that views only ever see and wire up features as a hard rule.
 - Ultimately widgets are just grouped features, so exposing them as just another feature kind of makes sense.
+
+**shared**
+- these should never ever import anything from app/admin, only outwards, never inwards.
