@@ -1,2 +1,2 @@
-export { useAppStore } from './useAppStore'
-export { useContentStore } from './useContentStore'
+export { useAppStore } from './app'
+export { useContentStore } from './content'

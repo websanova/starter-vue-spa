@@ -24,13 +24,11 @@ export const useAppStore = defineStore('app', () => {
     }
 
     return {
+        isDarkMode,
+        isMaintenanceMode,
+        isUpdateRequired,
         activateMaintenanceMode,
         activateUpdateRequired,
         toggleDarkMode,
-        state: {
-            isDarkMode,
-            isUpdateRequired,
-            isMaintenanceMode,
-        }
     }
 })
