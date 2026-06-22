@@ -1,15 +1,16 @@
 import { computed } from 'vue'
 
-import { useHttp } from 'SHR_PLG/http/index.js'
-import { useAuthStore } from 'SHR_STR/core/useAuthStore.js'
-import model from 'SHR_MDL/user.js'
+import { useHttp } from '../../plugins/http'
+import { useQuery as useQueryClient } from '../../plugins/query'
+import { useAuthStore } from '../../stores/auth'
+import { profileQuery } from '../api/profile'
 
 export const useAuth = function() {
     const auth = useAuthStore()
-    const http = useHttp()
+    const client = useQueryClient()
 
     async function refreshToken() {
-        return await http.request({url: 'refresh', method: 'post'})
+        return await useHttp().post('refresh')
     }
 
     async function checkReady() {
@@ -24,8 +25,8 @@ export const useAuth = function() {
     }
 
     async function fetchUser() {
-        const res = await http.request({url: 'me'})
-        auth.setUser(res.data.data)
+        const user = await client.fetchQuery(profileQuery())
+        auth.setUser(user)
     }
 
     function flush() {
@@ -40,8 +41,8 @@ export const useAuth = function() {
         getToken: auth.getToken,
         refreshToken,
         setToken: auth.setToken,
-        isLoggedIn: computed(() => auth.isReady && auth.user),
+        isLoggedIn: computed(() => auth.isReady && !!auth.user),
         isReady: computed(() => auth.isReady),
-        user: computed(() => auth.user ? model(auth.user) : {}),
+        user: computed(() => auth.user),
     }
 }

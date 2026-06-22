@@ -2,9 +2,11 @@ import { ref } from 'vue'
 
 import { defineStore } from 'pinia'
 
+import type { Auth } from '../models/auth'
+
 export const useAuthStore = defineStore('auth', () => {
     const isReady = ref(false)
-    const user = ref(null)
+    const user = ref<Auth | null>(null)
 
     function activateReady() {
         isReady.value = true
@@ -27,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('auth_token', val)
     }
 
-    function setUser(val) {
+    function setUser(val: Auth | null) {
         user.value = val
     }
 
