@@ -1,5 +1,5 @@
 import {computed, reactive} from 'vue'
-import {useAppStore} from 'SHR_STR/core/useAppStore.js'
+import {useAppStore} from 'SHR_STR'
 
 // NOTE: This works with some hard codes in the index.html so that the theme class
 //       is set right away and avoids any flicker that coudl happen if the manually

@@ -1,5 +1,6 @@
-import {ref} from 'vue'
-import {defineStore} from 'pinia'
+import { ref } from 'vue'
+
+import { defineStore } from 'pinia'
 
 export const useContentStore = defineStore('content', () => {
     const isLayoutLoaded = ref(false)

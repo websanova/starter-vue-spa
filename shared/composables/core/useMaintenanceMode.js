@@ -1,5 +1,5 @@
 import {computed, reactive} from 'vue'
-import {useAppStore} from 'SHR_STR/core/useAppStore.js'
+import {useAppStore} from 'SHR_STR'
 
 export const useMaintenanceMode = function() {
     const app = useAppStore()
