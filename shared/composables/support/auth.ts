@@ -2,47 +2,54 @@ import { computed } from 'vue'
 
 import { useHttp } from '../../plugins/http'
 import { useQueryClient } from '../../plugins/query'
-import { useAuthStore } from '../../stores/auth'
+import { useAppStore } from '../../stores'
 import { profileQuery } from '../api/profile'
+import { deleteToken, getToken, setToken } from '../../lib/token'
+
+import type { Auth } from '../../models/auth'
 
 export const useAuth = function() {
-    const auth = useAuthStore()
-    const client = useQueryClient()
+  const app = useAppStore()
+  const client = useQueryClient()
 
-    async function refreshToken() {
-        return await useHttp().post('refresh')
+  async function refreshToken() {
+    return await useHttp().post('refresh')
+  }
+
+  async function checkReady() {
+    if (app.isAuthReady) {
+      return
     }
 
-    async function checkReady() {
-        if (!auth.isReady) {
-            if (auth.getToken()) {
-                await refreshToken()
-                await fetchUser()
-            }
-
-            auth.activateReady()
-        }
+    if (getToken()) {
+      try {
+        await refreshToken()
+        await client.ensureQueryData(profileQuery())
+      } catch {
+        flush()
+      }
     }
 
-    async function fetchUser() {
-        const user = await client.fetchQuery(profileQuery())
-        auth.setUser(user)
-    }
+    app.activateAuthReady()
+  }
 
-    function flush() {
-        auth.deleteUser()
-        auth.deleteToken()
-    }
+  function flush() {
+    deleteToken()
+    client.removeQueries({ queryKey: profileQuery().queryKey })
+  }
 
-    return {
-        checkReady,
-        fetchUser,
-        flush,
-        getToken: auth.getToken,
-        refreshToken,
-        setToken: auth.setToken,
-        isLoggedIn: computed(() => auth.isReady && !!auth.user),
-        isReady: computed(() => auth.isReady),
-        user: computed(() => auth.user),
-    }
+  const isAuthReady = computed(() => app.isAuthReady)
+  const isLoggedIn = computed(() => !!user.value)
+  const user = computed(() => client.getQueryData<Auth>(profileQuery().queryKey) ?? null)
+
+  return {
+    checkReady,
+    flush,
+    getToken,
+    isAuthReady,
+    isLoggedIn,
+    refreshToken,
+    setToken,
+    user,
+  }
 }

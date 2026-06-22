@@ -7,8 +7,13 @@ export const useAppStore = defineStore('app', () => {
         localStorage.getItem('color-scheme') === 'dark' ||
         (!localStorage.getItem('color-scheme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
     )
+    const isAuthReady = ref(false)
     const isMaintenanceMode = ref(false)
     const isUpdateRequired = ref(false)
+
+    function activateAuthReady() {
+        isAuthReady.value = true
+    }
 
     function activateMaintenanceMode() {
         isMaintenanceMode.value = true
@@ -24,9 +29,11 @@ export const useAppStore = defineStore('app', () => {
     }
 
     return {
+        isAuthReady,
         isDarkMode,
         isMaintenanceMode,
         isUpdateRequired,
+        activateAuthReady,
         activateMaintenanceMode,
         activateUpdateRequired,
         toggleDarkMode,
