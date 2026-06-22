@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
   import { useBookmarks } from "../model/useBookmarks"
   import BookmarkRow from "./BookmarkRow.vue"
 
@@ -17,3 +17,4 @@
     />
   </div>
 </template>
+ -->

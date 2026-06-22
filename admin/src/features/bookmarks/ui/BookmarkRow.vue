@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
   import type { Bookmark } from "../types"
 
   defineProps<{
@@ -16,3 +16,4 @@
     <div class="text-sm text-muted-foreground">owner #{{ bookmark.ownerId }}</div>
   </div>
 </template>
+ -->
