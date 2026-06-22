@@ -1,6 +1,7 @@
-import {computed, reactive} from 'vue'
-import {useHttp} from 'SHR_PLG/http/index.js'
-import {useAuthStore} from 'SHR_STR/core/useAuthStore.js'
+import { computed } from 'vue'
+
+import { useHttp } from 'SHR_PLG/http/index.js'
+import { useAuthStore } from 'SHR_STR/core/useAuthStore.js'
 import model from 'SHR_MDL/user.js'
 
 export const useAuth = function() {
@@ -12,7 +13,7 @@ export const useAuth = function() {
     }
 
     async function checkReady() {
-        if (!auth.state.isReady) {
+        if (!auth.isReady) {
             if (auth.getToken()) {
                 await refreshToken()
                 await fetchUser()
@@ -39,11 +40,8 @@ export const useAuth = function() {
         getToken: auth.getToken,
         refreshToken,
         setToken: auth.setToken,
-        state: reactive({
-            isLoggedIn: computed(() => auth.state.isReady && auth.state.user),
-            isReady: computed(() => auth.state.isReady),
-            user: computed(() => auth.state.user ? model(auth.state.user) : {}),
-        })
+        isLoggedIn: computed(() => auth.isReady && auth.user),
+        isReady: computed(() => auth.isReady),
+        user: computed(() => auth.user ? model(auth.user) : {}),
     }
 }
-

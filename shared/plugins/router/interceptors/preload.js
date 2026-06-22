@@ -1,17 +1,40 @@
-import {useI18n} from 'SHR_CMP/core/useI18n.js'
+import {useAuth} from 'SHR_CMP/core/useAuth.js'
+import {useSettings} from 'SHR_CMP/core/useSettings.js'
 
-export async function beforeEach(to, from, next) {
-    const i18n = useI18n()
+/**
+ * The preloads here affect other router intercepts so they
+ * must be loaded first. The setup here is to avoid loading
+ * them asynchronously to get them all in as fast as possible.
+ */
+export function beforeEach(to, from, next) {
+    const auth = useAuth()
+    const settings = useSettings()
 
-    const toObj = {layout: [], page: [], site: []}
+    if (
+        auth.state.isReady &&
+        settings.state.isLoaded
+    ) {
+        next()
+    }
+    else {
+        let interval = null
 
-    to.matched.forEach(function(obj) {
-        toObj.layout = toObj.layout.concat((obj.meta.i18n || {}).layout || [])
-        toObj.page = toObj.page.concat((obj.meta.i18n || {}).page || [])
-        toObj.site = toObj.site.concat((obj.meta.i18n || {}).site || [])
-    })
+        if (!auth.state.isReady) {
+            auth.checkReady()
+        }
 
-    i18n.load(toObj)
+        if (!settings.state.isLoaded) {
+            settings.load()
+        }
 
-    next()
+        interval = setInterval(() => {
+            if (
+                auth.state.isReady &&
+                settings.state.isLoaded
+            ) {
+                clearInterval(interval)
+                next()
+            }
+        }, 50)
+    }
 }
