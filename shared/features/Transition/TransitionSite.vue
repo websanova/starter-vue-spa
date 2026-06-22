@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
+
   import { useAppStore, useContentStore } from '@shared/stores'
   // import {useAuthStore} from '@shared/stores/core/useAuthStore'
   // import {useI18nStore} from '@shared/stores/core/useI18nStore'
@@ -8,9 +9,6 @@
   import { CoverLoading } from '@shared/components/common/CoverLoading'
   import { CoverMaintenance } from '@shared/components/common/CoverMaintenance'
   import { CoverUpdate } from '@shared/components/common/CoverUpdate'
-  // import {useUpdateRequired} from '@shared/composables/core/useUpdateRequired.js'
-  // import { useLoaded } from '@shared/composables/core/useLoaded'
-  // import {useMaintenanceMode} from '@shared/composables/core/useMaintenanceMode.js'
 
   const app = useAppStore()
   // const auth = useAuthStore()
@@ -30,7 +28,7 @@
 
 <template>
   <template
-      v-if=" app.isMaintenanceMode"
+      v-if="true || app.isMaintenanceMode"
   >
     <CoverMaintenance />
   </template>
