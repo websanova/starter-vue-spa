@@ -1,4 +1,5 @@
 import { useAuth } from '../../../composables/support/auth'
+import { getToken, setToken } from '../../../lib/authToken'
 import { useRouter } from '../../router'
 import { HttpError } from '../client'
 
@@ -8,7 +9,7 @@ import type { RequestInterceptor, ResponseError, ResponseSuccess } from '../clie
  * Attaches the stored bearer token to outgoing requests.
  */
 export const request: RequestInterceptor = (config) => {
-  const token = useAuth().getToken()
+  const token = getToken()
 
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
@@ -24,7 +25,7 @@ export const responseSuccess: ResponseSuccess = (res) => {
   const token = res.headers.get('authorization')
 
   if (token) {
-    useAuth().setToken(token)
+    setToken(token)
   }
 
   return res

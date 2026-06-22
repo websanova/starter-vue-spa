@@ -4,7 +4,7 @@ import { useHttp } from '../../plugins/http'
 import { useQueryClient } from '../../plugins/query'
 import { useAppStore } from '../../stores'
 import { profileQuery } from '../api/profile'
-import { deleteToken, getToken, setToken } from '../../lib/token'
+import { deleteToken, getToken } from '../../lib/authToken'
 
 import type { Auth } from '../../models/auth'
 
@@ -45,11 +45,9 @@ export const useAuth = function() {
   return {
     checkReady,
     flush,
-    getToken,
     isAuthReady,
     isLoggedIn,
     refreshToken,
-    setToken,
     user,
   }
 }
