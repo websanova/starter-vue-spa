@@ -6,6 +6,8 @@
   // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
+  import { CoverMaintenance } from '@shared/components/common/CoverMaintenance'
+  import { CoverUpdate } from '@shared/components/common/CoverUpdate'
   // import {useUpdateRequired} from '@shared/composables/core/useUpdateRequired.js'
   // import { useLoaded } from '@shared/composables/core/useLoaded'
   // import {useMaintenanceMode} from '@shared/composables/core/useMaintenanceMode.js'
@@ -27,21 +29,21 @@
 </script>
 
 <template>
-  <!-- <template
-      v-if="maintenanceMode.state.isActive"
+  <template
+      v-if=" app.isMaintenanceMode"
   >
-    <cpt-cover-maintenance />
+    <CoverMaintenance />
   </template>
 
-  <template
-      v-else-if="updateRequired.state.isActive"
+   <template
+      v-else-if="app.isUpdateRequired"
   >
-    <cpt-cover-update />
+    <CoverUpdate />
   </template>
 
   <template
       v-else
-  >-->
+  >
     <template
         v-if="isSiteLoaded"
     >
@@ -55,5 +57,5 @@
           v-if="!isSiteLoaded"
       />
     </Transition>
-  <!--</template> -->
+  </template>
 </template>
