@@ -1,13 +1,13 @@
 import { createApp } from "vue"
 import App from "@shared/views/App.vue"
 import { createHttp } from "@shared/plugins/http"
-import { createQuery } from "@shared/plugins/query"
+import { createQueryClient } from "@shared/plugins/query"
 import { createRouter } from "@shared/plugins/router"
 import { createStore } from "@shared/plugins/store"
 
 createApp(App)
   .use(createHttp)
-  .use(createQuery)
+  .use(createQueryClient)
   .use(createRouter)
   .use(createStore)
   .mount("#app")

@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 
 import { useHttp } from '../../plugins/http'
-import { useQuery as useQueryClient } from '../../plugins/query'
+import { useQueryClient } from '../../plugins/query'
 import { useAuthStore } from '../../stores/auth'
 import { profileQuery } from '../api/profile'
 
