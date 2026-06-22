@@ -21,9 +21,9 @@ interface RequestOptions {
   signal?: AbortSignal
 }
 
-type RequestInterceptor = (config: RequestConfig) => RequestConfig | Promise<RequestConfig>
-type ResponseSuccess = (res: Response) => Response | Promise<Response>
-type ResponseError = (err: unknown) => unknown
+export type RequestInterceptor = (config: RequestConfig) => RequestConfig | Promise<RequestConfig>
+export type ResponseSuccess = (res: Response) => Response | Promise<Response>
+export type ResponseError = (err: unknown) => unknown
 
 export interface HttpClient {
   get: <T>(url: string, options?: RequestOptions) => Promise<T>
@@ -33,6 +33,19 @@ export interface HttpClient {
   interceptors: {
     request: { use: (fn: RequestInterceptor) => void }
     response: { use: (success?: ResponseSuccess | null, error?: ResponseError | null) => void }
+  }
+}
+
+/**
+ * Normalized rejection for non-2xx responses. Mirrors the useful part of axios so callers and interceptors read err.response.status / data / headers, and instanceof distinguishes it from a raw network error.
+ */
+export class HttpError extends Error {
+  readonly response: { status: number; data: unknown; headers: Headers }
+
+  constructor(status: number, data: unknown, headers: Headers) {
+    super(`HTTP ${status}`)
+    this.name = 'HttpError'
+    this.response = { status, data, headers }
   }
 }
 
@@ -138,7 +151,9 @@ export function createClient(config: ClientConfig): HttpClient {
     }
 
     if (!res.ok) {
-      return runResponseError(res)
+      const data = await res.json().catch(() => null)
+
+      return runResponseError(new HttpError(res.status, data, res.headers))
     }
 
     for (const { success } of responseChain) {

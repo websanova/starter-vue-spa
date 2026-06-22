@@ -1,10 +1,7 @@
 import type { App } from 'vue'
 
 import { createClient, type HttpClient } from './client'
-
-// import * as auth from './interceptors/auth'
-// import * as maintenanceMode from './interceptors/maintenanceMode'
-// import * as updateRequired from './interceptors/updateRequired'
+import { auth, maintenanceMode, updateRequired } from './interceptors'
 
 let instance: HttpClient
 
@@ -18,10 +15,10 @@ function createHttp(_app: App) {
   })
 
   // NOTE: Order here matters
-  // instance.interceptors.request.use(auth.request)
-  // instance.interceptors.response.use(auth.responseSuccess, auth.responseError)
-  // instance.interceptors.response.use(null, maintenanceMode.responseError)
-  // instance.interceptors.response.use(updateRequired.responseSuccess, updateRequired.responseError)
+  instance.interceptors.request.use(auth.request)
+  instance.interceptors.response.use(auth.responseSuccess, auth.responseError)
+  instance.interceptors.response.use(null, maintenanceMode.responseError)
+  instance.interceptors.response.use(updateRequired.responseSuccess, updateRequired.responseError)
 }
 
 function useHttp() {
