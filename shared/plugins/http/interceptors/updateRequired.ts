@@ -1,4 +1,4 @@
-import { useAppStore } from '../../../stores'
+import { useAppStore } from '../../../stores/app'
 import { HttpError } from '../client'
 
 import type { ResponseError, ResponseSuccess } from '../client'

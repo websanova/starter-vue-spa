@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized } from "vue-router"
-import { useContentStore } from "@shared/stores"
+import { useContentStore } from "@shared/stores/content"
 
 declare module "vue-router" {
   interface RouteMeta {

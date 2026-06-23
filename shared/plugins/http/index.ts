@@ -1,7 +1,9 @@
 import type { App } from 'vue'
 
 import { createClient, type HttpClient } from './client'
-import { auth, maintenanceMode, updateRequired } from './interceptors'
+import * as auth from './interceptors/auth'
+import * as maintenanceMode from './interceptors/maintenanceMode'
+import * as updateRequired from './interceptors/updateRequired'
 
 let instance: HttpClient
 

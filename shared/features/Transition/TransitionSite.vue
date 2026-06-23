@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { computed, onMounted } from 'vue'
 
-  import { useAppStore, useContentStore } from '@shared/stores'
+  import { useAppStore } from '@shared/stores/app'
+  import { useContentStore } from '@shared/stores/content'
   // import {useAuthStore} from '@shared/stores/core/useAuthStore'
   // import {useI18nStore} from '@shared/stores/core/useI18nStore'
   // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'

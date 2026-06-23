@@ -2,7 +2,7 @@ import { computed } from 'vue'
 
 import { useHttp } from '../../plugins/http'
 import { useQueryClient } from '../../plugins/query'
-import { useAppStore } from '../../stores'
+import { useAppStore } from '../../stores/app'
 import { useAuthGet, authQuery } from '../api/auth'
 import { deleteToken, getToken } from '../../lib/authToken'
 
