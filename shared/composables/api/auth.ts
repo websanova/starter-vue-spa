@@ -8,9 +8,10 @@ import type { Auth, AuthDto } from '../../models/auth'
 /**
  * Query definition for the authenticated profile. Shared by the component hook and imperative fetches so both resolve against the same cache entry.
  */
-export function profileQuery() {
+export function authQuery() {
   return {
-    queryKey: ['profile'] as const,
+    enabled: false,
+    queryKey: ['auth'] as const,
     queryFn: async (): Promise<Auth> => toAuth(await useHttp().get<AuthDto>('profile')),
   }
 }
@@ -18,6 +19,6 @@ export function profileQuery() {
 /**
  * Fetches the authenticated profile as reactive query state for components.
  */
-export function useProfileGet() {
-  return useQuery(profileQuery())
+export function useAuthGet() {
+  return useQuery(authQuery())
 }

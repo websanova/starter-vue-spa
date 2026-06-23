@@ -3,11 +3,12 @@ import { computed } from 'vue'
 import { useHttp } from '../../plugins/http'
 import { useQueryClient } from '../../plugins/query'
 import { useAppStore } from '../../stores'
-import { profileQuery } from '../api/profile'
+import { useAuthGet, authQuery } from '../api/auth'
 import { deleteToken, getToken } from '../../lib/authToken'
 
-import type { Auth } from '../../models/auth'
-
+/**
+ * Imperative auth orchestration. Safe to call outside component setup (router guards, interceptors) because it never instantiates a query observer.
+ */
 export const useAuth = function() {
   const app = useAppStore()
   const client = useQueryClient()
@@ -24,7 +25,7 @@ export const useAuth = function() {
     if (getToken()) {
       try {
         await refreshToken()
-        await client.ensureQueryData(profileQuery())
+        await fetchUser()
       } catch {
         flush()
       }
@@ -33,21 +34,36 @@ export const useAuth = function() {
     app.activateAuthReady()
   }
 
+  async function fetchUser() {
+    return await client.fetchQuery(authQuery())
+  }
+
   function flush() {
     deleteToken()
-    client.removeQueries({ queryKey: profileQuery().queryKey })
+    client.removeQueries({ queryKey: authQuery().queryKey })
   }
 
   const isAuthReady = computed(() => app.isAuthReady)
-  const isLoggedIn = computed(() => !!user.value)
-  const user = computed(() => client.getQueryData<Auth>(profileQuery().queryKey) ?? null)
 
   return {
     checkReady,
     flush,
     isAuthReady,
-    isLoggedIn,
     refreshToken,
+  }
+}
+
+/**
+ * Reactive authenticated user state. Component only, since it subscribes a query observer that must bind to an active effect scope for cleanup.
+ */
+export const useAuthUser = function() {
+  const { data } = useAuthGet()
+
+  const user = computed(() => data.value ?? null)
+  const isLoggedIn = computed(() => !!user.value)
+
+  return {
+    isLoggedIn,
     user,
   }
 }

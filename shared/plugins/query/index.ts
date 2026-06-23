@@ -11,9 +11,10 @@ let instance: QueryClient
 function createQueryClient(app: App) {
   instance = new QueryClient({
     defaultOptions: {
-      queries: { staleTime: 60_000, retry: 1 }
+      queries: { staleTime: 60_000, retry: false }
     }
   })
+
   app.use(VueQueryPlugin, { queryClient: instance })
 }
 
