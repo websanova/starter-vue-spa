@@ -13,7 +13,7 @@ export const responseError: ResponseError = (err) => {
     const clientVersion = err.response.headers.get('x-client-version')
 
     if (clientVersion && clientVersion !== version) {
-      useAppStore().activateUpdateRequired()
+      useAppStore().isUpdateRequired = true
     }
   }
 
@@ -27,7 +27,7 @@ export const responseSuccess: ResponseSuccess = (res) => {
   const clientVersion = res.headers.get('x-client-version')
 
   if (clientVersion && clientVersion !== version) {
-    useAppStore().activateUpdateRequired()
+    useAppStore().isUpdateRequired = true
   }
 
   return res

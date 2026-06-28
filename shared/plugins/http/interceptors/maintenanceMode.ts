@@ -8,7 +8,7 @@ import type { ResponseError } from '../client'
  */
 export const responseError: ResponseError = (err) => {
   if (err instanceof HttpError && (err.response.data as { code?: string })?.code === 'MaintenanceMode') {
-    useAppStore().activateMaintenanceMode()
+    useAppStore().isMaintenanceMode = true
   }
 
   return Promise.reject(err)

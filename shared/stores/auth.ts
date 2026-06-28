@@ -5,7 +5,7 @@ import { defineStore } from 'pinia'
 import type { Auth } from '../models/auth'
 
 export const useAuthStore = defineStore('auth', () => {
-  const isReady = ref(false)
+  const isReady = ref<boolean>(false)
   const user = ref<Auth | null>(null)
 
   return {

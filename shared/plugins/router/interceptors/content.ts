@@ -32,9 +32,9 @@ export function beforeEach(to: RouteLocationNormalized, from: RouteLocationNorma
   to.matched.forEach((obj) => { toObj = Object.assign(toObj, obj.meta.content || {}) })
   from.matched.forEach((obj) => { frObj = Object.assign(frObj, obj.meta.content || {}) })
 
-  content.setIsLayoutLoaded(frObj.layout === toObj.layout)
-  content.setIsPageLoaded(frObj.page === toObj.page)
-  content.setIsSiteLoaded(frObj.site === toObj.site)
+  content.isLayoutLoaded = frObj.layout === toObj.layout
+  content.isPageLoaded = frObj.page === toObj.page
+  content.isSiteLoaded = frObj.site === toObj.site
 
   if (
     to.path !== from.path &&
@@ -55,8 +55,8 @@ export function afterEach(to: RouteLocationNormalized, from: RouteLocationNormal
   setTimeout(() => {
     document.documentElement.style.overflowY = ""
 
-    content.setIsLayoutLoaded(true)
-    content.setIsPageLoaded(true)
-    content.setIsSiteLoaded(true)
+    content.isLayoutLoaded = true
+    content.isPageLoaded = true
+    content.isSiteLoaded = true
   }, timeout)
 }
