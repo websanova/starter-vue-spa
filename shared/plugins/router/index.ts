@@ -7,13 +7,9 @@ import * as content from './interceptors/content'
 // import * as preload from './interceptors/preload.js'
 // import * as scrollToTop from './interceptors/scrollToTop.js'
 
-
-import { useAuth } from '../../composables/support/auth'
-
 import routes from "@routes"
 
 let instance: Router
-
 
 /**
 * Builds the router from the app supplied routes. Shared guards register here
@@ -25,16 +21,6 @@ function createRouter(app: App) {
     history: createWebHistory(),
     routes
   })
-
-  // NOTE: Order here matters
-
-  instance.beforeEach(() => {
-    const auth = useAuth()
-
-    auth.checkReady()
-
-  })
-
 
   // instance.beforeEach(preload.beforeEach)
   // instance.beforeEach(i18n.beforeEach)

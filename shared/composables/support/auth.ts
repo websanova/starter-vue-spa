@@ -1,24 +1,29 @@
 import { computed } from 'vue'
 
 import { useHttp } from '../../plugins/http'
-import { useQueryClient } from '../../plugins/query'
-import { useAppStore } from '../../stores/app'
-import { useAuthGet, authQuery } from '../api/auth'
+import { useAuthStore } from '../../stores/auth'
+import { toAuth } from '../../models/auth'
 import { deleteToken, getToken } from '../../lib/authToken'
 
+import type { AuthDto } from '../../models/auth'
+
 /**
- * Imperative auth orchestration. Safe to call outside component setup (router guards, interceptors) because it never instantiates a query observer.
+ * Auth orchestration. Safe to call outside component setup (router guards, interceptors) since it does not instantiate a query observer.
  */
 export const useAuth = function() {
-  const app = useAppStore()
-  const client = useQueryClient()
+  const store = useAuthStore()
 
   async function refreshToken() {
     return await useHttp().post('refresh')
   }
 
+  async function fetchUser() {
+    const dto = await useHttp().get<AuthDto>('profile')
+    store.user = toAuth(dto)
+  }
+
   async function checkReady() {
-    if (app.isAuthReady) {
+    if (store.isReady) {
       return
     }
 
@@ -31,39 +36,20 @@ export const useAuth = function() {
       }
     }
 
-    app.activateAuthReady()
-  }
-
-  async function fetchUser() {
-    return await client.fetchQuery(authQuery())
+    store.isReady = true
   }
 
   function flush() {
     deleteToken()
-    client.removeQueries({ queryKey: authQuery().queryKey })
+    store.user = null
   }
 
-  const isAuthReady = computed(() => app.isAuthReady)
-
   return {
+    user: computed(() => store.user),
+    isLoggedIn: computed(() => !!store.user),
+    isReady: computed(() => store.isReady),
     checkReady,
     flush,
-    isAuthReady,
     refreshToken,
-  }
-}
-
-/**
- * Reactive authenticated user state. Component only, since it subscribes a query observer that must bind to an active effect scope for cleanup.
- */
-export const useAuthUser = function() {
-  const { data } = useAuthGet()
-
-  const user = computed(() => data.value ?? null)
-  const isLoggedIn = computed(() => !!user.value)
-
-  return {
-    isLoggedIn,
-    user,
   }
 }
