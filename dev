@@ -2,6 +2,7 @@
 
 case "$1" in
     install) docker compose exec node yarn install ;;
+    update) docker compose exec node yarn install --immutable ;;
     app) shift; docker compose exec app yarn workspace app run "$@" ;;
     admin) shift; docker compose exec admin yarn workspace admin run "$@" ;;
     yarn) shift; docker compose exec node yarn "$@" ;;
@@ -10,5 +11,5 @@ case "$1" in
     down) docker compose down ;;
     restart) docker compose down && docker compose up -d --force-recreate ;;
     logs) shift; docker compose logs -f "$@" ;;
-    *) echo "Usage: ./run {install|app|admin|yarn|sh} [args]" ;;
+    *) echo "Usage: ./dev {install|app|admin|yarn|sh} [args]" ;;
 esac
