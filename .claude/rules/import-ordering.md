@@ -23,7 +23,7 @@ When editing or generating files, enforce the following import order and groupin
 
 Rules:
 - Always group imports in the above order
-- Insert exactly one blank line between each group
+- No blank lines between groups
 - Within each group, sort imports alphabetically by module path
 - Prefer absolute imports (e.g., '@/...') for internal modules when available
 - Do not mix groups
@@ -42,16 +42,10 @@ Example:
 
 ```ts
 import { ref } from 'vue'
-
 import axios from 'axios'
-
 import { useUserStore } from '@/stores/user'
-
 import Button from '@/components/Button.vue'
-
 import { formatDate } from '@/utils/date'
-
 import type { User } from '@/types/user'
-
 import '@/styles/global.css'
 ```
