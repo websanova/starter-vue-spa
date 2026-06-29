@@ -1,5 +1,7 @@
+<script setup lang="ts">
+  import LoginForm from '@/features/forms/Login.vue'
+</script>
+
 <template>
-  <div>
-    <h1 class="text-2xl font-bold">Auth Login</h1>
-  </div>
+  <LoginForm />
 </template>
