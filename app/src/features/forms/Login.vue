@@ -6,6 +6,7 @@
   import { useMutation } from '@tanstack/vue-query'
   import { useAuth } from '@shared/composables/support/auth'
   import { HttpError } from '@shared/plugins/http/client'
+  import type { LoginData } from '@shared/composables/support/auth'
   import { Button } from '@shared/components/ui/button'
   import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@shared/components/ui/form'
   import { Input } from '@shared/components/ui/input'
@@ -24,7 +25,7 @@
   })
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (values: { email: string; password: string }) => login(values),
+    mutationFn: (values: LoginData) => login(values),
     onSuccess: () => router.push({ name: 'user-landing' }),
     onError: (err) => {
       if (err instanceof HttpError && err.response.status === 422) {

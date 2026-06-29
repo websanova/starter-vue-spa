@@ -7,7 +7,7 @@ import { deleteToken, getToken } from '../../lib/authToken'
 
 import type { AuthDto } from '../../models/auth'
 
-interface LoginData {
+export interface LoginData {
   email: string
   password: string
 }
