@@ -33,6 +33,7 @@
     "@tailwindcss/vite": "^4.0.0",
     "@tanstack/vue-query-devtools": "^5.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
+    "shadcn-vue": "^2.7.4",
     "tailwindcss": "^4.0.0",
     "tw-animate-css": "^1.0.0",
     "typescript": "^5.7.2",

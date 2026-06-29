@@ -3,8 +3,8 @@
 case "$1" in
     install) docker compose exec node yarn install ;;
     update) docker compose exec node yarn install --immutable ;;
-    app) shift; docker compose exec app yarn workspace app run "$@" ;;
-    admin) shift; docker compose exec admin yarn workspace admin run "$@" ;;
+    app) shift; docker compose exec app yarn workspace app "$@" ;;
+    admin) shift; docker compose exec admin yarn workspace admin "$@" ;;
     yarn) shift; docker compose exec node yarn "$@" ;;
     sh) shift; docker compose exec "$1" sh ;;
     up) docker compose up -d --force-recreate ;;
