@@ -29,7 +29,7 @@
 
 <template>
   <template
-      v-if="true || app.isMaintenanceMode"
+      v-if="app.isMaintenanceMode"
   >
     <CoverMaintenance />
   </template>

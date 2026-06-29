@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Starter } from "@shared/components/icons"
+  import LogoStarter from "@shared/components/logos/LogoStarter.vue"
   import { Cover, CoverContent } from "@shared/components/common/Cover"
 </script>
 
@@ -7,7 +7,7 @@
   <Cover>
     <CoverContent>
       <div class="text-center">
-        <Starter class="mx-auto mb-4 h-20 w-20" />
+        <LogoStarter class="mx-auto mb-4 h-20" />
 
         <div v-if="$slots.default">
           <slot />
