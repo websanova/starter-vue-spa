@@ -13,7 +13,6 @@ let instance: HttpClient
 function createHttp(_app: App) {
   instance = createClient({
     baseURL: import.meta.env.VITE_API_URL ?? '',
-    credentials: 'include',
   })
 
   // NOTE: Order here matters
