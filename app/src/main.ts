@@ -1,5 +1,5 @@
 import { createApp } from "vue"
-import App from "@shared/views/App.vue"
+import App from "./App.vue"
 import { createHttp } from "@shared/plugins/http"
 import { createQueryClient } from "@shared/plugins/query"
 import { createRouter } from "@shared/plugins/router"
