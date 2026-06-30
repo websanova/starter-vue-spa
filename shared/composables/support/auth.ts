@@ -21,35 +21,8 @@ interface RegisterOptions {
   autoLogin?: boolean
 }
 
-/**
- * Auth orchestration. Safe to call outside component setup (router guards, interceptors) since it does not instantiate a query observer.
- */
 export const useAuth = function() {
   const store = useAuthStore()
-
-  async function fetchUser() {
-    const dto = await useHttp().get<AuthDto>('profile')
-    store.user = toAuth(dto)
-  }
-
-  async function refreshToken() {
-    return await useHttp().post('refresh')
-  }
-
-  async function login(data: LoginData) {
-    await useHttp().post('login', data)
-    await fetchUser()
-    store.isReady = true
-  }
-
-  async function register(data: RegisterData, options: RegisterOptions = {}) {
-    await useHttp().post('register', data)
-
-    if (options.autoLogin) {
-      await fetchUser()
-      store.isReady = true
-    }
-  }
 
   async function checkReady() {
     if (store.isReady) {
@@ -68,10 +41,34 @@ export const useAuth = function() {
     store.isReady = true
   }
 
+  async function fetchUser() {
+    const dto = await useHttp().get<AuthDto>('profile')
+    store.user = toAuth(dto)
+  }
+
   function flush() {
     deleteToken()
     store.user = null
     store.isReady = false
+  }
+
+  async function login(data: LoginData) {
+    await useHttp().post('login', data)
+    await fetchUser()
+    store.isReady = true
+  }
+
+  async function refreshToken() {
+    return await useHttp().post('refresh')
+  }
+
+  async function register(data: RegisterData, options: RegisterOptions = {}) {
+    await useHttp().post('register', data)
+
+    if (options.autoLogin) {
+      await fetchUser()
+      store.isReady = true
+    }
   }
 
   return {
