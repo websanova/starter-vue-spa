@@ -1,11 +1,10 @@
 import { computed } from 'vue'
 
-import { useHttp } from '../../plugins/http'
-import { useAuthStore } from '../../stores/auth'
-import { toAuth } from '../../models/auth'
-import { deleteToken, getToken } from '../../lib/authToken'
-
-import type { AuthDto } from '../../models/auth'
+import { useHttp } from '@shared/plugins/http'
+import { useAuthStore } from '@shared/stores/auth'
+import { toAuth } from '@/models/auth'
+import { deleteToken, getToken } from '@shared/lib/authToken'
+import type { AuthDto } from '@/models/auth'
 
 export interface LoginData {
   email: string

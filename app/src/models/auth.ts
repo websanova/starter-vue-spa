@@ -1,5 +1,3 @@
-import type { User } from './user'
-
 /**
  * Wire shape returned by the auth profile endpoint. Stays inside the model layer; nothing downstream depends on these field names.
  */
@@ -35,13 +33,3 @@ export function toAuth(dto: AuthDto): Auth {
   }
 }
 
-/**
- * Derives the general user resource from an authenticated identity.
- */
-export function toUser(auth: Auth): User {
-  return {
-    id: auth.id,
-    name: auth.name,
-    email: auth.email,
-  }
-}
