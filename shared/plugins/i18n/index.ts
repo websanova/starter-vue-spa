@@ -12,6 +12,8 @@ function buildI18n() {
   })
 }
 
+export type Locale = ReturnType<typeof buildI18n>['global']['locale']['value']
+
 let instance: ReturnType<typeof buildI18n>['global']
 
 /**

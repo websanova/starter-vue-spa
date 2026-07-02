@@ -3,8 +3,8 @@
 
   import { useAppStore } from '@shared/stores/app'
   import { useContentStore } from '@shared/stores/content'
+  import { useI18nStore } from '@shared/stores/i18n'
   // import {useAuthStore} from '@shared/stores/core/useAuthStore'
-  // import {useI18nStore} from '@shared/stores/core/useI18nStore'
   // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
@@ -14,15 +14,15 @@
   const app = useAppStore()
   // const auth = useAuthStore()
   const content = useContentStore()
-  // const i18n = useI18nStore()
+  const i18n = useI18nStore()
   // const settings = useSettingsStore()
 
   const isSiteLoaded = computed(() => {
       return (
           // auth.isReady &&
-          content.isSiteLoaded// &&
-          // i18n.isSiteLoaded &&
-          // settings.isLoaded
+          content.isSiteLoaded &&
+          i18n.isSiteLoaded
+          // && settings.isLoaded
       )
   })
 </script>

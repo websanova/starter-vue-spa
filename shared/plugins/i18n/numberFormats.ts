@@ -1,5 +1,5 @@
 export default {
-  usd: {
+  'en-US': {
     currency: {
       currency: 'USD',
       notation: 'standard',
