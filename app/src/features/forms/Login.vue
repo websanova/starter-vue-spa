@@ -7,16 +7,16 @@
   import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@shared/components/ui/form'
   import { Input } from '@shared/components/ui/input'
 
-  const router = useRouter()
   const { login } = useAuth()
+  const router = useRouter()
 
-  const form = useFormMutation({
+  const { submit, isPending } = useFormMutation({
     rules: { email: AuthRules.email(), password: AuthRules.password() },
     onSubmit: login,
   })
 
   async function onSubmit() {
-    await form.submit()
+    await submit()
     router.push({ name: 'user-landing' })
   }
 </script>
@@ -41,8 +41,8 @@
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit" class="w-full" :disabled="form.isPending">
-      {{ form.isPending ? 'Signing in...' : 'Sign in' }}
+    <Button type="submit" class="w-full" :disabled="isPending">
+      {{ isPending ? 'Signing in...' : 'Sign in' }}
     </Button>
   </form>
 </template>
