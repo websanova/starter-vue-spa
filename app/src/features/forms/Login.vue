@@ -13,16 +13,12 @@
   const { submit, isPending } = useFormMutation({
     rules: { email: AuthRules.email(), password: AuthRules.password() },
     onSubmit: login,
+    onSuccess: () => router.push({ name: 'user-landing' }),
   })
-
-  async function onSubmit() {
-    await submit()
-    router.push({ name: 'user-landing' })
-  }
 </script>
 
 <template>
-  <form class="flex w-full flex-col gap-4" @submit.prevent="onSubmit">
+  <form class="flex w-full flex-col gap-4" @submit.prevent="submit">
     <FormField v-slot="{ componentField }" name="email">
       <FormItem>
         <FormLabel>Email</FormLabel>
