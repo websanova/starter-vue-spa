@@ -5,10 +5,10 @@ Radix). Components are copied into `shared/components/ui/` and shared by both ap
 
 ## Add a component
 
-Run inside either app - output goes to the shared folder via `components.json`.
+Run inside either app, output goes to the shared folder via `components.json`.
 
 ```bash
-npx shadcn-vue@latest add button
+yarn shadcn-vue add spinner --cwd app
 ```
 
 ## Icons
