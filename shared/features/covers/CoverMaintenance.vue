@@ -13,8 +13,8 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4" v-html="app.interrupt?.type === 'maintenance' ? app.interrupt.message || $t('cover.loading.maintenance') : ''" />
+    <p class="mb-4" v-html="app.interrupt?.type === 'maintenance' ? app.interrupt.message || $t('site.cover.maintenance.message') : ''" />
 
-    <Button @click="onRefresh">Refresh</Button>
+    <Button @click="onRefresh">{{ $t('site.common.refresh') }}</Button>
   </CoverLoading>
 </template>

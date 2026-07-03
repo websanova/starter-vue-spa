@@ -9,8 +9,8 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4">A new version is available. Refresh to update.</p>
+    <p class="mb-4">{{ $t('site.cover.update.message') }}</p>
 
-    <Button @click="onRefresh">Refresh</Button>
+    <Button @click="onRefresh">{{ $t('site.common.refresh') }}</Button>
   </CoverLoading>
 </template>

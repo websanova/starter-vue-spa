@@ -1,8 +1,16 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "update": "Update",
+    "delete": "Delete",
+    "refresh": "Refresh"
+  },
   "cover": {
-    "loading": {
-      "maintenance": "App is down for maintenance.<br>We should be back up shortly.",
-      "update": "The app has been updated."
+    "maintenance": {
+      "message": "App is down for maintenance.<br>We should be back up shortly."
+    },
+    "update": {
+      "message": "The app has been updated."
     }
   }
 }
