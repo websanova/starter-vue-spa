@@ -13,7 +13,7 @@ export const responseError: ResponseError = (err) => {
     const clientVersion = err.response.headers.get('x-client-version')
 
     if (clientVersion && clientVersion !== version) {
-      useAppStore().isUpdateRequired = true
+      useAppStore().interrupt = { type: 'update' }
     }
   }
 
@@ -27,7 +27,7 @@ export const responseSuccess: ResponseSuccess = (res) => {
   const clientVersion = res.headers.get('x-client-version')
 
   if (clientVersion && clientVersion !== version) {
-    useAppStore().isUpdateRequired = true
+    useAppStore().interrupt = { type: 'update' }
   }
 
   return res

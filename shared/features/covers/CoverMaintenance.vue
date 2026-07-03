@@ -1,6 +1,10 @@
 <script setup lang="ts">
+  import { useAppStore } from "@shared/stores/app"
+
   import { Button } from "@shared/components/ui/button"
   import { CoverLoading } from "@shared/components/common/CoverLoading"
+
+  const app = useAppStore()
 
   function onRefresh() {
     window.location.reload()
@@ -9,7 +13,7 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4">We are down for maintenance. Please check back shortly.</p>
+    <p class="mb-4">{{ app.interrupt?.type === "maintenance" ? app.interrupt.message : "" }}</p>
 
     <Button @click="onRefresh">Refresh</Button>
   </CoverLoading>

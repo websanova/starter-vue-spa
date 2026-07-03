@@ -1,12 +1,14 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+export type AppInterrupt =
+    | { type: 'maintenance'; message: string; retryAfter: number | null }
+    | { type: 'update' }
+
 export const useAppStore = defineStore('app', () => {
-    const isMaintenanceMode = ref<boolean>(false)
-    const isUpdateRequired = ref<boolean>(false)
+    const interrupt = ref<AppInterrupt | null>(null)
 
     return {
-        isMaintenanceMode,
-        isUpdateRequired,
+        interrupt,
     }
 })
