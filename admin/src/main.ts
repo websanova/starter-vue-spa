@@ -5,6 +5,7 @@ import { createI18n } from "@shared/plugins/i18n"
 import { createQueryClient } from "@shared/plugins/query"
 import { createRouter } from "@shared/plugins/router"
 import { createStore } from "@shared/plugins/store"
+import { registerModuleReload } from "@shared/lib/moduleReload"
 
 createApp(App)
   .use(createHttp)
@@ -13,3 +14,5 @@ createApp(App)
   .use(createRouter)
   .use(createStore)
   .mount("#app")
+
+registerModuleReload()
