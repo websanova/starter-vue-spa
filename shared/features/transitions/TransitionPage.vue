@@ -8,10 +8,15 @@
   const i18n = useI18nStore()
 
   const isPageLoaded = computed(() => {
-      return (
-          content.isPageLoaded &&
-          i18n.isPageLoaded
-      )
+    console.log('here')
+
+    console.log(content.isPageLoaded)
+    console.log(i18n.isPageLoaded)
+
+    return (
+        content.isPageLoaded &&
+        i18n.isPageLoaded
+    )
   })
 </script>
 
@@ -25,6 +30,8 @@
   <Transition
       name="fade-in"
   >
-    <Loading />
+    <Loading
+      v-if="!isPageLoaded"
+    />
   </Transition>
 </template>

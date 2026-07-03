@@ -20,7 +20,7 @@ export const useI18n = function() {
   function setLoaded(tier: I18nTier, locale: string) {
     const loaded = Object.values(store.localesLoaded[tier][locale] || {})
 
-    if (loaded.length && loaded.every((isLoaded) => isLoaded)) {
+    if (loaded.every((isLoaded) => isLoaded)) {
       store[loadedKeys[tier]] = true
     }
   }
