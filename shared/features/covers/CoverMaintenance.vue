@@ -13,7 +13,7 @@
 
 <template>
   <CoverLoading>
-    <p class="mb-4">{{ app.interrupt?.type === "maintenance" ? app.interrupt.message : "" }}</p>
+    <p class="mb-4" v-html="app.interrupt?.type === 'maintenance' ? app.interrupt.message || $t('cover.loading.maintenance') : ''" />
 
     <Button @click="onRefresh">Refresh</Button>
   </CoverLoading>

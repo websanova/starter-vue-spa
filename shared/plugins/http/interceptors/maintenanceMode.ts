@@ -8,7 +8,7 @@ import type { ResponseError } from '../client'
  */
 export const responseError: ResponseError = (err) => {
   if (err instanceof HttpError && err.response.status === 503) {
-    const message = (err.response.data as { message?: string })?.message ?? 'Service unavailable.'
+    const message = (err.response.data as { message?: string })?.message ?? ''
     const retryAfterHeader = err.response.headers.get('retry-after')
     const retryAfter = retryAfterHeader ? Number(retryAfterHeader) : null
 
