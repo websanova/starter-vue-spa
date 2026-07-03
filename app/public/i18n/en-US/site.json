@@ -3,7 +3,8 @@
     "cancel": "Cancel",
     "update": "Update",
     "delete": "Delete",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "loading": "Loading..."
   },
   "cover": {
     "maintenance": {
