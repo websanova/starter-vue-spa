@@ -1,7 +1,7 @@
-import { useAppStore } from '../../../stores/app'
-import { HttpError } from '../client'
+import { HttpError } from '@shared/plugins/http/client'
+import { useAppStore } from '@shared/stores/app'
 
-import type { ResponseError, ResponseSuccess } from '../client'
+import type { ResponseError, ResponseSuccess } from '@shared/plugins/http/client'
 
 const version = import.meta.env.VITE_APP_VERSION
 

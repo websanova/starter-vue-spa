@@ -1,9 +1,9 @@
-import { useAuth } from '../../../composables/support/auth'
-import { getToken, setToken } from '../../../lib/authToken'
-import { useRouter } from '../../router'
-import { HttpError } from '../client'
+import { useAuth } from '@shared/composables/support/auth'
+import { getToken, setToken } from '@shared/lib/authToken'
+import { HttpError } from '@shared/plugins/http/client'
+import { useRouter } from '@shared/plugins/router'
 
-import type { RequestInterceptor, ResponseError, ResponseSuccess } from '../client'
+import type { RequestInterceptor, ResponseError, ResponseSuccess } from '@shared/plugins/http/client'
 
 /**
  * Attaches the stored bearer token to outgoing requests.

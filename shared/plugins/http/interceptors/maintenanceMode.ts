@@ -1,7 +1,7 @@
-import { useAppStore } from '../../../stores/app'
-import { HttpError } from '../client'
+import { HttpError } from '@shared/plugins/http/client'
+import { useAppStore } from '@shared/stores/app'
 
-import type { ResponseError } from '../client'
+import type { ResponseError } from '@shared/plugins/http/client'
 
 /**
  * Activates maintenance mode when the API responds with a 503.
