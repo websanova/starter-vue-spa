@@ -1,6 +1,12 @@
 import { z } from 'zod'
 
 export const AuthRules = {
+  name() {
+    return z.string()
+      .max(255, 'Name is too long.')
+      .optional()
+  },
+
   email() {
     return z.string()
       .min(1, 'Email is required.')
