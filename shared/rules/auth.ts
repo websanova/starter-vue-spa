@@ -19,4 +19,11 @@ export const AuthRules = {
       .min(1, 'Password is required.')
       .max(255, 'Password is too long.')
   },
+
+  passwordsMatch<T extends { password: string; password_confirmation: string }>(schema: z.ZodType<T>) {
+    return schema.refine((data) => data.password === data.password_confirmation, {
+      message: 'Passwords do not match.',
+      path: ['password_confirmation'],
+    })
+  },
 }

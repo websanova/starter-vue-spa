@@ -17,10 +17,7 @@
       password: AuthRules.password(),
       password_confirmation: AuthRules.password(),
     },
-    refine: (schema) => schema.refine((data) => data.password === data.password_confirmation, {
-      message: 'Passwords do not match.',
-      path: ['password_confirmation'],
-    }),
+    refine: AuthRules.passwordsMatch,
     onSubmit: (data) => register(data, { autoLogin: true }),
     onSuccess: () => router.push({ name: 'user-landing' }),
   })
