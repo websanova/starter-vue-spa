@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import LayoutRoot from '@shared/features/layouts/LayoutRoot.vue'
+  import RootLayout from '@shared/features/layouts/Root.vue'
 </script>
 
 <template>
-  <LayoutRoot />
+  <RootLayout />
 </template>

@@ -8,8 +8,8 @@
   // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
-  import CoverMaintenance from '@shared/features/covers/CoverMaintenance.vue'
-  import CoverUpdate from '@shared/features/covers/CoverUpdate.vue'
+  import MaintenanceCover from '@shared/features/covers/Maintenance.vue'
+  import UpdateCover from '@shared/features/covers/Update.vue'
 
   const app = useAppStore()
   // const auth = useAuthStore()
@@ -31,13 +31,13 @@
   <template
       v-if="app.interrupt?.type === 'maintenance'"
   >
-    <CoverMaintenance />
+    <MaintenanceCover />
   </template>
 
    <template
       v-else-if="app.interrupt?.type === 'update'"
   >
-    <CoverUpdate />
+    <UpdateCover />
   </template>
 
   <template

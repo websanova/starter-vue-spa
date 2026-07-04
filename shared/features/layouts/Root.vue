@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { onMounted } from 'vue'
-  import TransitionSite from '@shared/features/transitions/TransitionSite.vue'
+  import SiteTransition from '@shared/features/transitions/Site.vue'
   import { removeInitCover } from '@shared/lib/utils'
   import "@shared/assets/main.css"
 
@@ -10,9 +10,9 @@
 </script>
 
 <template>
-  <TransitionSite>
+  <SiteTransition>
       <!-- <cpt-meta /> -->
 
       <RouterView />
-  </TransitionSite>
+  </SiteTransition>
 </template>

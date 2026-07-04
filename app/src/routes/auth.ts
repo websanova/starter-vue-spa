@@ -1,5 +1,5 @@
 const Impersonate         = () => import('@/views/auth/Impersonate.vue')
-const LayoutAuth          = () => import('@/features/layouts/LayoutAuth.vue')
+const AuthLayout          = () => import('@/features/layouts/Auth.vue')
 const Login               = () => import('@/views/auth/Login.vue')
 const PasswordResetSend   = () => import('@/views/auth/PasswordResetSend.vue')
 const PasswordResetUpdate = () => import('@/views/auth/PasswordResetUpdate.vue')
@@ -19,7 +19,7 @@ const meta = {
 
 export default [{
     path: '/',
-    component: LayoutAuth,
+    component: AuthLayout,
     meta: {
         content: {
             site: 'auth',

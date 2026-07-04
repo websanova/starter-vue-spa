@@ -18,7 +18,7 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 **Page Transitions**
 - Tiered load-state (site / layout / page) driven by route meta, so nested routes only re-trigger the transition for the tier that actually changed
-- `TransitionSite` / `TransitionLayout` / `TransitionPage` gate their reveal on this tiered state, and accept an `isLoading` prop so a specific layout or page can feed in its own async work - queries, preloaded models, whatever else it needs - on top of the built-in tiers
+- `SiteTransition` / `LayoutTransition` / `PageTransition` gate their reveal on this tiered state, and accept an `isLoading` prop so a specific layout or page can feed in its own async work - queries, preloaded models, whatever else it needs - on top of the built-in tiers
 - One shared cover/transition mechanism instead of per-page spinners
 
 **i18n Loading**
