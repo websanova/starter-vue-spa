@@ -8,9 +8,11 @@
     <div class="flex w-full max-w-sm flex-col items-center gap-4 p-8">
       <StarterTextLogo class="h-10" />
 
+      <div class="h-100 w-full">
       <PageTransition>
         <RouterView />
       </PageTransition>
+    </div>
     </div>
   </div>
 </template>

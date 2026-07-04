@@ -1,11 +1,9 @@
 <script setup lang="ts">
   import { Spinner } from "@shared/components/ui/spinner"
 
-  interface Props {
+  defineProps<{
     text?: string
-  }
-
-  defineProps<Props>()
+  }>()
 </script>
 
 <template>

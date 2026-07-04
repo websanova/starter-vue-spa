@@ -3,12 +3,10 @@
   import { type CoverContentVariants, coverContentVariants } from "."
   import { cn } from "@shared/lib/utils"
 
-  interface Props {
+  const props = defineProps<{
     size?: CoverContentVariants["size"]
     class?: HTMLAttributes["class"]
-  }
-
-  const props = defineProps<Props>()
+  }>()
 </script>
 
 <template>

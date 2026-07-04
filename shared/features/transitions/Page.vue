@@ -4,34 +4,19 @@
   import { useI18nStore } from '@shared/stores/i18n'
   import { Loading } from '@shared/components/common/Loading'
 
+  const props = defineProps<{ isLoading?: boolean }>()
+
   const content = useContentStore()
   const i18n = useI18nStore()
 
-  const isPageLoaded = computed(() => {
-    console.log('here')
-
-    console.log(content.isPageLoaded)
-    console.log(i18n.isPageLoaded)
-
-    return (
-        content.isPageLoaded &&
-        i18n.isPageLoaded
-    )
-  })
+  const isReady = computed(() => content.isPageLoaded && i18n.isPageLoaded && !props.isLoading)
+  const showLoading = computed(() => props.isLoading || !i18n.isPageLoaded)
 </script>
 
 <template>
-  <template
-      v-if="isPageLoaded"
-  >
-    <slot />
-  </template>
-
-  <Transition
-      name="fade-in"
-  >
-    <Loading
-      v-if="!isPageLoaded"
-    />
+  <Transition name="fade-in">
+    <slot v-if="isReady" />
   </Transition>
+
+  <Loading v-if="!isReady && showLoading" />
 </template>
