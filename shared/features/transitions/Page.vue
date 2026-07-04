@@ -14,9 +14,15 @@
 </script>
 
 <template>
-  <Transition name="fade-in">
-    <slot v-if="isReady" />
+  <Transition
+    name="fade-in"
+  >
+    <slot
+      v-if="isReady"
+    />
   </Transition>
 
-  <Loading v-if="!isReady && showLoading" />
+  <Loading
+    v-if="!isReady && showLoading"
+  />
 </template>

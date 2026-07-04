@@ -4,14 +4,26 @@
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center">
-    <div class="flex w-full max-w-sm flex-col items-center gap-4 p-8">
-      <StarterTextLogo class="h-10" />
+  <div
+    class="min-h-screen flex items-center justify-center"
+  >
+    <div
+      class="flex w-full max-w-sm flex-col items-center gap-4 p-8"
+    >
+      <StarterTextLogo
+        class="h-10"
+      />
 
-      <div class="h-100 w-full">
-        <RouterView v-slot="{ Component }">
+      <div
+        class="h-100 w-full"
+      >
+        <RouterView
+          v-slot="{ Component }"
+        >
           <PageTransition>
-            <component :is="Component" />
+            <component
+              :is="Component"
+            />
           </PageTransition>
         </RouterView>
       </div>

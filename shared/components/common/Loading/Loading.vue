@@ -7,7 +7,9 @@
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
+  <div
+    class="flex items-center gap-2"
+  >
     <Spinner />
     <span>{{ text ?? $t('site.common.loading.text') }}</span>
   </div>

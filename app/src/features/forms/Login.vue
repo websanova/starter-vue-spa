@@ -17,17 +17,40 @@
 </script>
 
 <template>
-  <form class="flex w-full flex-col gap-4" @submit.prevent="submit">
-    <FormInputText name="email" :label="$t('features.lbl.email')" :placeholder="$t('features.ph.email')" />
-    <FormInputText name="password" type="password" :label="$t('features.lbl.password')" :placeholder="$t('features.ph.password')" />
+  <form
+    class="flex w-full flex-col gap-4"
+    @submit.prevent="submit"
+  >
+    <FormInputText
+      name="email"
+      :label="$t('features.lbl.email')"
+      :placeholder="$t('features.ph.email')"
+    />
 
-    <Button type="submit" class="w-full" :disabled="isPending">
+    <FormInputText
+      name="password"
+      type="password"
+      :label="$t('features.lbl.password')"
+      :placeholder="$t('features.ph.password')"
+    />
+
+    <Button
+      type="submit"
+      class="w-full"
+      :disabled="isPending"
+    >
       {{ isPending ? $t('features.form.login.loading') : $t('features.lbl.sign_in') }}
     </Button>
 
-    <p class="self-end text-sm text-muted-foreground">
+    <p
+      class="self-end text-sm text-muted-foreground"
+    >
       {{ $t('features.form.login.prompt') }}
-      <RouterLink :to="{ name: 'auth-register' }" class="text-primary underline underline-offset-4">
+
+      <RouterLink
+        :to="{ name: 'auth-register' }"
+        class="text-primary underline underline-offset-4"
+      >
         {{ $t('features.lbl.sign_up') }}
       </RouterLink>
     </p>

@@ -15,14 +15,24 @@
 </script>
 
 <template>
-  <FormField v-slot="{ componentField }" :name="props.name">
+  <FormField
+    v-slot="{ componentField }"
+    :name="props.name"
+  >
     <FormItem>
       <FormLabel>
         {{ props.label }}
-        <span v-if="props.optional" class="lowercase text-muted-foreground">({{ $t('features.lbl.optional') }})</span>
+        <span
+          v-if="props.optional"
+          class="lowercase text-muted-foreground"
+        >({{ $t('features.lbl.optional') }})</span>
       </FormLabel>
       <FormControl>
-        <Input :type="props.type" :placeholder="props.placeholder" v-bind="componentField" />
+        <Input
+          :type="props.type"
+          :placeholder="props.placeholder"
+          v-bind="componentField"
+        />
       </FormControl>
       <FormMessage />
     </FormItem>
