@@ -1,13 +1,10 @@
 {
   "name": "Starter",
-
   "common": {
     "loading": {
       "text": "Loading..."
     }
   },
-
-  "meta": {},
-
-  "unit": {}
+  "units": {},
+  "meta": {}
 }

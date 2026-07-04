@@ -1,9 +1,31 @@
 {
-  "common": {
+  "lbl": {
     "cancel": "Cancel",
     "update": "Update",
     "delete": "Delete",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "sign_in": "Sign in",
+    "sign_up": "Sign up",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "password_confirmation": "Confirm Password"
+  },
+  "ph": {
+    "name": "Your name",
+    "email": "you{'@'}example.com",
+    "password": "Password",
+    "password_confirmation": "Confirm password"
+  },
+  "form": {
+    "login": {
+      "loading": "Signing in...",
+      "prompt": "Not a member?"
+    },
+    "register": {
+      "loading": "Signing up...",
+      "prompt": "Already a member?"
+    }
   },
   "cover": {
     "maintenance": {

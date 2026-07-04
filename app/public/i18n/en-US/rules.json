@@ -1,1 +1,10 @@
-{}
+{
+  "attr": {
+    "email": "Email",
+    "password": "Password"
+  },
+  "min": {
+    "string": "The :attribute field must be at least :min characters.",
+    "numeric": "The :attribute field must be at least :min."
+  }
+}

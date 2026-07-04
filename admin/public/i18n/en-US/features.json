@@ -1,11 +1,13 @@
 {
-  "common": {
+  "lbl": {
     "cancel": "Cancel",
     "update": "Update",
     "delete": "Delete",
     "refresh": "Refresh"
   },
+  "ph": {
 
+  },
   "cover": {
     "maintenance": {
       "message": "App is down for maintenance.<br>We should be back up shortly."

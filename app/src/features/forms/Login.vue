@@ -21,9 +21,9 @@
   <form class="flex w-full flex-col gap-4" @submit.prevent="submit">
     <FormField v-slot="{ componentField }" name="email">
       <FormItem>
-        <FormLabel>Email</FormLabel>
+        <FormLabel>{{ $t('features.lbl.email') }}</FormLabel>
         <FormControl>
-          <Input type="email" placeholder="you@example.com" v-bind="componentField" />
+          <Input type="email" :placeholder="$t('features.ph.email')" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -31,22 +31,22 @@
 
     <FormField v-slot="{ componentField }" name="password">
       <FormItem>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>{{ $t('features.lbl.password') }}</FormLabel>
         <FormControl>
-          <Input type="password" placeholder="Password" v-bind="componentField" />
+          <Input type="password" :placeholder="$t('features.ph.password')" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
 
     <Button type="submit" class="w-full" :disabled="isPending">
-      {{ isPending ? 'Signing in...' : 'Sign in' }}
+      {{ isPending ? $t('features.form.login.loading') : $t('features.lbl.sign_in') }}
     </Button>
 
     <p class="self-end text-sm text-muted-foreground">
-      Not a member?
+      {{ $t('features.form.login.prompt') }}
       <RouterLink :to="{ name: 'auth-register' }" class="text-primary underline underline-offset-4">
-        Sign Up
+        {{ $t('features.lbl.sign_up') }}
       </RouterLink>
     </p>
   </form>
