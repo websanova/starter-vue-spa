@@ -3,9 +3,8 @@
   import { useAuth } from '@shared/composables/support/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { AuthRules } from '@shared/rules/auth'
+  import { FormInputText } from '@shared/components/common/FormInputText'
   import { Button } from '@shared/components/ui/button'
-  import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@shared/components/ui/form'
-  import { Input } from '@shared/components/ui/input'
 
   const { register } = useAuth()
   const router = useRouter()
@@ -25,50 +24,10 @@
 
 <template>
   <form class="flex w-full flex-col gap-4" @submit.prevent="submit">
-    <FormField v-slot="{ componentField }" name="name">
-      <FormItem>
-        <FormLabel>
-          <span>
-            {{ $t('features.lbl.name') }}
-            <span class="lowercase text-muted-foreground">({{ $t('features.lbl.optional') }})</span>
-          </span>
-        </FormLabel>
-        <FormControl>
-          <Input type="text" :placeholder="$t('features.ph.name')" v-bind="componentField" />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-
-    <FormField v-slot="{ componentField }" name="email">
-      <FormItem>
-        <FormLabel>{{ $t('features.lbl.email') }}</FormLabel>
-        <FormControl>
-          <Input type="email" :placeholder="$t('features.ph.email')" v-bind="componentField" />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-
-    <FormField v-slot="{ componentField }" name="password">
-      <FormItem>
-        <FormLabel>{{ $t('features.lbl.password') }}</FormLabel>
-        <FormControl>
-          <Input type="password" :placeholder="$t('features.ph.password')" v-bind="componentField" />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-
-    <FormField v-slot="{ componentField }" name="password_confirmation">
-      <FormItem>
-        <FormLabel>{{ $t('features.lbl.password_confirmation') }}</FormLabel>
-        <FormControl>
-          <Input type="password" :placeholder="$t('features.ph.password_confirmation')" v-bind="componentField" />
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
+    <FormInputText name="name" optional :label="$t('features.lbl.name')" :placeholder="$t('features.ph.name')" />
+    <FormInputText name="email" :label="$t('features.lbl.email')" :placeholder="$t('features.ph.email')" />
+    <FormInputText name="password" type="password" :label="$t('features.lbl.password')" :placeholder="$t('features.ph.password')" />
+    <FormInputText name="password_confirmation" type="password" :label="$t('features.lbl.password_confirmation')" :placeholder="$t('features.ph.password_confirmation')" />
 
     <Button type="submit" class="w-full" :disabled="isPending">
       {{ isPending ? $t('features.form.register.loading') : $t('features.lbl.sign_up') }}
