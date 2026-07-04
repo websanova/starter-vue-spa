@@ -27,13 +27,19 @@
   <form class="flex w-full flex-col gap-4" @submit.prevent="submit">
     <FormField v-slot="{ componentField }" name="name">
       <FormItem>
-        <FormLabel>{{ $t('features.lbl.name') }}</FormLabel>
+        <FormLabel>
+          <span>
+            {{ $t('features.lbl.name') }}
+            <span class="lowercase text-muted-foreground">({{ $t('features.lbl.optional') }})</span>
+          </span>
+        </FormLabel>
         <FormControl>
           <Input type="text" :placeholder="$t('features.ph.name')" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
+
     <FormField v-slot="{ componentField }" name="email">
       <FormItem>
         <FormLabel>{{ $t('features.lbl.email') }}</FormLabel>
@@ -43,6 +49,7 @@
         <FormMessage />
       </FormItem>
     </FormField>
+
     <FormField v-slot="{ componentField }" name="password">
       <FormItem>
         <FormLabel>{{ $t('features.lbl.password') }}</FormLabel>
@@ -52,6 +59,7 @@
         <FormMessage />
       </FormItem>
     </FormField>
+
     <FormField v-slot="{ componentField }" name="password_confirmation">
       <FormItem>
         <FormLabel>{{ $t('features.lbl.password_confirmation') }}</FormLabel>
@@ -61,9 +69,11 @@
         <FormMessage />
       </FormItem>
     </FormField>
+
     <Button type="submit" class="w-full" :disabled="isPending">
       {{ isPending ? $t('features.form.register.loading') : $t('features.lbl.sign_up') }}
     </Button>
+
     <p class="self-end text-sm text-muted-foreground">
       {{ $t('features.form.register.prompt') }}
       <RouterLink :to="{ name: 'auth-login' }" class="text-primary underline underline-offset-4">

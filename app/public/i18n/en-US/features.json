@@ -9,7 +9,8 @@
     "name": "Name",
     "email": "Email",
     "password": "Password",
-    "password_confirmation": "Confirm Password"
+    "password_confirmation": "Confirm Password",
+    "optional": "Optional"
   },
   "ph": {
     "name": "Your name",

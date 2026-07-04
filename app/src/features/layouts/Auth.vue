@@ -9,10 +9,12 @@
       <StarterTextLogo class="h-10" />
 
       <div class="h-100 w-full">
-      <PageTransition>
-        <RouterView />
-      </PageTransition>
-    </div>
+        <RouterView v-slot="{ Component }">
+          <PageTransition>
+            <component :is="Component" />
+          </PageTransition>
+        </RouterView>
+      </div>
     </div>
   </div>
 </template>
