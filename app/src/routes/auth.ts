@@ -25,7 +25,7 @@ export default [{
             site: 'auth',
         },
         i18n: {
-            site: ['site']
+            site: ['features', 'rules', 'site']
         },
     },
     children: [{

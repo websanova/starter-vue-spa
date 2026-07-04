@@ -10,7 +10,7 @@ export default [{
             redirect: {name: 'auth-login'}
         },
         i18n: {
-            site: ['site']
+            site: ['features', 'rules', 'site']
         },
     }
 }]

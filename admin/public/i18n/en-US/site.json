@@ -1,17 +1,13 @@
 {
+  "name": "Starter",
+
   "common": {
-    "cancel": "Cancel",
-    "update": "Update",
-    "delete": "Delete",
-    "refresh": "Refresh",
-    "loading": "Loading..."
-  },
-  "cover": {
-    "maintenance": {
-      "message": "App is down for maintenance.<br>We should be back up shortly."
-    },
-    "update": {
-      "message": "The app has been updated."
+    "loading": {
+      "text": "Loading..."
     }
-  }
+  },
+
+  "meta": {},
+
+  "unit": {}
 }

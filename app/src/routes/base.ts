@@ -10,7 +10,7 @@ export default [{
             site: 'base'
         },
         i18n: {
-            site: ['site']
+            site: ['features', 'rules', 'site']
         },
     },
     children: [{

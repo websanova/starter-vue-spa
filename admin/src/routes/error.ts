@@ -7,7 +7,7 @@ export default [{
     component: Index,
     meta: {
         i18n: {
-           site: ['site'],
+           site: ['features', 'rules', 'site'],
         },
     },
     children: [{
