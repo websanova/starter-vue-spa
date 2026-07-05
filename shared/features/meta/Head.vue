@@ -9,20 +9,16 @@
   const i18n = useI18n()
 
   useHead({
-    titleTemplate: i18n.t('site.meta.name') + ' | %s',
+    titleTemplate: i18n.t('site.name') + ' | %s',
   })
 
-  /**
-   * Resolves a site meta i18n value for the current route. The route name prefix is dropped so keys resolve against site.<key>.<route suffix>. Returns an empty string when the key is not defined.
-   */
   function metaText(key: string) {
     return computed(() => {
       if (typeof route.name !== 'string') {
         return ''
       }
 
-      const suffix = route.name.split('-').slice(1).join('-')
-      const i18nKey = `site.${key}.${suffix}`
+      const i18nKey = `site.${key}.${route.name}`
 
       return i18n.te(i18nKey) ? i18n.t(i18nKey) : ''
     })

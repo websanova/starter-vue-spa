@@ -6,5 +6,10 @@
     }
   },
   "units": {},
-  "meta": {}
+  "meta": {
+    "title": {
+      "auth-login": "Sign In",
+      "auth-register": "Sign Up"
+    }
+  }
 }
