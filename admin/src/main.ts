@@ -6,6 +6,7 @@ import { createMeta } from "@shared/plugins/meta"
 import { createQueryClient } from "@shared/plugins/query"
 import { createRouter } from "@shared/plugins/router"
 import { createStore } from "@shared/plugins/store"
+import { createValidation } from "@shared/plugins/validation"
 import { registerModuleReload } from "@shared/lib/moduleReload"
 
 createApp(App)
@@ -15,6 +16,7 @@ createApp(App)
   .use(createQueryClient)
   .use(createRouter)
   .use(createStore)
+  .use(createValidation)
   .mount("#app")
 
 registerModuleReload()
