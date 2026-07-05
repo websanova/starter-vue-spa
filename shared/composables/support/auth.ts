@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useHttp } from '@shared/plugins/http'
 import { useAuthStore } from '@shared/stores/auth'
 import { toAuth } from '@/models/auth'
-import { deleteToken, getToken } from '@shared/lib/authToken'
+import { deleteToken, getToken, setToken } from '@shared/lib/authToken'
 import type { AuthDto } from '@/models/auth'
 
 export interface LoginData {
@@ -54,7 +54,8 @@ export const useAuth = function() {
   }
 
   async function login(data: LoginData) {
-    await useHttp().post('login', data)
+    const res = await useHttp().post<{ token: string }>('login', data)
+    setToken(res.token)
     await fetchUser()
     store.isReady = true
   }
@@ -64,7 +65,8 @@ export const useAuth = function() {
   }
 
   async function register(data: RegisterData, options: RegisterOptions = {}) {
-    await useHttp().post('register', data)
+    const res = await useHttp().post<{ token: string }>('register', data)
+    setToken(res.token)
 
     if (options.autoLogin) {
       await fetchUser()
