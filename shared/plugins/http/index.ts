@@ -17,7 +17,7 @@ function createHttp(_app: App) {
 
   // NOTE: Order here matters
   instance.interceptors.request.use(auth.request)
-  instance.interceptors.response.use(auth.responseSuccess, auth.responseError)
+  instance.interceptors.response.use(null, auth.responseError)
   instance.interceptors.response.use(null, maintenanceMode.responseError)
   instance.interceptors.response.use(updateRequired.responseSuccess, updateRequired.responseError)
 }

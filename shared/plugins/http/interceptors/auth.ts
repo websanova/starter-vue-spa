@@ -1,9 +1,9 @@
 import { useAuth } from '@shared/composables/support/auth'
-import { getToken, setToken } from '@shared/lib/authToken'
+import { getToken } from '@shared/lib/authToken'
 import { HttpError } from '@shared/plugins/http/client'
 import { useRouter } from '@shared/plugins/router'
 
-import type { RequestInterceptor, ResponseError, ResponseSuccess } from '@shared/plugins/http/client'
+import type { RequestInterceptor, ResponseError } from '@shared/plugins/http/client'
 
 /**
  * Attaches the stored bearer token to outgoing requests.
@@ -16,19 +16,6 @@ export const request: RequestInterceptor = (config) => {
   }
 
   return config
-}
-
-/**
- * Captures a refreshed token from the response authorization header.
- */
-export const responseSuccess: ResponseSuccess = (res) => {
-  const token = res.headers.get('authorization')
-
-  if (token) {
-    setToken(token)
-  }
-
-  return res
 }
 
 /**

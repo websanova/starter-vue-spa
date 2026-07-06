@@ -61,7 +61,8 @@ export const useAuth = function() {
   }
 
   async function refreshToken() {
-    return await useHttp().post('refresh')
+    const res = await useHttp().post<{ token: string }>('refresh')
+    setToken(res.token)
   }
 
   async function register(data: RegisterData, options: RegisterOptions = {}) {
