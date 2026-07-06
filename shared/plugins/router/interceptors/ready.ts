@@ -2,7 +2,7 @@ import { useAuth } from '@shared/composables/support/auth'
 import { useSettings } from '@shared/composables/support/settings'
 
 /**
- * Resolves app critical state before any downstream guard runs. Auth and settings are independent so they load in parallel, and the flag checks make every navigation after the first a no-op.
+ * Ready gate. Resolves app critical state before any downstream guard runs. Auth and settings are independent so they load in parallel, and the flag checks make every navigation after the first a no-op.
  */
 export async function beforeEach(): Promise<void> {
   const auth = useAuth()
