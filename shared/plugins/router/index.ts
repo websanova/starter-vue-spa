@@ -5,7 +5,7 @@ import { createRouter as createVueRouter, createWebHistory, type Router } from "
 // import * as i18n from './interceptors/i18n.js'
 import * as content from './interceptors/content'
 import * as i18n from './interceptors/i18n'
-// import * as preload from './interceptors/preload.js'
+import * as preload from './interceptors/preload'
 // import * as scrollToTop from './interceptors/scrollToTop.js'
 
 import routes from "@routes"
@@ -23,7 +23,7 @@ function createRouter(app: App) {
     routes
   })
 
-  // instance.beforeEach(preload.beforeEach)
+  instance.beforeEach(preload.beforeEach)
   instance.beforeEach(i18n.beforeEach)
   // instance.beforeEach(auth.beforeEach)
   instance.beforeEach(content.beforeEach)
