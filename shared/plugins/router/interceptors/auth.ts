@@ -10,6 +10,13 @@ declare module 'vue-router' {
   }
 }
 
+/**
+ * Enforces the auth meta of the matched route, merged across all matched
+ * records. Three scenarios drive the redirect: roles false is a guest
+ * only route and redirects when logged in, roles true requires any
+ * authenticated user and redirects when logged out, and a roles array
+ * requires the user role to be listed and redirects otherwise.
+ */
 export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | undefined {
   const auth = useAuth()
 

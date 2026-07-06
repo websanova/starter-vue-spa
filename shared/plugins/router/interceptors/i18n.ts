@@ -8,6 +8,10 @@ declare module "vue-router" {
   }
 }
 
+/**
+ * Accumulates the i18n files declared per tier across every matched
+ * route, then hands the merged set to i18n.load for fetching.
+ */
 export function beforeEach(to: RouteLocationNormalized): void {
   const i18n = useI18n()
 

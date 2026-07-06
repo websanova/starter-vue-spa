@@ -13,9 +13,8 @@ import routes from "@routes"
 let instance: Router
 
 /**
-* Builds the router from the app supplied routes. Shared guards register here
-* in order once they exist. The instance is exposed through useRouter for
-* navigation in non component code.
+* The instance is exposed through useRouter so non component code can
+* navigate.
 */
 function createRouter(app: App) {
   instance = createVueRouter({
