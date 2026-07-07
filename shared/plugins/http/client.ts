@@ -37,7 +37,9 @@ export interface HttpClient {
 }
 
 /**
- * Normalized rejection for non-2xx responses. Mirrors the useful part of axios so callers and interceptors read err.response.status / data / headers, and instanceof distinguishes it from a raw network error.
+ * Normalized rejection for non-2xx responses. Mirrors the useful part of
+ * axios so callers and interceptors read err.response.status / data /
+ * headers, and instanceof distinguishes it from a raw network error.
  */
 export class HttpError extends Error {
   readonly response: { status: number; data: unknown; headers: Headers }
@@ -79,14 +81,18 @@ async function parseBody<T>(res: Response): Promise<T> {
 }
 
 /**
- * Creates an isolated http client bound to its own config and interceptor chains. Equivalent to axios.create: mint as many as you need for separate base URLs.
+ * Creates an isolated http client bound to its own config and interceptor
+ * chains. Equivalent to axios.create: mint as many as you need for
+ * separate base URLs.
  */
 export function createClient(config: ClientConfig): HttpClient {
   const requestChain: RequestInterceptor[] = []
   const responseChain: { success?: ResponseSuccess | null; error?: ResponseError | null }[] = []
 
   /**
-   * Runs the response error chain, then rejects with the final error. Handlers run in registration order and may transform the error before it propagates.
+   * Runs the response error chain, then rejects with the final error.
+   * Handlers run in registration order and may transform the error before
+   * it propagates.
    */
   async function runResponseError(err: unknown): Promise<never> {
     let current = err
@@ -106,6 +112,11 @@ export function createClient(config: ClientConfig): HttpClient {
     return Promise.reject(current)
   }
 
+  /**
+   * Core request pipeline. Runs the request interceptors, performs the
+   * fetch, routes non-2xx and network failures through the error chain,
+   * then applies the success chain before parsing the body.
+   */
   async function request<T>(method: string, url: string, body?: unknown, options: RequestOptions = {}): Promise<T> {
     const headers: Record<string, string> = {
       Accept: 'application/json',

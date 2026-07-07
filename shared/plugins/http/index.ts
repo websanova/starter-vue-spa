@@ -8,7 +8,10 @@ import * as updateRequired from './interceptors/updateRequired'
 let instance: HttpClient
 
 /**
- * Builds the default http client and registers shared interceptors in order. The instance is exposed through useHttp for requests in non component code. Additional clients for other base URLs can be minted directly with createClient.
+ * Builds the default http client and registers shared interceptors in
+ * order. The instance is exposed through useHttp for requests in non
+ * component code. Additional clients for other base URLs can be minted
+ * directly with createClient.
  */
 function createHttp(_app: App) {
   instance = createClient({

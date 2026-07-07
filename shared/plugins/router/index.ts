@@ -13,9 +13,9 @@ import routes from "@routes"
 let instance: Router
 
 /**
-* The instance is exposed through useRouter so non component code can
-* navigate.
-*/
+ * The instance is exposed through useRouter so non component code can
+ * navigate.
+ */
 function createRouter(app: App) {
   instance = createVueRouter({
     history: createWebHistory(),
