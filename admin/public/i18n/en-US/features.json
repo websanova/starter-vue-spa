@@ -1,12 +1,11 @@
 {
   "lbl": {
-    "cancel": "Cancel",
-    "update": "Update",
-    "delete": "Delete",
-    "refresh": "Refresh"
+    "email": "Email",
+    "password": "Password",
   },
   "ph": {
-
+    "email": "you{'@'}example.com",
+    "password": "Password",
   },
   "cover": {
     "maintenance": {
@@ -14,6 +13,12 @@
     },
     "update": {
       "message": "The app has been updated."
+    }
+  },
+  "form": {
+    "login": {
+      "loading": "Signing in...",
+      "prompt": "Not a member?"
     }
   }
 }

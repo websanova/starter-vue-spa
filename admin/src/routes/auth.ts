@@ -1,15 +1,21 @@
-const Index = () => import('@/views/auth/Index.vue')
+const AuthLayout = () => import('@/features/layouts/Auth.vue')
 const Login = () => import('@/views/auth/Login.vue')
+
+const meta = {
+    auth: {
+        roles: false,
+        redirect: {
+            name: 'user-landing'
+        }
+    }
+}
 
 export default [{
     path: '/',
-    component: Index,
+    component: AuthLayout,
     meta: {
-        auth: {
-            roles: false,
-            redirect: {
-                name: 'user-landing'
-            }
+        content: {
+            site: 'auth',
         },
         i18n: {
             site: ['features', 'rules', 'site']
@@ -25,5 +31,6 @@ export default [{
         path: 'login',
         name: 'auth-login',
         component: Login,
+        meta
     }]
 }]

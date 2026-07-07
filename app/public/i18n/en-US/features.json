@@ -18,6 +18,14 @@
     "password": "Password",
     "password_confirmation": "Confirm password"
   },
+  "cover": {
+    "maintenance": {
+      "message": "App is down for maintenance.<br>We should be back up shortly."
+    },
+    "update": {
+      "message": "The app has been updated."
+    }
+  },
   "form": {
     "login": {
       "loading": "Signing in...",
@@ -26,14 +34,6 @@
     "register": {
       "loading": "Signing up...",
       "prompt": "Already a member?"
-    }
-  },
-  "cover": {
-    "maintenance": {
-      "message": "App is down for maintenance.<br>We should be back up shortly."
-    },
-    "update": {
-      "message": "The app has been updated."
     }
   }
 }

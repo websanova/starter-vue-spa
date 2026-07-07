@@ -18,7 +18,6 @@ function createHttp(_app: App) {
     baseURL: import.meta.env.VITE_API_URL ?? '',
   })
 
-  // NOTE: Order here matters
   instance.interceptors.request.use(auth.request)
   instance.interceptors.response.use(null, auth.responseError)
   instance.interceptors.response.use(null, maintenanceMode.responseError)
