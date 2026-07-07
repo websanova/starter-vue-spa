@@ -1,11 +1,6 @@
 <script setup lang="ts">
   import StarterLogo from '@shared/components/logos/Starter.vue'
-  import StarterTextLogo from "@shared/components/logos/StarterText.vue"
-  import PageTransition from '@shared/features/transitions/Page.vue'
-
-  defineProps<{
-    height?: string
-  }>()
+  import LayoutTransition from '@shared/features/transitions/Layout.vue'
 </script>
 
 <template>
@@ -24,21 +19,17 @@
     <div
       class="flex w-full max-w-sm flex-col items-center gap-4 p-8"
     >
-      <StarterTextLogo
-        class="h-10"
-      />
-
       <div
-        :class="['w-full', height]"
+        class="w-full"
       >
         <RouterView
           v-slot="{ Component }"
         >
-          <PageTransition>
+          <LayoutTransition>
             <component
               :is="Component"
             />
-          </PageTransition>
+          </LayoutTransition>
         </RouterView>
       </div>
     </div>

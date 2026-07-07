@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <AuthLayout
-    height="h-100"
-  />
+  <AuthLayout />
 </template>
