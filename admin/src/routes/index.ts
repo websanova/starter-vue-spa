@@ -1,5 +1,5 @@
 import auth from './auth'
-import error from './error'
+import error from '@shared/routes/error'
 import logout from './logout'
 import user from './user'
 

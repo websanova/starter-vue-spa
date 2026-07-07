@@ -1,16 +1,16 @@
-const Forbidden = () => import('@/views/error/Forbidden.vue')
-const Index     = () => import('@/views/error/Index.vue')
-const NotFound  = () => import('@/views/error/NotFound.vue')
+const ErrorLayout = () => import('@shared/features/layouts/Error.vue')
+const Forbidden = () => import('@shared/views/error/Forbidden.vue')
+const NotFound = () => import('@shared/views/error/NotFound.vue')
 
 export default [{
     path: '/',
-    component: Index,
+    component: ErrorLayout,
     meta: {
         content: {
             site: 'error'
         },
         i18n: {
-           site: ['features', 'rules', 'site'],
+            site: ['site'],
         },
     },
     children: [{

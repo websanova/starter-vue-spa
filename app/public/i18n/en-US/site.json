@@ -5,11 +5,23 @@
       "text": "Loading..."
     }
   },
-  "units": {},
+  "error": {
+    "403": {
+      "title": "403",
+      "message": "Error Forbidden"
+    },
+    "404": {
+      "title": "404",
+      "message": "Error Not Found"
+    }
+  },
   "meta": {
     "title": {
       "auth-login": "Sign In",
-      "auth-register": "Sign Up"
+      "auth-register": "Sign Up",
+      "error-403": "403 Forbidden",
+      "error-404": "404 Not Found"
     }
-  }
+  },
+  "units": {}
 }
