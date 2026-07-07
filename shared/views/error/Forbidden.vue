@@ -1,12 +1,14 @@
+<script setup lang="ts">
+  import { Heading } from '@shared/components/common/Heading'
+</script>
+
 <template>
   <div
     class="text-center"
   >
-    <h1
-      class="text-2xl font-bold"
-    >
+    <Heading>
       {{ $t('site.error.403.title') }}
-    </h1>
+    </Heading>
 
     {{ $t('site.error.403.message') }}
   </div>

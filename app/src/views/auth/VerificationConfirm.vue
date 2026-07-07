@@ -1,7 +1,9 @@
+<script setup lang="ts">
+  import { Heading } from '@shared/components/common/Heading'
+</script>
+
 <template>
   <div>
-    <h1
-      class="text-2xl font-bold"
-    >Auth Verification Confirm</h1>
+    <Heading>Auth Verification Confirm</Heading>
   </div>
 </template>
