@@ -8,11 +8,11 @@
   "error": {
     "403": {
       "title": "403",
-      "message": "Error Forbidden"
+      "message": "Forbidden"
     },
     "404": {
       "title": "404",
-      "message": "Error Not Found"
+      "message": "Not Found"
     }
   },
   "meta": {
