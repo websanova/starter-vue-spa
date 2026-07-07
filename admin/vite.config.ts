@@ -4,10 +4,15 @@ import vue from "@vitejs/plugin-vue"
 import tailwindcss from "@tailwindcss/vite"
 import { fileURLToPath, URL } from "node:url"
 
+const buildId = Date.now().toString(36)
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "VITE_")
 
   return {
+    define: {
+      __I18N_VERSION__: JSON.stringify(buildId)
+    },
     plugins: [
       vue(),
       tailwindcss(),

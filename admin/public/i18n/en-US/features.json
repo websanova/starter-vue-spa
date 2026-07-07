@@ -2,10 +2,11 @@
   "lbl": {
     "email": "Email",
     "password": "Password",
+    "sign_in": "Sign in"
   },
   "ph": {
     "email": "you{'@'}example.com",
-    "password": "Password",
+    "password": "Password"
   },
   "cover": {
     "maintenance": {

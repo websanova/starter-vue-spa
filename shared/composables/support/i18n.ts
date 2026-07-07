@@ -30,14 +30,20 @@ export const useI18n = function() {
     store.localesLoaded[tier][locale][name] = false
     store[loadedKeys[tier]] = false
 
-    fetch(`/i18n/${locale}/${name}.json`)
-      .then((res) => res.json())
+    const v = import.meta.env.PROD ? __I18N_VERSION__ : Date.now()
+
+    fetch(`/i18n/${locale}/${name}.json?v=${v}`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then((data) => {
         i18n.mergeLocaleMessage(locale, { [name]: data })
         store.localesLoaded[tier][locale][name] = true
         setLoaded(tier, locale)
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(`[i18n] Failed to load /i18n/${locale}/${name}.json`, err)
         store.localesLoaded[tier][locale][name] = true
         setLoaded(tier, locale)
       })

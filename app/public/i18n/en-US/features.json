@@ -1,20 +1,20 @@
 {
   "lbl": {
     "cancel": "Cancel",
-    "update": "Update",
     "delete": "Delete",
+    "email": "Email",
+    "name": "Name",
+    "optional": "Optional",
+    "password": "Password",
+    "password_confirmation": "Confirm Password",
     "refresh": "Refresh",
     "sign_in": "Sign in",
     "sign_up": "Sign up",
-    "name": "Name",
-    "email": "Email",
-    "password": "Password",
-    "password_confirmation": "Confirm Password",
-    "optional": "Optional"
+    "update": "Update"
   },
   "ph": {
-    "name": "Your name",
     "email": "you{'@'}example.com",
+    "name": "Your name",
     "password": "Password",
     "password_confirmation": "Confirm password"
   },
