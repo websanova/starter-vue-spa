@@ -24,9 +24,7 @@
           :to="{ name: 'user-icons' }"
         >Icons</RouterLink>
       </nav>
-      <hr
-        class="mb-4"
-      >
+      <hr class="mb-4">
       <RouterView />
     </div>
   </div>

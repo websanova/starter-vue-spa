@@ -28,33 +28,21 @@
 </script>
 
 <template>
-  <template
-    v-if="app.interrupt?.type === 'maintenance'"
-  >
+  <template v-if="app.interrupt?.type === 'maintenance'">
     <MaintenanceCover />
   </template>
 
-  <template
-    v-else-if="app.interrupt?.type === 'update'"
-  >
+  <template v-else-if="app.interrupt?.type === 'update'">
     <UpdateCover />
   </template>
 
-  <template
-    v-else
-  >
-    <template
-      v-if="isSiteLoaded"
-    >
+  <template v-else>
+    <template v-if="isSiteLoaded">
       <slot />
     </template>
 
-    <Transition
-      name="fade-out-cover"
-    >
-      <CoverLoading
-        v-if="!isSiteLoaded"
-      />
+    <Transition name="fade-out-cover">
+      <CoverLoading v-if="!isSiteLoaded" />
     </Transition>
   </template>
 </template>

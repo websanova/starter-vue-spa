@@ -5,32 +5,21 @@
 </script>
 
 <template>
-  <div
-    class="min-h-screen flex flex-col"
-  >
+  <div class="min-h-screen flex flex-col">
     <Header>
       <template #logo>
         <RouterLink
           :to="{ name: 'auth-landing' }"
           class="flex h-full items-center"
         >
-          <StarterLogo
-            class="h-6 sm:hidden"
-          />
-
-          <StarterTextLogo
-            class="h-6 sm:unhidden"
-          />
+          <StarterLogo class="h-6 sm:hidden" />
+          <StarterTextLogo class="h-6 sm:unhidden" />
         </RouterLink>
       </template>
     </Header>
 
-    <main
-      class="flex-1 flex items-center justify-center"
-    >
-      <div
-        class="flex w-full flex-col items-center justify-center gap-4 p-8"
-      >
+    <main class="flex-1 flex items-center justify-center">
+      <div class="flex w-full flex-col items-center justify-center gap-4 p-8">
         <RouterView />
       </div>
     </main>

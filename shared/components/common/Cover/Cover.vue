@@ -8,9 +8,7 @@
 </script>
 
 <template>
-  <div
-    :class="cn('fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-background', props.class)"
-  >
+  <div :class="cn('fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-background', props.class)">
     <slot />
   </div>
 </template>

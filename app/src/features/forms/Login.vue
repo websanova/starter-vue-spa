@@ -42,9 +42,7 @@
       {{ isPending ? $t('features.form.login.loading') : $t('features.lbl.sign_in') }}
     </Button>
 
-    <p
-      class="self-end text-sm text-muted-foreground"
-    >
+    <p class="self-end text-sm text-muted-foreground">
       {{ $t('features.form.login.prompt') }}
 
       <RouterLink

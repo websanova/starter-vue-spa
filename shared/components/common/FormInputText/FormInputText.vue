@@ -22,11 +22,15 @@
     <FormItem>
       <FormLabel>
         {{ props.label }}
+
         <span
           v-if="props.optional"
-          class="lowercase text-muted-foreground"
-        >({{ $t('features.lbl.optional') }})</span>
+          class="lowercase text-muted-foreground -ml-1"
+        >
+          ({{ $t('features.lbl.optional') }})
+        </span>
       </FormLabel>
+
       <FormControl>
         <Input
           :type="props.type"
@@ -34,6 +38,7 @@
           v-bind="componentField"
         />
       </FormControl>
+
       <FormMessage />
     </FormItem>
   </FormField>

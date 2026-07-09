@@ -36,9 +36,7 @@
           :to="{ name: 'user-unsubscribe' }"
         >Unsubscribe</RouterLink>
       </nav>
-      <hr
-        class="mb-4"
-      >
+      <hr class="mb-4">
       <RouterView />
     </div>
   </div>

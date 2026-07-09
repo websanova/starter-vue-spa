@@ -62,9 +62,7 @@
       {{ isPending ? $t('features.form.register.loading') : $t('features.lbl.sign_up') }}
     </Button>
 
-    <p
-      class="self-end text-sm text-muted-foreground"
-    >
+    <p class="self-end text-sm text-muted-foreground">
       {{ $t('features.form.register.prompt') }}
 
       <RouterLink

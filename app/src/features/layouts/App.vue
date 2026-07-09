@@ -11,39 +11,29 @@
 </script>
 
 <template>
-  <div
-    class="min-h-screen flex flex-col"
-  >
+  <div class="min-h-screen flex flex-col">
     <Header>
       <template #logo>
         <RouterLink
           :to="{ name: 'user-landing' }"
           class="flex h-full items-center sm:unhidden"
         >
-          <StarterTextLogo
-            class="h-6"
-          />
+          <StarterTextLogo class="h-6" />
         </RouterLink>
 
         <div
           class="flex h-full items-center sm:hidden cursor-pointer"
           @click="onLogo"
         >
-          <StarterLogo
-            class="h-6"
-          />
+          <StarterLogo class="h-6" />
         </div>
       </template>
     </Header>
 
     <Body>
-      <RouterView
-        v-slot="{ Component }"
-      >
+      <RouterView v-slot="{ Component }" >
         <PageTransition>
-          <component
-            :is="Component"
-          />
+          <component :is="Component" />
         </PageTransition>
       </RouterView>
     </Body>

@@ -10,9 +10,7 @@
 </script>
 
 <template>
-  <div
-    :class="cn(coverContentVariants({ size }), props.class)"
-  >
+  <div :class="cn(coverContentVariants({ size }), props.class)">
     <slot />
   </div>
 </template>

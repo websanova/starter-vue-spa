@@ -103,6 +103,7 @@
 - Dev environment is Dockerized (Node 22). Use the `./run` script for container commands.
 - Always use 2 spaces for indenting.
 - In Vue SFCs, indent `<script>` and `<style>` block content one level (2 spaces), not flush to column 0.
+- In Vue templates, a self-closing element with exactly one attribute goes on a single line (`<component :is="Component" />`), regardless of attribute length. Two or more attributes stay multi-line, one attribute per line. Never collapse an element that has child content; leave elements with children as they are.
 - Doc blocks must always use multi-line `/** */` format, never single-line above any function, variable, or type.
 - Doc block prose must read as plain sentences. No dashes of any kind (em, en, or double hyphen) as punctuation.
 - Never align variable assignments or object properties with extra spaces. One space on each side of `=` and `:`.

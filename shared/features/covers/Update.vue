@@ -13,8 +13,8 @@
       class="mb-4"
     >{{ $t('features.cover.update.message') }}</p>
 
-    <Button
-      @click="onRefresh"
-    >{{ $t('features.lbl.refresh') }}</Button>
+    <Button @click="onRefresh">
+      {{ $t('features.lbl.refresh') }}
+    </Button>
   </CoverLoading>
 </template>

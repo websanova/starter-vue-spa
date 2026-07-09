@@ -18,9 +18,7 @@
           :to="{ name: 'base-tos' }"
         >Terms Of Service</RouterLink>
       </nav>
-      <hr
-        class="mb-4"
-      >
+      <hr class="mb-4">
       <RouterView />
     </div>
   </div>

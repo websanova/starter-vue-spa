@@ -18,8 +18,8 @@
       v-html="app.interrupt?.type === 'maintenance' ? app.interrupt.message || $t('features.cover.maintenance.message') : ''"
     />
 
-    <Button
-      @click="onRefresh"
-    >{{ $t('features.lbl.refresh') }}</Button>
+    <Button @click="onRefresh">
+      {{ $t('features.lbl.refresh') }}
+    </Button>
   </CoverLoading>
 </template>

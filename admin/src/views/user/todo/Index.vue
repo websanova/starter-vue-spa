@@ -13,9 +13,7 @@
         to="tasks"
       >Tasks</RouterLink>
     </nav>
-    <hr
-      class="mb-4"
-    >
+    <hr class="mb-4">
     <RouterView />
   </div>
 </template>

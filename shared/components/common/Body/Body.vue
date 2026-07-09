@@ -11,9 +11,7 @@
 </script>
 
 <template>
-  <div
-    class="flex-1 flex"
-  >
+  <div class="flex-1 flex">
     <aside
       v-if="$slots.left"
       :class="[leftWidth, 'border-r border-border']"
@@ -21,12 +19,8 @@
       <slot name="left" />
     </aside>
 
-    <main
-      class="flex-1"
-    >
-      <div
-        :class="['mx-auto px-2 w-full', fluid ? '' : 'max-w-(--breakpoint-xl)']"
-      >
+    <main class="flex-1">
+      <div :class="['mx-auto px-2 w-full', fluid ? '' : 'max-w-(--breakpoint-xl)']">
         <slot />
       </div>
     </main>
