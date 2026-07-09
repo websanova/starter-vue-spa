@@ -1,20 +1,13 @@
 <script setup lang="ts">
   import { Header } from '@shared/components/common/Header'
-  import StarterLogo from '@shared/components/logos/Starter.vue'
-  import StarterTextLogo from '@shared/components/logos/StarterText.vue'
+  import LogoNav from '@shared/features/navs/Logo.vue'
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
     <Header>
       <template #logo>
-        <RouterLink
-          :to="{ name: 'auth-landing' }"
-          class="flex h-full items-center"
-        >
-          <StarterLogo class="h-6 sm:hidden" />
-          <StarterTextLogo class="h-6 sm:unhidden" />
-        </RouterLink>
+        <LogoNav :to="{ name: 'auth-landing' }" />
       </template>
     </Header>
 
