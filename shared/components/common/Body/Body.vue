@@ -20,7 +20,7 @@
     </aside>
 
     <main class="flex-1">
-      <div :class="['mx-auto px-2 w-full', fluid ? '' : 'max-w-(--breakpoint-xl)']">
+      <div :class="['mx-auto px-2 w-full', fluid ? '' : 'max-w-(--breakpoint-lg)']">
         <slot />
       </div>
     </main>
