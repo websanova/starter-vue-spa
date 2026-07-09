@@ -1,5 +1,5 @@
+const AppLayout   = () => import('@/features/layouts/App.vue')
 const Icons       = () => import('@/views/user/Icons.vue')
-const Index       = () => import('@/views/user/Index.vue')
 const Plans       = () => import('@/views/user/Plans.vue')
 const TodoIndex   = () => import('@/views/user/todo/Index.vue')
 const TodoInfo    = () => import('@/views/user/todo/Info.vue')
@@ -13,7 +13,7 @@ const Users       = () => import('@/views/user/Users.vue')
 
 export default [{
     path: '/',
-    component: Index,
+    component: AppLayout,
     meta: {
         auth: {
             roles: true,
