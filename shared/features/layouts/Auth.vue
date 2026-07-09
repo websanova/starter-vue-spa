@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LayoutTransition from '@shared/features/transitions/Layout.vue'
+  import PageTransition from '@shared/features/transitions/Page.vue'
   import StarterLogo from '@shared/components/logos/Starter.vue'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
 </script>
@@ -30,11 +30,11 @@
         <RouterView
           v-slot="{ Component }"
         >
-          <LayoutTransition>
+          <PageTransition>
             <component
               :is="Component"
             />
-          </LayoutTransition>
+          </PageTransition>
         </RouterView>
       </div>
     </div>
