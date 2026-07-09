@@ -1,13 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./transitions.css";
+@import "./utilities.css";
 @source "../";
 
 @custom-variant dark (&:is(.dark *));
-
-@utility unhidden {
-  display: revert;
-}
 
 :root {
   --radius: 0.625rem;

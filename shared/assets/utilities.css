@@ -1,0 +1,5 @@
+@media (width < theme(--breakpoint-sm)) { .sm\:unhidden { display: none } }
+@media (width < theme(--breakpoint-md)) { .md\:unhidden { display: none } }
+@media (width < theme(--breakpoint-lg)) { .lg\:unhidden { display: none } }
+@media (width < theme(--breakpoint-xl)) { .xl\:unhidden { display: none } }
+@media (width < theme(--breakpoint-2xl)) { .\32xl\:unhidden { display: none } }

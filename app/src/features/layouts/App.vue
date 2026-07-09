@@ -25,7 +25,7 @@
           class="flex items-center sm:hidden"
         >
           <StarterLogo
-            class="h-6 sm:hidden"
+            class="h-6"
           />
         </div>
 
