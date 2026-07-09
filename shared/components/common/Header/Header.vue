@@ -13,7 +13,7 @@
     :class="['sticky top-0 w-full bg-background shadow-sm', height]"
   >
     <div
-      :class="['mx-auto px-4 w-full flex h-full items-center justify-between', fluid ? '' : 'max-w-(--breakpoint-xl)']"
+      :class="['mx-auto px-2 w-full flex h-full items-center justify-between', fluid ? '' : 'max-w-(--breakpoint-xl)']"
     >
       <slot name="logo" />
       <slot name="nav" />

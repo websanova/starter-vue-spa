@@ -1,6 +1,7 @@
 <script setup lang="ts">
-  import StarterLogo from '@shared/components/logos/Starter.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
+  import StarterLogo from '@shared/components/logos/Starter.vue'
+  import StarterTextLogo from '@shared/components/logos/StarterText.vue'
 </script>
 
 <template>
@@ -9,11 +10,15 @@
   >
     <RouterLink
       :to="{ name: 'auth-landing' }"
-      class="fixed top-0 left-0 h-10 px-4 flex items-center"
+      class="fixed top-0 left-0 h-10 px-2 flex items-center"
     >
-      <StarterLogo
-        class="h-6"
-      />
+          <StarterLogo
+            class="h-6 sm:hidden"
+          />
+
+          <StarterTextLogo
+            class="h-6 hidden sm:unhidden"
+          />
     </RouterLink>
 
     <div
