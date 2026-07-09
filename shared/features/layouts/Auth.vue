@@ -12,13 +12,13 @@
       :to="{ name: 'auth-landing' }"
       class="fixed top-0 left-0 h-10 px-2 flex items-center"
     >
-          <StarterLogo
-            class="h-6 sm:hidden"
-          />
+      <StarterLogo
+        class="h-6 sm:hidden"
+      />
 
-          <StarterTextLogo
-            class="h-6 sm:unhidden"
-          />
+      <StarterTextLogo
+        class="h-6 sm:unhidden"
+      />
     </RouterLink>
 
     <div

@@ -12,7 +12,7 @@
       <template #logo>
         <RouterLink
           :to="{ name: 'auth-landing' }"
-          class="flex items-center"
+          class="flex h-full items-center"
         >
           <StarterLogo
             class="h-6 sm:hidden"

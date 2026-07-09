@@ -4,6 +4,10 @@
   import StarterLogo from '@shared/components/logos/Starter.vue'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
+
+  function onLogo() {
+    console.log('onLogo')
+  }
 </script>
 
 <template>
@@ -14,21 +18,21 @@
       <template #logo>
         <RouterLink
           :to="{ name: 'user-landing' }"
-          class="flex items-center sm:unhidden"
+          class="flex h-full items-center sm:unhidden"
         >
           <StarterTextLogo
-            class="h-6 "
+            class="h-6"
           />
         </RouterLink>
 
         <div
-          class="flex items-center sm:hidden"
+          class="flex h-full items-center sm:hidden cursor-pointer"
+          @click="onLogo"
         >
           <StarterLogo
             class="h-6"
           />
         </div>
-
       </template>
     </Header>
 
