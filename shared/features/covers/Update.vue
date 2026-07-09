@@ -11,7 +11,9 @@
   <CoverLoading>
     <p
       class="mb-4"
-    >{{ $t('features.cover.update.message') }}</p>
+    >
+      {{ $t('features.cover.update.message') }}
+    </p>
 
     <Button @click="onRefresh">
       {{ $t('features.lbl.refresh') }}
