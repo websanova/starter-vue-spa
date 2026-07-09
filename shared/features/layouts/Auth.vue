@@ -17,7 +17,7 @@
           />
 
           <StarterTextLogo
-            class="h-6 hidden sm:unhidden"
+            class="h-6 sm:unhidden"
           />
     </RouterLink>
 

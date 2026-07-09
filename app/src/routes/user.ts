@@ -1,6 +1,6 @@
+const AppLayout   = () => import('@/features/layouts/App.vue')
 const Account     = () => import('@/views/user/Account.vue')
 const Billing     = () => import('@/views/user/Billing.vue')
-const Index       = () => import('@/views/user/Index.vue')
 const Logout      = () => import('@/views/user/Logout.vue')
 const PaymentInfo = () => import('@/views/user/PaymentInfo.vue')
 const Plans       = () => import('@/views/user/Plans.vue')
@@ -12,7 +12,7 @@ const Unsubscribe = () => import('@/views/user/Unsubscribe.vue')
 
 export default [{
     path: '/u/',
-    component: Index,
+    component: AppLayout,
     meta: {
         auth: {
             roles: true,
