@@ -2,22 +2,26 @@
  * Wire shape returned by the auth profile endpoint. Stays inside the model layer; nothing downstream depends on these field names.
  */
 export interface AuthDto {
-  id: number
-  name: string
+  avatar_url: string
   email: string
-  role: string
   email_verified_at: string | null
+  first_name: string
+  id: number
+  last_name: string
+  role?: string
 }
 
 /**
  * Authenticated identity held in app state. Distinct from the general user resource since it carries auth context rather than list detail.
  */
 export interface Auth {
-  id: number
-  name: string
+  avatarUrl: string
   email: string
-  role: string
+  firstName: string
+  id: number
   isVerified: boolean
+  lastName: string
+  role?: string
 }
 
 /**
@@ -25,11 +29,13 @@ export interface Auth {
  */
 export function toAuth(dto: AuthDto): Auth {
   return {
-    id: dto.id,
-    name: dto.name,
+    avatarUrl: dto.avatar_url,
     email: dto.email,
-    role: dto.role,
+    firstName: dto.first_name,
+    id: dto.id,
     isVerified: dto.email_verified_at !== null,
+    lastName: dto.last_name,
+    role: dto.role,
   }
 }
 

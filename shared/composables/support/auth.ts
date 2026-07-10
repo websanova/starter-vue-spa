@@ -43,8 +43,8 @@ export const useAuth = function() {
   }
 
   async function fetchUser() {
-    const dto = await useHttp().get<AuthDto>('profile')
-    store.user = toAuth(dto)
+    const { data } = await useHttp().get<{ data: AuthDto }>('profile')
+    store.user = toAuth(data)
   }
 
   function flush() {
