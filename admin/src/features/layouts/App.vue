@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <div class="h-screen overflow-hidden flex flex-col">
+  <div class="min-h-screen flex flex-col">
     <Header fluid>
       <template #logo>
         <LogoNav

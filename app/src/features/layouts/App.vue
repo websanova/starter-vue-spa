@@ -15,7 +15,7 @@
 </script>
 
 <template>
-  <div class="h-screen overflow-hidden flex flex-col">
+  <div class="min-h-screen flex flex-col">
     <Header>
       <template #logo>
         <LogoNav
@@ -85,6 +85,14 @@
           <NavItem :to="{ name: 'user-billing' }">Billing</NavItem>
           <NavItem :to="{ name: 'user-plans' }">Plans</NavItem>
         </Navbar>
+
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        test
       </template>
 
       <RouterView v-slot="{ Component }" >
@@ -92,6 +100,14 @@
           <component :is="Component" />
         </PageTransition>
       </RouterView>
+
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
+      test
     </Body>
   </div>
 </template>

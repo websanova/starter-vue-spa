@@ -11,16 +11,16 @@
 </script>
 
 <template>
-  <div class="flex-1 flex min-h-0 overflow-hidden">
-    <div :class="['mx-auto w-full flex flex-1 min-h-0', fluid ? '' : 'max-w-(--breakpoint-lg)']">
+  <div class="flex-1 flex">
+    <div :class="['mx-auto w-full flex', fluid ? '' : 'max-w-(--breakpoint-lg)']">
       <aside
         v-if="$slots.left"
-        :class="[leftWidth, 'shrink-0 overflow-y-auto border-r border-border']"
+        :class="[leftWidth, 'shrink-0 sticky top-10 h-[calc(100vh-2.5rem)] overflow-y-auto border-r border-border']"
       >
         <slot name="left" />
       </aside>
 
-      <main class="flex-1 overflow-y-auto">
+      <main class="flex-1">
         <div class="px-2">
           <slot />
         </div>
@@ -28,7 +28,7 @@
 
       <aside
         v-if="$slots.right"
-        :class="[rightWidth, 'shrink-0 overflow-y-auto border-l border-border']"
+        :class="[rightWidth, 'shrink-0 sticky top-10 h-[calc(100vh-2.5rem)] overflow-y-auto border-l border-border']"
       >
         <slot name="right" />
       </aside>
