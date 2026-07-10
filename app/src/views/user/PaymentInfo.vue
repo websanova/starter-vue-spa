@@ -1,7 +1,11 @@
+<script setup lang="ts">
+  import { Heading } from '@shared/components/common/Heading'
+</script>
+
 <template>
   <div>
-    <h1
-      class="text-2xl font-bold"
-    >User Payment Info</h1>
+    <Heading>
+      User Payment Info
+    </Heading>
   </div>
 </template>

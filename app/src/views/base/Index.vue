@@ -1,3 +1,7 @@
+<script setup lang="ts">
+  import { Heading } from '@shared/components/common/Heading'
+</script>
+
 <template>
   <div
     class="flex min-h-screen items-center justify-center"
@@ -5,9 +9,9 @@
     <div
       class="text-center"
     >
-      <h1
-        class="text-2xl font-bold mb-4"
-      >Base Index</h1>
+      <Heading>
+        Base Index
+      </Heading>
       <nav
         class="flex flex-wrap gap-4 justify-center mb-4"
       >

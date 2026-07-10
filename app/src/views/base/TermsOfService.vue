@@ -1,7 +1,11 @@
+<script setup lang="ts">
+  import { Heading } from '@shared/components/common/Heading'
+</script>
+
 <template>
   <div>
-    <h1
-      class="text-2xl font-bold"
-    >Base Terms Of Service</h1>
+    <Heading>
+      Base Terms Of Service
+    </Heading>
   </div>
 </template>
