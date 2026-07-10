@@ -22,11 +22,10 @@
     <slot />
   </RouterLink>
 
-  <button
+  <div
     v-else
-    type="button"
     :class="cn(navItemVariants({ orientation }), props.class)"
   >
     <slot />
-  </button>
+  </div>
 </template>

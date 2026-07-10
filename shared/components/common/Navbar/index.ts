@@ -21,8 +21,8 @@ export const navbarVariants = cva(
   {
     variants: {
       orientation: {
-        horizontal: "flex-row items-center gap-1",
-        vertical: "flex-col items-stretch gap-1"
+        horizontal: "flex-row items-center h-full gap-3",
+        vertical: "flex-col items-stretch my-2 gap-1"
       }
     },
     defaultVariants: {
@@ -32,12 +32,12 @@ export const navbarVariants = cva(
 )
 
 export const navItemVariants = cva(
-  "flex items-center gap-2 rounded-md text-sm font-medium cursor-pointer transition-colors hover:bg-accent hover:text-accent-foreground [&>svg]:size-4 [&>svg]:shrink-0",
+  "flex items-center gap-2 text-sm font-medium cursor-pointer transition-colors [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       orientation: {
-        horizontal: "px-3 py-2",
-        vertical: "w-full px-3 py-2"
+        horizontal: "h-full",
+        vertical: "w-full px-3 py-2 hover:bg-accent hover:text-accent-foreground "
       }
     },
     defaultVariants: {

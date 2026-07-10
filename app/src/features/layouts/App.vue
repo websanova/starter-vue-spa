@@ -30,7 +30,7 @@
 
           <NavDropdown align="end">
             <template #trigger>
-              <SettingsIcon />
+              <SettingsIcon class="h-6" />
             </template>
             <DropdownMenuItem as-child>
               <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
