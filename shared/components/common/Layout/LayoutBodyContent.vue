@@ -9,9 +9,9 @@
 <template>
   <main
     class="flex-1"
-    :class="centered ? 'flex items-center justify-center' : ''"
+    :class="centered ? 'flex items-center' : ''"
   >
-    <div class="px-3">
+    <div class="w-full px-3">
       <slot />
     </div>
   </main>

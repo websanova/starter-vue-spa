@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <Layout>
+  <Layout header-height="3rem">
     <LayoutHeader>
       <template #logo>
         <LogoNav :to="{ name: 'auth-landing' }" />

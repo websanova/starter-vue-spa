@@ -12,11 +12,13 @@
 
     <LayoutBody>
       <LayoutBodyContent centered>
-        <RouterView v-slot="{ Component }">
-          <PageTransition>
-            <component :is="Component" />
-          </PageTransition>
-        </RouterView>
+        <div class="mx-auto w-full max-w-xs">
+          <RouterView v-slot="{ Component }">
+            <PageTransition>
+              <component :is="Component" />
+            </PageTransition>
+          </RouterView>
+        </div>
       </LayoutBodyContent>
     </LayoutBody>
   </Layout>

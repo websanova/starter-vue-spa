@@ -12,6 +12,7 @@ export const layoutContainerVariants = cva(
   {
     variants: {
       size: {
+        xs: "max-w-(--breakpoint-xs)",
         sm: "max-w-(--breakpoint-sm)",
         md: "max-w-(--breakpoint-md)",
         lg: "max-w-(--breakpoint-lg)",
