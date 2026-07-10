@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Layout, LayoutBody, LayoutHeader } from '@shared/components/common/Layout'
+  import { Layout, LayoutBodyAside, LayoutHeader } from '@shared/components/common/Layout'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
 
@@ -19,12 +19,12 @@
       </template>
     </LayoutHeader>
 
-    <LayoutBody fluid>
+    <LayoutBodyAside fluid>
       <RouterView v-slot="{ Component }" >
         <PageTransition>
           <component :is="Component" />
         </PageTransition>
       </RouterView>
-    </LayoutBody>
+    </LayoutBodyAside>
   </Layout>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { SettingsIcon } from '@lucide/vue'
-  import { Layout, LayoutBody, LayoutHeader } from '@shared/components/common/Layout'
+  import { Layout, LayoutBodyAside, LayoutHeader } from '@shared/components/common/Layout'
   import { Navbar, NavDivider, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
@@ -71,7 +71,7 @@
       </template>
     </LayoutHeader>
 
-    <LayoutBody>
+    <LayoutBodyAside>
       <template #left>
         <Navbar
           orientation="vertical"
@@ -107,6 +107,6 @@
       <br/><br/><br/><br/><br/><br/>
       <br/><br/><br/><br/><br/><br/>
       test
-    </LayoutBody>
+    </LayoutBodyAside>
   </Layout>
 </template>
