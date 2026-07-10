@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { SettingsIcon } from '@lucide/vue'
-  import { Body } from '@shared/components/common/Body'
-  import { Header } from '@shared/components/common/Header'
+  import { Layout, LayoutBody, LayoutHeader } from '@shared/components/common/Layout'
   import { Navbar, NavDivider, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
@@ -15,11 +14,8 @@
 </script>
 
 <template>
-  <div
-    class="min-h-screen flex flex-col"
-    style="--app-header-h: 3.5rem; --app-footer-h: 0px"
-  >
-    <Header>
+  <Layout header-height="3rem">
+    <LayoutHeader>
       <template #logo>
         <LogoNav
           :to="{ name: 'user-landing' }"
@@ -73,9 +69,9 @@
           </NavDropdown>
         </Navbar>
       </template>
-    </Header>
+    </LayoutHeader>
 
-    <Body>
+    <LayoutBody>
       <template #left>
         <Navbar
           orientation="vertical"
@@ -111,6 +107,6 @@
       <br/><br/><br/><br/><br/><br/>
       <br/><br/><br/><br/><br/><br/>
       test
-    </Body>
-  </div>
+    </LayoutBody>
+  </Layout>
 </template>
