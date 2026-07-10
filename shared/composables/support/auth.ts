@@ -60,6 +60,11 @@ export const useAuth = function() {
     store.isReady = true
   }
 
+  function logout() {
+    useHttp().post('logout')
+    flush()
+  }
+
   async function refreshToken() {
     const res = await useHttp().post<{ token: string }>('refresh')
     setToken(res.token)
@@ -81,6 +86,7 @@ export const useAuth = function() {
     isReady: computed(() => store.isReady),
     checkReady,
     login,
+    logout,
     register,
     flush,
     refreshToken,

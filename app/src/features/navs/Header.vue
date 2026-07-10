@@ -1,12 +1,18 @@
 <script setup lang="ts">
-  import { SettingsIcon } from '@lucide/vue'
+  import { BellIcon } from '@lucide/vue'
   import { useAuth } from '@shared/composables/support/auth'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
-  import { RouterLink } from 'vue-router'
+  import { RouterLink, useRouter } from 'vue-router'
 
-  const { user } = useAuth()
+  const { logout, user } = useAuth()
+  const router = useRouter()
+
+  function onLogout() {
+    logout()
+    router.push({ name: 'auth-landing' })
+  }
 </script>
 
 <template>
@@ -16,7 +22,7 @@
 
     <NavDropdown align="end">
       <template #trigger>
-        <SettingsIcon />
+        <BellIcon />
       </template>
       <DropdownMenuItem as-child>
         <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
@@ -25,9 +31,7 @@
         <RouterLink :to="{ name: 'user-settings' }">Settings</RouterLink>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-logout' }">Logout</RouterLink>
-      </DropdownMenuItem>
+      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem>
     </NavDropdown>
 
     <NavDropdown align="end">
@@ -49,9 +53,7 @@
         <RouterLink :to="{ name: 'user-billing' }">Billing</RouterLink>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-logout' }">Logout</RouterLink>
-      </DropdownMenuItem>
+      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem>
     </NavDropdown>
   </Navbar>
 </template>
