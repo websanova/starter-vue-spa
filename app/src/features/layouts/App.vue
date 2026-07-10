@@ -1,12 +1,9 @@
 <script setup lang="ts">
-  import { SettingsIcon } from '@lucide/vue'
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
-  import { Navbar, NavDivider, NavDropdown, NavItem } from '@shared/components/common/Navbar'
-  import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
-  import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
+  import AsideNav from '@/features/navs/Aside.vue'
+  import HeaderNav from '@/features/navs/Header.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
-  import { RouterLink } from 'vue-router'
 
   function onLogo() {
     console.log('onLogo')
@@ -24,73 +21,13 @@
       </template>
 
       <template #nav>
-        <Navbar>
-          <NavItem :to="{ name: 'user-todos' }">Todos</NavItem>
-          <NavItem :to="{ name: 'user-billing' }">Billing</NavItem>
-
-          <NavDropdown align="end">
-            <template #trigger>
-              <SettingsIcon />
-            </template>
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-settings' }">Settings</RouterLink>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-logout' }">Logout</RouterLink>
-            </DropdownMenuItem>
-          </NavDropdown>
-
-          <NavDropdown align="end">
-            <template #trigger>
-              <Avatar>
-                <AvatarImage
-                  src="https://www.gravatar.com/avatar/68b1c78d0a9d7a5b9c2e9a4f1e3d2c1b?s=64"
-                  alt="Rob"
-                />
-                <AvatarFallback>RD</AvatarFallback>
-              </Avatar>
-            </template>
-            <DropdownMenuLabel>rob@websanova.com</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-plans' }">Plans</RouterLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-billing' }">Billing</RouterLink>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem as-child>
-              <RouterLink :to="{ name: 'user-logout' }">Logout</RouterLink>
-            </DropdownMenuItem>
-          </NavDropdown>
-        </Navbar>
+        <HeaderNav />
       </template>
     </LayoutHeader>
 
     <LayoutBody>
       <LayoutBodyAside side="left">
-        <Navbar
-          orientation="vertical"
-        >
-          <NavItem :to="{ name: 'user-todos' }">Todos</NavItem>
-          <NavItem :to="{ name: 'user-account' }">Account</NavItem>
-          <NavItem :to="{ name: 'user-settings' }">Settings</NavItem>
-          <NavDivider />
-          <NavItem :to="{ name: 'user-billing' }">Billing</NavItem>
-          <NavItem :to="{ name: 'user-plans' }">Plans</NavItem>
-        </Navbar>
-
-        <!-- <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        test -->
+        <AsideNav />
       </LayoutBodyAside>
 
       <LayoutBodyContent>
@@ -99,14 +36,6 @@
             <component :is="Component" />
           </PageTransition>
         </RouterView>
-
-        <!-- <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        test -->
       </LayoutBodyContent>
     </LayoutBody>
   </Layout>
