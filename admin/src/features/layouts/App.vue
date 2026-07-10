@@ -10,7 +10,7 @@
 
 <template>
   <Layout header-height="3rem">
-    <LayoutHeader fluid>
+    <LayoutHeader size="full">
       <template #logo>
         <LogoNav
           :to="{ name: 'user-landing' }"
@@ -19,7 +19,7 @@
       </template>
     </LayoutHeader>
 
-    <LayoutBodyAside fluid>
+    <LayoutBodyAside size="full">
       <RouterView v-slot="{ Component }" >
         <PageTransition>
           <component :is="Component" />

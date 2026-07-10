@@ -1,10 +1,12 @@
 <script setup lang="ts">
+  import { type LayoutContainerVariants, layoutContainerVariants } from '.'
+  import { cn } from '@shared/lib/utils'
+
   withDefaults(defineProps<{
-    fluid?: boolean
+    size?: LayoutContainerVariants['size']
     leftWidth?: string
     rightWidth?: string
   }>(), {
-    fluid: false,
     leftWidth: 'w-40',
     rightWidth: 'w-40',
   })
@@ -12,7 +14,7 @@
 
 <template>
   <div class="flex-1 flex">
-    <div :class="['mx-auto w-full flex', fluid ? '' : 'max-w-(--breakpoint-lg)']">
+    <div :class="cn(layoutContainerVariants({ size }), 'flex')">
       <aside
         v-if="$slots.left"
         :class="[leftWidth, 'shrink-0 sticky top-[var(--app-header-h,0px)] h-[calc(100dvh-var(--app-header-h,0px)-var(--app-footer-h,0px))] overflow-y-auto border-r border-border']"

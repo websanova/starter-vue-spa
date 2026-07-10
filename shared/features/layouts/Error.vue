@@ -1,20 +1,18 @@
 <script setup lang="ts">
-  import { Header } from '@shared/components/common/Header'
+  import { Layout, LayoutBodyCentered, LayoutHeader } from '@shared/components/common/Layout'
   import LogoNav from '@shared/features/navs/Logo.vue'
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
-    <Header>
+  <Layout>
+    <LayoutHeader>
       <template #logo>
         <LogoNav :to="{ name: 'auth-landing' }" />
       </template>
-    </Header>
+    </LayoutHeader>
 
-    <main class="flex-1 flex items-center justify-center">
-      <div class="flex w-full flex-col items-center justify-center gap-4 p-8">
-        <RouterView />
-      </div>
-    </main>
-  </div>
+    <LayoutBodyCentered>
+      <RouterView />
+    </LayoutBodyCentered>
+  </Layout>
 </template>

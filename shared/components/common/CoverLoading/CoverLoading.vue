@@ -7,7 +7,7 @@
   <Cover>
     <CoverContent>
       <div class="text-center">
-        <StarterLogo class="mx-auto mb-4 h-20" />
+        <StarterLogo class="mx-auto mb-4 h-10" />
 
         <div v-if="$slots.default">
           <slot />
