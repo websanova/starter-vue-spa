@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Layout, LayoutBodyCentered } from '@shared/components/common/Layout'
+  import { Layout, LayoutBody, LayoutBodyContent } from '@shared/components/common/Layout'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
 </script>
@@ -10,12 +10,14 @@
       <LogoNav :to="{ name: 'auth-landing' }" />
     </div>
 
-    <LayoutBodyCentered>
-      <RouterView v-slot="{ Component }">
-        <PageTransition>
-          <component :is="Component" />
-        </PageTransition>
-      </RouterView>
-    </LayoutBodyCentered>
+    <LayoutBody>
+      <LayoutBodyContent centered>
+        <RouterView v-slot="{ Component }">
+          <PageTransition>
+            <component :is="Component" />
+          </PageTransition>
+        </RouterView>
+      </LayoutBodyContent>
+    </LayoutBody>
   </Layout>
 </template>

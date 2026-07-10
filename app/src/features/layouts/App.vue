@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { SettingsIcon } from '@lucide/vue'
-  import { Layout, LayoutBodyAside, LayoutHeader } from '@shared/components/common/Layout'
+  import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
   import { Navbar, NavDivider, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
@@ -71,8 +71,8 @@
       </template>
     </LayoutHeader>
 
-    <LayoutBodyAside>
-      <template #left>
+    <LayoutBody>
+      <LayoutBodyAside side="left">
         <Navbar
           orientation="vertical"
           class="p-2"
@@ -92,21 +92,23 @@
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         test
-      </template>
+      </LayoutBodyAside>
 
-      <RouterView v-slot="{ Component }" >
-        <PageTransition>
-          <component :is="Component" />
-        </PageTransition>
-      </RouterView>
+      <LayoutBodyContent>
+        <RouterView v-slot="{ Component }" >
+          <PageTransition>
+            <component :is="Component" />
+          </PageTransition>
+        </RouterView>
 
-      <br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/>
-      test
-    </LayoutBodyAside>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/>
+        test
+      </LayoutBodyContent>
+    </LayoutBody>
   </Layout>
 </template>

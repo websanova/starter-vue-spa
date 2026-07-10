@@ -8,8 +8,8 @@
 </script>
 
 <template>
-  <div class="flex-1 flex items-center justify-center">
-    <div :class="cn(layoutContainerVariants({ size }), 'px-3')">
+  <div class="flex-1 flex">
+    <div :class="cn(layoutContainerVariants({ size }), 'flex')">
       <slot />
     </div>
   </div>

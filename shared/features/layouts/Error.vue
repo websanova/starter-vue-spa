@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Layout, LayoutBodyCentered, LayoutHeader } from '@shared/components/common/Layout'
+  import { Layout, LayoutBody, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
   import LogoNav from '@shared/features/navs/Logo.vue'
 </script>
 
@@ -11,8 +11,10 @@
       </template>
     </LayoutHeader>
 
-    <LayoutBodyCentered>
-      <RouterView />
-    </LayoutBodyCentered>
+    <LayoutBody>
+      <LayoutBodyContent centered>
+        <RouterView />
+      </LayoutBodyContent>
+    </LayoutBody>
   </Layout>
 </template>
