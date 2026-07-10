@@ -75,7 +75,6 @@
       <LayoutBodyAside side="left">
         <Navbar
           orientation="vertical"
-          class="p-2"
         >
           <NavItem :to="{ name: 'user-todos' }">Todos</NavItem>
           <NavItem :to="{ name: 'user-account' }">Account</NavItem>
@@ -85,13 +84,13 @@
           <NavItem :to="{ name: 'user-plans' }">Plans</NavItem>
         </Navbar>
 
+        <!-- <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        test
+        test -->
       </LayoutBodyAside>
 
       <LayoutBodyContent>
@@ -101,13 +100,13 @@
           </PageTransition>
         </RouterView>
 
+        <!-- <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/><br/>
-        test
+        test -->
       </LayoutBodyContent>
     </LayoutBody>
   </Layout>

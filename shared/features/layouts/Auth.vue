@@ -6,7 +6,7 @@
 
 <template>
   <Layout>
-    <div class="fixed top-0 left-0 h-10 px-2">
+    <div class="fixed top-0 left-0 p-3">
       <LogoNav :to="{ name: 'auth-landing' }" />
     </div>
 

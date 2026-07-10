@@ -9,7 +9,7 @@
 
 <template>
   <header class="sticky top-0 z-[1000] w-full bg-background shadow-sm h-[var(--app-header-h,3.5rem)]">
-    <div :class="cn(layoutContainerVariants({ size }), 'px-2 flex h-full items-center justify-between')">
+    <div :class="cn(layoutContainerVariants({ size }), 'px-3 flex h-full items-center justify-between')">
       <slot name="logo" />
       <slot name="nav" />
     </div>
