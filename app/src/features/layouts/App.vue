@@ -30,7 +30,7 @@
 
           <NavDropdown align="end">
             <template #trigger>
-              <SettingsIcon class="h-6" />
+              <SettingsIcon />
             </template>
             <DropdownMenuItem as-child>
               <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
@@ -46,7 +46,7 @@
 
           <NavDropdown align="end">
             <template #trigger>
-              <Avatar size="sm">
+              <Avatar>
                 <AvatarImage
                   src="https://www.gravatar.com/avatar/68b1c78d0a9d7a5b9c2e9a4f1e3d2c1b?s=64"
                   alt="Rob"

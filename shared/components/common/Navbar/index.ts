@@ -32,12 +32,12 @@ export const navbarVariants = cva(
 )
 
 export const navItemVariants = cva(
-  "flex items-center gap-2 text-sm font-medium cursor-pointer transition-colors [&>svg]:size-4 [&>svg]:shrink-0",
+  "flex items-center gap-2 cursor-pointer transition-colors [&>svg]:size-6 [&>svg]:shrink-0",
   {
     variants: {
       orientation: {
         horizontal: "h-full",
-        vertical: "w-full px-3 py-2 hover:bg-accent hover:text-accent-foreground "
+        vertical: "w-full px-3 py-2 hover:bg-accent [&.router-link-active]:bg-accent [&.router-link-active]:font-bold"
       }
     },
     defaultVariants: {
