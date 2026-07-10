@@ -15,20 +15,20 @@
     <div :class="['mx-auto w-full flex', fluid ? '' : 'max-w-(--breakpoint-lg)']">
       <aside
         v-if="$slots.left"
-        :class="[leftWidth, 'shrink-0 sticky top-10 h-[calc(100vh-2.5rem)] overflow-y-auto border-r border-border']"
+        :class="[leftWidth, 'shrink-0 sticky top-[var(--app-header-h,0px)] h-[calc(100dvh-var(--app-header-h,0px)-var(--app-footer-h,0px))] overflow-y-auto border-r border-border']"
       >
         <slot name="left" />
       </aside>
 
       <main class="flex-1">
-        <div class="px-2">
+        <div class="px-3">
           <slot />
         </div>
       </main>
 
       <aside
         v-if="$slots.right"
-        :class="[rightWidth, 'shrink-0 sticky top-10 h-[calc(100vh-2.5rem)] overflow-y-auto border-l border-border']"
+        :class="[rightWidth, 'shrink-0 sticky top-[var(--app-header-h,0px)] h-[calc(100dvh-var(--app-header-h,0px)-var(--app-footer-h,0px))] overflow-y-auto border-l border-border']"
       >
         <slot name="right" />
       </aside>

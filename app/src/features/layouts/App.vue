@@ -15,7 +15,10 @@
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div
+    class="min-h-screen flex flex-col"
+    style="--app-header-h: 3.5rem; --app-footer-h: 0px"
+  >
     <Header>
       <template #logo>
         <LogoNav
