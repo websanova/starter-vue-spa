@@ -6,7 +6,6 @@
   <Navbar
     orientation="vertical"
   >
-    <NavDivider />
     <NavItem :to="{ name: 'user-bookmarks', query: { folder_id: undefined } }">All</NavItem>
     <NavDivider />
     <NavItem :to="{ name: 'user-bookmarks', query: { folder_id: 1 } }">Folder One</NavItem>

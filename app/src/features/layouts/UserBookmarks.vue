@@ -1,7 +1,9 @@
 <script setup lang="ts">
+  import { PlusIcon } from '@lucide/vue'
   import { LayoutBody, LayoutBodyAside, LayoutBodyContent } from '@shared/components/common/Layout'
   import BookmarksNav from '@/features/navs/Bookmarks.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
+  import { Button } from '@shared/components/ui/button'
 
   // TODO: Load and manage folders here
   // TODO: Should load features/navs/Folders
@@ -11,6 +13,14 @@
 <template>
   <LayoutBody>
     <LayoutBodyAside side="left">
+
+      <div class="my-3 pe-3">
+        <Button class="w-full">
+          <PlusIcon />
+          Create
+        </Button>
+      </div>
+
       <BookmarksNav />
     </LayoutBodyAside>
 
