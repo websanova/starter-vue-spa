@@ -1,4 +1,4 @@
-const AppLayout   = () => import('@/features/layouts/App.vue')
+const UserLayout  = () => import('@/features/layouts/User.vue')
 const Icons       = () => import('@/views/user/Icons.vue')
 const Plans       = () => import('@/views/user/Plans.vue')
 const TodoIndex   = () => import('@/views/user/todo/Index.vue')
@@ -13,7 +13,7 @@ const Users       = () => import('@/views/user/Users.vue')
 
 export default [{
     path: '/',
-    component: AppLayout,
+    component: UserLayout,
     meta: {
         auth: {
             roles: true,

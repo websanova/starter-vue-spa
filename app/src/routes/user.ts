@@ -1,4 +1,4 @@
-const AppLayout   = () => import('@/features/layouts/App.vue')
+const UserLayout  = () => import('@/features/layouts/User.vue')
 const Account     = () => import('@/views/user/Account.vue')
 const Billing     = () => import('@/views/user/Billing.vue')
 const Logout      = () => import('@/views/user/Logout.vue')
@@ -12,7 +12,7 @@ const Unsubscribe = () => import('@/views/user/Unsubscribe.vue')
 
 export default [{
     path: '/u/',
-    component: AppLayout,
+    component: UserLayout,
     meta: {
         auth: {
             roles: true,
