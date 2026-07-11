@@ -17,7 +17,7 @@
       <div class="my-3 pe-3">
         <Button class="w-full">
           <PlusIcon />
-          Create
+          {{ $t('features.lbl.create') }}
         </Button>
       </div>
 
