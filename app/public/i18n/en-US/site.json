@@ -20,7 +20,15 @@
       "auth-login": "Sign In",
       "auth-register": "Sign Up",
       "error-403": "403 Forbidden",
-      "error-404": "404 Not Found"
+      "error-404": "404 Not Found",
+      "user-account-billing": "Billing",
+      "user-account-profile": "Profile",
+      "user-account-security": "Security",
+      "user-account-settings": "Settings",
+      "user-bookmarks": "Bookmarks",
+      "user-subscribe-cancel": "Unsubscribe",
+      "user-subscribe-checkout": "Subscribe",
+      "user-subscribe-plans": "Plans"
     }
   },
   "units": {}
