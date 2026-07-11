@@ -96,7 +96,7 @@
 - When multiple approaches exist, prefer the one aligned with Vue/ecosystem convention and industry standard practice. If the simpler approach deviates from convention, mention the conventional approach and the tradeoff.
 - Stack: Vite 6, Vue 3 (Composition API, `<script setup>`), TypeScript (strict), Tailwind v4, Vue Router 4.
 - Monorepo via yarn workspaces. Two apps, `app` and `admin`, sharing a central `shared/` codebase. Build/dev through workspace scripts (`yarn dev:app`, `yarn build`, etc.).
-- UI primitives via shadcn-vue (built on reka-ui). Variants via cva + tailwind-merge + clsx. Icons via lucide-vue-next.
+- UI primitives via shadcn-vue (built on reka-ui). Variants via cva + tailwind-merge + clsx. Icons via @lucide/vue (icon names use the `Icon` suffix, e.g. `PlusIcon`).
 - shadcn primitives in `shared/components/ui/` are vendored. Do not hand-edit them. Build app-specific pieces as composites in `shared/components/common/`. See `.claude/rules/components.md`.
 - SPA with client-side routing (Vue Router). No SSR.
 - TypeScript throughout, strict mode. Build runs `vue-tsc --noEmit` for typechecking.
