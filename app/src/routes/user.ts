@@ -1,108 +1,105 @@
-const UserLayout  = () => import('@/features/layouts/User.vue')
-const Account     = () => import('@/views/user/Account.vue')
-const Billing     = () => import('@/views/user/Billing.vue')
-const Logout      = () => import('@/views/user/Logout.vue')
-const PaymentInfo = () => import('@/views/user/PaymentInfo.vue')
-const Plans       = () => import('@/views/user/Plans.vue')
-const Settings    = () => import('@/views/user/Settings.vue')
-const Subscribe   = () => import('@/views/user/Subscribe.vue')
-const Tasks       = () => import('@/views/user/Tasks.vue')
-const Todos       = () => import('@/views/user/Todos.vue')
-const Unsubscribe = () => import('@/views/user/Unsubscribe.vue')
+const Layout            = () => import('@/features/layouts/User.vue')
+const LayoutAccount     = () => import('@/features/layouts/UserAccount.vue')
+const LayoutBookmarks   = () => import('@/features/layouts/UserBookmarks.vue')
+const LayoutSubscribe   = () => import('@/features/layouts/UserSubscribe.vue')
+
+const AccountBilling    = () => import('@/views/user/account/Billing.vue')
+const AccountProfile    = () => import('@/views/user/account/Profile.vue')
+const AccountSecurity   = () => import('@/views/user/account/Security.vue')
+const AccountSettings   = () => import('@/views/user/account/Settings.vue')
+
+const BookmarksList     = () => import('@/views/user/bookmarks/List.vue')
+
+const SubscribeCancel   = () => import('@/views/user/subscribe/Cancel.vue')
+const SubscribeCheckout = () => import('@/views/user/subscribe/Checkout.vue')
+const SubscribePlans    = () => import('@/views/user/subscribe/Plans.vue')
 
 export default [{
-    path: '/u/',
-    component: UserLayout,
+  path: '/u/',
+  component: Layout,
+  meta: {
+    auth: {
+      roles: true,
+      redirect: {name: 'auth-login'}
+    },
+    content: {
+      site: 'user'
+    },
+    i18n: {
+      site: ['features', 'rules', 'site']
+    },
+  },
+  children: [{
+    path: '',
+    name: 'user-landing',
+    redirect: {
+      name: 'user-bookmarks'
+    }
+  }, {
+    path: 'account',
+    component: LayoutAccount,
     meta: {
-        auth: {
-            roles: true,
-            redirect: {name: 'auth-login'}
-        },
-        content: {
-            site: 'user'
-        },
-        i18n: {
-            site: ['features', 'rules', 'site']
-        },
+      content: {
+        layout: 'account'
+      }
     },
     children: [{
-        path: '',
-        name: 'user-landing',
-        redirect: {
-            name: 'user-todos'
-        }
+      path: '',
+      name: 'user-account',
+      redirect: {
+        name: 'user-account-profile'
+      }
     }, {
-        path: 'account',
-        name: 'user-account',
-        component: Account,
+      path: 'billing',
+      name: 'user-account-billing',
+      component: AccountBilling
     }, {
-        path: 'billing',
-        name: 'user-billing',
-        component: Billing,
+      path: 'profile',
+      name: 'user-account-profile',
+      component: AccountProfile
     }, {
-        path: '/logout',
-        name: 'user-logout',
-        component: Logout,
-        meta: {
-            auth: {
-                roles: true,
-                redirect: {name: 'auth-login'}
-            },
-            i18n: {
-                site: ['features', 'rules', 'site']
-            },
-        }
+      path: 'security',
+      name: 'user-account-security',
+      component: AccountSecurity
     }, {
-        path: 'payment-info',
-        name: 'user-payment-info',
-        component: PaymentInfo,
-        meta: {
-            isAside: false,
-        },
-    }, {
-        path: 'plans',
-        name: 'user-plans',
-        component: Plans,
-        meta: {
-            isAside: false,
-        },
-    }, {
-        path: 'settings',
-        name: 'user-settings',
-        component: Settings,
-    }, {
-        path: 'subscribe',
-        name: 'user-subscribe',
-        component: Subscribe,
-        meta: {
-            isAside: false,
-        },
-    }, {
-        path: 'todos/:todo_id',
-        meta: {
-            content: {
-                layout: 'todos-show'
-            }
-        },
-        children: [{
-            path: '',
-            name: 'user-todos-show',
-            redirect: {name: 'user-todos-show-tasks'},
-        }, {
-            path: 'tasks',
-            name: 'user-todos-show-tasks',
-            component: Tasks,
-        }]
-    }, {
-        path: 'todos',
-        name: 'user-todos',
-        component: Todos,
-    }, {
-        path: 'unsubscribe',
-        name: 'user-unsubscribe',
-        component: Unsubscribe,
-        meta: {
-            isAside: false,
-        },
+      path: 'settings',
+      name: 'user-account-settings',
+      component: AccountSettings
     }]
+  }, {
+    path: 'bookmarks',
+    component: LayoutBookmarks,
+    meta: {
+      content: {
+        layout: 'bookmarks'
+      }
+    },
+    children: [{
+      path: '',
+      name: 'user-bookmarks',
+      component: BookmarksList
+    }]
+  }, {
+    path: 'subscribe',
+    name: 'user-subscribe',
+    component: LayoutSubscribe,
+    meta: {
+      content: {
+        layout: 'subscribe'
+      }
+    },
+    children: [{
+      path: 'cancel',
+      name: 'user-subscribe-cancel',
+      component: SubscribeCancel
+    }, {
+      path: 'checkout',
+      name: 'user-subscribe-checkout',
+      component: SubscribeCheckout
+    }, {
+      path: 'plans',
+      name: 'user-subscribe-plans',
+      component: SubscribePlans
+    }]
+  }]
 }]

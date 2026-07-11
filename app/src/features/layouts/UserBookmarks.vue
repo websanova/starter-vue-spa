@@ -1,0 +1,27 @@
+<script setup lang="ts">
+  import { LayoutBody, LayoutBodyAside, LayoutBodyContent } from '@shared/components/common/Layout'
+  import BookmarksNav from '@/features/navs/Bookmarks.vue'
+  import PageTransition from '@shared/features/transitions/Page.vue'
+
+  // TODO: Load and manage folders here
+  // TODO: Should load features/navs/Folders
+  // TODO: Should load features/modals/FolderDelete (etc)
+</script>
+
+<template>
+  <LayoutBody>
+    <LayoutBodyAside side="left">
+      <BookmarksNav />
+    </LayoutBodyAside>
+
+    <LayoutBodyContent>
+      <h1 class="my-3">Folder One</h1>
+
+      <RouterView v-slot="{ Component }" >
+        <PageTransition>
+          <component :is="Component" />
+        </PageTransition>
+      </RouterView>
+    </LayoutBodyContent>
+  </LayoutBody>
+</template>

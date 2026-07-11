@@ -1,5 +1,8 @@
 {
   "lbl": {
+    "account": "Account",
+    "billing": "Billing",
+    "bookmarks": "Bookmarks",
     "cancel": "Cancel",
     "delete": "Delete",
     "email": "Email",
@@ -7,8 +10,12 @@
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm Password",
+    "profile": "Profile",
     "refresh": "Refresh",
+    "security": "Security",
+    "settings": "Settings",
     "sign_in": "Sign in",
+    "sign_out": "Sign out",
     "sign_up": "Sign up",
     "update": "Update"
   },

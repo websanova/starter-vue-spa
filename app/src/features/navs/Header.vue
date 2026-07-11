@@ -17,21 +17,15 @@
 
 <template>
   <Navbar>
-    <NavItem :to="{ name: 'user-todos' }">Todos</NavItem>
-    <NavItem :to="{ name: 'user-billing' }">Billing</NavItem>
-
     <NavDropdown align="end">
       <template #trigger>
         <BellIcon />
       </template>
-      <DropdownMenuItem as-child>
+      <!-- <DropdownMenuItem as-child>
         <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
       </DropdownMenuItem>
-      <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-settings' }">Settings</RouterLink>
-      </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem>
+      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem> -->
     </NavDropdown>
 
     <NavDropdown align="end">
@@ -41,19 +35,30 @@
             v-if="user?.avatarUrl"
             :src="user.avatarUrl"
           />
-          <AvatarFallback>{{ user?.firstName?.charAt(0).toUpperCase() }}</AvatarFallback>
+
+          <AvatarFallback>
+            {{ user?.firstName?.charAt(0).toUpperCase() }}
+          </AvatarFallback>
         </Avatar>
       </template>
-      <DropdownMenuLabel>{{ user?.email }}</DropdownMenuLabel>
-      <DropdownMenuSeparator />
+
       <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-plans' }">Plans</RouterLink>
+        <RouterLink :to="{ name: 'user-account' }">
+          {{ $t('features.lbl.account') }}
+        </RouterLink>
       </DropdownMenuItem>
+
       <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-billing' }">Billing</RouterLink>
+        <RouterLink :to="{ name: 'user-bookmarks' }">
+          {{ $t('features.lbl.bookmarks') }}
+        </RouterLink>
       </DropdownMenuItem>
+
       <DropdownMenuSeparator />
-      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem>
+
+      <DropdownMenuItem @select="onLogout">
+        {{ $t('features.lbl.sign_out') }}
+      </DropdownMenuItem>
     </NavDropdown>
   </Navbar>
 </template>

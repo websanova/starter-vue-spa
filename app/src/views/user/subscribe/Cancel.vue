@@ -1,11 +1,10 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
+
 </script>
 
 <template>
-  <div>
-    <Heading>
-      User Unsubscribe
-    </Heading>
-  </div>
+  <Heading>
+    Subscribe Cancel
+  </Heading>
 </template>
