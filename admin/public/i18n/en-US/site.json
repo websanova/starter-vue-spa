@@ -19,7 +19,15 @@
     "title": {
       "auth-login": "Sign In",
       "error-403": "403 Forbidden",
-      "error-404": "404 Not Found"
+      "error-404": "404 Not Found",
+      "user-icons": "Icons",
+      "user-plans": "Plans",
+      "user-users": "Users",
+      "user-users-show-billing": "User Billing",
+      "user-users-show-bookmarks": "User Bookmarks",
+      "user-users-show-edit": "User Edit",
+      "user-users-show-folders": "User Folders",
+      "user-users-show-info": "User Info"
     }
   },
   "units": {}
