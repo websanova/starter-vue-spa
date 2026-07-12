@@ -8,9 +8,6 @@
   function onLogo() {
     console.log('onLogo')
   }
-
-  // TODO: Set aside menu at top level here
-  // TODO: /bookmark, /user (for drilldown with header/tabs and PageTransition).
 </script>
 
 <template>
@@ -29,7 +26,10 @@
     </LayoutHeader>
 
     <LayoutBody size="full">
-      <LayoutBodyAside side="left">
+      <LayoutBodyAside
+        class="sm:unhidden"
+        side="left"
+      >
         <ConsoleNav />
       </LayoutBodyAside>
 

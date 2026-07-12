@@ -12,7 +12,10 @@
 
 <template>
   <LayoutBody>
-    <LayoutBodyAside side="left">
+    <LayoutBodyAside
+      class="sm:unhidden"
+      side="left"
+    >
 
       <div class="my-3 pe-3">
         <Button class="w-full">

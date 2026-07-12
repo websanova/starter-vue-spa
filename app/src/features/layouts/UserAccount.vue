@@ -6,7 +6,10 @@
 
 <template>
   <LayoutBody>
-    <LayoutBodyAside side="left">
+    <LayoutBodyAside
+      class="sm:unhidden"
+      side="left"
+    >
       <AccountNav />
     </LayoutBodyAside>
 
