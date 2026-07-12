@@ -1,15 +1,15 @@
-const Layout        = () => import('@/features/layouts/User.vue')
-const LayoutUser    = () => import('@/features/layouts/UserUser.vue')
+const Layout        = () => import('@/features/layouts/Console.vue')
+const LayoutConsole = () => import('@/features/layouts/ConsoleUser.vue')
 
-const Icons         = () => import('@/views/user/Icons.vue')
-const Plans         = () => import('@/views/user/Plans.vue')
-const Users         = () => import('@/views/user/Users.vue')
+const Icons         = () => import('@/views/console/Icons.vue')
+const Plans         = () => import('@/views/console/Plans.vue')
+const Users         = () => import('@/views/console/Users.vue')
 
-const UserBilling   = () => import('@/views/user/user/Billing.vue')
-const UserBookmarks = () => import('@/views/user/user/Bookmarks.vue')
-const UserEdit      = () => import('@/views/user/user/Edit.vue')
-const UserFolders   = () => import('@/views/user/user/Folders.vue')
-const UserInfo      = () => import('@/views/user/user/Info.vue')
+const UserBilling   = () => import('@/views/console/user/Billing.vue')
+const UserBookmarks = () => import('@/views/console/user/Bookmarks.vue')
+const UserEdit      = () => import('@/views/console/user/Edit.vue')
+const UserFolders   = () => import('@/views/console/user/Folders.vue')
+const UserInfo      = () => import('@/views/console/user/Info.vue')
 
 export default [{
     path: '/',
@@ -61,7 +61,7 @@ export default [{
         }
     }, {
         path: 'users/:user_id',
-        component: LayoutUser,
+        component: LayoutConsole,
         meta: {
             content: {
                 layout: 'users-show'

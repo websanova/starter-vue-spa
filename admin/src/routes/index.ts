@@ -1,5 +1,5 @@
 import auth from './auth'
 import error from '@shared/routes/error'
-import user from './user'
+import console from './console'
 
-export default [...auth, ...user, ...error]
+export default [...auth, ...console, ...error]

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
   import HeaderNav from '@/features/navs/Header.vue'
-  import UserNav from '@/features/navs/User.vue'
+  import ConsoleNav from '@/features/navs/Console.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
@@ -30,7 +30,7 @@
 
     <LayoutBody size="full">
       <LayoutBodyAside side="left">
-        <UserNav />
+        <ConsoleNav />
       </LayoutBodyAside>
 
       <LayoutBodyContent>
