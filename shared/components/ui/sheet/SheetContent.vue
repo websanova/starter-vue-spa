@@ -51,12 +51,18 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     >
       <slot />
 
-      <DialogClose
+      <!--
+        Default floating close disabled. Composites (e.g. common/SheetMenu)
+        render their own close inside a header bar on a swappable side, which
+        the fixed top-right button conflicts with. Re-enable if a plain Sheet
+        needs the standard close.
+      -->
+      <!-- <DialogClose
         class="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none"
       >
         <X class="size-4" />
         <span class="sr-only">Close</span>
-      </DialogClose>
+      </DialogClose> -->
     </DialogContent>
   </DialogPortal>
 </template>
