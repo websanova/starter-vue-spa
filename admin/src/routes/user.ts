@@ -1,23 +1,26 @@
-const UserLayout  = () => import('@/features/layouts/User.vue')
-const Icons       = () => import('@/views/user/Icons.vue')
-const Plans       = () => import('@/views/user/Plans.vue')
-const TodoIndex   = () => import('@/views/user/todo/Index.vue')
-const TodoInfo    = () => import('@/views/user/todo/Info.vue')
-const TodoTasks   = () => import('@/views/user/todo/Tasks.vue')
-const Todos       = () => import('@/views/user/Todos.vue')
-const UserIndex   = () => import('@/views/user/user/Index.vue')
-const UserBilling = () => import('@/views/user/user/Billing.vue')
-const UserEdit    = () => import('@/views/user/user/Edit.vue')
-const UserInfo    = () => import('@/views/user/user/Info.vue')
-const Users       = () => import('@/views/user/Users.vue')
+const Layout        = () => import('@/features/layouts/User.vue')
+const LayoutUser    = () => import('@/features/layouts/UserUser.vue')
+
+const Icons         = () => import('@/views/user/Icons.vue')
+const Plans         = () => import('@/views/user/Plans.vue')
+const Users         = () => import('@/views/user/Users.vue')
+
+const UserBilling   = () => import('@/views/user/user/Billing.vue')
+const UserBookmarks = () => import('@/views/user/user/Bookmarks.vue')
+const UserEdit      = () => import('@/views/user/user/Edit.vue')
+const UserFolders   = () => import('@/views/user/user/Folders.vue')
+const UserInfo      = () => import('@/views/user/user/Info.vue')
 
 export default [{
     path: '/',
-    component: UserLayout,
+    component: Layout,
     meta: {
         auth: {
             roles: true,
             redirect: {name: 'auth-login'}
+        },
+        content: {
+          site: 'user'
         },
         i18n: {
             site: ['features', 'rules', 'site']
@@ -27,44 +30,38 @@ export default [{
         path: '',
         name: 'user-landing',
         redirect: {
-            name: 'user-todos'
+            name: 'user-users'
         }
     }, {
         path: 'icons',
         name: 'user-icons',
         component: Icons,
+        meta: {
+            content: {
+                layout: 'icons'
+            }
+        }
     }, {
         path: 'plans',
         name: 'user-plans',
         component: Plans,
-    }, {
-        path: 'todos',
-        name: 'user-todos',
-        component: Todos,
-    }, {
-        path: 'todos/:todo_id',
-        component: TodoIndex,
         meta: {
             content: {
-                layout: 'todos-show'
+                layout: 'plans'
             }
-        },
-        children: [{
-            path: '',
-            name: 'user-todos-show',
-            redirect: {name: 'user-todos-show-tasks'},
-        }, {
-            path: 'info',
-            name: 'user-todos-show-info',
-            component: TodoInfo,
-        }, {
-            path: 'tasks',
-            name: 'user-todos-show-tasks',
-            component: TodoTasks,
-        }]
+        }
+    }, {
+        path: 'users',
+        name: 'user-users',
+        component: Users,
+        meta: {
+            content: {
+                layout: 'users'
+            }
+        }
     }, {
         path: 'users/:user_id',
-        component: UserIndex,
+        component: LayoutUser,
         meta: {
             content: {
                 layout: 'users-show'
@@ -79,17 +76,21 @@ export default [{
             name: 'user-users-show-billing',
             component: UserBilling,
         }, {
+            path: 'bookmarks',
+            name: 'user-users-show-bookmarks',
+            component: UserBookmarks,
+        }, {
             path: 'edit',
             name: 'user-users-show-edit',
             component: UserEdit,
+        }, {
+            path: 'folders',
+            name: 'user-users-show-folders',
+            component: UserFolders,
         }, {
             path: 'info',
             name: 'user-users-show-info',
             component: UserInfo,
         }]
-    }, {
-        path: 'users',
-        name: 'user-users',
-        component: Users,
     }]
 }]

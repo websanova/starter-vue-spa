@@ -1,11 +1,16 @@
 <script setup lang="ts">
-  import { Layout, LayoutBody, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
+  import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
+  import HeaderNav from '@/features/navs/Header.vue'
+  import UserNav from '@/features/navs/User.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
-  import PageTransition from '@shared/features/transitions/Page.vue'
+  import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
   function onLogo() {
     console.log('onLogo')
   }
+
+  // TODO: Set aside menu at top level here
+  // TODO: /bookmark, /user (for drilldown with header/tabs and PageTransition).
 </script>
 
 <template>
@@ -17,14 +22,22 @@
           @click="onLogo"
         />
       </template>
+
+      <template #nav>
+        <HeaderNav />
+      </template>
     </LayoutHeader>
 
     <LayoutBody size="full">
+      <LayoutBodyAside side="left">
+        <UserNav />
+      </LayoutBodyAside>
+
       <LayoutBodyContent>
         <RouterView v-slot="{ Component }" >
-          <PageTransition>
+          <LayoutTransition>
             <component :is="Component" />
-          </PageTransition>
+          </LayoutTransition>
         </RouterView>
       </LayoutBodyContent>
     </LayoutBody>

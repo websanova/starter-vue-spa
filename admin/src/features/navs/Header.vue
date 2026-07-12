@@ -1,9 +1,8 @@
 <script setup lang="ts">
-  import { BellIcon } from '@lucide/vue'
   import { useAuth } from '@shared/composables/support/auth'
   import { Navbar, NavDropdown } from '@shared/components/common/Navbar'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
-  import { DropdownMenuItem, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
+  import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import { useRouter } from 'vue-router'
 
   const { logout, user } = useAuth()
@@ -19,17 +18,6 @@
   <Navbar>
     <NavDropdown align="end">
       <template #trigger>
-        <BellIcon />
-      </template>
-      <!-- <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem> -->
-    </NavDropdown>
-
-    <NavDropdown align="end">
-      <template #trigger>
         <Avatar>
           <AvatarImage
             v-if="user?.avatarUrl"
@@ -41,20 +29,6 @@
           </AvatarFallback>
         </Avatar>
       </template>
-
-      <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-account' }">
-          {{ $t('features.lbl.account') }}
-        </RouterLink>
-      </DropdownMenuItem>
-
-      <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-bookmarks' }">
-          {{ $t('features.lbl.bookmarks') }}
-        </RouterLink>
-      </DropdownMenuItem>
-
-      <DropdownMenuSeparator />
 
       <DropdownMenuItem @select="onLogout">
         {{ $t('features.lbl.sign_out') }}

@@ -1,8 +1,12 @@
 {
   "lbl": {
     "email": "Email",
+    "icons": "Icons",
     "password": "Password",
-    "sign_in": "Sign in"
+    "plans": "Plans",
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "users": "Users"
   },
   "ph": {
     "email": "you{'@'}example.com",

@@ -5,7 +5,7 @@
 <template>
   <div>
     <Heading>
-      User Logout
+      User User Bookmarks
     </Heading>
   </div>
 </template>

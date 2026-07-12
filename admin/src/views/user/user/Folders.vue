@@ -5,7 +5,7 @@
 <template>
   <div>
     <Heading>
-      User Todo Info
+      User User Folders
     </Heading>
   </div>
 </template>

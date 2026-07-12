@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <div class="flex-1 flex px-3">
+  <div class="flex-1 flex">
     <div :class="cn(layoutContainerVariants({ size }), 'flex')">
       <slot />
     </div>
