@@ -1,12 +1,16 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
+  import { MobileMenu } from '@shared/components/common/MobileMenu'
   import HeaderNav from '@/features/navs/Header.vue'
   import ConsoleNav from '@/features/navs/Console.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
+  const mobileMenuOpen = ref(false)
+
   function onLogo() {
-    console.log('onLogo')
+    mobileMenuOpen.value = true
   }
 </script>
 
@@ -24,6 +28,13 @@
         <HeaderNav />
       </template>
     </LayoutHeader>
+
+    <MobileMenu
+      v-model:open="mobileMenuOpen"
+      side="left"
+    >
+      <ConsoleNav />
+    </MobileMenu>
 
     <LayoutBody size="full">
       <LayoutBodyAside
