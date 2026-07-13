@@ -37,7 +37,7 @@ export const navItemVariants = cva(
     variants: {
       orientation: {
         horizontal: "h-full",
-        vertical: "w-full px-2 py-1 hover:bg-accent [&.active]:bg-accent [&.active]:font-bold"
+        vertical: "w-full px-2 py-1 hover:bg-accent [&.router-link-exact-active]:bg-accent"
       }
     },
     defaultVariants: {
