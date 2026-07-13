@@ -22,7 +22,7 @@ export const navbarVariants = cva(
     variants: {
       orientation: {
         horizontal: "flex-row items-center h-full gap-3",
-        vertical: "flex-col items-stretch my-3 pe-3"
+        vertical: "flex-col items-stretch my-3"
       }
     },
     defaultVariants: {

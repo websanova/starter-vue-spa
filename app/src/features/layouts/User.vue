@@ -1,12 +1,11 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Layout, LayoutHeader } from '@shared/components/common/Layout'
-  import { SheetMenu } from '@shared/components/common/SheetMenu'
+  import BookmarksSheetMenu from '@/features/sheet-menus/Bookmarks.vue'
   import AccountSheetMenu from '@shared/features/sheet-menus/Account.vue'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
   import HeaderNav from '@/features/navs/Header.vue'
   import AccountNav from '@/features/navs/Account.vue'
-  import BookmarksNav from '@/features/navs/Bookmarks.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
@@ -37,14 +36,11 @@
       </template>
     </LayoutHeader>
 
-    <SheetMenu
+    <BookmarksSheetMenu
       v-model:open="bookmarksMenuOpen"
-      :title="$t('features.sr.menu_bookmarks')"
       header-height="3rem"
       side="left"
-    >
-      <BookmarksNav />
-    </SheetMenu>
+    />
 
     <AccountSheetMenu
       v-model:open="accountMenuOpen"

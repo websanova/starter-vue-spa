@@ -46,7 +46,7 @@
         </SheetClose>
       </header>
 
-      <div class="flex-1 min-h-0 overflow-y-auto">
+      <div class="flex-1 px-3 min-h-0 overflow-y-auto">
         <slot />
       </div>
 

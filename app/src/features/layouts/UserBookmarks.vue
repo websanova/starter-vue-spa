@@ -16,8 +16,7 @@
       class="sm:unhidden"
       side="left"
     >
-
-      <div class="my-3 pe-3">
+      <div class="my-3">
         <Button class="w-full">
           <PlusIcon />
           {{ $t('features.lbl.create') }}
