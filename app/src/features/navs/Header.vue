@@ -2,7 +2,7 @@
   import { BellIcon } from '@lucide/vue'
   import { useAuth } from '@shared/composables/support/auth'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
-  import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
+  import AccountAvatar from '@shared/features/avatars/Account.vue'
   import { DropdownMenuItem, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
   import { useRouter } from 'vue-router'
 
@@ -11,7 +11,7 @@
     account: []
   }>()
 
-  const { logout, user } = useAuth()
+  const { logout } = useAuth()
   const router = useRouter()
 
   function onLogout() {
@@ -48,16 +48,7 @@
       class="sm:unhidden"
     >
       <template #trigger>
-        <Avatar>
-          <AvatarImage
-            v-if="user?.avatarUrl"
-            :src="user.avatarUrl"
-          />
-
-          <AvatarFallback>
-            {{ user?.firstName?.charAt(0).toUpperCase() }}
-          </AvatarFallback>
-        </Avatar>
+        <AccountAvatar />
       </template>
 
       <DropdownMenuItem as-child>
@@ -83,16 +74,7 @@
       class="sm:hidden"
       @click="emit('account')"
     >
-      <Avatar>
-        <AvatarImage
-          v-if="user?.avatarUrl"
-          :src="user.avatarUrl"
-        />
-
-        <AvatarFallback>
-          {{ user?.firstName?.charAt(0).toUpperCase() }}
-        </AvatarFallback>
-      </Avatar>
+      <AccountAvatar />
     </NavItem>
   </Navbar>
 </template>
