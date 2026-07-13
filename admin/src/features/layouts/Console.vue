@@ -7,10 +7,10 @@
   import LogoNav from '@shared/features/navs/Logo.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
-  const mobileMenuOpen = ref(false)
+  const sheetMenuMainOpen = ref(false)
 
   function onLogo() {
-    mobileMenuOpen.value = true
+    sheetMenuMainOpen.value = true
   }
 </script>
 
@@ -30,9 +30,8 @@
     </LayoutHeader>
 
     <SheetMenuMain
-      v-model:open="mobileMenuOpen"
+      v-model:open="sheetMenuMainOpen"
       header-height="3rem"
-      side="left"
     >
       <ConsoleNav />
     </SheetMenuMain>
