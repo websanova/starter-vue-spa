@@ -46,7 +46,7 @@
         </SheetClose>
       </header>
 
-      <div class="overflow-y-auto">
+      <div class="flex-1 min-h-0 overflow-y-auto">
         <slot />
 
         test
@@ -56,6 +56,14 @@
         <br /><br /><br /><br /><br /><br /><br /><br />
         test
       </div>
+
+      <footer
+        v-if="$slots.footer"
+        class="shrink-0 flex items-center px-3 border-t"
+        :style="{ minHeight: headerHeight }"
+      >
+        <slot name="footer" />
+      </footer>
     </SheetContent>
   </Sheet>
 </template>

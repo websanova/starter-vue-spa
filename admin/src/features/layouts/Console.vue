@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
-  import { SheetMenu } from '@shared/components/common/SheetMenu'
+  import SheetMenuMain from '@shared/features/menus/SheetMenuMain.vue'
   import HeaderNav from '@/features/navs/Header.vue'
   import ConsoleNav from '@/features/navs/Console.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
@@ -29,13 +29,13 @@
       </template>
     </LayoutHeader>
 
-    <SheetMenu
+    <SheetMenuMain
       v-model:open="mobileMenuOpen"
       header-height="3rem"
       side="left"
     >
       <ConsoleNav />
-    </SheetMenu>
+    </SheetMenuMain>
 
     <LayoutBody size="full">
       <LayoutBodyAside
