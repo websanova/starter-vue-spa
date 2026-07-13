@@ -30,22 +30,21 @@
 
     <template #footer>
       <Button
-        variant="ghost"
+        severity="danger"
+        size="sm"
         @click="$emit('logout')"
       >
         <LogOutIcon />
-        Logout
+        {{ $t('features.lbl.sign_out') }}
       </Button>
 
-      <Button
-        variant="ghost"
-        size="icon"
+      <span
         class="ms-auto"
         @click="$emit('toggle-dark-mode')"
       >
-        <MoonIcon />
+        <MoonIcon class="h-8 w-8" />
         <span class="sr-only">Toggle dark mode</span>
-      </Button>
+      </span>
     </template>
   </SheetMenu>
 </template>
