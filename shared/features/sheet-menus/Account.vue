@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { LogOutIcon, MoonIcon, SunIcon } from '@lucide/vue'
-  import { useDarkMode } from '@shared/composables/support/darkMode'
+  import { LogOutIcon } from '@lucide/vue'
   import { useLogout } from '@shared/composables/support/logout'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
+  import DarkModeNav from '@shared/features/navs/DarkMode.vue'
   import { Button } from '@shared/components/ui/button'
 
   withDefaults(defineProps<{
@@ -13,7 +13,6 @@
     side: 'left',
   })
 
-  const { isDark, toggle } = useDarkMode()
   const onLogout = useLogout()
   const open = defineModel<boolean>('open', { default: false })
 </script>
@@ -38,24 +37,7 @@
         {{ $t('features.lbl.sign_out') }}
       </Button>
 
-      <span
-        class="ms-auto"
-        @click="toggle"
-      >
-        <SunIcon
-          v-if="isDark"
-          class="h-8 w-8"
-        />
-
-        <MoonIcon
-          v-else
-          class="h-8 w-8"
-        />
-
-        <span class="sr-only">
-          {{ $t('features.sr.dark_mode_toggle') }}
-        </span>
-      </span>
+      <DarkModeNav class="ms-auto size-8" />
     </template>
   </SheetMenu>
 </template>
