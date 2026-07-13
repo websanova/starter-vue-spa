@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { BellIcon } from '@lucide/vue'
+  import { BellIcon, BookmarkIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
   import { useDarkMode } from '@shared/composables/support/darkMode'
   import { useLogout } from '@shared/composables/support/logout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
@@ -48,12 +48,14 @@
 
       <DropdownMenuItem as-child>
         <RouterLink :to="{ name: 'user-account' }">
+          <UserIcon />
           {{ $t('features.lbl.account') }}
         </RouterLink>
       </DropdownMenuItem>
 
       <DropdownMenuItem as-child>
         <RouterLink :to="{ name: 'user-bookmarks' }">
+          <BookmarkIcon />
           {{ $t('features.lbl.bookmarks') }}
         </RouterLink>
       </DropdownMenuItem>
@@ -61,10 +63,13 @@
       <DropdownMenuSeparator />
 
       <DropdownMenuItem @select="toggle">
+        <SunIcon v-if="isDark" />
+        <MoonIcon v-else />
         {{ isDark ? $t('features.lbl.light_mode') : $t('features.lbl.dark_mode') }}
       </DropdownMenuItem>
 
       <DropdownMenuItem @select="onLogout">
+        <LogOutIcon />
         {{ $t('features.lbl.sign_out') }}
       </DropdownMenuItem>
     </NavDropdown>
