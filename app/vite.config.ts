@@ -29,12 +29,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: env.VITE_HOST || "0.0.0.0",
-      port: Number(env.VITE_PORT) || 5173,
-      watch: {
-        usePolling: true,
-        interval: 500,
-        ignored: ["**/node_modules/**", "**/.git/**", "**/dist/**"]
-      }
+      port: Number(env.VITE_PORT) || 5173
     }
   }
 })
