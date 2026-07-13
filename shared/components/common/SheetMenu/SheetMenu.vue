@@ -35,7 +35,7 @@
       <SheetTitle class="sr-only">{{ title }}</SheetTitle>
 
       <header
-        class="shrink-0 flex items-center justify-between px-3 bg-background shadow-sm"
+        class="shrink-0 flex items-center justify-between px-3 bg-background border-b shadow-sm"
         :style="{ height: headerHeight }"
       >
         <StarterTextLogo class="h-6" />
