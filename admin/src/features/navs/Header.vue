@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { useDarkMode } from '@shared/composables/support/darkMode'
   import { useLogout } from '@shared/composables/support/logout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
@@ -8,6 +9,7 @@
     account: []
   }>()
 
+  const { isDark, toggle } = useDarkMode()
   const onLogout = useLogout()
 </script>
 
@@ -20,6 +22,10 @@
       <template #trigger>
         <AccountAvatar />
       </template>
+
+      <DropdownMenuItem @select="toggle">
+        {{ isDark ? $t('features.lbl.light_mode') : $t('features.lbl.dark_mode') }}
+      </DropdownMenuItem>
 
       <DropdownMenuItem @select="onLogout">
         {{ $t('features.lbl.sign_out') }}

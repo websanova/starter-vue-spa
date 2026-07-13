@@ -1,7 +1,9 @@
 {
   "lbl": {
+    "dark_mode": "Dark mode",
     "email": "Email",
     "icons": "Icons",
+    "light_mode": "Light mode",
     "mark_all_read": "Mark all read",
     "password": "Password",
     "plans": "Plans",
