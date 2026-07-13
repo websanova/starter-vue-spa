@@ -15,16 +15,18 @@
 </script>
 
 <template>
-  <RouterLink :to="to" class="flex h-full items-center sm:unhidden">
-    <StarterTextLogo class="h-6" />
-  </RouterLink>
+  <div class="flex items-center gap-3">
+    <component
+      :is="isClickable ? 'div' : RouterLink"
+      :to="isClickable ? undefined : to"
+      v-bind="$attrs"
+      :class="['flex h-full items-center sm:hidden', isClickable ? 'cursor-pointer' : '']"
+    >
+      <MenuIcon class="size-6" />
+    </component>
 
-  <component
-    :is="isClickable ? 'div' : RouterLink"
-    :to="isClickable ? undefined : to"
-    v-bind="$attrs"
-    :class="['flex h-full items-center sm:hidden', isClickable ? 'cursor-pointer' : '']"
-  >
-    <MenuIcon class="size-6" />
-  </component>
+    <RouterLink :to="to" class="flex h-full items-center sm:unhidden">
+      <StarterTextLogo class="h-6" />
+    </RouterLink>
+  </div>
 </template>

@@ -29,11 +29,11 @@
 
     <template #footer>
       <Button
-        variant="link"
-        class="ms-auto"
+        severity="danger"
+        size="sm"
         @click="$emit('mark-all-read')"
       >
-        {{ $t('features.sr.mark_all_read') }}
+        {{ $t('features.lbl.mark_all_read') }}
       </Button>
     </template>
   </SheetMenu>

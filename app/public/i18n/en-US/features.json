@@ -7,6 +7,7 @@
     "create": "Create",
     "delete": "Delete",
     "email": "Email",
+    "mark_all_read": "Mark all read",
     "name": "Name",
     "optional": "Optional",
     "password": "Password",
@@ -19,6 +20,12 @@
     "sign_out": "Sign out",
     "sign_up": "Sign up",
     "update": "Update"
+  },
+  "sr": {
+    "menu_bookmarks": "Bookmarks menu",
+    "menu_account": "Account menu",
+    "menu_notifications": "Notifications menu",
+    "dark_mode_toggle": "Toggle dark mode"
   },
   "ph": {
     "email": "you{'@'}example.com",
