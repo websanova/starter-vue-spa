@@ -8,6 +8,8 @@ export { default as NavDropdown } from "./NavDropdown.vue"
 
 export type NavOrientation = "horizontal" | "vertical"
 
+export type NavIconSize = "sm" | "md" | "lg" | "xl"
+
 /**
  * Injection key for the navbar orientation.
  *
@@ -15,6 +17,14 @@ export type NavOrientation = "horizontal" | "vertical"
  * their own per-orientation styling without prop drilling.
  */
 export const navOrientationKey = Symbol("navOrientation") as InjectionKey<Ref<NavOrientation>>
+
+/**
+ * Injection key for the navbar icon size.
+ *
+ * Navbar provides it so NavItem can size its icons independently of
+ * orientation, set once per navbar rather than per item.
+ */
+export const navIconSizeKey = Symbol("navIconSize") as InjectionKey<Ref<NavIconSize>>
 
 export const navbarVariants = cva(
   "flex",
@@ -32,16 +42,23 @@ export const navbarVariants = cva(
 )
 
 export const navItemVariants = cva(
-  "flex items-center gap-2 cursor-pointer transition-colors [&>svg]:size-6 [&>svg]:shrink-0",
+  "flex items-center gap-2 cursor-pointer transition-colors [&>svg]:shrink-0",
   {
     variants: {
       orientation: {
         horizontal: "h-full",
         vertical: "w-full px-2 py-1 hover:bg-accent [&.router-link-exact-active]:bg-accent"
+      },
+      iconSize: {
+        sm: "[&>svg]:size-3",
+        md: "[&>svg]:size-4",
+        lg: "[&>svg]:size-5",
+        xl: "[&>svg]:size-6"
       }
     },
     defaultVariants: {
-      orientation: "horizontal"
+      orientation: "horizontal",
+      iconSize: "md"
     }
   }
 )

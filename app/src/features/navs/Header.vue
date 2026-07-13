@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <Navbar>
+  <Navbar icon-size="xl">
     <NavDropdown
       align="end"
       class="sm:unhidden"

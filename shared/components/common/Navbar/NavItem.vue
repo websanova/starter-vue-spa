@@ -2,7 +2,7 @@
   import type { HTMLAttributes } from "vue"
   import { inject } from "vue"
   import { RouterLink, type RouteLocationRaw } from "vue-router"
-  import { navItemVariants, navOrientationKey } from "."
+  import { navIconSizeKey, navItemVariants, navOrientationKey } from "."
   import { cn } from "@shared/lib/utils"
 
   const props = defineProps<{
@@ -11,20 +11,21 @@
   }>()
 
   const orientation = inject(navOrientationKey, undefined)
+  const iconSize = inject(navIconSizeKey, undefined)
 </script>
 
 <template>
   <RouterLink
     v-if="to"
     :to="to"
-    :class="cn(navItemVariants({ orientation }), props.class)"
+    :class="cn(navItemVariants({ orientation, iconSize }), props.class)"
   >
     <slot />
   </RouterLink>
 
   <div
     v-else
-    :class="cn(navItemVariants({ orientation }), props.class)"
+    :class="cn(navItemVariants({ orientation, iconSize }), props.class)"
   >
     <slot />
   </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router'
+  import { FolderIcon } from '@lucide/vue'
   import { Navbar, NavDivider, NavItem } from '@shared/components/common/Navbar'
 
   const route = useRoute()
@@ -14,6 +15,7 @@
       :class="{ 'router-link-exact-active': !route.query.folder_id }"
       :to="{ name: 'user-bookmarks', query: { folder_id: undefined } }"
     >
+      <FolderIcon />
       {{ $t('features.lbl.all') }}
     </NavItem>
 
@@ -24,6 +26,7 @@
       :class="{ 'router-link-exact-active': route.query.folder_id === '1' }"
       :to="{ name: 'user-bookmarks', query: { folder_id: 1 } }"
     >
+      <FolderIcon />
       Folder One
     </NavItem>
 
@@ -32,6 +35,7 @@
       :class="{ 'router-link-exact-active': route.query.folder_id === '2' }"
       :to="{ name: 'user-bookmarks', query: { folder_id: 2 } }"
     >
+      <FolderIcon />
       Folder Two
     </NavItem>
 
@@ -40,6 +44,7 @@
       :class="{ 'router-link-exact-active': route.query.folder_id === '3' }"
       :to="{ name: 'user-bookmarks', query: { folder_id: 3 } }"
     >
+      <FolderIcon />
       Folder Three
     </NavItem>
   </Navbar>
