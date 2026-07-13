@@ -7,23 +7,29 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-white shadow-sm hover:bg-destructive/90",
-        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline"
+        solid: "bg-[var(--btn)] text-[var(--btn-fg)] shadow-sm hover:bg-[var(--btn)]/90",
+        outline: "border border-[var(--btn)] text-[var(--btn)] shadow-sm hover:bg-[var(--btn)]/10",
+        ghost: "text-[var(--btn)] hover:bg-[var(--btn)]/10",
+        link: "text-[var(--btn)] underline-offset-4 hover:underline"
+      },
+      color: {
+        primary: "[--btn:var(--primary)] [--btn-fg:var(--primary-foreground)]",
+        secondary: "[--btn:var(--secondary)] [--btn-fg:var(--secondary-foreground)]",
+        destructive: "[--btn:var(--destructive)] [--btn-fg:var(--destructive-foreground)]",
+        success: "[--btn:var(--success)] [--btn-fg:var(--success-foreground)]",
+        warning: "[--btn:var(--warning)] [--btn-fg:var(--warning-foreground)]"
       },
       size: {
-        default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
+        md: "h-9 px-4 py-2",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9"
       }
     },
     defaultVariants: {
-      variant: "default",
-      size: "default"
+      variant: "solid",
+      color: "primary",
+      size: "md"
     }
   }
 )

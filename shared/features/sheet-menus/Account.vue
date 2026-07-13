@@ -29,7 +29,7 @@
 
     <template #footer>
       <Button
-        severity="danger"
+        color="success"
         size="sm"
         @click="onLogout"
       >
