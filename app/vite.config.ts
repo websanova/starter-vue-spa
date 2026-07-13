@@ -3,6 +3,7 @@ import { defineConfig, loadEnv } from "vite"
 import vue from "@vitejs/plugin-vue"
 import tailwindcss from "@tailwindcss/vite"
 import { fileURLToPath, URL } from "node:url"
+import { initCover } from "../vite/init-cover-plugin"
 
 const buildId = Date.now().toString(36)
 
@@ -16,7 +17,8 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       tailwindcss(),
-      checker({ vueTsc: true })
+      checker({ vueTsc: true }),
+      initCover()
     ],
     resolve: {
       alias: {
