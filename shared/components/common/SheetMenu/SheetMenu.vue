@@ -15,6 +15,12 @@
   })
 
   const open = defineModel<boolean>('open', { default: false })
+
+  function onContentClick(e: MouseEvent) {
+    if ((e.target as HTMLElement).closest('a')) {
+      open.value = false
+    }
+  }
 </script>
 
 <template>
@@ -46,7 +52,10 @@
         </SheetClose>
       </header>
 
-      <div class="flex-1 px-3 min-h-0 overflow-y-auto">
+      <div
+        class="flex-1 px-3 min-h-0 overflow-y-auto"
+        @click="onContentClick"
+      >
         <slot />
       </div>
 
