@@ -1,16 +1,18 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
-  import SheetMenuMain from '@shared/features/menus/SheetMenuMain.vue'
+  import { SheetMenu } from '@shared/components/common/SheetMenu'
+  import AccountMenu from '@shared/features/menus/Account.vue'
   import HeaderNav from '@/features/navs/Header.vue'
   import ConsoleNav from '@/features/navs/Console.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import LayoutTransition from '@shared/features/transitions/Layout.vue'
 
-  const sheetMenuMainOpen = ref(false)
+  const consoleMenuOpen = ref(false)
+  const accountMenuOpen = ref(false)
 
   function onLogo() {
-    sheetMenuMainOpen.value = true
+    consoleMenuOpen.value = true
   }
 </script>
 
@@ -25,16 +27,23 @@
       </template>
 
       <template #nav>
-        <HeaderNav />
+        <HeaderNav @account="accountMenuOpen = true" />
       </template>
     </LayoutHeader>
 
-    <SheetMenuMain
-      v-model:open="sheetMenuMainOpen"
+    <SheetMenu
+      v-model:open="consoleMenuOpen"
       header-height="3rem"
+      side="left"
     >
       <ConsoleNav />
-    </SheetMenuMain>
+    </SheetMenu>
+
+    <AccountMenu
+      v-model:open="accountMenuOpen"
+      header-height="3rem"
+      side="right"
+    />
 
     <LayoutBody size="full">
       <LayoutBodyAside

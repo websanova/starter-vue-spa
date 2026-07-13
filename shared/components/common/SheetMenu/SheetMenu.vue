@@ -35,7 +35,6 @@
 
       <header
         class="shrink-0 flex items-center justify-between px-3 bg-background shadow-sm"
-        :class="side === 'right' ? 'flex-row-reverse' : ''"
         :style="{ height: headerHeight }"
       >
         <StarterTextLogo class="h-6" />

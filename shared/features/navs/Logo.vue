@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, useAttrs } from 'vue'
+  import { MenuIcon } from '@lucide/vue'
   import { RouterLink, type RouteLocationRaw } from 'vue-router'
-  import StarterLogo from '@shared/components/logos/Starter.vue'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
 
   defineProps<{
@@ -25,6 +25,6 @@
     v-bind="$attrs"
     :class="['flex h-full items-center sm:hidden', isClickable ? 'cursor-pointer' : '']"
   >
-    <StarterLogo class="h-6" />
+    <MenuIcon class="size-6" />
   </component>
 </template>

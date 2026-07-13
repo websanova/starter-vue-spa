@@ -31,20 +31,20 @@
     <template #footer>
       <Button
         variant="ghost"
-        size="icon"
-        @click="$emit('toggle-dark-mode')"
-      >
-        <MoonIcon />
-        <span class="sr-only">Toggle dark mode</span>
-      </Button>
-
-      <Button
-        variant="ghost"
-        class="ms-auto"
         @click="$emit('logout')"
       >
         <LogOutIcon />
         Logout
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="icon"
+        class="ms-auto"
+        @click="$emit('toggle-dark-mode')"
+      >
+        <MoonIcon />
+        <span class="sr-only">Toggle dark mode</span>
       </Button>
     </template>
   </SheetMenu>
