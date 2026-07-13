@@ -4,6 +4,7 @@
   import { Sheet, SheetClose, SheetContent, SheetTitle } from '@shared/components/ui/sheet'
 
   withDefaults(defineProps<{
+    title: string
     side?: 'left' | 'right'
     width?: string
     headerHeight?: string
@@ -27,11 +28,11 @@
       <!--
         Accessible name for the dialog, required by reka-ui and read out by
         screen readers on open. Visually hidden since the header already shows
-        the logo. No description: the title alone describes a nav menu, and
-        aria-describedby is opted out above to silence the missing-description
-        warning.
+        the logo. Set per instance via the title prop so it names the specific
+        menu. No description: the title alone suffices, and aria-describedby is
+        opted out above to silence the missing-description warning.
       -->
-      <SheetTitle class="sr-only">Main Menu</SheetTitle>
+      <SheetTitle class="sr-only">{{ title }}</SheetTitle>
 
       <header
         class="shrink-0 flex items-center justify-between px-3 bg-background shadow-sm"

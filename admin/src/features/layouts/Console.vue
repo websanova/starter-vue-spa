@@ -33,6 +33,7 @@
 
     <SheetMenu
       v-model:open="consoleMenuOpen"
+      :title="$t('features.sr.menu_main')"
       header-height="3rem"
       side="left"
     >

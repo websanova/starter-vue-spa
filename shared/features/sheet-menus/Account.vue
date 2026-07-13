@@ -22,6 +22,7 @@
 <template>
   <SheetMenu
     v-model:open="open"
+    :title="$t('features.sr.menu_account')"
     :side="side"
     :width="width"
     :header-height="headerHeight"
@@ -43,7 +44,7 @@
         @click="$emit('toggle-dark-mode')"
       >
         <MoonIcon class="h-8 w-8" />
-        <span class="sr-only">Toggle dark mode</span>
+        <span class="sr-only">{{ $t('features.sr.dark_mode_toggle') }}</span>
       </span>
     </template>
   </SheetMenu>

@@ -2,6 +2,7 @@
   "lbl": {
     "email": "Email",
     "icons": "Icons",
+    "mark_all_read": "Mark all read",
     "password": "Password",
     "plans": "Plans",
     "refresh": "Refresh",
@@ -12,6 +13,12 @@
   "ph": {
     "email": "you{'@'}example.com",
     "password": "Password"
+  },
+  "sr": {
+    "menu_account": "Account menu",
+    "menu_main": "Main menu",
+    "menu_notifications": "Notifications menu",
+    "dark_mode_toggle": "Toggle dark mode"
   },
   "cover": {
     "maintenance": {

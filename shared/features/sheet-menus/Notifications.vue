@@ -20,6 +20,7 @@
 <template>
   <SheetMenu
     v-model:open="open"
+    :title="$t('features.sr.menu_notifications')"
     :side="side"
     :width="width"
     :header-height="headerHeight"
@@ -32,7 +33,7 @@
         class="ms-auto"
         @click="$emit('mark-all-read')"
       >
-        Mark all read
+        {{ $t('features.sr.mark_all_read') }}
       </Button>
     </template>
   </SheetMenu>
