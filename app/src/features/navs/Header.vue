@@ -1,23 +1,16 @@
 <script setup lang="ts">
   import { BellIcon } from '@lucide/vue'
-  import { useAuth } from '@shared/composables/support/auth'
+  import { useLogout } from '@shared/composables/support/logout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
   import { DropdownMenuItem, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
-  import { useRouter } from 'vue-router'
 
   const emit = defineEmits<{
     notifications: []
     account: []
   }>()
 
-  const { logout } = useAuth()
-  const router = useRouter()
-
-  function onLogout() {
-    logout()
-    router.push({ name: 'auth-landing' })
-  }
+  const onLogout = useLogout()
 </script>
 
 <template>
