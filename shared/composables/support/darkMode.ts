@@ -9,6 +9,7 @@ export const useDarkMode = function() {
   function toggle() {
     isDark.value = !isDark.value
     localStorage.setItem('color-scheme', isDark.value ? 'dark' : 'light')
+    document.documentElement.classList.toggle('dark', isDark.value)
   }
 
   return {

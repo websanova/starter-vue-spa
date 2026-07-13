@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { useLogout } from '@shared/composables/support/logout'
   import { Layout, LayoutHeader } from '@shared/components/common/Layout'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
   import AccountSheetMenu from '@shared/features/sheet-menus/Account.vue'
@@ -14,8 +13,6 @@
   const bookmarksMenuOpen = ref(false)
   const accountMenuOpen = ref(false)
   const notificationsMenuOpen = ref(false)
-
-  const onLogout = useLogout()
 
   function onLogo() {
     bookmarksMenuOpen.value = true
@@ -53,7 +50,6 @@
       v-model:open="accountMenuOpen"
       header-height="3rem"
       side="right"
-      @logout="onLogout"
     >
       <AccountNav />
     </AccountSheetMenu>
