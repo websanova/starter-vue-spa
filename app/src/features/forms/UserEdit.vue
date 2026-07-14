@@ -36,7 +36,6 @@
     <FormButton
       class="self-start"
       :pending="isPending"
-      :loading-text="$t('features.form.profile.loading')"
     >
       {{ $t('features.lbl.update') }}
     </FormButton>
