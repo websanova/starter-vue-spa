@@ -30,8 +30,10 @@ export default defineConfig(({ mode }) => {
     server: {
       host: env.VITE_HOST || "0.0.0.0",
       port: Number(env.VITE_PORT) || 5173,
-      usePolling: true,
-      interval: 100
+      watch: {
+        usePolling: true,
+        interval: 100
+      }
     }
   }
 })
