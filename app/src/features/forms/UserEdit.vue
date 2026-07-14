@@ -2,9 +2,7 @@
   import { useAuth } from '@shared/composables/support/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { UserRules } from '@shared/rules/user'
-  import { Form } from '@shared/components/common/Form'
-  import { FormInputText } from '@shared/components/common/FormInputText'
-  import { Button } from '@shared/components/ui/button'
+  import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const { user, updateProfile } = useAuth()
 
@@ -35,12 +33,12 @@
       :placeholder="$t('features.ph.last_name')"
     />
 
-    <Button
-      type="submit"
+    <FormButton
       class="self-start"
-      :disabled="isPending"
+      :pending="isPending"
+      :loading-text="$t('features.form.profile.loading')"
     >
-      {{ isPending ? $t('features.form.profile.loading') : $t('features.lbl.update') }}
-    </Button>
+      {{ $t('features.lbl.update') }}
+    </FormButton>
   </Form>
 </template>
