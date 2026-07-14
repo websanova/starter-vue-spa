@@ -54,3 +54,8 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 **Dark Mode**
 - Light and dark themes, remembered across visits
 - Correct theme shown immediately, no flash on load
+
+**Accessibility**
+- Accessible component primitives via reka-ui - keyboard nav, focus management, and ARIA out of the box
+- Icon-only controls and dialogs carry screen-reader labels
+- Work in progress, not yet fully audited - more support coming soon
