@@ -9,6 +9,7 @@
   >
     <Heading
       class="capitalize text-center"
+      :divider="false"
     >
       {{ $t('features.lbl.sign_up') }}
     </Heading>
