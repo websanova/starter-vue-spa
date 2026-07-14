@@ -100,7 +100,7 @@
 - shadcn primitives in `shared/components/ui/` are vendored. Do not hand-edit them. Build app-specific pieces as composites in `shared/components/common/`. See `.claude/rules/components.md`.
 - SPA with client-side routing (Vue Router). No SSR.
 - TypeScript throughout, strict mode. Build runs `vue-tsc --noEmit` for typechecking.
-- Dev environment is Dockerized (Node 22). Use the `./run` script for container commands.
+- Dev environment is Dockerized (Node 22). Use the `./dev` script for container commands.
 - Always use 2 spaces for indenting.
 - In Vue SFCs, indent `<script>` and `<style>` block content one level (2 spaces), not flush to column 0.
 - In Vue templates, a self-closing element with exactly one attribute goes on a single line (`<component :is="Component" />`), regardless of attribute length. Two or more attributes stay multi-line, one attribute per line. Never collapse an element that has child content; leave elements with children as they are.

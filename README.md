@@ -14,7 +14,7 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 **Dev Environment**
 - Dockerized dev environment (Node 22)
-- Simple `./run` script for container commands
+- Simple `./dev` script for container commands
 
 **Page Transitions**
 - Smooth transitions across site, layout, and page changes
