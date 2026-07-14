@@ -22,6 +22,11 @@ interface RegisterOptions {
   autoLogin?: boolean
 }
 
+interface UpdateProfileData {
+  first_name: string
+  last_name: string
+}
+
 export const useAuth = function() {
   const store = useAuthStore()
 
@@ -80,6 +85,11 @@ export const useAuth = function() {
     }
   }
 
+  async function updateProfile(data: UpdateProfileData) {
+    const { data: dto } = await useHttp().patch<{ data: AuthDto }>('profile', data)
+    store.user = toAuth(dto)
+  }
+
   return {
     user: computed(() => store.user),
     isLoggedIn: computed(() => !!store.user),
@@ -90,5 +100,6 @@ export const useAuth = function() {
     register,
     flush,
     refreshToken,
+    updateProfile,
   }
 }

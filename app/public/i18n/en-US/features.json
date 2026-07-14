@@ -9,6 +9,8 @@
     "dark_mode": "Dark mode",
     "delete": "Delete",
     "email": "Email",
+    "first_name": "First Name",
+    "last_name": "Last Name",
     "light_mode": "Light mode",
     "mark_all_read": "Mark all read",
     "name": "Name",
@@ -32,6 +34,8 @@
   },
   "ph": {
     "email": "you{'@'}example.com",
+    "first_name": "Your first name",
+    "last_name": "Your last name",
     "name": "Your name",
     "password": "Password",
     "password_confirmation": "Confirm password"
@@ -52,6 +56,9 @@
     "register": {
       "loading": "Signing up...",
       "prompt": "Already a member?"
+    },
+    "profile": {
+      "loading": "Saving..."
     }
   }
 }
