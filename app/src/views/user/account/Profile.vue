@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
-  import UserEdit from '@/features/forms/UserEdit.vue'
+  import UserEditForm from '@/features/forms/UserEdit.vue'
 
   // TODO: Update avatar
 </script>
@@ -11,6 +11,6 @@
       {{ $t('features.lbl.profile') }}
     </Heading>
 
-    <UserEdit />
+    <UserEditForm />
   </div>
 </template>
