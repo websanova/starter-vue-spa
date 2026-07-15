@@ -19,12 +19,14 @@
     "password_confirmation": "Confirm Password",
     "profile": "Profile",
     "refresh": "Refresh",
+    "remove": "Remove",
     "security": "Security",
     "settings": "Settings",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "sign_up": "Sign up",
-    "update": "Update"
+    "update": "Update",
+    "upload": "Upload"
   },
   "sr": {
     "menu_bookmarks": "Bookmarks menu",
@@ -49,6 +51,11 @@
     }
   },
   "form": {
+    "avatar": {
+      "invalid_type": "Please choose a PNG, JPG, or WEBP image.",
+      "too_large": "Image must be smaller than 2MB.",
+      "failed": "Could not upload avatar. Please try again."
+    },
     "login": {
       "loading": "Signing in...",
       "prompt": "Not a member?"

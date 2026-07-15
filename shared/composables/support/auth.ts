@@ -47,9 +47,14 @@ export const useAuth = function() {
     store.isReady = true
   }
 
+  async function deleteAvatar() {
+    const { data } = await useHttp().delete<{ data: AuthDto }>('avatar')
+    setUser(data)
+  }
+
   async function fetchUser() {
     const { data } = await useHttp().get<{ data: AuthDto }>('profile')
-    store.user = toAuth(data)
+    setUser(data)
   }
 
   function flush() {
@@ -85,9 +90,13 @@ export const useAuth = function() {
     }
   }
 
+  function setUser(dto: AuthDto) {
+    store.user = toAuth(dto)
+  }
+
   async function updateProfile(data: UpdateProfileData) {
     const { data: dto } = await useHttp().patch<{ data: AuthDto }>('profile', data)
-    store.user = toAuth(dto)
+    setUser(dto)
   }
 
   return {
@@ -95,11 +104,13 @@ export const useAuth = function() {
     isLoggedIn: computed(() => !!store.user),
     isReady: computed(() => store.isReady),
     checkReady,
+    deleteAvatar,
     login,
     logout,
     register,
     flush,
     refreshToken,
+    setUser,
     updateProfile,
   }
 }
