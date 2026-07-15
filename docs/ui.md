@@ -12,6 +12,14 @@ docker compose exec node yarn shadcn-vue add spinner --cwd app
 ./dev yarn shadcn-vue add spinner --cwd app
 ```
 
+Note the `add` will automatically modify the package.json and yarn.lock, those changes can just be discarded.
+
+You may also need to change ownership.
+
+```bash
+sudo chown -R user:user shared/components/ui/spinner
+```
+
 ## Icons
 
 Default set is `@lucide/vue`. Icon names carry an `Icon` suffix. Size from the
