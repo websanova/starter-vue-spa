@@ -3,6 +3,7 @@
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { UserRules } from '@shared/rules/user'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
+  import { toast } from '@shared/components/ui/sonner'
 
   const { user, updateProfile } = useAuth()
 
@@ -16,6 +17,7 @@
       last_name: user.value?.lastName,
     },
     onSubmit: updateProfile,
+    onSuccess: () => toast.warning('Changes saved'),
   })
 </script>
 
