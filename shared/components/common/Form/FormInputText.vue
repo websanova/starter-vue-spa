@@ -2,6 +2,8 @@
   import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@shared/components/ui/form"
   import { Input } from "@shared/components/ui/input"
 
+  defineOptions({ inheritAttrs: false })
+
   const props = withDefaults(defineProps<{
     name: string
     label: string
@@ -35,7 +37,7 @@
         <Input
           :type="props.type"
           :placeholder="props.placeholder"
-          v-bind="componentField"
+          v-bind="{ ...componentField, ...$attrs }"
         />
       </FormControl>
 
