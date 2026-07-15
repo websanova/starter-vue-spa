@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { useAuth } from '@shared/composables/support/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
+  import { useI18n } from '@shared/plugins/i18n'
   import { UserRules } from '@shared/rules/user'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
   import { toast } from '@shared/components/ui/sonner'
 
+  const i18n = useI18n()
   const { user, updateProfile } = useAuth()
 
   const { submit, isPending } = useFormMutation({
@@ -17,7 +19,7 @@
       last_name: user.value?.lastName,
     },
     onSubmit: updateProfile,
-    onSuccess: () => toast.warning('Changes saved'),
+    onSuccess: () => toast.success(i18n.t('features.form.profile.toast')),
   })
 </script>
 

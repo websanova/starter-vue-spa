@@ -58,7 +58,7 @@
       "prompt": "Already a member?"
     },
     "profile": {
-      "loading": "Saving..."
+      "toast": "Profile saved"
     }
   }
 }

@@ -7,6 +7,7 @@
 
 <template>
   <Sonner
+    :duration="2000"
     rich-colors
     :style="{
       '--success-bg': 'var(--success)',
