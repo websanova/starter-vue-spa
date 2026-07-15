@@ -3,7 +3,10 @@
 </script>
 
 <template>
-  <ButtonLoading type="submit">
+  <ButtonLoading
+    type="submit"
+    class="self-start"
+  >
     <slot />
   </ButtonLoading>
 </template>

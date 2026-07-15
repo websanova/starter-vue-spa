@@ -33,10 +33,7 @@
       :placeholder="$t('features.ph.last_name')"
     />
 
-    <FormButton
-      class="self-start"
-      :pending="isPending"
-    >
+    <FormButton :pending="isPending">
       {{ $t('features.lbl.update') }}
     </FormButton>
   </Form>
