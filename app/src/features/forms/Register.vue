@@ -3,8 +3,7 @@
   import { useAuth } from '@shared/composables/support/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { AuthRules } from '@shared/rules/auth'
-  import { FormInputText } from '@shared/components/common/FormInputText'
-  import { Button } from '@shared/components/ui/button'
+  import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const { register } = useAuth()
   const router = useRouter()
@@ -23,10 +22,7 @@
 </script>
 
 <template>
-  <form
-    class="flex w-full flex-col gap-4"
-    @submit.prevent="submit"
-  >
+  <Form @submit="submit">
     <FormInputText
       name="name"
       optional
@@ -54,13 +50,12 @@
       :placeholder="$t('features.ph.password_confirmation')"
     />
 
-    <Button
-      type="submit"
+    <FormButton
       class="w-full"
-      :disabled="isPending"
+      :pending="isPending"
     >
-      {{ isPending ? $t('features.form.register.loading') : $t('features.lbl.sign_up') }}
-    </Button>
+      {{ $t('features.lbl.sign_up') }}
+    </FormButton>
 
     <p class="self-end text-sm text-muted-foreground">
       {{ $t('features.form.register.prompt') }}
@@ -72,5 +67,5 @@
         {{ $t('features.lbl.sign_in') }}
       </RouterLink>
     </p>
-  </form>
+  </Form>
 </template>

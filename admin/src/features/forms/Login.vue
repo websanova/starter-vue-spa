@@ -3,8 +3,7 @@
   import { useAuth } from '@shared/composables/support/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { AuthRules } from '@shared/rules/auth'
-  import { FormInputText } from '@shared/components/common/FormInputText'
-  import { Button } from '@shared/components/ui/button'
+  import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const { login } = useAuth()
   const router = useRouter()
@@ -17,14 +16,12 @@
 </script>
 
 <template>
-  <form
-    class="flex w-full flex-col gap-4"
-    @submit.prevent="submit"
-  >
+  <Form @submit="submit">
     <FormInputText
       name="email"
       :label="$t('features.lbl.email')"
       :placeholder="$t('features.ph.email')"
+      @keyup.enter="submit"
     />
 
     <FormInputText
@@ -32,14 +29,14 @@
       type="password"
       :label="$t('features.lbl.password')"
       :placeholder="$t('features.ph.password')"
+      @keyup.enter="submit"
     />
 
-    <Button
-      type="submit"
+    <FormButton
       class="w-full"
-      :disabled="isPending"
+      :pending="isPending"
     >
-      {{ isPending ? $t('features.form.login.loading') : $t('features.lbl.sign_in') }}
-    </Button>
-  </form>
+      {{ $t('features.lbl.sign_in') }}
+    </FormButton>
+  </Form>
 </template>
