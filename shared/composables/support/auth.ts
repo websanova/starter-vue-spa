@@ -48,13 +48,13 @@ export const useAuth = function() {
   }
 
   async function deleteAvatar() {
-    const { data } = await useHttp().delete<{ data: AuthDto }>('avatar')
-    setUser(data)
+    await useHttp().delete('avatar')
+    setAvatar(null)
   }
 
   async function fetchUser() {
     const { data } = await useHttp().get<{ data: AuthDto }>('profile')
-    setUser(data)
+    store.user = toAuth(data)
   }
 
   function flush() {
@@ -90,13 +90,15 @@ export const useAuth = function() {
     }
   }
 
-  function setUser(dto: AuthDto) {
-    store.user = toAuth(dto)
+  function setAvatar(url: string | null) {
+    if (store.user) {
+      store.user.avatarUrl = url
+    }
   }
 
   async function updateProfile(data: UpdateProfileData) {
     const { data: dto } = await useHttp().patch<{ data: AuthDto }>('profile', data)
-    setUser(dto)
+    store.user = toAuth(dto)
   }
 
   return {
@@ -110,7 +112,7 @@ export const useAuth = function() {
     register,
     flush,
     refreshToken,
-    setUser,
+    setAvatar,
     updateProfile,
   }
 }

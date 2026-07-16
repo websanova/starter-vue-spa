@@ -1,5 +1,5 @@
 export interface AuthDto {
-  avatar_url: string
+  avatar_url: string | null
   email: string
   email_verified_at: string | null
   first_name: string
@@ -9,7 +9,7 @@ export interface AuthDto {
 }
 
 export interface Auth {
-  avatarUrl: string
+  avatarUrl: string | null
   email: string
   firstName: string
   id: number

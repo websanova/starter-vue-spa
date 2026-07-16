@@ -4,17 +4,16 @@
   import { useFileUpload } from '@shared/composables/support/useFileUpload'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { Button } from '@shared/components/ui/button'
-  import type { AuthDto } from '@/models/auth'
 
-  const { user, setUser, deleteAvatar } = useAuth()
+  const { user, setAvatar, deleteAvatar } = useAuth()
 
-  const { open, isPending, error: uploadError } = useFileUpload<{ data: AuthDto }>({
+  const { open, isPending, error: uploadError } = useFileUpload<{ data: { avatar_url: string } }>({
     url: 'avatar',
     field: 'avatar',
     accept: 'image/png,image/jpeg,image/webp',
     maxSize: 2 * 1024 * 1024,
     i18nKey: 'features.form.avatar',
-    onSuccess: ({ data }) => setUser(data),
+    onSuccess: ({ data }) => setAvatar(data.avatar_url),
   })
 
   const { submit: removeAvatar, isPending: isDeleting, error: deleteError } = useActionMutation({
