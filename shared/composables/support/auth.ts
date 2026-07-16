@@ -102,16 +102,16 @@ export const useAuth = function() {
   }
 
   return {
-    user: computed(() => store.user),
     isLoggedIn: computed(() => !!store.user),
     isReady: computed(() => store.isReady),
+    user: computed(() => store.user),
     checkReady,
     deleteAvatar,
+    flush,
     login,
     logout,
-    register,
-    flush,
     refreshToken,
+    register,
     setAvatar,
     updateProfile,
   }
