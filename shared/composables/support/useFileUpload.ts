@@ -1,31 +1,28 @@
 import { ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
-import { useHttp } from '@shared/plugins/http'
 import { useI18n } from '@shared/plugins/i18n'
 import { validationMessage } from '@shared/lib/validationMessage'
 
-interface Options<T> {
-  url: string
-  field: string
+interface Options {
   accept: string
   maxSize: number
   i18nKey?: string
-  onSuccess?: (data: T) => void
+  onSubmit: (file: File) => Promise<void>
+  onSuccess?: () => void
 }
 
 /**
  * Reusable single file upload. Opens the file dialog, validates the
- * picked file against accept and maxSize, posts it as multipart form
- * data, and exposes pending and error state for the view to render. All
- * messages resolve from the i18nKey namespace.
+ * picked file against accept and maxSize, hands it to onSubmit for the
+ * upload, and exposes pending and error state for the view to render.
+ * All messages resolve from the i18nKey namespace.
  *
  * Expects these keys under i18nKey: invalid_type, too_large, failed.
  */
-export function useFileUpload<T>(options: Options<T>) {
-  const { url, field, accept, maxSize, i18nKey = 'features.form.upload', onSuccess } = options
+export function useFileUpload(options: Options) {
+  const { accept, maxSize, i18nKey = 'features.form.upload', onSubmit, onSuccess } = options
 
   const i18n = useI18n()
-  const http = useHttp()
 
   const isPending = ref(false)
   const error = ref<string | null>(null)
@@ -52,14 +49,11 @@ export function useFileUpload<T>(options: Options<T>) {
       return
     }
 
-    const form = new FormData()
-    form.append(field, file)
-
     isPending.value = true
 
     try {
-      const data = await http.post<T>(url, form)
-      onSuccess?.(data)
+      await onSubmit(file)
+      onSuccess?.()
     } catch (err) {
       error.value = validationMessage(err) ?? i18n.t(`${i18nKey}.failed`)
     } finally {

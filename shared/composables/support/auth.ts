@@ -101,6 +101,13 @@ export const useAuth = function() {
     store.user = toAuth(dto)
   }
 
+  async function uploadAvatar(file: File) {
+    const form = new FormData()
+    form.append('avatar', file)
+    const { data } = await useHttp().post<{ data: { avatar_url: string } }>('avatar', form)
+    setAvatar(data.avatar_url)
+  }
+
   return {
     isLoggedIn: computed(() => !!store.user),
     isReady: computed(() => store.isReady),
@@ -114,5 +121,6 @@ export const useAuth = function() {
     register,
     setAvatar,
     updateProfile,
+    uploadAvatar,
   }
 }

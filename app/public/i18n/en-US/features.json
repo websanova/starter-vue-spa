@@ -54,7 +54,8 @@
     "avatar": {
       "invalid_type": "Please choose a PNG, JPG, or WEBP image.",
       "too_large": "Image must be smaller than 2MB.",
-      "failed": "Could not upload avatar. Please try again."
+      "failed": "Could not upload avatar. Please try again.",
+      "toast": "Avatar updated"
     },
     "login": {
       "loading": "Signing in...",
