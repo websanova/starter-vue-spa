@@ -1,11 +1,12 @@
 <script setup lang="ts">
   import { useAuth } from '@shared/composables/api/auth'
-  import { useAvatarUpload, useDeleteAvatar } from '@shared/features/profile'
+  import { useDeleteAvatar } from '@/composables/api/profile'
+  import { useProfileAvatar } from '@/composables/forms/profile'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
   import { Button } from '@shared/components/ui/button'
 
   const { user } = useAuth()
-  const { open, isPending, error } = useAvatarUpload()
+  const { open, isPending, error } = useProfileAvatar()
   const { mutate: remove, isPending: isRemoving } = useDeleteAvatar()
 </script>
 

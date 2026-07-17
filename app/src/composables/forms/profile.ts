@@ -1,7 +1,8 @@
+import { useFileUpload } from '@shared/composables/support/useFileUpload'
 import { useValidatedForm } from '@shared/composables/support/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
-import { useUpdateProfile } from './api'
+import { useUpdateProfile, useUploadAvatar } from '@/composables/api/profile'
 
 export function useProfileForm() {
   const store = useAuthStore()
@@ -17,5 +18,16 @@ export function useProfileForm() {
       last_name: store.user?.lastName ?? '',
     },
     onSubmit: update.mutateAsync,
+  })
+}
+
+export function useProfileAvatar() {
+  const upload = useUploadAvatar()
+
+  return useFileUpload({
+    accept: 'image/png,image/jpeg,image/webp',
+    maxSize: 2 * 1024 * 1024,
+    i18nKey: 'features.form.avatar',
+    onSubmit: upload.mutateAsync,
   })
 }

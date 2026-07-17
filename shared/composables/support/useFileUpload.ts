@@ -7,7 +7,7 @@ interface Options {
   accept: string
   maxSize: number
   i18nKey?: string
-  onSubmit: (file: File) => Promise<void>
+  onSubmit: (file: File) => Promise<unknown>
   onSuccess?: () => void
 }
 

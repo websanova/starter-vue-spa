@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useProfileForm } from '@shared/features/profile'
+  import { useProfileForm } from '@/composables/forms/profile'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const { submit, isPending } = useProfileForm()
