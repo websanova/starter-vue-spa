@@ -2,12 +2,14 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import { HttpError } from '@shared/plugins/http/client'
-import type { ZodObject, ZodRawShape } from 'zod'
+import type { ZodObject, ZodRawShape, ZodTypeAny } from 'zod'
 
 interface Options<TShape extends ZodRawShape> {
   rules: TShape
   initial: Record<string, unknown>
   onSubmit: (values: z.infer<ZodObject<TShape>>) => Promise<unknown>
+  onSuccess?: () => void
+  refine?: (schema: ZodObject<TShape>) => ZodTypeAny
   reset?: boolean
 }
 
@@ -20,10 +22,12 @@ interface Options<TShape extends ZodRawShape> {
 export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TShape>) {
   type TData = z.infer<ZodObject<TShape>>
 
-  const { rules, initial, onSubmit, reset = false } = options
+  const { rules, initial, onSubmit, onSuccess, refine, reset = false } = options
+
+  const baseSchema = z.object(rules)
 
   const { handleSubmit, setErrors, resetForm, isSubmitting } = useForm({
-    validationSchema: toTypedSchema(z.object(rules)),
+    validationSchema: toTypedSchema(refine ? refine(baseSchema) : baseSchema),
     initialValues: initial,
   })
 
@@ -31,6 +35,7 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
     try {
       await onSubmit(values as TData)
       if (reset) resetForm()
+      onSuccess?.()
     } catch (err) {
       if (err instanceof HttpError && err.response.status === 422) {
         setErrors((err.response.data as { errors: Record<string, string[]> }).errors)

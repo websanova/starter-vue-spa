@@ -1,22 +1,11 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
-  import { useAuth } from '@shared/composables/api/auth'
-  import { useFormMutation } from '@shared/composables/support/useFormMutation'
-  import { AuthRules } from '@shared/rules/auth'
+  import { useRegisterForm } from '@/composables/forms/register'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
-  const { register } = useAuth()
   const router = useRouter()
 
-  const { submit, isPending } = useFormMutation({
-    rules: {
-      name: AuthRules.name(),
-      email: AuthRules.email(),
-      password: AuthRules.password(),
-      password_confirmation: AuthRules.password(),
-    },
-    refine: AuthRules.passwordsMatch,
-    onSubmit: (data) => register(data, { autoLogin: true }),
+  const { submit, isPending } = useRegisterForm({
     onSuccess: () => router.push({ name: 'user-landing' }),
   })
 </script>

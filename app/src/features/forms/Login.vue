@@ -1,16 +1,11 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
-  import { useAuth } from '@shared/composables/api/auth'
-  import { useFormMutation } from '@shared/composables/support/useFormMutation'
-  import { AuthRules } from '@shared/rules/auth'
+  import { useLoginForm } from '@shared/composables/forms/login'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
-  const { login } = useAuth()
   const router = useRouter()
 
-  const { submit, isPending } = useFormMutation({
-    rules: { email: AuthRules.email(), password: AuthRules.password() },
-    onSubmit: login,
+  const { submit, isPending } = useLoginForm({
     onSuccess: () => router.push({ name: 'user-landing' }),
   })
 </script>

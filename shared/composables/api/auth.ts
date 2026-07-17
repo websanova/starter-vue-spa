@@ -6,22 +6,6 @@ import { toAuth } from '@/models/auth'
 import { deleteToken, getToken, setToken } from '@shared/lib/authToken'
 import type { AuthDto } from '@/models/auth'
 
-export interface LoginData {
-  email: string
-  password: string
-}
-
-interface RegisterData {
-  name?: string
-  email: string
-  password: string
-  password_confirmation: string
-}
-
-interface RegisterOptions {
-  autoLogin?: boolean
-}
-
 export const useAuth = function() {
   const store = useAuthStore()
 
@@ -53,13 +37,6 @@ export const useAuth = function() {
     store.isReady = false
   }
 
-  async function login(data: LoginData) {
-    const res = await useHttp().post<{ token: string }>('login', data)
-    setToken(res.token)
-    await fetchUser()
-    store.isReady = true
-  }
-
   function logout() {
     useHttp().post('logout')
     flush()
@@ -70,14 +47,10 @@ export const useAuth = function() {
     setToken(res.token)
   }
 
-  async function register(data: RegisterData, options: RegisterOptions = {}) {
-    const res = await useHttp().post<{ token: string }>('register', data)
-    setToken(res.token)
-
-    if (options.autoLogin) {
-      await fetchUser()
-      store.isReady = true
-    }
+  async function startSession(token: string) {
+    setToken(token)
+    await fetchUser()
+    store.isReady = true
   }
 
   return {
@@ -86,9 +59,8 @@ export const useAuth = function() {
     user: computed(() => store.user),
     checkReady,
     flush,
-    login,
     logout,
     refreshToken,
-    register,
+    startSession,
   }
 }
