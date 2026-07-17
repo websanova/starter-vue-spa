@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized } from "vue-router"
-import { useI18n } from "@shared/composables/support/i18n"
+import { useI18n } from "@shared/composables/services/i18n"
 import type { I18nTier } from "@shared/stores/i18n"
 
 declare module "vue-router" {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useAuth } from '@shared/composables/api/auth'
+  import { useAuth } from '@shared/composables/services/auth'
   import { useDeleteAvatar } from '@/composables/api/profile'
   import { useProfileAvatar } from '@/composables/forms/profile'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'

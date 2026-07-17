@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/vue-query'
-import { useAuth } from '@shared/composables/api/auth'
+import { useAuth } from '@shared/composables/services/auth'
 import { useHttp } from '@shared/plugins/http'
 
 export interface LoginData {

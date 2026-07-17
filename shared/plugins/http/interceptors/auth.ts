@@ -1,4 +1,4 @@
-import { useAuth } from '@shared/composables/api/auth'
+import { useAuth } from '@shared/composables/services/auth'
 import { getToken } from '@shared/lib/authToken'
 import { HttpError } from '@shared/plugins/http/client'
 import { useRouter } from '@shared/plugins/router'

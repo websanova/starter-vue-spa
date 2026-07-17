@@ -1,4 +1,4 @@
-import { useValidatedForm } from '@shared/composables/support/useValidatedForm'
+import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { useCreateBookmark, useUpdateBookmark } from '@/composables/api/bookmarks'
 import { BookmarkRules } from '@/rules/bookmark'
 import type { Bookmark } from '@/models/bookmark'

@@ -1,4 +1,4 @@
-import { useAuth } from '@shared/composables/api/auth'
+import { useAuth } from '@shared/composables/services/auth'
 import type { RouteLocationNormalized, RouteLocationRaw, RouteMeta } from 'vue-router'
 
 declare module 'vue-router' {

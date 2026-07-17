@@ -1,5 +1,5 @@
-import { useFileUpload } from '@shared/composables/support/useFileUpload'
-import { useValidatedForm } from '@shared/composables/support/useValidatedForm'
+import { useFileUpload } from '@shared/composables/primitives/useFileUpload'
+import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
 import { useUpdateProfile, useUploadAvatar } from '@/composables/api/profile'

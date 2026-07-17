@@ -1,5 +1,5 @@
 import { useLogin } from '@shared/composables/api/login'
-import { useValidatedForm } from '@shared/composables/support/useValidatedForm'
+import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { AuthRules } from '@shared/rules/auth'
 
 interface Options {
