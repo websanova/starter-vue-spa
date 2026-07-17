@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useAuth } from '@shared/composables/support/auth'
+  import { useAuth } from '@shared/composables/api/auth'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
 
   const { user } = useAuth()

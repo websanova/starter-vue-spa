@@ -1,4 +1,4 @@
-import { useAuth } from '@shared/composables/support/auth'
+import { useAuth } from '@shared/composables/api/auth'
 import { useSettings } from '@shared/composables/support/settings'
 
 /**

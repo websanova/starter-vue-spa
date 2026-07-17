@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
-  import { useAuth } from '@shared/composables/support/auth'
+  import { useAuth } from '@shared/composables/api/auth'
   import { useFormMutation } from '@shared/composables/support/useFormMutation'
   import { AuthRules } from '@shared/rules/auth'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'

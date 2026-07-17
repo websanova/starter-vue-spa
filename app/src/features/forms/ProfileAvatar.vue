@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useAuth } from '@shared/composables/support/auth'
+  import { useAuth } from '@shared/composables/api/auth'
   import { useActionMutation } from '@shared/composables/support/useActionMutation'
   import { useFileUpload } from '@shared/composables/support/useFileUpload'
   import { useI18n } from '@shared/plugins/i18n'
