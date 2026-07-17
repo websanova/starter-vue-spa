@@ -22,11 +22,6 @@ interface RegisterOptions {
   autoLogin?: boolean
 }
 
-interface UpdateProfileData {
-  first_name: string
-  last_name: string
-}
-
 export const useAuth = function() {
   const store = useAuthStore()
 
@@ -45,11 +40,6 @@ export const useAuth = function() {
     }
 
     store.isReady = true
-  }
-
-  async function deleteAvatar() {
-    await useHttp().delete('avatar')
-    setAvatar(null)
   }
 
   async function fetchUser() {
@@ -90,37 +80,15 @@ export const useAuth = function() {
     }
   }
 
-  function setAvatar(url: string | null) {
-    if (store.user) {
-      store.user.avatarUrl = url
-    }
-  }
-
-  async function updateProfile(data: UpdateProfileData) {
-    const { data: dto } = await useHttp().patch<{ data: AuthDto }>('profile', data)
-    store.user = toAuth(dto)
-  }
-
-  async function uploadAvatar(file: File) {
-    const form = new FormData()
-    form.append('avatar', file)
-    const { data } = await useHttp().post<{ data: { avatar_url: string } }>('avatar', form)
-    setAvatar(data.avatar_url)
-  }
-
   return {
     isLoggedIn: computed(() => !!store.user),
     isReady: computed(() => store.isReady),
     user: computed(() => store.user),
     checkReady,
-    deleteAvatar,
     flush,
     login,
     logout,
     refreshToken,
     register,
-    setAvatar,
-    updateProfile,
-    uploadAvatar,
   }
 }

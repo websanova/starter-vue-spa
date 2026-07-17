@@ -2,12 +2,12 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { z } from 'zod'
 import { HttpError } from '@shared/plugins/http/client'
-import type { ZodRawShape } from 'zod'
+import type { ZodObject, ZodRawShape } from 'zod'
 
 interface Options<TShape extends ZodRawShape> {
   rules: TShape
   initial: Record<string, unknown>
-  onSubmit: (values: unknown) => Promise<unknown>
+  onSubmit: (values: z.infer<ZodObject<TShape>>) => Promise<unknown>
   reset?: boolean
 }
 
@@ -18,6 +18,8 @@ interface Options<TShape extends ZodRawShape> {
  * knows a URI. Pending comes from vee-validate, not a hand rolled ref.
  */
 export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TShape>) {
+  type TData = z.infer<ZodObject<TShape>>
+
   const { rules, initial, onSubmit, reset = false } = options
 
   const { handleSubmit, setErrors, resetForm, isSubmitting } = useForm({
@@ -27,7 +29,7 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
 
   const submit = handleSubmit(async (values) => {
     try {
-      await onSubmit(values)
+      await onSubmit(values as TData)
       if (reset) resetForm()
     } catch (err) {
       if (err instanceof HttpError && err.response.status === 422) {
