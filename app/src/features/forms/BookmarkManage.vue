@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { useBookmarkForm } from '@shared/features/bookmarks'
+  import { useBookmarkForm } from '@/composables/forms/bookmark'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
-  import type { Bookmark } from '@shared/features/bookmarks'
+  import type { Bookmark } from '@/models/bookmark'
 
   const props = defineProps<{
     bookmark?: Bookmark

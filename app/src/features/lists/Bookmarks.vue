@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useArchiveBookmark, useBookmarks, useDeleteBookmark } from '@shared/features/bookmarks'
+  import { useArchiveBookmark, useBookmarks, useDeleteBookmark } from '@/composables/api/bookmarks'
   import { Button } from '@shared/components/ui/button'
 
   const { data: bookmarks, isPending, error } = useBookmarks()

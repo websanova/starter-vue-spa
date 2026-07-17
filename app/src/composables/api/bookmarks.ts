@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
-import { toBookmark } from './model'
-import type { BookmarkDto, BookmarkInput } from './model'
+import { toBookmark } from '@/models/bookmark'
+import type { BookmarkDto, BookmarkInput } from '@/models/bookmark'
 
 const key = ['bookmarks']
 

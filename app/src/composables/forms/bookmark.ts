@@ -1,7 +1,7 @@
 import { useValidatedForm } from '@shared/composables/support/useValidatedForm'
-import { useCreateBookmark, useUpdateBookmark } from './api'
-import { BookmarkRules } from './rules'
-import type { Bookmark } from './model'
+import { useCreateBookmark, useUpdateBookmark } from '@/composables/api/bookmarks'
+import { BookmarkRules } from '@/rules/bookmark'
+import type { Bookmark } from '@/models/bookmark'
 
 export function useBookmarkForm(bookmark?: Bookmark) {
   const mutation = bookmark
