@@ -8,22 +8,22 @@
     orientation="vertical"
   >
     <NavItem :to="{ name: 'user-account-profile' }">
-      <UserIcon />
+      <UserIcon class="size-4" />
       {{ $t('features.lbl.profile') }}
     </NavItem>
 
     <NavItem :to="{ name: 'user-account-billing' }">
-      <CreditCardIcon />
+      <CreditCardIcon class="size-4" />
       {{ $t('features.lbl.billing') }}
     </NavItem>
 
     <NavItem :to="{ name: 'user-account-settings' }">
-      <SettingsIcon />
+      <SettingsIcon class="size-4" />
       {{ $t('features.lbl.settings') }}
     </NavItem>
 
     <NavItem :to="{ name: 'user-account-security' }">
-      <ShieldIcon />
+      <ShieldIcon class="size-4" />
       {{ $t('features.lbl.security') }}
     </NavItem>
   </Navbar>

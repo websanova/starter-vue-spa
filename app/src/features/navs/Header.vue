@@ -16,13 +16,13 @@
 </script>
 
 <template>
-  <Navbar icon-size="xl">
+  <Navbar>
     <NavDropdown
       align="end"
       class="sm:unhidden"
     >
       <template #trigger>
-        <BellIcon />
+        <BellIcon class="size-7" />
       </template>
       <!-- <DropdownMenuItem as-child>
         <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
@@ -43,7 +43,7 @@
       class="sm:unhidden"
     >
       <template #trigger>
-        <AccountAvatar class="size-6" />
+        <AccountAvatar class="size-8" />
       </template>
 
       <DropdownMenuItem as-child>
