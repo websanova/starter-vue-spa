@@ -2,7 +2,8 @@
   import { useAuth } from '@shared/composables/services/auth'
   import { useDeleteAvatar } from '@/composables/api/profile'
   import { useProfileAvatar } from '@/composables/forms/profile'
-  import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
+  // import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
+  import AccountAvatar from '@shared/features/avatars/Account.vue'
   import { Button } from '@shared/components/ui/button'
 
   const { user } = useAuth()
@@ -11,17 +12,14 @@
 </script>
 
 <template>
-  <div>
-    <Avatar>
-      <AvatarImage
-        v-if="user?.avatarUrl"
-        :src="user.avatarUrl"
-      />
+  <div
 
-      <AvatarFallback>
-        {{ user?.firstName?.charAt(0).toUpperCase() }}
-      </AvatarFallback>
-    </Avatar>
+  >
+    <div
+      class="mb-3"
+    >
+      <AccountAvatar class="size-16" />
+    </div>
 
     <Button
       :disabled="isPending"

@@ -43,7 +43,7 @@
       class="sm:unhidden"
     >
       <template #trigger>
-        <AccountAvatar />
+        <AccountAvatar class="size-6" />
       </template>
 
       <DropdownMenuItem as-child>
