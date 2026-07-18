@@ -2,11 +2,10 @@
   import { useAuth } from '@shared/composables/services/auth'
   import { useDeleteAvatar } from '@/composables/api/profile'
   import { useProfileAvatar } from '@/composables/forms/profile'
-  // import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
+  import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form } from '@shared/components/common/Form'
   import { Inline } from '@shared/components/common/Inline'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
-  import { Button } from '@shared/components/ui/button'
 
   const { user } = useAuth()
   const { open, isPending, error, sizeLabel, formatsLabel } = useProfileAvatar()
@@ -24,22 +23,24 @@
     </div>
 
     <Inline>
-      <Button
-        :disabled="isPending"
+      <ButtonLoading
+        :pending="isPending"
+        :disabled="isRemoving"
         @click="open()"
       >
         {{ $t('features.lbl.upload') }}
-      </Button>
+      </ButtonLoading>
 
-      <Button
+      <ButtonLoading
         v-if="user?.isAvatar"
         variant="outline"
         color="destructive"
-        :disabled="isRemoving"
+        :pending="isRemoving"
+        :disabled="isPending"
         @click="remove()"
       >
         {{ $t('features.lbl.remove') }}
-      </Button>
+      </ButtonLoading>
     </Inline>
   </Form>
 </template>
