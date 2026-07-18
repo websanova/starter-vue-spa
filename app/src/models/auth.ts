@@ -13,9 +13,11 @@ export interface Auth {
   email: string
   firstName: string
   id: number
-  isVerified: boolean
   lastName: string
   role?: string
+  verifiedAt: string | null
+  readonly isAvatar: boolean
+  readonly isVerified: boolean
 }
 
 export function toAuth(dto: AuthDto): Auth {
@@ -24,8 +26,10 @@ export function toAuth(dto: AuthDto): Auth {
     email: dto.email,
     firstName: dto.first_name,
     id: dto.id,
-    isVerified: dto.email_verified_at !== null,
     lastName: dto.last_name,
     role: dto.role,
+    verifiedAt: dto.email_verified_at,
+    get isAvatar() { return this.avatarUrl !== null },
+    get isVerified() { return this.verifiedAt !== null },
   }
 }

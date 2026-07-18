@@ -9,9 +9,9 @@ export const formVariants = cva(
   {
     variants: {
       size: {
-        sm: "max-w-[10rem]",
-        md: "max-w-[20rem]",
-        lg: "max-w-[30rem]",
+        sm: "sm:max-w-[20rem]",
+        md: "sm:max-w-[25rem]",
+        lg: "sm:max-w-[30rem]",
         full: "max-w-full"
       }
     },

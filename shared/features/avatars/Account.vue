@@ -7,10 +7,7 @@
 
 <template>
   <Avatar>
-    <AvatarImage
-      v-if="user?.avatarUrl"
-      :src="user.avatarUrl"
-    />
+    <AvatarImage :src="user?.avatarUrl ?? ''" />
 
     <AvatarFallback>
       {{ user?.firstName?.charAt(0).toUpperCase() }}
