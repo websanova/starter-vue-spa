@@ -9,7 +9,7 @@
   import { Button } from '@shared/components/ui/button'
 
   const { user } = useAuth()
-  const { open, isPending, error } = useProfileAvatar()
+  const { open, isPending, error, sizeLabel, formatsLabel } = useProfileAvatar()
   const { mutate: remove, isPending: isRemoving } = useDeleteAvatar()
 </script>
 
@@ -19,7 +19,7 @@
       <AccountAvatar class="size-16 text-2xl shrink-0" />
 
       <p class="flex-1 min-w-0 text-sm text-muted-foreground">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        {{ $t('features.form.avatar.hint', [sizeLabel, formatsLabel]) }}
       </p>
     </div>
 

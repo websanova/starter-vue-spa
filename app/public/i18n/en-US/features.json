@@ -54,9 +54,10 @@
   },
   "form": {
     "avatar": {
-      "invalid_type": "Please choose a {types} image.",
-      "too_large": "Image must be smaller than {size}.",
-      "failed": "Could not upload avatar. Please try again.",
+      "error_failed": "Could not upload avatar. Please try again.",
+      "error_invalid_type": "Please choose a {0} image.",
+      "error_too_large": "Image must be smaller than {0}.",
+      "note": "Image must be a maximum of {0} and of the following formats: {1}.",
       "toast": "Avatar updated"
     },
     "login": {

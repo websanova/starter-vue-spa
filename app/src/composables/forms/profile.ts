@@ -27,16 +27,22 @@ export function useProfileAvatar() {
   const i18n = useI18n()
   const upload = useUploadAvatar()
   const maxSize = 2 * 1024 * 1024
+  const sizeLabel = i18n.t('site.units.mb', [byteToMb(maxSize)])
+  const formatsLabel = 'png, jpg/jpeg, webp'
 
-  return useFileUpload({
-    accept: 'image/png,image/jpeg,image/webp',
-    maxSize,
-    field: 'avatar',
-    messages: {
-      invalidType: () => i18n.t('features.form.avatar.invalid_type', { types: 'png, jpg, webp' }),
-      tooLarge: () => i18n.t('features.form.avatar.too_large', { size: i18n.t('site.units.mb', [byteToMb(maxSize)]) }),
-      failed: () => i18n.t('features.form.avatar.failed'),
-    },
-    onSubmit: upload.mutateAsync,
-  })
+  return {
+    ...useFileUpload({
+      accept: 'image/png,image/jpeg,image/webp',
+      maxSize,
+      field: 'avatar',
+      messages: {
+        failed: () => i18n.t('features.form.avatar.error_failed'),
+        invalidType: () => i18n.t('features.form.avatar.error_invalid_type', [formatsLabel]),
+        tooLarge: () => i18n.t('features.form.avatar.error_too_large', [sizeLabel]),
+      },
+      onSubmit: upload.mutateAsync,
+    }),
+    sizeLabel,
+    formatsLabel,
+  }
 }
