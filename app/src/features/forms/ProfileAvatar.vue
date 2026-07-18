@@ -19,7 +19,7 @@
       <AccountAvatar class="size-16 text-2xl shrink-0" />
 
       <p class="flex-1 min-w-0 text-sm text-muted-foreground">
-        {{ $t('features.form.avatar.hint', [sizeLabel, formatsLabel]) }}
+        {{ $t('features.form.avatar.note', [sizeLabel, formatsLabel]) }}
       </p>
     </div>
 
