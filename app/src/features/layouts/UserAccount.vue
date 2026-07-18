@@ -13,7 +13,7 @@
       <AccountNav />
     </LayoutBodyAside>
 
-    <LayoutBodyContent>
+    <LayoutBodyContent class="pb-15">
       <RouterView v-slot="{ Component }" >
         <PageTransition>
           <component :is="Component" />

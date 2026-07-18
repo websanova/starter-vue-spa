@@ -46,7 +46,10 @@
       side="right"
     />
 
-    <LayoutBody size="full">
+    <LayoutBody
+       class="pb-15"
+       size="full"
+      >
       <LayoutBodyAside
         class="sm:unhidden"
         side="left"

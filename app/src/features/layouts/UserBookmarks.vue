@@ -26,7 +26,7 @@
       <BookmarksNav />
     </LayoutBodyAside>
 
-    <LayoutBodyContent>
+    <LayoutBodyContent class="pb-15">
       <h1 class="my-3">Folder One</h1>
 
       <RouterView v-slot="{ Component }" >
