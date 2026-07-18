@@ -47,7 +47,7 @@ export const navItemVariants = cva(
     variants: {
       orientation: {
         horizontal: "h-full",
-        vertical: "w-full px-2 py-1 hover:bg-accent [&.router-link-exact-active]:bg-accent"
+        vertical: "w-full px-2 py-1 rounded-sm hover:bg-accent [&.router-link-exact-active]:bg-accent"
       },
       iconSize: {
         sm: "[&>svg]:size-3",
