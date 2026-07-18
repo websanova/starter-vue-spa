@@ -31,5 +31,7 @@
       "user-subscribe-plans": "Plans"
     }
   },
-  "units": {}
+  "units": {
+    "mb": "{0}MB"
+  }
 }

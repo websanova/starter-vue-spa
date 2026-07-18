@@ -30,5 +30,7 @@
       "user-users-show-info": "User Info"
     }
   },
-  "units": {}
+  "units": {
+    "mb": "{0}MB"
+  }
 }

@@ -52,8 +52,8 @@
   },
   "form": {
     "avatar": {
-      "invalid_type": "Please choose a PNG, JPG, or WEBP image.",
-      "too_large": "Image must be smaller than 2MB.",
+      "invalid_type": "Please choose a {types} image.",
+      "too_large": "Image must be smaller than {size}.",
       "failed": "Could not upload avatar. Please try again.",
       "toast": "Avatar updated"
     },
