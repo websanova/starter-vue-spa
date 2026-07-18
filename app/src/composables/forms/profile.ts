@@ -1,3 +1,4 @@
+import { useI18n } from '@shared/plugins/i18n'
 import { useFileUpload } from '@shared/composables/primitives/useFileUpload'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
@@ -22,12 +23,18 @@ export function useProfileForm() {
 }
 
 export function useProfileAvatar() {
+  const i18n = useI18n()
   const upload = useUploadAvatar()
 
   return useFileUpload({
     accept: 'image/png,image/jpeg,image/webp',
     maxSize: 2 * 1024 * 1024,
-    i18nKey: 'features.form.avatar',
+    field: 'avatar',
+    messages: {
+      invalidType: () => i18n.t('features.form.avatar.invalid_type'),
+      tooLarge: () => i18n.t('features.form.avatar.too_large'),
+      failed: () => i18n.t('features.form.avatar.failed'),
+    },
     onSubmit: upload.mutateAsync,
   })
 }

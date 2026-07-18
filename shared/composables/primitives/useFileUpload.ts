@@ -1,12 +1,16 @@
 import { ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
-import { useI18n } from '@shared/plugins/i18n'
-import { validationMessage } from '@shared/lib/validationMessage'
+import { HttpError } from '@shared/plugins/http/client'
 
 interface Options {
   accept: string
   maxSize: number
-  i18nKey?: string
+  field?: string
+  messages: {
+    invalidType: () => string
+    tooLarge: () => string
+    failed: () => string
+  }
   onSubmit: (file: File) => Promise<unknown>
   onSuccess?: () => void
 }
@@ -15,14 +19,13 @@ interface Options {
  * Reusable single file upload. Opens the file dialog, validates the
  * picked file against accept and maxSize, hands it to onSubmit for the
  * upload, and exposes pending and error state for the view to render.
- * All messages resolve from the i18nKey namespace.
  *
- * Expects these keys under i18nKey: invalid_type, too_large, failed.
+ * The caller supplies messages for the client side rejections and the
+ * upload failure fallback. A server 422 message for field wins over
+ * the failed fallback when present.
  */
 export function useFileUpload(options: Options) {
-  const { accept, maxSize, i18nKey = 'features.form.upload', onSubmit, onSuccess } = options
-
-  const i18n = useI18n()
+  const { accept, maxSize, field = 'file', messages, onSubmit, onSuccess } = options
 
   const isPending = ref(false)
   const error = ref<string | null>(null)
@@ -38,13 +41,13 @@ export function useFileUpload(options: Options) {
     error.value = null
 
     if (!matchesAccept(file, accept)) {
-      error.value = i18n.t(`${i18nKey}.invalid_type`)
+      error.value = messages.invalidType()
       reset()
       return
     }
 
     if (file.size > maxSize) {
-      error.value = i18n.t(`${i18nKey}.too_large`)
+      error.value = messages.tooLarge()
       reset()
       return
     }
@@ -55,7 +58,11 @@ export function useFileUpload(options: Options) {
       await onSubmit(file)
       onSuccess?.()
     } catch (err) {
-      error.value = validationMessage(err) ?? i18n.t(`${i18nKey}.failed`)
+      let message: string | undefined
+      if (err instanceof HttpError && err.response.status === 422) {
+        message = (err.response.data as { errors: Record<string, string[]> }).errors[field]?.[0]
+      }
+      error.value = message ?? messages.failed()
     } finally {
       isPending.value = false
       reset()
