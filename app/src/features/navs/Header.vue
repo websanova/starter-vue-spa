@@ -43,7 +43,7 @@
       class="sm:unhidden"
     >
       <template #trigger>
-        <AccountAvatar class="size-8" />
+        <AccountAvatar class="size-7" />
       </template>
 
       <DropdownMenuItem as-child>
@@ -78,7 +78,7 @@
       class="sm:hidden"
       @click="emit('account')"
     >
-      <AccountAvatar />
+      <AccountAvatar class="size-7" />
     </NavItem>
   </Navbar>
 </template>

@@ -15,13 +15,13 @@
 </script>
 
 <template>
-  <Navbar icon-size="xl">
+  <Navbar>
     <NavDropdown
       align="end"
       class="sm:unhidden"
     >
       <template #trigger>
-        <AccountAvatar />
+        <AccountAvatar class="size-7" />
       </template>
 
       <DropdownMenuItem @select="toggle">
@@ -40,7 +40,7 @@
       class="sm:hidden"
       @click="emit('account')"
     >
-      <AccountAvatar />
+      <AccountAvatar class="size-7" />
     </NavItem>
   </Navbar>
 </template>
