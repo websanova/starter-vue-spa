@@ -6,7 +6,7 @@ import type { ZodObject, ZodRawShape, ZodTypeAny } from 'zod'
 
 interface Options<TShape extends ZodRawShape> {
   rules: TShape
-  initial: Record<string, unknown>
+  initial: z.infer<ZodObject<TShape>>
   onSubmit: (values: z.infer<ZodObject<TShape>>) => Promise<unknown>
   onSuccess?: () => void
   refine?: (schema: ZodObject<TShape>) => ZodTypeAny
@@ -26,19 +26,19 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
 
   const baseSchema = z.object(rules)
 
-  const { handleSubmit, setErrors, resetForm, isSubmitting } = useForm({
+  const { handleSubmit, setErrors, resetForm, isSubmitting } = useForm<TData>({
     validationSchema: toTypedSchema(refine ? refine(baseSchema) : baseSchema),
-    initialValues: initial,
+    initialValues: initial as never
   })
 
   const submit = handleSubmit(async (values) => {
     try {
-      await onSubmit(values as TData)
+      await onSubmit(values)
       if (reset) resetForm()
       onSuccess?.()
     } catch (err) {
       if (err instanceof HttpError && err.response.status === 422) {
-        setErrors((err.response.data as { errors: Record<string, string[]> }).errors)
+        setErrors((err.response.data as { errors: Parameters<typeof setErrors>[0] }).errors)
         return
       }
       throw err
