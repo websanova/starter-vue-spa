@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import RegisterForm from '@/features/forms/Register.vue'
+  import AuthRegisterForm from '@/features/forms/AuthRegister.vue'
   import { Heading } from '@shared/components/common/Heading'
 </script>
 
@@ -14,6 +14,6 @@
       {{ $t('features.lbl.sign_up') }}
     </Heading>
 
-    <RegisterForm />
+    <AuthRegisterForm />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LoginForm from '@/features/forms/Login.vue'
+  import AuthLoginForm from '@/features/forms/AuthLogin.vue'
   import { Heading } from '@shared/components/common/Heading'
 </script>
 
@@ -14,6 +14,6 @@
       {{ $t('features.lbl.sign_in') }}
     </Heading>
 
-    <LoginForm />
+    <AuthLoginForm />
   </div>
 </template>
