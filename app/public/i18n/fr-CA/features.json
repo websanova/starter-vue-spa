@@ -1,0 +1,87 @@
+{
+  "lbl": {
+    "account": "Compte",
+    "all": "Tout",
+    "avatar": "Avatar",
+    "billing": "Facturation",
+    "bookmarks": "Signets",
+    "cancel": "Annuler",
+    "create": "Créer",
+    "dark_mode": "Mode sombre",
+    "delete": "Supprimer",
+    "email": "Courriel",
+    "first_name": "Prénom",
+    "info": "Renseignements",
+    "language": "Langue",
+    "last_name": "Nom",
+    "light_mode": "Mode clair",
+    "locale": "Paramètres régionaux",
+    "mark_all_read": "Tout marquer comme lu",
+    "name": "Nom",
+    "optional": "Facultatif",
+    "password": "Mot de passe",
+    "password_confirmation": "Confirmer le mot de passe",
+    "profile": "Profil",
+    "refresh": "Actualiser",
+    "remove": "Retirer",
+    "security": "Sécurité",
+    "settings": "Paramètres",
+    "sign_in": "Se connecter",
+    "sign_out": "Se déconnecter",
+    "sign_up": "S'inscrire",
+    "timezone": "Fuseau horaire",
+    "update": "Mettre à jour",
+    "upload": "Téléverser"
+  },
+  "sr": {
+    "menu_bookmarks": "Menu des signets",
+    "menu_account": "Menu du compte",
+    "menu_notifications": "Menu des notifications",
+    "dark_mode_toggle": "Basculer le mode sombre"
+  },
+  "ph": {
+    "email": "vous{'@'}exemple.com",
+    "first_name": "Votre prénom",
+    "language": "Sélectionnez une langue",
+    "last_name": "Votre nom",
+    "name": "Votre nom",
+    "password": "Mot de passe",
+    "password_confirmation": "Confirmer le mot de passe",
+    "timezone": "Sélectionnez un fuseau horaire"
+  },
+  "tz": {
+    "new_york": "Est (New York)",
+    "chicago": "Centre (Chicago)",
+    "denver": "Rocheuses (Denver)",
+    "los_angeles": "Pacifique (Los Angeles)",
+    "london": "Londres (GMT)"
+  },
+  "cover": {
+    "maintenance": {
+      "message": "L'application est en maintenance.<br>Nous serons de retour sous peu."
+    },
+    "update": {
+      "message": "L'application a été mise à jour."
+    }
+  },
+  "form": {
+    "avatar": {
+      "error_failed": "Impossible de téléverser l'avatar. Veuillez réessayer.",
+      "error_invalid_type": "Veuillez choisir une image {0}.",
+      "error_too_large": "L'image doit être inférieure à {0}.",
+      "note": "L'image doit avoir une taille maximale de {0} et être dans l'un des formats suivants : {1}.",
+      "toast": "Avatar mis à jour"
+    },
+    "login": {
+      "loading": "Connexion en cours...",
+      "prompt": "Pas encore membre?"
+    },
+    "register": {
+      "loading": "Inscription en cours...",
+      "prompt": "Déjà membre?"
+    },
+    "profile": {
+      "toast": "Profil enregistré"
+    }
+  }
+}

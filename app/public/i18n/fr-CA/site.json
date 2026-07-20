@@ -1,0 +1,40 @@
+{
+  "name": "Starter",
+  "locale": {
+    "en-US": "Anglais (États-Unis)"
+  },
+  "common": {
+    "loading": {
+      "text": "Chargement..."
+    }
+  },
+  "error": {
+    "403": {
+      "title": "403",
+      "message": "Interdit"
+    },
+    "404": {
+      "title": "404",
+      "message": "Introuvable"
+    }
+  },
+  "meta": {
+    "title": {
+      "auth-login": "Connexion",
+      "auth-register": "Inscription",
+      "error-403": "403 Interdit",
+      "error-404": "404 Introuvable",
+      "user-account-billing": "Facturation",
+      "user-account-profile": "Profil",
+      "user-account-security": "Sécurité",
+      "user-account-settings": "Paramètres",
+      "user-bookmarks": "Signets",
+      "user-subscribe-cancel": "Désabonnement",
+      "user-subscribe-checkout": "Abonnement",
+      "user-subscribe-plans": "Forfaits"
+    }
+  },
+  "units": {
+    "mb": "{0} Mo"
+  }
+}

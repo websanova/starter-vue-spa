@@ -1,12 +1,14 @@
 import type { App } from 'vue'
 
 import { createI18n as createVueI18n } from 'vue-i18n'
+import { settings } from '@/config/settings'
 import datetimeFormats from './datetimeFormats'
 import numberFormats from './numberFormats'
 
 function buildI18n() {
   return createVueI18n({
     datetimeFormats,
+    fallbackLocale: settings.defaultLocale!,
     legacy: false,
     numberFormats,
   })

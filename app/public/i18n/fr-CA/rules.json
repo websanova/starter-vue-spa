@@ -1,0 +1,22 @@
+{
+  "attr": {
+    "email": "Courriel",
+    "first_name": "Prénom",
+    "language": "Langue",
+    "last_name": "Nom",
+    "name": "Nom",
+    "password": "Mot de passe",
+    "timezone": "Fuseau horaire"
+  },
+  "confirmed": "La confirmation du champ {attribute} ne correspond pas.",
+  "email": "Le champ {attribute} doit être une adresse courriel valide.",
+  "max": {
+    "numeric": "Le champ {attribute} ne doit pas être supérieur à {max}.",
+    "string": "Le champ {attribute} ne doit pas dépasser {max} caractères."
+  },
+  "min": {
+    "numeric": "Le champ {attribute} doit être au moins {min}.",
+    "string": "Le champ {attribute} doit comporter au moins {min} caractères."
+  },
+  "required": "Le champ {attribute} est obligatoire."
+}
