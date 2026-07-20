@@ -1,11 +1,11 @@
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
-import { useUpdateSettings } from '@/composables/api/profile'
+import { useUpdateProfile } from '@/composables/api/profile'
 
 export function useSettingsLocaleForm() {
   const store = useAuthStore()
-  const update = useUpdateSettings()
+  const update = useUpdateProfile()
 
   return useValidatedForm({
     rules: {

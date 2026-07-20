@@ -5,29 +5,16 @@ import { toAuth } from '@/models/auth'
 import type { AuthDto } from '@/models/auth'
 
 interface UpdateProfileData {
-  first_name: string
-  last_name: string
-}
-
-interface UpdateSettingsData {
-  locale: string
-  timezone: string
+  first_name?: string
+  last_name?: string
+  locale?: string
+  timezone?: string
 }
 
 export function useUpdateProfile() {
   const store = useAuthStore()
   return useMutation({
     mutationFn: (data: UpdateProfileData) => useHttp().patch<{ data: AuthDto }>('profile', data),
-    onSuccess: ({ data }) => {
-      store.user = toAuth(data)
-    },
-  })
-}
-
-export function useUpdateSettings() {
-  const store = useAuthStore()
-  return useMutation({
-    mutationFn: (data: UpdateSettingsData) => useHttp().patch<{ data: AuthDto }>('profile', data),
     onSuccess: ({ data }) => {
       store.user = toAuth(data)
     },
