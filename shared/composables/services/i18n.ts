@@ -76,6 +76,10 @@ export const useI18n = function() {
   }
 
   function switchLocale(locale: Locale) {
+    if (i18n.locale.value === locale) {
+      return
+    }
+
     const files: I18nFiles = {}
 
     tiers.forEach((tier) => {

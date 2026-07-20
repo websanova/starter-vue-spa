@@ -1,4 +1,3 @@
-import { settings as config } from '@/config/settings'
 import { useAuth } from '@shared/composables/services/auth'
 import { useI18n } from '@shared/composables/services/i18n'
 import { useSettings } from '@shared/composables/services/settings'
@@ -19,7 +18,7 @@ export async function beforeEach(): Promise<void> {
 
       const locale = auth.user.value?.locale
 
-      if (locale && locale !== config.defaultLocale) {
+      if (locale) {
         useI18n().switchLocale(locale as Locale)
       }
     })(),
