@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 
+import { settings } from '@/config/settings'
 import { useI18n as useI18nPlugin, type Locale } from '@shared/plugins/i18n'
 import { useI18nStore, type I18nTier } from '@shared/stores/i18n'
 
@@ -17,8 +18,8 @@ export const useI18n = function() {
   const store = useI18nStore()
   const i18n = useI18nPlugin()
 
-  function setLoaded(tier: I18nTier, locale: string) {
-    const loaded = Object.values(store.localesLoaded[tier][locale] || {})
+  function setLoaded(tier: I18nTier) {
+    const loaded = Object.values(store.localesLoaded[tier]).flatMap((files) => Object.values(files))
 
     if (loaded.every((isLoaded) => isLoaded)) {
       store[loadedKeys[tier]] = true
@@ -40,32 +41,36 @@ export const useI18n = function() {
       .then((data) => {
         i18n.mergeLocaleMessage(locale, { [name]: data })
         store.localesLoaded[tier][locale][name] = true
-        setLoaded(tier, locale)
+        setLoaded(tier)
       })
       .catch((err) => {
         console.error(`[i18n] Failed to load /i18n/${locale}/${name}.json`, err)
         store.localesLoaded[tier][locale][name] = true
-        setLoaded(tier, locale)
+        setLoaded(tier)
       })
   }
 
   function load(files: I18nFiles) {
     const locale = i18n.locale.value
+    const fallback = settings.defaultLocale!
+    const locales = locale === fallback ? [locale] : [fallback, locale]
 
     tiers.forEach((tier) => {
       const names = files[tier] || []
 
       if (!names.length) {
-        setLoaded(tier, locale)
+        setLoaded(tier)
         return
       }
 
       names.forEach((name) => {
-        if (store.localesLoaded[tier][locale]?.[name]) {
-          return
-        }
+        locales.forEach((loc) => {
+          if (store.localesLoaded[tier][loc]?.[name]) {
+            return
+          }
 
-        fetchFile(tier, locale, name)
+          fetchFile(tier, loc, name)
+        })
       })
     })
   }
