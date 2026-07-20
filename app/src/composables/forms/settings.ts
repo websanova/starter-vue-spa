@@ -1,3 +1,4 @@
+import { settings } from '@/config/settings'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
@@ -13,7 +14,7 @@ export function useSettingsLocaleForm() {
       timezone: UserRules.timezone(),
     },
     initial: {
-      locale: (store.user?.locale ?? 'en-US') as 'en-US' | 'en-CA',
+      locale: store.user?.locale ?? settings.defaultLocale!,
       timezone: (store.user?.timezone ?? 'America/New_York') as 'America/New_York' | 'America/Chicago' | 'America/Denver' | 'America/Los_Angeles' | 'Europe/London',
     },
     onSubmit: update.mutateAsync,

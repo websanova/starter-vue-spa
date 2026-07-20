@@ -1,5 +1,8 @@
 {
   "name": "Starter",
+  "locale": {
+    "en-US": "English (US)"
+  },
   "common": {
     "loading": {
       "text": "Loading..."

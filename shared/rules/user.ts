@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { settings } from '@/config/settings'
 import { useI18n } from '@shared/plugins/i18n'
 
 export const UserRules = {
@@ -21,7 +22,7 @@ export const UserRules = {
   locale() {
     const i18n = useI18n()
 
-    return z.enum(['en-US', 'en-CA'], {
+    return z.enum(settings.locales as [string, ...string[]], {
       message: i18n.t('rules.required', { attribute: i18n.t('rules.attr.language') }),
     })
   },

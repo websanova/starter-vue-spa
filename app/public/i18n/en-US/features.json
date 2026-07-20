@@ -49,10 +49,6 @@
     "password_confirmation": "Confirm password",
     "timezone": "Select a timezone"
   },
-  "lang": {
-    "en_us": "English (US)",
-    "en_ca": "English (Canada)"
-  },
   "tz": {
     "new_york": "Eastern (New York)",
     "chicago": "Central (Chicago)",

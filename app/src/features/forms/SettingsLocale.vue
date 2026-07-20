@@ -1,15 +1,13 @@
 <script setup lang="ts">
   import { useI18n } from '@shared/plugins/i18n'
+  import { useLocaleOptions } from '@shared/composables/support/useLocaleOptions'
   import { useSettingsLocaleForm } from '@/composables/forms/settings'
   import { Form, FormButton, FormInputSelect } from '@shared/components/common/Form'
 
   const i18n = useI18n()
   const { submit, isPending } = useSettingsLocaleForm()
 
-  const languages = [
-    { value: 'en-US', label: i18n.t('features.lang.en_us') },
-    { value: 'en-CA', label: i18n.t('features.lang.en_ca') },
-  ]
+  const languages = useLocaleOptions()
 
   const timezones = [
     { value: 'America/New_York', label: i18n.t('features.tz.new_york') },
