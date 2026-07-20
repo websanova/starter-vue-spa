@@ -1,12 +1,15 @@
 import { settings } from '@/config/settings'
+import { useI18n } from '@shared/composables/services/i18n'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
 import { useUpdateProfile } from '@/composables/api/profile'
+import type { Locale } from '@shared/plugins/i18n'
 
 export function useSettingsLocaleForm() {
   const store = useAuthStore()
   const update = useUpdateProfile()
+  const { switchLocale } = useI18n()
 
   return useValidatedForm({
     rules: {
@@ -18,5 +21,6 @@ export function useSettingsLocaleForm() {
       timezone: (store.user?.timezone ?? 'America/New_York') as 'America/New_York' | 'America/Chicago' | 'America/Denver' | 'America/Los_Angeles' | 'Europe/London',
     },
     onSubmit: update.mutateAsync,
+    onSuccess: (values) => switchLocale(values.locale as Locale),
   })
 }

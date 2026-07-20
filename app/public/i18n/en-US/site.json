@@ -1,7 +1,9 @@
 {
   "name": "Starter",
   "locale": {
-    "en-US": "English (US)"
+    "en-US": "English (US)",
+    "en-CA": "English (Canada)",
+    "fr-CA": "French (Canada)"
   },
   "common": {
     "loading": {

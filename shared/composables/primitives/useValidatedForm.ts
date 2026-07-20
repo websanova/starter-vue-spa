@@ -8,7 +8,7 @@ interface Options<TShape extends ZodRawShape> {
   rules: TShape
   initial: z.infer<ZodObject<TShape>>
   onSubmit: (values: z.infer<ZodObject<TShape>>) => Promise<unknown>
-  onSuccess?: () => void
+  onSuccess?: (values: z.infer<ZodObject<TShape>>) => void
   refine?: (schema: ZodObject<TShape>) => ZodTypeAny
   reset?: boolean
 }
@@ -35,7 +35,7 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
     try {
       await onSubmit(values)
       if (reset) resetForm()
-      onSuccess?.()
+      onSuccess?.(values)
     } catch (err) {
       if (err instanceof HttpError && err.response.status === 422) {
         setErrors((err.response.data as { errors: Parameters<typeof setErrors>[0] }).errors)

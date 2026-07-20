@@ -1,12 +1,11 @@
 <script setup lang="ts">
-  import { useI18n } from '@shared/plugins/i18n'
   import { useLocaleOptions } from '@shared/composables/support/useLocaleOptions'
+  import { useI18n } from '@shared/plugins/i18n'
   import { useSettingsLocaleForm } from '@/composables/forms/settings'
   import { Form, FormButton, FormInputSelect } from '@shared/components/common/Form'
 
   const i18n = useI18n()
   const { submit, isPending } = useSettingsLocaleForm()
-
   const languages = useLocaleOptions()
 
   const timezones = [
