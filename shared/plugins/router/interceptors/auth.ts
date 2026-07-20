@@ -1,4 +1,4 @@
-import { useAuth } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/auth'
 import type { RouteLocationNormalized, RouteLocationRaw, RouteMeta } from 'vue-router'
 
 declare module 'vue-router' {
@@ -18,7 +18,7 @@ declare module 'vue-router' {
  * requires the user role to be listed and redirects otherwise.
  */
 export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | undefined {
-  const auth = useAuth()
+  const auth = useAuthService()
 
   let meta: RouteMeta['auth'] | undefined
 

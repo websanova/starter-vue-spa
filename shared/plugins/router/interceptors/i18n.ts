@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized } from "vue-router"
-import { useI18n } from "@shared/composables/services/i18n"
+import { useI18nService } from "@shared/composables/services/i18n"
 import type { I18nTier } from "@shared/stores/i18n"
 
 declare module "vue-router" {
@@ -13,7 +13,7 @@ declare module "vue-router" {
  * route, then hands the merged set to i18n.load for fetching.
  */
 export function beforeEach(to: RouteLocationNormalized): void {
-  const i18n = useI18n()
+  const i18n = useI18nService()
 
   const files: Partial<Record<I18nTier, string[]>> = { layout: [], page: [], site: [] }
 

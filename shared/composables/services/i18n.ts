@@ -14,7 +14,7 @@ const loadedKeys: Record<I18nTier, 'isLayoutLoaded' | 'isPageLoaded' | 'isSiteLo
   site: 'isSiteLoaded',
 }
 
-export const useI18n = function() {
+export const useI18nService = function() {
   const store = useI18nStore()
   const i18n = useI18nPlugin()
 

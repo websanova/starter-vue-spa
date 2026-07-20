@@ -1,5 +1,5 @@
-import { useAuth } from '@shared/composables/services/auth'
-import { useSettings } from '@shared/composables/services/settings'
+import { useAuthService } from '@shared/composables/services/auth'
+import { useSettingsService } from '@shared/composables/services/settings'
 
 /**
  * Ready gate. Resolves app critical state before any downstream guard
@@ -7,8 +7,8 @@ import { useSettings } from '@shared/composables/services/settings'
  * the flag checks make every navigation after the first a no-op.
  */
 export async function beforeEach(): Promise<void> {
-  const auth = useAuth()
-  const settings = useSettings()
+  const auth = useAuthService()
+  const settings = useSettingsService()
 
   await Promise.all([
     auth.isReady.value ? undefined : auth.checkReady(),

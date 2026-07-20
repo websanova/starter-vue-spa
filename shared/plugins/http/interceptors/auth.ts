@@ -1,4 +1,4 @@
-import { useAuth } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/auth'
 import { getToken } from '@shared/lib/authToken'
 import { HttpError } from '@shared/plugins/http/client'
 import { useRouter } from '@shared/plugins/router'
@@ -23,7 +23,7 @@ export const request: RequestInterceptor = (config) => {
  */
 export const responseError: ResponseError = (err) => {
   if (err instanceof HttpError && err.response.status === 401) {
-    useAuth().flush()
+    useAuthService().flush()
     useRouter().replace({ name: 'auth-login' })
   }
 

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/vue-query'
-import { useAuth } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/auth'
 import { useHttp } from '@shared/plugins/http'
 
 export interface RegisterData {
@@ -10,7 +10,7 @@ export interface RegisterData {
 }
 
 export function useRegister() {
-  const { startSession } = useAuth()
+  const { startSession } = useAuthService()
   return useMutation({
     mutationFn: async (data: RegisterData) => {
       const { token } = await useHttp().post<{ token: string }>('register', data)

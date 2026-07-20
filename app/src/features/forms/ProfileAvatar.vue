@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useAuth } from '@shared/composables/services/auth'
+  import { useAuthService } from '@shared/composables/services/auth'
   import { useDeleteAvatar } from '@/composables/api/profile'
   import { useProfileAvatar } from '@/composables/forms/profile'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
@@ -7,7 +7,7 @@
   import { Inline } from '@shared/components/common/Inline'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
 
-  const { user } = useAuth()
+  const { user } = useAuthService()
   const { open, isPending, error, sizeLabel, formatsLabel } = useProfileAvatar()
   const { mutate: remove, isPending: isRemoving } = useDeleteAvatar()
 </script>

@@ -6,7 +6,7 @@ import { useHttp } from '@shared/plugins/http'
 import { useSettingsStore } from '@shared/stores/settings'
 import type { Settings } from '@shared/config/settings'
 
-export const useSettings = function() {
+export const useSettingsService = function() {
   const store = useSettingsStore()
 
   async function load() {

@@ -1,5 +1,5 @@
 import { settings } from '@/config/settings'
-import { useI18n } from '@shared/composables/services/i18n'
+import { useI18nService } from '@shared/composables/services/i18n'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
@@ -9,7 +9,7 @@ import type { Locale } from '@shared/plugins/i18n'
 export function useSettingsLocaleForm() {
   const store = useAuthStore()
   const update = useUpdateProfile()
-  const { switchLocale } = useI18n()
+  const { switchLocale } = useI18nService()
 
   return useValidatedForm({
     rules: {

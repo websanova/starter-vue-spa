@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 
-import { useI18n } from '@shared/composables/services/i18n'
+import { useI18nService } from '@shared/composables/services/i18n'
 import { useHttp } from '@shared/plugins/http'
 import { useAuthStore } from '@shared/stores/auth'
 import { toAuth } from '@/models/auth'
@@ -8,7 +8,7 @@ import { deleteToken, getToken, setToken } from '@shared/lib/authToken'
 import type { AuthDto } from '@/models/auth'
 import type { Locale } from '@shared/plugins/i18n'
 
-export const useAuth = function() {
+export const useAuthService = function() {
   const store = useAuthStore()
 
   async function checkReady() {
@@ -31,7 +31,7 @@ export const useAuth = function() {
   async function fetchUser() {
     const { data } = await useHttp().get<{ data: AuthDto }>('profile')
     store.user = toAuth(data)
-    useI18n().switchLocale(store.user.locale as Locale)
+    useI18nService().switchLocale(store.user.locale as Locale)
   }
 
   function flush() {

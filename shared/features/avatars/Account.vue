@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { useAuth } from '@shared/composables/services/auth'
+  import { useAuthService } from '@shared/composables/services/auth'
   import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
 
-  const { user } = useAuth()
+  const { user } = useAuthService()
 </script>
 
 <template>
