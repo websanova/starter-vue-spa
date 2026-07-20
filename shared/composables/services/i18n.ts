@@ -65,7 +65,7 @@ export const useI18n = function() {
 
       names.forEach((name) => {
         locales.forEach((loc) => {
-          if (store.localesLoaded[tier][loc]?.[name]) {
+          if (store.localesLoaded[tier][loc]?.[name] !== undefined) {
             return
           }
 

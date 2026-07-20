@@ -2,9 +2,9 @@
   import { computed } from 'vue'
 
   import { useAppStore } from '@shared/stores/app'
+  import { useAuthStore } from '@shared/stores/auth'
   import { useContentStore } from '@shared/stores/content'
   import { useI18nStore } from '@shared/stores/i18n'
-  // import {useAuthStore} from '@shared/stores/core/useAuthStore'
   // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
@@ -12,14 +12,14 @@
   import UpdateCover from '@shared/features/covers/Update.vue'
 
   const app = useAppStore()
-  // const auth = useAuthStore()
+  const auth = useAuthStore()
   const content = useContentStore()
   const i18n = useI18nStore()
   // const settings = useSettingsStore()
 
   const isSiteLoaded = computed(() => {
       return (
-          // auth.isReady &&
+          auth.isReady &&
           content.isSiteLoaded &&
           i18n.isSiteLoaded
           // && settings.isLoaded

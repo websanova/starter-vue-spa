@@ -1,5 +1,8 @@
+import { settings as config } from '@/config/settings'
 import { useAuth } from '@shared/composables/services/auth'
+import { useI18n } from '@shared/composables/services/i18n'
 import { useSettings } from '@shared/composables/services/settings'
+import type { Locale } from '@shared/plugins/i18n'
 
 /**
  * Ready gate. Resolves app critical state before any downstream guard
@@ -11,7 +14,15 @@ export async function beforeEach(): Promise<void> {
   const settings = useSettings()
 
   await Promise.all([
-    auth.isReady.value ? undefined : auth.checkReady(),
+    (async () => {
+      if (!auth.isReady.value) await auth.checkReady()
+
+      const locale = auth.user.value?.locale
+
+      if (locale && locale !== config.defaultLocale) {
+        useI18n().switchLocale(locale as Locale)
+      }
+    })(),
     settings.isLoaded.value ? undefined : settings.load(),
   ])
 }
