@@ -5,7 +5,7 @@
   import { useAuthStore } from '@shared/stores/auth'
   import { useContentStore } from '@shared/stores/content'
   import { useI18nStore } from '@shared/stores/i18n'
-  // import {useSettingsStore} from '@shared/stores/core/useSettingsStore'
+  import { useSettingsStore } from '@shared/stores/settings'
 
   import { CoverLoading } from '@shared/components/common/CoverLoading'
   import MaintenanceCover from '@shared/features/covers/Maintenance.vue'
@@ -15,14 +15,14 @@
   const auth = useAuthStore()
   const content = useContentStore()
   const i18n = useI18nStore()
-  // const settings = useSettingsStore()
+  const settings = useSettingsStore()
 
   const isSiteLoaded = computed(() => {
       return (
           auth.isReady &&
           content.isSiteLoaded &&
-          i18n.isSiteLoaded
-          // && settings.isLoaded
+          i18n.isSiteLoaded &&
+          settings.isLoaded
       )
   })
 </script>
