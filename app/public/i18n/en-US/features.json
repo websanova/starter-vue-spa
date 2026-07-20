@@ -12,8 +12,10 @@
     "email": "Email",
     "first_name": "First Name",
     "info": "Info",
+    "language": "Language",
     "last_name": "Last Name",
     "light_mode": "Light mode",
+    "locale": "Locale",
     "mark_all_read": "Mark all read",
     "name": "Name",
     "optional": "Optional",
@@ -27,6 +29,7 @@
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "sign_up": "Sign up",
+    "timezone": "Timezone",
     "update": "Update",
     "upload": "Upload"
   },
@@ -39,10 +42,23 @@
   "ph": {
     "email": "you{'@'}example.com",
     "first_name": "Your first name",
+    "language": "Select a language",
     "last_name": "Your last name",
     "name": "Your name",
     "password": "Password",
-    "password_confirmation": "Confirm password"
+    "password_confirmation": "Confirm password",
+    "timezone": "Select a timezone"
+  },
+  "lang": {
+    "en_us": "English (US)",
+    "en_ca": "English (Canada)"
+  },
+  "tz": {
+    "new_york": "Eastern (New York)",
+    "chicago": "Central (Chicago)",
+    "denver": "Mountain (Denver)",
+    "los_angeles": "Pacific (Los Angeles)",
+    "london": "London (GMT)"
   },
   "cover": {
     "maintenance": {

@@ -9,10 +9,25 @@ interface UpdateProfileData {
   last_name: string
 }
 
+interface UpdateSettingsData {
+  locale: string
+  timezone: string
+}
+
 export function useUpdateProfile() {
   const store = useAuthStore()
   return useMutation({
     mutationFn: (data: UpdateProfileData) => useHttp().patch<{ data: AuthDto }>('profile', data),
+    onSuccess: ({ data }) => {
+      store.user = toAuth(data)
+    },
+  })
+}
+
+export function useUpdateSettings() {
+  const store = useAuthStore()
+  return useMutation({
+    mutationFn: (data: UpdateSettingsData) => useHttp().patch<{ data: AuthDto }>('profile', data),
     onSuccess: ({ data }) => {
       store.user = toAuth(data)
     },

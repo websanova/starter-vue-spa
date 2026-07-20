@@ -2,9 +2,11 @@
   "attr": {
     "email": "Email",
     "first_name": "First Name",
+    "language": "Language",
     "last_name": "Last Name",
     "name": "Name",
-    "password": "Password"
+    "password": "Password",
+    "timezone": "Timezone"
   },
   "confirmed": "The {attribute} confirmation does not match.",
   "email": "The {attribute} field must be a valid email address.",

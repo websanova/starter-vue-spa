@@ -1,12 +1,17 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
-
-  // TODO: Timezone
-  // TODO: Language
+  import { Stack } from '@shared/components/common/Stack'
+  import SettingsLocaleForm from '@/features/forms/SettingsLocale.vue'
 </script>
 
 <template>
-  <Heading>
-    Account Settings
-  </Heading>
+  <Stack>
+    <section>
+      <Heading>
+        {{ $t('features.lbl.locale') }}
+      </Heading>
+
+      <SettingsLocaleForm />
+    </section>
+  </Stack>
 </template>
