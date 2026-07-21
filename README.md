@@ -21,10 +21,10 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Only the part of the page that actually changed re-transitions
 - One shared loading mechanism instead of scattered spinners
 
-**i18n**
-- Translations loaded per page, only what's needed
-- Pages wait for their translations before showing
-- Instant locale switching, cached as you go
+**Localization**
+- Translations loaded per page and cached, only what's needed
+- Locale auto detected on first visit, then stored in local storage and restored on refresh
+- Signed-in users load their saved locale from the API, so it follows them across devices
 
 **Settings**
 - App config loaded from the API, with local overrides per app
