@@ -1,8 +1,9 @@
 <script setup lang="ts">
   import { Layout, LayoutBody, LayoutBodyContent } from '@shared/components/common/Layout'
+  import { Navbar, NavItem } from '@shared/components/common/Navbar'
   import AuthNav from '@shared/features/navs/Auth.vue'
-  import LogoNav from '@shared/features/navs/Logo.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
+  import StarterTextLogo from '@shared/components/logos/StarterText.vue'
 </script>
 
 <template>
@@ -14,7 +15,14 @@
       border-box eats, otherwise the logo would shift.
     -->
     <div class="fixed top-0 left-0 px-3 flex items-center h-[3rem] border-b border-transparent">
-      <LogoNav :to="{ name: 'auth-landing' }" />
+      <Navbar>
+        <NavItem
+          :to="{ name: 'auth-landing' }"
+          class="[&>svg]:!w-auto"
+        >
+          <StarterTextLogo />
+        </NavItem>
+      </Navbar>
     </div>
 
     <div class="fixed top-0 right-0 px-3 flex items-center h-[3rem] border-b border-transparent">
