@@ -2,6 +2,7 @@ import type { App } from 'vue'
 
 import { createClient, type HttpClient } from './client'
 import * as auth from './interceptors/auth'
+import * as locale from './interceptors/locale'
 import * as maintenanceMode from './interceptors/maintenanceMode'
 import * as updateRequired from './interceptors/updateRequired'
 
@@ -19,6 +20,7 @@ function createHttp(_app: App) {
   })
 
   instance.interceptors.request.use(auth.request)
+  instance.interceptors.request.use(locale.request)
   instance.interceptors.response.use(null, auth.responseError)
   instance.interceptors.response.use(null, maintenanceMode.responseError)
   instance.interceptors.response.use(updateRequired.responseSuccess, updateRequired.responseError)
