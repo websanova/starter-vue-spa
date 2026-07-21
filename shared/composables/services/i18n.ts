@@ -19,6 +19,10 @@ export const useI18nService = function() {
   const store = useI18nStore()
   const i18n = useI18nPlugin()
 
+  /**
+   * Marks a tier fully loaded once every tracked file across
+   * all locales for that tier has resolved.
+   */
   function setLoaded(tier: I18nTier) {
     const loaded = Object.values(store.localesLoaded[tier]).flatMap((files) => Object.values(files))
 
@@ -27,6 +31,11 @@ export const useI18nService = function() {
     }
   }
 
+  /**
+   * Fetches a single locale file and merges it into the active
+   * messages. Flags the file loaded on success or failure so a
+   * missing file never blocks the tier from completing.
+   */
   function fetchFile(tier: I18nTier, locale: string, name: string) {
     store.localesLoaded[tier][locale] ??= {}
     store.localesLoaded[tier][locale][name] = false
@@ -51,6 +60,11 @@ export const useI18nService = function() {
       })
   }
 
+  /**
+   * Loads the given files for the active locale, adding the
+   * fallback locale when it differs. Skips files already tracked
+   * and marks empty tiers loaded immediately.
+   */
   function load(files: I18nFiles) {
     const locale = i18n.locale.value
     const fallback = settings.defaultLocale!
@@ -76,6 +90,11 @@ export const useI18nService = function() {
     })
   }
 
+  /**
+   * Switches the active locale. Reloads the set of files already
+   * present for the current locale so the new locale has the same
+   * coverage, then persists the choice.
+   */
   function switchLocale(locale: Locale) {
     if (i18n.locale.value === locale) {
       return

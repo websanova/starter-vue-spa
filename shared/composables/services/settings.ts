@@ -9,6 +9,10 @@ import type { Settings } from '@shared/config/settings'
 export const useSettingsService = function() {
   const store = useSettingsStore()
 
+  /**
+   * Fetches remote settings and merges them under the shared and
+   * local config, so local config always wins. Marks the store loaded.
+   */
   async function load() {
     const data = await useHttp().get<Partial<Settings>>('settings')
 
