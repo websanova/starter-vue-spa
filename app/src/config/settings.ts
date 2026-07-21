@@ -6,4 +6,5 @@ import type { Settings } from '@shared/config/settings'
 export const settings: Partial<Settings> = {
   locales: ['en-US', 'en-CA', 'fr-CA'],
   defaultLocale: 'en-US',
+  defaultTimezone: 'America/New_York',
 }

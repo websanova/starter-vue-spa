@@ -18,7 +18,7 @@ export function useSettingsLocaleForm() {
     },
     initial: {
       locale: store.user?.locale ?? settings.defaultLocale!,
-      timezone: (store.user?.timezone ?? 'America/New_York') as 'America/New_York' | 'America/Chicago' | 'America/Denver' | 'America/Los_Angeles' | 'Europe/London',
+      timezone: store.user?.timezone ?? settings.defaultTimezone!,
     },
     onSubmit: update.mutateAsync,
     onSuccess: (values) => switchLocale(values.locale as Locale),

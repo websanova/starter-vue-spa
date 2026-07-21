@@ -30,7 +30,7 @@ export const UserRules = {
   timezone() {
     const i18n = useI18n()
 
-    return z.enum(['America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles', 'Europe/London'], {
+    return z.string().min(1, {
       message: i18n.t('rules.required', { attribute: i18n.t('rules.attr.timezone') }),
     })
   },

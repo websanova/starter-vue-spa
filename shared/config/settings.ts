@@ -1,6 +1,7 @@
 export interface Settings {
   locales: string[]
   defaultLocale: string
+  defaultTimezone: string
 }
 
 /**
