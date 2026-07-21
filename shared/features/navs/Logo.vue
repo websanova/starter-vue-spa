@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { computed, useAttrs } from 'vue'
   import { MenuIcon } from '@lucide/vue'
-  import { RouterLink, type RouteLocationRaw } from 'vue-router'
+  import { type RouteLocationRaw } from 'vue-router'
+  import { Navbar, NavItem } from '@shared/components/common/Navbar'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
 
   defineProps<{
@@ -15,18 +16,20 @@
 </script>
 
 <template>
-  <div class="flex items-center gap-3">
-    <component
-      :is="isClickable ? 'div' : RouterLink"
+  <Navbar>
+    <NavItem
       :to="isClickable ? undefined : to"
       v-bind="$attrs"
-      :class="['flex h-full items-center sm:hidden', isClickable ? 'cursor-pointer' : '']"
+      class="sm:hidden"
     >
-      <MenuIcon class="size-6" />
-    </component>
+      <MenuIcon />
+    </NavItem>
 
-    <RouterLink :to="to" class="flex h-full items-center sm:unhidden">
-      <StarterTextLogo class="h-6" />
-    </RouterLink>
-  </div>
+    <NavItem
+      :to="to"
+      class="sm:unhidden [&>svg]:!w-auto"
+    >
+      <StarterTextLogo />
+    </NavItem>
+  </Navbar>
 </template>
