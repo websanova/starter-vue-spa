@@ -91,6 +91,7 @@ export const useI18nService = function() {
     })
 
     i18n.locale.value = locale
+    localStorage.setItem('locale', locale)
 
     load(files)
   }

@@ -5,11 +5,20 @@ import { settings } from '@/config/settings'
 import datetimeFormats from './datetimeFormats'
 import numberFormats from './numberFormats'
 
+function readInitialLocale() {
+  const stored = localStorage.getItem('locale')
+
+  return stored && settings.locales?.includes(stored)
+    ? stored
+    : settings.defaultLocale!
+}
+
 function buildI18n() {
   return createVueI18n({
     datetimeFormats,
     fallbackLocale: settings.defaultLocale!,
     legacy: false,
+    locale: readInitialLocale(),
     numberFormats,
   })
 }
