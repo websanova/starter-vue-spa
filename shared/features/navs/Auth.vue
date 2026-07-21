@@ -2,11 +2,13 @@
   import { GlobeIcon } from '@lucide/vue'
   import { useI18nService } from '@shared/composables/services/i18n'
   import { useLocaleOptions } from '@shared/composables/support/useLocaleOptions'
+  import { useI18n } from '@shared/plugins/i18n'
   import { Navbar, NavDropdown } from '@shared/components/common/Navbar'
-  import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
+  import { DropdownMenuRadioGroup, DropdownMenuRadioItem } from '@shared/components/ui/dropdown-menu'
   import DarkModeToggle from '@shared/features/toggles/DarkMode.vue'
   import type { Locale } from '@shared/plugins/i18n'
 
+  const i18n = useI18n()
   const { switchLocale } = useI18nService()
   const locales = useLocaleOptions()
 </script>
@@ -21,13 +23,18 @@
         <GlobeIcon />
       </template>
 
-      <DropdownMenuItem
-        v-for="option in locales"
-        :key="option.value"
-        @select="switchLocale(option.value as Locale)"
+      <DropdownMenuRadioGroup
+        :model-value="i18n.locale.value"
+        @update:model-value="switchLocale($event as Locale)"
       >
-        {{ option.label }}
-      </DropdownMenuItem>
+        <DropdownMenuRadioItem
+          v-for="option in locales"
+          :key="option.value"
+          :value="option.value"
+        >
+          {{ option.label }}
+        </DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
     </NavDropdown>
 
     <DarkModeToggle class="size-7" />

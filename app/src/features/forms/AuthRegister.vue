@@ -51,7 +51,7 @@
 
       <RouterLink
         :to="{ name: 'auth-login' }"
-        class="text-primary underline underline-offset-4"
+        class="text-link"
       >
         {{ $t('features.lbl.sign_in') }}
       </RouterLink>
