@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { Layout, LayoutBody, LayoutBodyContent } from '@shared/components/common/Layout'
-  import DarkModeNav from '@shared/features/navs/DarkMode.vue'
+  import AuthNav from '@shared/features/navs/Auth.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
 </script>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="fixed top-0 right-0 px-3 flex items-center h-[3rem] border-b border-transparent">
-      <DarkModeNav class="size-6" />
+      <AuthNav />
     </div>
 
     <LayoutBody>

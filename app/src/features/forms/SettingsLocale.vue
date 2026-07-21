@@ -20,6 +20,7 @@
 <template>
   <Form @submit="submit">
     <FormInputSelect
+      v-if="languages.length > 1"
       name="locale"
       :label="$t('features.lbl.language')"
       :placeholder="$t('features.ph.language')"
