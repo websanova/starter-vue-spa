@@ -18,6 +18,7 @@ export function useRegister() {
       const { token } = await useHttp().post<{ token: string }>('register', {
         ...data,
         locale: i18n.locale.value,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
       // Auto login after register. To require email verification first,
       // drop startSession here and route to a verify screen instead.
