@@ -22,16 +22,19 @@
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm Password",
+    "password_reset": "Password reset",
     "profile": "Profile",
     "refresh": "Refresh",
     "remove": "Remove",
     "security": "Security",
+    "send_reset_link": "Send reset link",
     "settings": "Settings",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "sign_up": "Sign up",
     "timezone": "Timezone",
     "update": "Update",
+    "update_password": "Update password",
     "upload": "Upload"
   },
   "sr": {
@@ -67,8 +70,23 @@
       "toast": "Avatar updated"
     },
     "login": {
-      "loading": "Signing in...",
-      "prompt": "Not a member?"
+      "loading": "Signing in..."
+    },
+    "password_reset_send": {
+      "loading": "Sending...",
+      "note_back": "Back to",
+      "sent": {
+        "heading": "Password reset email sent",
+        "message": "Check your spam folder if it doesn't show up in a few minutes."
+      }
+    },
+    "password_reset_update": {
+      "done": {
+        "heading": "Password updated",
+        "message": "Your password has been changed. You can now {action}."
+      },
+      "invalid": "Invalid password update link.",
+      "loading": "Updating..."
     },
     "register": {
       "loading": "Signing up...",

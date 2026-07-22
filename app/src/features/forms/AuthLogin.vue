@@ -35,7 +35,14 @@
     </FormButton>
 
     <p class="self-end text-sm text-muted-foreground">
-      {{ $t('features.form.login.prompt') }}
+      <RouterLink
+        :to="{ name: 'auth-password-reset-send' }"
+        class="text-link"
+      >
+        {{ $t('features.lbl.password_reset') }}
+      </RouterLink>
+
+      |
 
       <RouterLink
         :to="{ name: 'auth-register' }"

@@ -22,16 +22,19 @@
     "optional": "Facultatif",
     "password": "Mot de passe",
     "password_confirmation": "Confirmer le mot de passe",
+    "password_reset": "Réinitialiser le mot de passe",
     "profile": "Profil",
     "refresh": "Actualiser",
     "remove": "Retirer",
     "security": "Sécurité",
+    "send_reset_link": "Envoyer le lien de réinitialisation",
     "settings": "Paramètres",
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter",
     "sign_up": "S'inscrire",
     "timezone": "Fuseau horaire",
     "update": "Mettre à jour",
+    "update_password": "Mettre à jour le mot de passe",
     "upload": "Téléverser"
   },
   "sr": {
@@ -67,8 +70,23 @@
       "toast": "Avatar mis à jour"
     },
     "login": {
-      "loading": "Connexion en cours...",
-      "prompt": "Pas encore membre?"
+      "loading": "Connexion en cours..."
+    },
+    "password_reset_send": {
+      "loading": "Envoi en cours...",
+      "note_back": "Retour à",
+      "sent": {
+        "heading": "Courriel de réinitialisation envoyé",
+        "message": "Vérifiez votre dossier de pourriels s'il n'apparaît pas dans quelques minutes."
+      }
+    },
+    "password_reset_update": {
+      "done": {
+        "heading": "Mot de passe mis à jour",
+        "message": "Votre mot de passe a été modifié. Vous pouvez maintenant {action}."
+      },
+      "invalid": "Lien de mise à jour du mot de passe invalide.",
+      "loading": "Mise à jour en cours..."
     },
     "register": {
       "loading": "Inscription en cours...",
