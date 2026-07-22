@@ -1,5 +1,6 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
+import { ref } from 'vue'
 import { z } from 'zod'
 import { HttpError } from '@shared/plugins/http/client'
 import type { ZodObject, ZodRawShape, ZodTypeAny } from 'zod'
@@ -31,10 +32,14 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
     initialValues: initial as never
   })
 
+  const isSuccess = ref(false)
+
   const submit = handleSubmit(async (values) => {
+    isSuccess.value = false
     try {
       await onSubmit(values)
       if (reset) resetForm()
+      isSuccess.value = true
       onSuccess?.(values)
     } catch (err) {
       if (err instanceof HttpError && err.response.status === 422) {
@@ -45,5 +50,5 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
     }
   })
 
-  return { submit, isPending: isSubmitting }
+  return { submit, isPending: isSubmitting, isSuccess }
 }

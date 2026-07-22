@@ -75,18 +75,12 @@
     "password_reset_send": {
       "loading": "Sending...",
       "note_back": "Back to",
-      "sent": {
-        "heading": "Password reset email sent",
-        "message": "Check your spam folder if it doesn't show up in a few minutes."
-      }
+      "note_success": "Password reset email sent. Check your spam folder if it doesn't show up in a few minutes."
     },
     "password_reset_update": {
-      "done": {
-        "heading": "Password updated",
-        "message": "Your password has been changed. You can now {action}."
-      },
-      "invalid": "Invalid password update link.",
-      "loading": "Updating..."
+      "loading": "Updating...",
+      "note_invalid": "Invalid password update link.",
+      "note_success": "Your password has changed. You can now {0} using your new credentials."
     },
     "register": {
       "loading": "Signing up...",

@@ -1,50 +1,42 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import { usePasswordResetUpdateForm } from '@shared/composables/forms/passwordResetUpdate'
+  import { usePasswordResetUpdateForm } from '@/composables/forms/password'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const route = useRoute()
-  const submitted = ref(false)
 
   const isValidLink = computed(() => Boolean(route.query.email && route.query.token))
 
-  const { submit, isPending } = usePasswordResetUpdateForm({
+  const { submit, isPending, isSuccess } = usePasswordResetUpdateForm({
     email: route.query.email as string,
     token: route.query.token as string,
-    onSuccess: () => { submitted.value = true },
   })
 </script>
 
 <template>
   <p
     v-if="!isValidLink"
-    class="text-sm text-muted-foreground text-center"
+    class="text-muted-foreground text-center"
   >
-    {{ $t('features.form.password_reset_update.invalid') }}
+    {{ $t('features.form.password_reset_update.note_invalid') }}
   </p>
 
   <div
-    v-else-if="submitted"
+    v-else-if="isSuccess"
     class="flex flex-col gap-2 text-center"
   >
-    <p class="font-medium">
-      {{ $t('features.form.password_reset_update.done.heading') }}
-    </p>
-
     <i18n-t
-      keypath="features.form.password_reset_update.done.message"
+      keypath="features.form.password_reset_update.note_success"
       tag="p"
-      class="text-sm text-muted-foreground"
+      class="text-muted-foreground"
     >
-      <template #action>
-        <RouterLink
-          :to="{ name: 'auth-login' }"
-          class="text-link"
-        >
-          {{ $t('features.lbl.sign_in') }}
-        </RouterLink>
-      </template>
+      <RouterLink
+        :to="{ name: 'auth-login' }"
+        class="text-link"
+      >
+        {{ $t('features.lbl.sign_in') }}
+      </RouterLink>
     </i18n-t>
   </div>
 

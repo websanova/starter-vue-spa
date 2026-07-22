@@ -1,26 +1,17 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { usePasswordResetSendForm } from '@shared/composables/forms/passwordResetSend'
+  import { usePasswordResetSendForm } from '@/composables/forms/password'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
-  const submitted = ref(false)
-
-  const { submit, isPending } = usePasswordResetSendForm({
-    onSuccess: () => { submitted.value = true },
-  })
+  const { submit, isPending, isSuccess } = usePasswordResetSendForm()
 </script>
 
 <template>
   <div
-    v-if="submitted"
+    v-if="isSuccess"
     class="flex flex-col gap-2 text-center"
   >
-    <p class="font-medium">
-      {{ $t('features.form.password_reset_send.sent.heading') }}
-    </p>
-
-    <p class="text-sm text-muted-foreground">
-      {{ $t('features.form.password_reset_send.sent.message') }}
+    <p class="text-muted-foreground">
+      {{ $t('features.form.password_reset_send.note_success') }}
     </p>
   </div>
 
