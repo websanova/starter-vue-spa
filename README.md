@@ -26,6 +26,11 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Locale auto detected on first visit, then stored in local storage and restored on refresh
 - Signed-in users load their saved locale from the API, so it follows them across devices
 
+**Timezones**
+- All times display in the user's selected timezone, adjusted on the fly
+- Timezone auto detected during registration.
+- Signed-in users load their saved timezone from the API, so it follows them across devices
+
 **Settings**
 - App config loaded from the API, with local overrides per app
 - Centralize front-end options like auto-login in one place
