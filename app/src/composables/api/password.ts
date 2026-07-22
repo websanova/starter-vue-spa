@@ -1,27 +1,27 @@
 import { useMutation } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 
-export interface PasswordResetSendData {
+export interface PasswordForgotData {
   email: string
 }
 
-export interface PasswordResetUpdateData {
+export interface PasswordResetData {
   email: string
   token: string
   password: string
   password_confirmation: string
 }
 
-export function usePasswordResetSend() {
+export function usePasswordForgot() {
   return useMutation({
-    mutationFn: (data: PasswordResetSendData) =>
+    mutationFn: (data: PasswordForgotData) =>
       useHttp().post('forgot-password', data),
   })
 }
 
-export function usePasswordResetUpdate() {
+export function usePasswordReset() {
   return useMutation({
-    mutationFn: (data: PasswordResetUpdateData) =>
+    mutationFn: (data: PasswordResetData) =>
       useHttp().post('reset-password', data),
   })
 }

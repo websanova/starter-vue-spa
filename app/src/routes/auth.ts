@@ -1,8 +1,8 @@
 const Impersonate         = () => import('@/views/auth/Impersonate.vue')
 const AuthLayout          = () => import('@/features/layouts/Auth.vue')
 const Login               = () => import('@/views/auth/Login.vue')
-const PasswordResetSend   = () => import('@/views/auth/PasswordResetSend.vue')
-const PasswordResetUpdate = () => import('@/views/auth/PasswordResetUpdate.vue')
+const PasswordForgot      = () => import('@/views/auth/PasswordForgot.vue')
+const PasswordReset       = () => import('@/views/auth/PasswordReset.vue')
 const Register            = () => import('@/views/auth/Register.vue')
 const Unsubscribe         = () => import('@/views/auth/Unsubscribe.vue')
 const VerificationConfirm = () => import('@/views/auth/VerificationConfirm.vue')
@@ -49,13 +49,13 @@ export default [{
         component: Login,
         meta
     }, {
-        path: 'password/reset',
-        name: 'auth-password-reset-send',
-        component: PasswordResetSend,
+        path: 'forgot-password',
+        name: 'auth-password-forgot',
+        component: PasswordForgot,
     }, {
-        path: 'password/update',
-        name: 'auth-password-reset-update',
-        component: PasswordResetUpdate,
+        path: 'reset-password',
+        name: 'auth-password-reset',
+        component: PasswordReset,
     }, {
         path: 'unsubscribe',
         name: 'auth-unsubscribe',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AuthPasswordResetSendForm from '@/features/forms/AuthPasswordResetSend.vue'
+  import AuthPasswordResetForm from '@/features/forms/AuthPasswordReset.vue'
   import { Heading } from '@shared/components/common/Heading'
 </script>
 
@@ -11,9 +11,9 @@
       class="capitalize text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.password_reset') }}
+      {{ $t('features.lbl.update_password') }}
     </Heading>
 
-    <AuthPasswordResetSendForm />
+    <AuthPasswordResetForm />
   </div>
 </template>

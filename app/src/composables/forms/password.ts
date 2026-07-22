@@ -1,14 +1,14 @@
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { AuthRules } from '@shared/rules/auth'
-import { usePasswordResetSend, usePasswordResetUpdate } from '@/composables/api/password'
+import { usePasswordForgot, usePasswordReset } from '@/composables/api/password'
 
 interface UpdateOptions {
   email: string
   token: string
 }
 
-export function usePasswordResetSendForm() {
-  const passwordResetSend = usePasswordResetSend()
+export function usePasswordForgotForm() {
+  const passwordForgot = usePasswordForgot()
 
   return useValidatedForm({
     rules: {
@@ -17,12 +17,12 @@ export function usePasswordResetSendForm() {
     initial: {
       email: '',
     },
-    onSubmit: passwordResetSend.mutateAsync,
+    onSubmit: passwordForgot.mutateAsync,
   })
 }
 
-export function usePasswordResetUpdateForm(options: UpdateOptions) {
-  const passwordResetUpdate = usePasswordResetUpdate()
+export function usePasswordResetForm(options: UpdateOptions) {
+  const passwordReset = usePasswordReset()
 
   return useValidatedForm({
     rules: {
@@ -34,7 +34,7 @@ export function usePasswordResetUpdateForm(options: UpdateOptions) {
       password_confirmation: '',
     },
     refine: AuthRules.passwordsMatch,
-    onSubmit: (values) => passwordResetUpdate.mutateAsync({
+    onSubmit: (values) => passwordReset.mutateAsync({
       ...values,
       email: options.email,
       token: options.token,

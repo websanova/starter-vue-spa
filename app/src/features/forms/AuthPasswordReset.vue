@@ -1,14 +1,14 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import { usePasswordResetUpdateForm } from '@/composables/forms/password'
+  import { usePasswordResetForm } from '@/composables/forms/password'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const route = useRoute()
 
   const isValidLink = computed(() => Boolean(route.query.email && route.query.token))
 
-  const { submit, isPending, isSuccess } = usePasswordResetUpdateForm({
+  const { submit, isPending, isSuccess } = usePasswordResetForm({
     email: route.query.email as string,
     token: route.query.token as string,
   })
@@ -19,7 +19,7 @@
     v-if="!isValidLink"
     class="text-muted-foreground text-center"
   >
-    {{ $t('features.form.password_reset_update.note_invalid') }}
+    {{ $t('features.form.password_reset.note_invalid') }}
   </p>
 
   <div
@@ -27,7 +27,7 @@
     class="flex flex-col gap-2 text-center"
   >
     <i18n-t
-      keypath="features.form.password_reset_update.note_success"
+      keypath="features.form.password_reset.note_success"
       tag="p"
       class="text-muted-foreground"
     >

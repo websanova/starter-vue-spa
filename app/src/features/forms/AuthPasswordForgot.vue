@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { usePasswordResetSendForm } from '@/composables/forms/password'
+  import { usePasswordForgotForm } from '@/composables/forms/password'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
-  const { submit, isPending, isSuccess } = usePasswordResetSendForm()
+  const { submit, isPending, isSuccess } = usePasswordForgotForm()
 </script>
 
 <template>
@@ -11,7 +11,7 @@
     class="flex flex-col gap-2 text-center"
   >
     <p class="text-muted-foreground">
-      {{ $t('features.form.password_reset_send.note_success') }}
+      {{ $t('features.form.password_forgot.note_success') }}
     </p>
   </div>
 
@@ -34,7 +34,7 @@
     </FormButton>
 
     <p class="self-end text-sm text-muted-foreground">
-      {{ $t('features.form.password_reset_send.note_back') }}
+      {{ $t('features.form.password_forgot.note_back') }}
 
       <RouterLink
         :to="{ name: 'auth-login' }"

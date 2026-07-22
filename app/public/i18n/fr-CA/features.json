@@ -72,12 +72,12 @@
     "login": {
       "loading": "Connexion en cours..."
     },
-    "password_reset_send": {
+    "password_forgot": {
       "loading": "Envoi en cours...",
       "note_back": "Retour à",
       "note_success": "Courriel de réinitialisation envoyé. Vérifiez votre dossier de pourriels s'il n'apparaît pas dans quelques minutes."
     },
-    "password_reset_update": {
+    "password_reset": {
       "loading": "Mise à jour en cours...",
       "note_invalid": "Lien de mise à jour du mot de passe invalide.",
       "note_success": "Votre mot de passe a changé. Vous pouvez maintenant {0} avec vos nouveaux identifiants."

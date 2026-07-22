@@ -36,7 +36,7 @@
 
     <p class="self-end text-sm text-muted-foreground">
       <RouterLink
-        :to="{ name: 'auth-password-reset-send' }"
+        :to="{ name: 'auth-password-forgot' }"
         class="text-link"
       >
         {{ $t('features.lbl.password_reset') }}

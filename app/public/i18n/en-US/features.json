@@ -72,12 +72,12 @@
     "login": {
       "loading": "Signing in..."
     },
-    "password_reset_send": {
+    "password_forgot": {
       "loading": "Sending...",
       "note_back": "Back to",
       "note_success": "Password reset email sent. Check your spam folder if it doesn't show up in a few minutes."
     },
-    "password_reset_update": {
+    "password_reset": {
       "loading": "Updating...",
       "note_invalid": "Invalid password update link.",
       "note_success": "Your password has changed. You can now {0} using your new credentials."
