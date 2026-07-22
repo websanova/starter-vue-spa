@@ -11,6 +11,17 @@
   }>(), {
     optional: false,
   })
+
+  /**
+   * Resolves the trigger label from the current options rather than
+   * letting reka-ui display its own. reka reads the selected item's
+   * text once when it is picked and does not update it if that
+   * option's label later changes to a new string. Reading from props
+   * keeps the displayed value in sync with the options.
+   */
+  function labelFor(value: unknown) {
+    return props.options.find((o) => o.value === value)?.label
+  }
 </script>
 
 <template>
@@ -33,7 +44,9 @@
       <Select v-bind="componentField">
         <FormControl>
           <SelectTrigger>
-            <SelectValue :placeholder="props.placeholder" />
+            <SelectValue :placeholder="props.placeholder">
+              {{ labelFor(componentField.modelValue) }}
+            </SelectValue>
           </SelectTrigger>
         </FormControl>
 
