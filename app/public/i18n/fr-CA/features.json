@@ -50,13 +50,6 @@
     "password_confirmation": "Confirmer le mot de passe",
     "timezone": "Sélectionnez un fuseau horaire"
   },
-  "tz": {
-    "new_york": "Est (New York)",
-    "chicago": "Centre (Chicago)",
-    "denver": "Rocheuses (Denver)",
-    "los_angeles": "Pacifique (Los Angeles)",
-    "london": "Londres (GMT)"
-  },
   "cover": {
     "maintenance": {
       "message": "L'application est en maintenance.<br>Nous serons de retour sous peu."

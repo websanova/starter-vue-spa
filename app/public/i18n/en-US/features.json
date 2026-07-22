@@ -50,13 +50,6 @@
     "password_confirmation": "Confirm password",
     "timezone": "Select a timezone"
   },
-  "tz": {
-    "new_york": "Eastern (New York)",
-    "chicago": "Central (Chicago)",
-    "denver": "Mountain (Denver)",
-    "los_angeles": "Pacific (Los Angeles)",
-    "london": "London (GMT)"
-  },
   "cover": {
     "maintenance": {
       "message": "App is down for maintenance.<br>We should be back up shortly."
