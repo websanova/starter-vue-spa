@@ -6,6 +6,7 @@ import * as auth from './interceptors/auth'
 import * as content from './interceptors/content'
 import * as i18n from './interceptors/i18n'
 import * as ready from './interceptors/ready'
+import * as verification from './interceptors/verification'
 // import * as scrollToTop from './interceptors/scrollToTop.js'
 
 import routes from "@routes"
@@ -35,6 +36,7 @@ function createRouter(app: App) {
 
   // Post-ready guards. Depend on the state ready resolved (auth roles, etc).
   instance.beforeEach(auth.beforeEach)
+  instance.beforeEach(verification.beforeEach)
   // instance.afterEach(scrollToTop.afterEach)
 
   app.use(instance)
