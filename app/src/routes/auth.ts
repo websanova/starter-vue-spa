@@ -4,15 +4,23 @@ const Login               = () => import('@/views/auth/Login.vue')
 const PasswordForgot      = () => import('@/views/auth/PasswordForgot.vue')
 const PasswordReset       = () => import('@/views/auth/PasswordReset.vue')
 const Register            = () => import('@/views/auth/Register.vue')
-const Unsubscribe         = () => import('@/views/auth/Unsubscribe.vue')
 const VerificationConfirm = () => import('@/views/auth/VerificationConfirm.vue')
 const VerificationResend  = () => import('@/views/auth/VerificationResend.vue')
 
-const meta = {
+const metaAuthFalse = {
     auth: {
         roles: false,
         redirect: {
             name: 'user-landing'
+        }
+    }
+}
+
+const metaAuthTrue = {
+    auth: {
+        roles: true,
+        redirect: {
+            name: 'auth-landing'
         }
     }
 }
@@ -42,12 +50,12 @@ export default [{
         path: 'register',
         name: 'auth-register',
         component: Register,
-        meta
+        meta: metaAuthFalse
     }, {
         path: 'login',
         name: 'auth-login',
         component: Login,
-        meta
+        meta: metaAuthFalse
     }, {
         path: 'forgot-password',
         name: 'auth-password-forgot',
@@ -57,17 +65,14 @@ export default [{
         name: 'auth-password-reset',
         component: PasswordReset,
     }, {
-        path: 'unsubscribe',
-        name: 'auth-unsubscribe',
-        component: Unsubscribe,
-    }, {
-        path: 'verify/confirm',
+        path: 'confirm-verification',
         name: 'auth-verification-confirm',
         component: VerificationConfirm,
+        meta: metaAuthTrue
     }, {
-        path: 'verify/resend',
+        path: 'resend-verification',
         name: 'auth-verification-resend',
         component: VerificationResend,
-        meta
+        meta: metaAuthFalse
     }]
 }]

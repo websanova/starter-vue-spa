@@ -11,13 +11,13 @@ export function useRegisterForm(options: Options = {}) {
 
   return useValidatedForm({
     rules: {
-      name: AuthRules.name(),
+      first_name: AuthRules.name(),
       email: AuthRules.email(),
       password: AuthRules.password(),
       password_confirmation: AuthRules.password(),
     },
     initial: {
-      name: '',
+      first_name: '',
       email: '',
       password: '',
       password_confirmation: '',

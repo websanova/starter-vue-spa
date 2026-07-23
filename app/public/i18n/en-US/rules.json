@@ -4,7 +4,6 @@
     "first_name": "First Name",
     "language": "Language",
     "last_name": "Last Name",
-    "name": "Name",
     "password": "Password",
     "timezone": "Timezone"
   },

@@ -13,10 +13,9 @@
 <template>
   <Form @submit="submit">
     <FormInputText
-      name="name"
-      optional
-      :label="$t('features.lbl.name')"
-      :placeholder="$t('features.ph.name')"
+      name="first_name"
+      :label="$t('features.lbl.first_name')"
+      :placeholder="$t('features.ph.first_name')"
     />
 
     <FormInputText

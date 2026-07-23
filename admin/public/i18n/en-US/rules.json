@@ -1,7 +1,6 @@
 {
   "attr": {
     "email": "Email",
-    "name": "Name",
     "password": "Password"
   },
   "confirmed": "The {attribute} confirmation does not match.",

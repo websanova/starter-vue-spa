@@ -6,7 +6,8 @@ export const AuthRules = {
     const i18n = useI18n()
 
     return z.string()
-      .max(255, i18n.t('rules.max.string', { attribute: i18n.t('rules.attr.name'), max: 255 }))
+      .min(1, i18n.t('rules.required', { attribute: i18n.t('rules.attr.first_name') }))
+      .max(255, i18n.t('rules.max.string', { attribute: i18n.t('rules.attr.first_name'), max: 255 }))
       .optional()
   },
 
