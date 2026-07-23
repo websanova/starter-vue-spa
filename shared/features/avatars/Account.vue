@@ -10,7 +10,7 @@
     <AvatarImage :src="user?.avatarUrl ?? ''" />
 
     <AvatarFallback>
-      {{ user?.firstName?.charAt(0).toUpperCase() }}
+      {{ (user?.firstName || user?.email)?.charAt(0).toUpperCase() }}
     </AvatarFallback>
   </Avatar>
 </template>
