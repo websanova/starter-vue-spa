@@ -12,85 +12,85 @@ const UserFolders   = () => import('@/views/console/user/Folders.vue')
 const UserInfo      = () => import('@/views/console/user/Info.vue')
 
 export default [{
-    path: '/',
-    component: Layout,
+  path: '/',
+  component: Layout,
+  meta: {
+    auth: {
+      roles: true,
+      redirect: {name: 'auth-login'}
+    },
+    content: {
+      site: 'user'
+    },
+    i18n: {
+      site: ['features', 'rules', 'site']
+    },
+  },
+  children: [{
+    path: '',
+    name: 'user-landing',
+    redirect: {
+      name: 'user-users'
+    }
+  }, {
+    path: 'icons',
+    name: 'user-icons',
+    component: Icons,
     meta: {
-        auth: {
-            roles: true,
-            redirect: {name: 'auth-login'}
-        },
-        content: {
-          site: 'user'
-        },
-        i18n: {
-            site: ['features', 'rules', 'site']
-        },
+      content: {
+        layout: 'icons'
+      }
+    }
+  }, {
+    path: 'plans',
+    name: 'user-plans',
+    component: Plans,
+    meta: {
+      content: {
+        layout: 'plans'
+      }
+    }
+  }, {
+    path: 'users',
+    name: 'user-users',
+    component: Users,
+    meta: {
+      content: {
+        layout: 'users'
+      }
+    }
+  }, {
+    path: 'users/:user_id',
+    component: LayoutConsole,
+    meta: {
+      content: {
+        layout: 'users-show'
+      }
     },
     children: [{
-        path: '',
-        name: 'user-landing',
-        redirect: {
-            name: 'user-users'
-        }
+      path: '',
+      name: 'user-users-show',
+      redirect: {name: 'user-users-show-edit'},
     }, {
-        path: 'icons',
-        name: 'user-icons',
-        component: Icons,
-        meta: {
-            content: {
-                layout: 'icons'
-            }
-        }
+      path: 'billing',
+      name: 'user-users-show-billing',
+      component: UserBilling,
     }, {
-        path: 'plans',
-        name: 'user-plans',
-        component: Plans,
-        meta: {
-            content: {
-                layout: 'plans'
-            }
-        }
+      path: 'bookmarks',
+      name: 'user-users-show-bookmarks',
+      component: UserBookmarks,
     }, {
-        path: 'users',
-        name: 'user-users',
-        component: Users,
-        meta: {
-            content: {
-                layout: 'users'
-            }
-        }
+      path: 'edit',
+      name: 'user-users-show-edit',
+      component: UserEdit,
     }, {
-        path: 'users/:user_id',
-        component: LayoutConsole,
-        meta: {
-            content: {
-                layout: 'users-show'
-            }
-        },
-        children: [{
-            path: '',
-            name: 'user-users-show',
-            redirect: {name: 'user-users-show-edit'},
-        }, {
-            path: 'billing',
-            name: 'user-users-show-billing',
-            component: UserBilling,
-        }, {
-            path: 'bookmarks',
-            name: 'user-users-show-bookmarks',
-            component: UserBookmarks,
-        }, {
-            path: 'edit',
-            name: 'user-users-show-edit',
-            component: UserEdit,
-        }, {
-            path: 'folders',
-            name: 'user-users-show-folders',
-            component: UserFolders,
-        }, {
-            path: 'info',
-            name: 'user-users-show-info',
-            component: UserInfo,
-        }]
+      path: 'folders',
+      name: 'user-users-show-folders',
+      component: UserFolders,
+    }, {
+      path: 'info',
+      name: 'user-users-show-info',
+      component: UserInfo,
     }]
+  }]
 }]
