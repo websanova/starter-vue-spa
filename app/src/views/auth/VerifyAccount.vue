@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AuthVerificationConfirmForm from '@/features/forms/AuthVerificationConfirm.vue'
+  import AuthVerifyAccountForm from '@/features/forms/AuthVerifyAccount.vue'
   import { Heading } from '@shared/components/common/Heading'
 </script>
 
@@ -11,9 +11,9 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t('features.headings.verification_confirm') }}
+      {{ $t('features.headings.verify_account') }}
     </Heading>
 
-    <AuthVerificationConfirmForm />
+    <AuthVerifyAccountForm />
   </div>
 </template>

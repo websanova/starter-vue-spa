@@ -88,7 +88,7 @@
     "settings_locale": {
       "local_time": "Local time"
     },
-    "verification_confirm": {
+    "verify_account": {
       "note": "Enter the pin sent to your email into the input below. If you do not see the email in your inbox please check your spam box.",
       "resend_code": "Resend code"
     }
@@ -101,6 +101,6 @@
     "profile_info": "Info",
     "register": "Sign Up",
     "settings_locale": "Locale",
-    "verification_confirm": "Verify Account"
+    "verify_account": "Verify Account"
   }
 }

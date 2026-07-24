@@ -23,15 +23,15 @@ export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | unde
   if (
     gated &&
     auth.user.value?.isVerificationRequired &&
-    to.name !== 'auth-verification-confirm'
+    to.name !== 'auth-verify-account'
   ) {
-    return { name: 'auth-verification-confirm' }
+    return { name: 'auth-verify-account' }
   }
 
   if (
     auth.user.value &&
     !auth.user.value.isVerificationRequired &&
-    to.name === 'auth-verification-confirm'
+    to.name === 'auth-verify-account'
   ) {
     return { name: 'user-landing' }
   }

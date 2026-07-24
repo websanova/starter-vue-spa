@@ -1,10 +1,10 @@
-const Impersonate         = () => import('@/views/auth/Impersonate.vue')
-const AuthLayout          = () => import('@/features/layouts/Auth.vue')
-const Login               = () => import('@/views/auth/Login.vue')
-const PasswordForgot      = () => import('@/views/auth/PasswordForgot.vue')
-const PasswordReset       = () => import('@/views/auth/PasswordReset.vue')
-const Register            = () => import('@/views/auth/Register.vue')
-const VerificationConfirm = () => import('@/views/auth/VerificationConfirm.vue')
+const Impersonate    = () => import('@/views/auth/Impersonate.vue')
+const AuthLayout     = () => import('@/features/layouts/Auth.vue')
+const Login          = () => import('@/views/auth/Login.vue')
+const PasswordForgot = () => import('@/views/auth/PasswordForgot.vue')
+const PasswordReset  = () => import('@/views/auth/PasswordReset.vue')
+const Register       = () => import('@/views/auth/Register.vue')
+const VerifyAccount  = () => import('@/views/auth/VerifyAccount.vue')
 
 const metaAuthFalse = {
   auth: {
@@ -64,9 +64,9 @@ export default [{
     name: 'auth-password-reset',
     component: PasswordReset,
   }, {
-    path: 'confirm-verification',
-    name: 'auth-verification-confirm',
-    component: VerificationConfirm,
+    path: 'verify-account',
+    name: 'auth-verify-account',
+    component: VerifyAccount,
     meta: metaAuthTrue
   }]
 }]

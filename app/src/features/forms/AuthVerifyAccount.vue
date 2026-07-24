@@ -44,7 +44,7 @@
 <template>
   <Form @submit="onVerify">
     <p class="text-center">
-      {{ $t('features.form.verification_confirm.note') }}
+      {{ $t('features.form.verify_account.note') }}
     </p>
 
     <div class="flex justify-center">
@@ -82,7 +82,7 @@
         variant="link"
         @click="onResend()"
       >
-        {{ $t('features.form.verification_confirm.resend_code') }}
+        {{ $t('features.form.verify_account.resend_code') }}
       </ButtonLoading>
 
       |
