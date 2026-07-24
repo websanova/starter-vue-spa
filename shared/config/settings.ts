@@ -2,6 +2,7 @@ export interface Settings {
   locales: string[]
   defaultLocale: string
   defaultTimezone: string
+  verification_code_length: number
 }
 
 /**

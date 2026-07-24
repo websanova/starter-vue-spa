@@ -6,6 +6,7 @@
     "billing": "Facturation",
     "bookmarks": "Signets",
     "cancel": "Annuler",
+    "confirm_verification": "Confirmer la vérification",
     "create": "Créer",
     "dark_mode": "Mode sombre",
     "delete": "Supprimer",
@@ -35,7 +36,8 @@
     "timezone": "Fuseau horaire",
     "update": "Mettre à jour",
     "update_password": "Mettre à jour le mot de passe",
-    "upload": "Téléverser"
+    "upload": "Téléverser",
+    "verify": "Vérifier"
   },
   "sr": {
     "menu_bookmarks": "Menu des signets",

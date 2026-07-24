@@ -14,9 +14,9 @@ export const useSettingsService = function() {
    * local config, so local config always wins. Marks the store loaded.
    */
   async function load() {
-    const data = await useHttp().get<Partial<Settings>>('settings')
+    const data = await useHttp().get<{ data: Partial<Settings> }>('settings')
 
-    store.data = { ...data, ...sharedConfig, ...localConfig } as Settings
+    store.data = { ...data.data, ...sharedConfig, ...localConfig } as Settings
     store.isLoaded = true
   }
 

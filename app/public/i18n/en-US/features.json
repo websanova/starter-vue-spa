@@ -6,6 +6,7 @@
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
+    "confirm_verification": "Confirm verification",
     "create": "Create",
     "dark_mode": "Dark mode",
     "delete": "Delete",
@@ -21,7 +22,7 @@
     "name": "Name",
     "optional": "Optional",
     "password": "Password",
-    "password_confirmation": "Confirm Password",
+    "password_confirmation": "Confirm password",
     "password_reset": "Password reset",
     "profile": "Profile",
     "refresh": "Refresh",
@@ -35,7 +36,8 @@
     "timezone": "Timezone",
     "update": "Update",
     "update_password": "Update password",
-    "upload": "Upload"
+    "upload": "Upload",
+    "verify": "Verify"
   },
   "sr": {
     "menu_bookmarks": "Bookmarks menu",
