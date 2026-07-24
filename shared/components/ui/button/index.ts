@@ -10,7 +10,7 @@ export const buttonVariants = cva(
         solid: "bg-[var(--btn)] text-[var(--btn-fg)] shadow-sm hover:bg-[var(--btn)]/90",
         outline: "border border-[var(--btn)] text-[var(--btn)] shadow-sm hover:bg-[var(--btn)]/10",
         ghost: "text-[var(--btn)] hover:bg-[var(--btn)]/10",
-        link: "text-[var(--btn)] underline-offset-4 hover:underline"
+        link: "text-[var(--btn)]"
       },
       color: {
         primary: "[--btn:var(--primary)] [--btn-fg:var(--primary-foreground)]",

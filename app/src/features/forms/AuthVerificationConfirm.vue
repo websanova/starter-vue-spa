@@ -3,6 +3,7 @@
   import { useVerificationResend } from '@/composables/api/verification'
   import { useLogout } from '@shared/composables/support/logout'
   import { useSettingsStore } from '@shared/stores/settings'
+  import { Button } from '@shared/components/ui/button'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
@@ -37,56 +38,54 @@
 
 <template>
   <Form>
-    <div class="flex flex-col gap-4">
-      <p class="text-center">
-        {{ $t('features.form.verification_confirm.note') }}
-      </p>
+    <p class="text-center">
+      {{ $t('features.form.verification_confirm.note') }}
+    </p>
 
-      <div class="flex justify-center">
-        <InputOTP
-          v-model="code"
-          :maxlength="length"
-        >
-          <InputOTPGroup
-              v-for="i in length"
-              :key="i"
-          >
-            <InputOTPSlot :index="i - 1" />
-          </InputOTPGroup>
-        </InputOTP>
-      </div>
-
-      <p
-        v-if="resendError"
-        class="text-center text-sm text-destructive"
+    <div class="flex justify-center">
+      <InputOTP
+        v-model="code"
+        :maxlength="length"
       >
-        {{ resendError }}
-      </p>
-
-      <FormButton class="w-full">
-        {{ $t('features.lbl.verify') }}
-      </FormButton>
-
-      <p class="self-end text-sm text-muted-foreground">
-        <ButtonLoading
-          :pending="verificationResend.isPending.value"
-          variant="link"
-          class="h-auto p-0 text-link"
-          @click="onResend()"
+        <InputOTPGroup
+            v-for="i in length"
+            :key="i"
         >
-          {{ $t('features.form.verification_confirm.resend_code') }}
-        </ButtonLoading>
-
-        |
-
-        <button
-          type="button"
-          class="text-link"
-          @click="onLogout"
-        >
-          {{ $t('features.lbl.sign_out') }}
-        </button>
-      </p>
+          <InputOTPSlot :index="i - 1" />
+        </InputOTPGroup>
+      </InputOTP>
     </div>
+
+    <p
+      v-if="resendError"
+      class="text-center text-sm text-destructive"
+    >
+      {{ resendError }}
+    </p>
+
+    <FormButton class="w-full">
+      {{ $t('features.lbl.verify') }}
+    </FormButton>
+
+    <p class="self-end text-sm text-muted-foreground">
+      <ButtonLoading
+        class="h-auto p-0 text-link"
+        :pending="verificationResend.isPending.value"
+        variant="link"
+        @click="onResend()"
+      >
+        {{ $t('features.form.verification_confirm.resend_code') }}
+      </ButtonLoading>
+
+      |
+
+      <Button
+        class="h-auto p-0 text-link"
+        variant="link"
+        @click="onLogout"
+      >
+        {{ $t('features.lbl.sign_out') }}
+      </Button>
+    </p>
   </Form>
 </template>
