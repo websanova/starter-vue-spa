@@ -90,13 +90,13 @@
     }
   },
   "headings": {
-    "settings_locale": "Locale",
     "login": "Sign In",
     "password_reset": "Reset Password",
     "password_update": "Update Password",
     "profile_avatar": "Avatar",
     "profile_info": "Info",
     "register": "Sign Up",
+    "settings_locale": "Locale",
     "verification_confirm": "Verify Account"
   }
 }
