@@ -5,7 +5,6 @@ const PasswordForgot      = () => import('@/views/auth/PasswordForgot.vue')
 const PasswordReset       = () => import('@/views/auth/PasswordReset.vue')
 const Register            = () => import('@/views/auth/Register.vue')
 const VerificationConfirm = () => import('@/views/auth/VerificationConfirm.vue')
-const VerificationResend  = () => import('@/views/auth/VerificationResend.vue')
 
 const metaAuthFalse = {
   auth: {
@@ -69,10 +68,5 @@ export default [{
     name: 'auth-verification-confirm',
     component: VerificationConfirm,
     meta: metaAuthTrue
-  }, {
-    path: 'resend-verification',
-    name: 'auth-verification-resend',
-    component: VerificationResend,
-    meta: metaAuthFalse
   }]
 }]
