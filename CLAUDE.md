@@ -8,8 +8,7 @@
 - Never ask "want me to :ex?" or "shall I execute?" or any variant. Wait for the user to give the command.
 - Structured output only: bullets, tables, code blocks. Prose only when explicitly requested.
 - When specifying an error on a line number, always include the filename.
-- No walls of text. Keep debugging output short. State the finding, not the full trace.
-- When investigating a bug, do not dump every step of your reasoning. Read code silently, report only the conclusion.
+- IMPORTANT - Bug/error questions: answer is `file:line - what is wrong`, max 2 lines. NEVER add cause analysis, fix options, or architecture commentary unless explicitly asked.
 - Yes/no questions get yes or no first. Always.
 
 ## Token Efficiency
