@@ -40,6 +40,12 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Login refreshes automatically and extends as you use the app
 - Sign back in only after a real stretch of inactivity
 
+**Account Verification**
+- Unverified users are held on a verify screen until they confirm
+- Supports more than one verification, worked through one at a time
+- Optional grace period lets users in early, with a reminder banner until they finish
+- Registration asks for a phone number only when api enables it
+
 **Layouts**
 - Layout builder with drop-in blocks: header, footer, body, asides
 - Left/right asides, centered content, with or without header/footer

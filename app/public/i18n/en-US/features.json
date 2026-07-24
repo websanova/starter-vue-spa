@@ -18,6 +18,7 @@
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm password",
+    "phone": "Phone Number",
     "profile": "Profile",
     "refresh": "Refresh",
     "remove": "Remove",
@@ -46,6 +47,7 @@
     "name": "Your name",
     "password": "Password",
     "password_confirmation": "Confirm password",
+    "phone": "Your phone number",
     "timezone": "Select a timezone"
   },
   "cover": {

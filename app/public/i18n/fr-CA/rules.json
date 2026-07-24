@@ -5,6 +5,7 @@
     "language": "Langue",
     "last_name": "Nom",
     "password": "Mot de passe",
+    "phone": "Numéro de téléphone",
     "timezone": "Fuseau horaire"
   },
   "confirmed": "La confirmation du champ {attribute} ne correspond pas.",

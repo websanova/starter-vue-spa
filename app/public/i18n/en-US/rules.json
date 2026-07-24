@@ -5,6 +5,7 @@
     "language": "Language",
     "last_name": "Last Name",
     "password": "Password",
+    "phone": "Phone Number",
     "timezone": "Timezone"
   },
   "confirmed": "The {attribute} confirmation does not match.",

@@ -6,6 +6,7 @@ import { useHttp } from '@shared/plugins/http'
 export interface RegisterData {
   name?: string
   email: string
+  phone?: string
   password: string
   password_confirmation: string
 }

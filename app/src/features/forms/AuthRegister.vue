@@ -5,7 +5,7 @@
 
   const router = useRouter()
 
-  const { submit, isPending } = useRegisterForm({
+  const { submit, isPending, hasPhone } = useRegisterForm({
     onSuccess: () => router.push({ name: 'user-landing' }),
   })
 </script>
@@ -22,6 +22,13 @@
       name="email"
       :label="$t('features.lbl.email')"
       :placeholder="$t('features.ph.email')"
+    />
+
+    <FormInputText
+      v-if="hasPhone"
+      name="phone"
+      :label="$t('features.lbl.phone')"
+      :placeholder="$t('features.ph.phone')"
     />
 
     <FormInputText
