@@ -4,6 +4,7 @@ import { useHttp } from '@shared/plugins/http'
 
 export interface VerificationConfirmData {
   code: string
+  channel: string
 }
 
 export function useVerificationConfirm() {
@@ -11,16 +12,20 @@ export function useVerificationConfirm() {
   return useMutation({
     mutationFn: async (data: VerificationConfirmData) => {
       await useHttp().post('verify', data)
-      // Refetch so isVerificationRequired clears before any redirect,
+      // Refetch so the verification flags clear before any redirect,
       // otherwise the verification interceptor bounces back here.
       await fetchUser()
     },
   })
 }
 
+export interface VerificationResendData {
+  channel: string
+}
+
 export function useVerificationResend() {
   return useMutation({
-    mutationFn: () =>
-      useHttp().post('verify/resend'),
+    mutationFn: (data: VerificationResendData) =>
+      useHttp().post('verify/resend', data),
   })
 }

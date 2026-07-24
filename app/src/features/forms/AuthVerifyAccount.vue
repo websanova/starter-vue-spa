@@ -1,16 +1,19 @@
 <script setup lang="ts">
-  import { computed, onMounted, ref } from 'vue'
+  import { computed, ref, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { useAuthService } from '@shared/composables/services/auth'
   import { useLogout } from '@shared/composables/support/logout'
   import { useSettingsStore } from '@shared/stores/settings'
   import { Button } from '@shared/components/ui/button'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
+  import { Heading } from '@shared/components/common/Heading'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
 
   const router = useRouter()
+  const auth = useAuthService()
   const settings = useSettingsStore()
   const onLogout = useLogout()
   const verificationConfirm = useVerificationConfirm()
@@ -20,31 +23,58 @@
   const error = useMutationError(verificationConfirm, verificationResend)
   const length = computed(() => settings.data.verificationCodeLength)
 
+  // Active channel is the first required channel still flagged on the
+  // user. Refetching the user after a verify advances it automatically.
+  const channel = computed(() => {
+    const user = auth.user.value
+    if (!user) return ''
+    return (settings.data.verificationRequired ?? []).find((c) => {
+      if (c === 'email') return user.isEmailVerificationRequired
+      if (c === 'phone') return user.isPhoneVerificationRequired
+      return false
+    }) ?? ''
+  })
+
+  const digits = computed(() => auth.user.value?.phone?.slice(-2) ?? '')
+
   function onVerify() {
     verificationResend.reset()
-    verificationConfirm.mutate({ code: code.value }, {
-      onSuccess: () => router.push({ name: 'user-landing' }),
+    verificationConfirm.mutate({ code: code.value, channel: channel.value }, {
+      onSuccess: () => {
+        if (!auth.user.value?.isVerificationRequired) {
+          router.push({ name: 'user-landing' })
+        }
+      },
     })
   }
 
   function onResend() {
     verificationConfirm.reset()
-    verificationResend.mutate()
+    verificationResend.mutate({ channel: channel.value })
   }
 
-  onMounted(() => {
-    // Auto send on mount, silently. Reset on error so the throttle
-    // message from a remount never displays.
-    verificationResend.mutate(undefined, {
+  // Send a code whenever the active channel resolves or advances. Silent,
+  // resetting on error so a throttle message never displays on its own.
+  watch(channel, (value) => {
+    if (!value) return
+    code.value = ''
+    verificationResend.mutate({ channel: value }, {
       onError: () => verificationResend.reset(),
     })
-  })
+  }, { immediate: true })
 </script>
 
 <template>
+  <Heading
+    class="text-center"
+    :divider="false"
+  >
+    {{ $t(`features.headings.verify_${channel}`) }}
+  </Heading>
+
   <Form @submit="onVerify">
     <p class="text-center">
-      {{ $t('features.form.verify_account.note') }}
+      {{ $t(`features.form.verify_account.note_${channel}`, { digits }) }}
     </p>
 
     <div class="flex justify-center">

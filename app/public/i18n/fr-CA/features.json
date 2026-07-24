@@ -89,7 +89,8 @@
       "local_time": "Heure locale"
     },
     "verify_account": {
-      "note": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
+      "note_email": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
+      "note_phone": "Entrez le NIP envoyé à votre numéro de téléphone se terminant par {digits}.",
       "resend_code": "Renvoyer le code"
     }
   },
@@ -101,6 +102,7 @@
     "profile_info": "Renseignements",
     "register": "S'inscrire",
     "settings_locale": "Paramètres régionaux",
-    "verify_account": "Vérifier le compte"
+    "verify_email": "Vérifier le courriel",
+    "verify_phone": "Vérifier le numéro de téléphone"
   }
 }
