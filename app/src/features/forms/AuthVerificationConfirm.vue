@@ -1,43 +1,44 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue'
-  import { useVerificationResend } from '@/composables/api/verification'
+  import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
+  import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useLogout } from '@shared/composables/support/logout'
   import { useSettingsStore } from '@shared/stores/settings'
   import { Button } from '@shared/components/ui/button'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
-  import { HttpError } from '@shared/plugins/http/client'
 
   const settings = useSettingsStore()
   const onLogout = useLogout()
+  const verificationConfirm = useVerificationConfirm()
   const verificationResend = useVerificationResend()
 
-  const length = computed(() => settings.data.verificationCodeLength)
   const code = ref('')
-  const resendError = ref('')
+  const error = useMutationError(verificationConfirm, verificationResend)
+  const length = computed(() => settings.data.verificationCodeLength)
 
-  async function onResend(silent = false) {
-    resendError.value = ''
-
-    try {
-      await verificationResend.mutateAsync()
-    } catch (err) {
-      if (err instanceof HttpError && err.response.status === 429) {
-        if (!silent) {
-          resendError.value = (err.response.data as { message: string }).message
-        }
-        return
-      }
-      throw err
-    }
+  function onVerify() {
+    verificationResend.reset()
+    verificationConfirm.mutate({ code: code.value })
   }
 
-  onMounted(() => onResend(true))
+  function onResend() {
+    verificationConfirm.reset()
+    verificationResend.mutate()
+  }
+
+  onMounted(() => {
+    // Auto send on mount, silently. Reset on error so the throttle
+    // message from a remount never displays.
+    verificationResend.mutate(undefined, {
+      onError: () => verificationResend.reset(),
+    })
+  })
 </script>
 
 <template>
-  <Form>
+  <Form @submit="onVerify">
     <p class="text-center">
       {{ $t('features.form.verification_confirm.note') }}
     </p>
@@ -57,13 +58,16 @@
     </div>
 
     <p
-      v-if="resendError"
+      v-if="error"
       class="text-center text-sm text-destructive"
     >
-      {{ resendError }}
+      {{ error }}
     </p>
 
-    <FormButton class="w-full">
+    <FormButton
+      class="w-full"
+      :pending="verificationConfirm.isPending.value"
+    >
       {{ $t('features.lbl.verify') }}
     </FormButton>
 
