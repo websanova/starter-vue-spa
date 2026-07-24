@@ -87,6 +87,10 @@
     },
     "settings_locale": {
       "local_time": "Local time"
+    },
+    "verification_confirm": {
+      "note": "Enter the pin sent to your email into the input below. If you do not see the email in your inbox please check your spam box.",
+      "resend_code": "Resend code"
     }
   },
   "headings": {

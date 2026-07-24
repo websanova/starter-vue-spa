@@ -87,6 +87,10 @@
     },
     "settings_locale": {
       "local_time": "Heure locale"
+    },
+    "verification_confirm": {
+      "note": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
+      "resend_code": "Renvoyer le code"
     }
   },
   "headings": {
