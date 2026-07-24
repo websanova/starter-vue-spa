@@ -96,6 +96,16 @@
       "resend_code": "Renvoyer le code"
     }
   },
+  "notification": {
+    "email": {
+      "title": "Vérifiez votre courriel",
+      "body": "Confirmez votre adresse courriel pour sécuriser votre compte."
+    },
+    "phone": {
+      "title": "Vérifiez votre numéro de téléphone",
+      "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
+    }
+  },
   "headings": {
     "login": "Se connecter",
     "password_reset": "Réinitialiser le mot de passe",

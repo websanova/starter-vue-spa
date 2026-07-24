@@ -96,6 +96,16 @@
       "resend_code": "Resend code"
     }
   },
+  "notification": {
+    "email": {
+      "title": "Verify your email",
+      "body": "Confirm your email address to secure your account."
+    },
+    "phone": {
+      "title": "Verify your phone number",
+      "body": "Confirm your phone number to secure your account."
+    }
+  },
   "headings": {
     "login": "Sign In",
     "password_reset": "Reset Password",

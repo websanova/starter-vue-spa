@@ -3,7 +3,7 @@
   import { Layout, LayoutHeader } from '@shared/components/common/Layout'
   import BookmarksSheetMenu from '@/features/sheet-menus/Bookmarks.vue'
   import AccountSheetMenu from '@shared/features/sheet-menus/Account.vue'
-  import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
+  import NotificationsSheetMenu from '@/features/sheet-menus/Notifications.vue'
   import HeaderNav from '@/features/navs/Header.vue'
   import AccountNav from '@/features/navs/Account.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'

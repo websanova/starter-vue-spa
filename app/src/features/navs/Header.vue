@@ -17,24 +17,7 @@
 
 <template>
   <Navbar>
-    <NavDropdown
-      align="end"
-      class="sm:unhidden"
-    >
-      <template #trigger>
-        <BellIcon class="size-7" />
-      </template>
-      <!-- <DropdownMenuItem as-child>
-        <RouterLink :to="{ name: 'user-account' }">Account</RouterLink>
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem @select="onLogout">Logout</DropdownMenuItem> -->
-    </NavDropdown>
-
-    <NavItem
-      class="sm:hidden"
-      @click="emit('notifications')"
-    >
+    <NavItem @click="emit('notifications')">
       <BellIcon />
     </NavItem>
 
