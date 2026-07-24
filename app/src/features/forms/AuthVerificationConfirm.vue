@@ -1,19 +1,38 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
+  import { useVerificationResend } from '@/composables/api/verification'
   import { useLogout } from '@shared/composables/support/logout'
   import { useSettingsStore } from '@shared/stores/settings'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
+  import { HttpError } from '@shared/plugins/http/client'
 
   const settings = useSettingsStore()
   const onLogout = useLogout()
+  const verificationResend = useVerificationResend()
 
   const length = computed(() => settings.data.verificationCodeLength)
   const code = ref('')
-  const isResending = ref(false)
+  const resendError = ref('')
 
-  function onResend() {}
+  async function onResend(silent = false) {
+    resendError.value = ''
+
+    try {
+      await verificationResend.mutateAsync()
+    } catch (err) {
+      if (err instanceof HttpError && err.response.status === 429) {
+        if (!silent) {
+          resendError.value = (err.response.data as { message: string }).message
+        }
+        return
+      }
+      throw err
+    }
+  }
+
+  onMounted(() => onResend(true))
 </script>
 
 <template>
@@ -37,16 +56,23 @@
         </InputOTP>
       </div>
 
+      <p
+        v-if="resendError"
+        class="text-center text-sm text-destructive"
+      >
+        {{ resendError }}
+      </p>
+
       <FormButton class="w-full">
         {{ $t('features.lbl.verify') }}
       </FormButton>
 
       <p class="self-end text-sm text-muted-foreground">
         <ButtonLoading
-          :pending="isResending"
+          :pending="verificationResend.isPending.value"
           variant="link"
           class="h-auto p-0 text-link"
-          @click="onResend"
+          @click="onResend()"
         >
           {{ $t('features.form.verification_confirm.resend_code') }}
         </ButtonLoading>
