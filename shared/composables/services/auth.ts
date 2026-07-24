@@ -85,6 +85,7 @@ export const useAuthService = function() {
     isReady: computed(() => store.isReady),
     user: computed(() => store.user),
     checkReady,
+    fetchUser,
     flush,
     logout,
     refreshToken,

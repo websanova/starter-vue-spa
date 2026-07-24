@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue'
+  import { useRouter } from 'vue-router'
   import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useLogout } from '@shared/composables/support/logout'
@@ -9,6 +10,7 @@
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
 
+  const router = useRouter()
   const settings = useSettingsStore()
   const onLogout = useLogout()
   const verificationConfirm = useVerificationConfirm()
@@ -20,7 +22,9 @@
 
   function onVerify() {
     verificationResend.reset()
-    verificationConfirm.mutate({ code: code.value })
+    verificationConfirm.mutate({ code: code.value }, {
+      onSuccess: () => router.push({ name: 'user-landing' }),
+    })
   }
 
   function onResend() {

@@ -6,7 +6,8 @@ import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
  * the auth guard, so any route that reaches here as gated already has a
  * logged in user. A route is gated when it carries auth meta that is not
  * guest only (roles other than false). The confirm route is exempt since
- * it is the redirect target.
+ * it is the redirect target. The reverse also holds, a verified user
+ * landing on the confirm route is sent to user landing.
  */
 export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | undefined {
   const auth = useAuthService()
@@ -25,5 +26,13 @@ export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | unde
     to.name !== 'auth-verification-confirm'
   ) {
     return { name: 'auth-verification-confirm' }
+  }
+
+  if (
+    auth.user.value &&
+    !auth.user.value.isVerificationRequired &&
+    to.name === 'auth-verification-confirm'
+  ) {
+    return { name: 'user-landing' }
   }
 }
