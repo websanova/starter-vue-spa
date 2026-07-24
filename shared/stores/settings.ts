@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { Settings } from '@shared/config/settings'
+import type { Settings } from '@shared/models/settings'
 
 export const useSettingsStore = defineStore('settings', () => {
   const isLoaded = ref<boolean>(false)

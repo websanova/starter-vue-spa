@@ -8,7 +8,7 @@
   const settings = useSettingsStore()
   const onLogout = useLogout()
 
-  const length = computed(() => settings.data.verification_code_length)
+  const length = computed(() => settings.data.verificationCodeLength)
   const code = ref('')
 </script>
 

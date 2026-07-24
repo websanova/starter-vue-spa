@@ -1,9 +1,4 @@
-export interface Settings {
-  locales: string[]
-  defaultLocale: string
-  defaultTimezone: string
-  verification_code_length: number
-}
+import type { Settings } from '@shared/models/settings'
 
 /**
  * Shared settings defaults applied across every app. Merged
