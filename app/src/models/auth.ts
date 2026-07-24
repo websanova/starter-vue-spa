@@ -3,14 +3,15 @@ export interface AuthDto {
   email: string
   first_name: string
   id: number
-  is_email_verification_required: boolean
-  is_phone_verification_required: boolean
+  is_verification_pending: boolean
   is_verification_required: boolean
   last_name: string
   locale: string
   phone: string | null
   role?: string
   timezone: string
+  verification_pending: string[]
+  verification_required: string[]
 }
 
 export interface Auth {
@@ -18,14 +19,15 @@ export interface Auth {
   email: string
   firstName: string
   id: number
-  isEmailVerificationRequired: boolean
-  isPhoneVerificationRequired: boolean
+  isVerificationPending: boolean
   isVerificationRequired: boolean
   lastName: string
   locale: string
   phone: string | null
   role?: string
   timezone: string
+  verificationPending: string[]
+  verificationRequired: string[]
   readonly isAvatar: boolean
 }
 
@@ -35,14 +37,15 @@ export function toAuth(dto: AuthDto): Auth {
     email: dto.email,
     firstName: dto.first_name,
     id: dto.id,
-    isEmailVerificationRequired: dto.is_email_verification_required,
-    isPhoneVerificationRequired: dto.is_phone_verification_required,
+    isVerificationPending: dto.is_verification_pending,
     isVerificationRequired: dto.is_verification_required,
     lastName: dto.last_name,
     locale: dto.locale,
     phone: dto.phone,
     role: dto.role,
     timezone: dto.timezone,
+    verificationPending: dto.verification_pending,
+    verificationRequired: dto.verification_required,
     get isAvatar() { return this.avatarUrl !== null },
   }
 }

@@ -2,6 +2,7 @@
   import { computed, ref, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
+  import { useVerifyChannel } from '@/composables/verifyChannel'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useAuthService } from '@shared/composables/services/auth'
   import { useLogout } from '@shared/composables/support/logout'
@@ -9,7 +10,6 @@
   import { Button } from '@shared/components/ui/button'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
-  import { Heading } from '@shared/components/common/Heading'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
 
   const router = useRouter()
@@ -19,22 +19,11 @@
   const verificationConfirm = useVerificationConfirm()
   const verificationResend = useVerificationResend()
 
+  const { channel } = useVerifyChannel()
+
   const code = ref('')
   const error = useMutationError(verificationConfirm, verificationResend)
   const length = computed(() => settings.data.verificationCodeLength)
-
-  // Active channel is the first required channel still flagged on the
-  // user. Refetching the user after a verify advances it automatically.
-  const channel = computed(() => {
-    const user = auth.user.value
-    if (!user) return ''
-    return (settings.data.verificationRequired ?? []).find((c) => {
-      if (c === 'email') return user.isEmailVerificationRequired
-      if (c === 'phone') return user.isPhoneVerificationRequired
-      return false
-    }) ?? ''
-  })
-
   const digits = computed(() => auth.user.value?.phone?.slice(-2) ?? '')
 
   function onVerify() {
@@ -65,13 +54,6 @@
 </script>
 
 <template>
-  <Heading
-    class="text-center"
-    :divider="false"
-  >
-    {{ $t(`features.headings.verify_${channel}`) }}
-  </Heading>
-
   <Form @submit="onVerify">
     <p class="text-center">
       {{ $t(`features.form.verify_account.note_${channel}`, { digits }) }}
