@@ -1,7 +1,10 @@
 <script setup lang="ts">
+  import { type NotificationVariants, notificationVariants } from "."
+
   defineProps<{
     title: string
     body: string
+    variant?: NotificationVariants["variant"]
   }>()
 
   defineEmits<{
@@ -11,14 +14,14 @@
 
 <template>
   <div
-    class="cursor-pointer rounded-md border p-3 transition-colors hover:bg-accent"
+    :class="notificationVariants({ variant })"
     @click="$emit('action')"
   >
-    <p class="font-medium">
+    <p class="text-sm font-bold">
       {{ title }}
     </p>
 
-    <p class="text-sm text-muted-foreground">
+    <p class="text-xs">
       {{ body }}
     </p>
   </div>

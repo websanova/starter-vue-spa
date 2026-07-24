@@ -26,11 +26,14 @@
     :width="width"
     :header-height="headerHeight"
   >
-    <Notification
-      v-for="channel in pending"
-      :key="channel"
-      :title="$t(`features.notification.${channel}.title`)"
-      :body="$t(`features.notification.${channel}.body`)"
-    />
+    <div class="py-3">
+      <Notification
+        v-for="channel in pending"
+        :key="channel"
+        variant="destructive"
+        :title="$t(`features.notification.${channel}.title`)"
+        :body="$t(`features.notification.${channel}.body`)"
+      />
+    </div>
   </NotificationsSheetMenu>
 </template>
