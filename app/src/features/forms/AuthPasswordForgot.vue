@@ -6,14 +6,12 @@
 </script>
 
 <template>
-  <div
+  <p
     v-if="isSuccess"
-    class="flex flex-col gap-2 text-center"
+    class="text-center"
   >
-    <p class="text-muted-foreground">
-      {{ $t('features.form.password_forgot.note_success') }}
-    </p>
-  </div>
+    {{ $t('features.form.password_forgot.note_success') }}
+  </p>
 
   <Form
     v-else

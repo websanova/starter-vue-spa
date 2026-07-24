@@ -17,28 +17,24 @@
 <template>
   <p
     v-if="!isValidLink"
-    class="text-muted-foreground text-center"
+    class="text-center"
   >
     {{ $t('features.form.password_reset.note_invalid') }}
   </p>
 
-  <div
+  <i18n-t
     v-else-if="isSuccess"
-    class="flex flex-col gap-2 text-center"
+    keypath="features.form.password_reset.note_success"
+    tag="p"
+    class="text-center"
   >
-    <i18n-t
-      keypath="features.form.password_reset.note_success"
-      tag="p"
-      class="text-muted-foreground"
+    <RouterLink
+      :to="{ name: 'auth-login' }"
+      class="text-link"
     >
-      <RouterLink
-        :to="{ name: 'auth-login' }"
-        class="text-link"
-      >
-        {{ $t('features.lbl.sign_in') }}
-      </RouterLink>
-    </i18n-t>
-  </div>
+      {{ $t('features.lbl.sign_in') }}
+    </RouterLink>
+  </i18n-t>
 
   <Form
     v-else
