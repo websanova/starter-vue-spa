@@ -39,7 +39,7 @@
         :to="{ name: 'auth-password-forgot' }"
         class="text-link"
       >
-        {{ $t('features.lbl.password_reset') }}
+        {{ $t('features.form.login.reset_password') }}
       </RouterLink>
 
       |

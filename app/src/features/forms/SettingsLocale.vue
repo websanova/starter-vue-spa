@@ -36,7 +36,7 @@
     />
 
     <p class="text-sm text-muted-foreground">
-      {{ $t('features.lbl.local_time') }}: {{ localTime }}
+      {{ $t('features.form.settings_locale.local_time') }}: {{ localTime }}
     </p>
 
     <FormButton :pending="isPending">

@@ -30,17 +30,15 @@
       class="w-full"
       :pending="isPending"
     >
-      {{ $t('features.lbl.send_reset_link') }}
+      {{ $t('features.lbl.send_reset_code') }}
     </FormButton>
 
     <p class="self-end text-sm text-muted-foreground">
-      {{ $t('features.form.password_forgot.note_back') }}
-
       <RouterLink
         :to="{ name: 'auth-login' }"
         class="text-link"
       >
-        {{ $t('features.lbl.sign_in') }}
+        {{ $t('features.form.password_forgot.back') }}
       </RouterLink>
     </p>
   </Form>

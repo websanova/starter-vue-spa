@@ -62,7 +62,7 @@
       class="w-full"
       :pending="isPending"
     >
-      {{ $t('features.lbl.update_password') }}
+      {{ $t('features.lbl.update') }}
     </FormButton>
   </Form>
 </template>

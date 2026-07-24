@@ -2,7 +2,6 @@
   "lbl": {
     "account": "Account",
     "all": "All",
-    "avatar": "Avatar",
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
@@ -11,30 +10,25 @@
     "delete": "Delete",
     "email": "Email",
     "first_name": "First Name",
-    "info": "Info",
     "language": "Language",
     "last_name": "Last Name",
     "light_mode": "Light mode",
-    "local_time": "Local time",
-    "locale": "Locale",
     "mark_all_read": "Mark all read",
     "name": "Name",
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm password",
-    "password_reset": "Password reset",
     "profile": "Profile",
     "refresh": "Refresh",
     "remove": "Remove",
     "security": "Security",
-    "send_reset_link": "Send reset link",
+    "send_reset_code": "Send reset code",
     "settings": "Settings",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "sign_up": "Sign up",
     "timezone": "Timezone",
     "update": "Update",
-    "update_password": "Update password",
     "upload": "Upload",
     "verify": "Verify"
   },
@@ -71,11 +65,12 @@
       "toast": "Avatar updated"
     },
     "login": {
-      "loading": "Signing in..."
+      "loading": "Signing in...",
+      "reset_password": "Reset password"
     },
     "password_forgot": {
+      "back": "Back to sign in",
       "loading": "Sending...",
-      "note_back": "Back to",
       "note_success": "Password reset email sent. Check your spam folder if it doesn't show up in a few minutes."
     },
     "password_reset": {
@@ -83,19 +78,25 @@
       "note_invalid": "Invalid password update link.",
       "note_success": "Your password has changed. You can now {0} using your new credentials."
     },
-    "register": {
-      "loading": "Signing up...",
-      "prompt": "Already a member?"
-    },
     "profile": {
       "toast": "Profile saved"
+    },
+    "register": {
+      "already_member": "Already a member?",
+      "loading": "Signing up..."
+    },
+    "settings_locale": {
+      "local_time": "Local time"
     }
   },
   "headings": {
-    "login": "Sign in",
+    "settings_locale": "Locale",
+    "login": "Sign In",
     "password_reset": "Reset Password",
-    "password_update": "Update password",
-    "register": "Sign up",
-    "verification_confirm": "Confirm Verification"
+    "password_update": "Update Password",
+    "profile_avatar": "Avatar",
+    "profile_info": "Info",
+    "register": "Sign Up",
+    "verification_confirm": "Verify Account"
   }
 }

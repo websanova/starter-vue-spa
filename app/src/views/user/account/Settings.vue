@@ -8,7 +8,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.lbl.locale') }}
+        {{ $t('features.headings.settings_locale') }}
       </Heading>
 
       <SettingsLocaleForm />
