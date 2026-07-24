@@ -6,7 +6,6 @@
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
-    "confirm_verification": "Confirm verification",
     "create": "Create",
     "dark_mode": "Dark mode",
     "delete": "Delete",
@@ -91,5 +90,12 @@
     "profile": {
       "toast": "Profile saved"
     }
+  },
+  "headings": {
+    "login": "Sign in",
+    "password_reset": "Reset Password",
+    "password_update": "Update password",
+    "register": "Sign up",
+    "verification_confirm": "Confirm Verification"
   }
 }

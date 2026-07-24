@@ -11,7 +11,7 @@
       class="capitalize text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.sign_in') }}
+      {{ $t('features.headings.sign_in') }}
     </Heading>
 
     <AuthLoginForm />

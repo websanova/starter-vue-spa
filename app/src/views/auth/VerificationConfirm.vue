@@ -8,10 +8,10 @@
     class="flex w-full flex-col gap-4"
   >
     <Heading
-      class="capitalize text-center"
+      class="text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.confirm_verification') }}
+      {{ $t('features.headings.verification_confirm') }}
     </Heading>
 
     <AuthVerificationConfirmForm />

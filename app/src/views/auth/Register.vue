@@ -8,10 +8,10 @@
     class="flex w-full flex-col gap-4"
   >
     <Heading
-      class="capitalize text-center"
+      class="text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.sign_up') }}
+      {{ $t('features.headings.register') }}
     </Heading>
 
     <AuthRegisterForm />

@@ -6,7 +6,6 @@
     "billing": "Facturation",
     "bookmarks": "Signets",
     "cancel": "Annuler",
-    "confirm_verification": "Confirmer la vérification",
     "create": "Créer",
     "dark_mode": "Mode sombre",
     "delete": "Supprimer",
@@ -91,5 +90,12 @@
     "profile": {
       "toast": "Profil enregistré"
     }
+  },
+  "headings": {
+    "confirm_verification": "Confirmer la vérification",
+    "password_reset": "Réinitialiser le mot de passe",
+    "sign_in": "Se connecter",
+    "sign_up": "S'inscrire",
+    "update_password": "Mettre à jour le mot de passe"
   }
 }

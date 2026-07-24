@@ -8,10 +8,10 @@
     class="flex w-full flex-col gap-4"
   >
     <Heading
-      class="capitalize text-center"
+      class="text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.sign_in') }}
+      {{ $t('features.headings.login') }}
     </Heading>
 
     <AuthLoginForm />

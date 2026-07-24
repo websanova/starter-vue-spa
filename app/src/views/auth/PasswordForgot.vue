@@ -8,10 +8,10 @@
     class="flex w-full flex-col gap-4"
   >
     <Heading
-      class="capitalize text-center"
+      class="text-center"
       :divider="false"
     >
-      {{ $t('features.lbl.password_reset') }}
+      {{ $t('features.headings.password_reset') }}
     </Heading>
 
     <AuthPasswordForgotForm />
