@@ -34,10 +34,11 @@
     "verify": "Vérifier"
   },
   "sr": {
-    "menu_bookmarks": "Menu des signets",
+    "dark_mode_toggle": "Basculer le mode sombre",
+    "mark_read": "Marquer comme lu",
     "menu_account": "Menu du compte",
-    "menu_notifications": "Menu des notifications",
-    "dark_mode_toggle": "Basculer le mode sombre"
+    "menu_bookmarks": "Menu des signets",
+    "menu_notifications": "Menu des notifications"
   },
   "ph": {
     "email": "vous{'@'}exemple.com",

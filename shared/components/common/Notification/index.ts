@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 export { default as Notification } from "./Notification.vue"
 
 export const notificationVariants = cva(
-  "cursor-pointer rounded-md p-3 shadow-sm transition-colors",
+  "flex items-start gap-3 cursor-pointer rounded-md p-3 shadow-sm transition-colors",
   {
     variants: {
       variant: {

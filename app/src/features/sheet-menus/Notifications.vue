@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useNotifications } from '@/composables/api/notifications'
+  import { useNotifications, useReadNotification } from '@/composables/api/notifications'
   import { useAuthService } from '@shared/composables/services/auth'
   import { Notification } from '@shared/components/common/Notification'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
@@ -20,6 +20,7 @@
   const open = defineModel<boolean>('open', { default: false })
 
   const { data: notifications } = useNotifications(open)
+  const { mutate: readNotification } = useReadNotification()
 
   const pending = computed(() => auth.user.value?.verificationPending ?? [])
 
@@ -49,8 +50,10 @@
       <Notification
         v-for="notification in notifications"
         :key="notification.id"
+        dismissible
         :title="notification.title"
         :body="notification.body"
+        @dismiss="readNotification(notification.id)"
       />
     </div>
   </NotificationsSheetMenu>
