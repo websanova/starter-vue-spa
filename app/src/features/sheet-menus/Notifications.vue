@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useNotifications, useReadNotification } from '@/composables/api/notifications'
+  import { useNotifications, useReadAllNotifications, useReadNotification } from '@/composables/api/notifications'
   import { useAuthService } from '@shared/composables/services/auth'
   import { Notification } from '@shared/components/common/Notification'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
@@ -21,12 +21,21 @@
 
   const { data: notifications } = useNotifications(open)
   const { mutate: readNotification } = useReadNotification()
+  const { mutate: readAllNotifications, isPending } = useReadAllNotifications()
 
   const pending = computed(() => auth.user.value?.verificationPending ?? [])
 
   function onVerify(channel: string) {
     router.push({ name: 'auth-verify-account', query: { channel } })
     open.value = false
+  }
+
+  function onMarkAllRead() {
+    readAllNotifications(undefined, {
+      onSuccess: () => {
+        open.value = false
+      },
+    })
   }
 </script>
 
@@ -36,6 +45,8 @@
     :side="side"
     :width="width"
     :header-height="headerHeight"
+    :pending="isPending"
+    @mark-all-read="onMarkAllRead"
   >
     <div class="flex flex-col gap-3 py-3">
       <Notification

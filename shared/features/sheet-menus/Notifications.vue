@@ -1,11 +1,12 @@
 <script setup lang="ts">
+  import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
-  import { Button } from '@shared/components/ui/button'
 
   withDefaults(defineProps<{
     side?: 'left' | 'right'
     width?: string
     headerHeight?: string
+    pending?: boolean
   }>(), {
     side: 'left',
   })
@@ -28,13 +29,14 @@
     <slot />
 
     <template #footer>
-      <Button
+      <ButtonLoading
         severity="danger"
         size="sm"
+        :pending="pending"
         @click="$emit('mark-all-read')"
       >
         {{ $t('features.lbl.mark_all_read') }}
-      </Button>
+      </ButtonLoading>
     </template>
   </SheetMenu>
 </template>

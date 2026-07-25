@@ -48,3 +48,24 @@ export function useReadNotification() {
     },
   })
 }
+
+/**
+ * Marks every notification read. The cached list is emptied and the
+ * synced count zeroed rather than decremented, since the whole set is
+ * cleared in one call. Pending verifications are untouched, so the bell
+ * stays marked while any remain. The next poll is authoritative either
+ * way.
+ */
+export function useReadAllNotifications() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: () => useHttp().post('notifications/read'),
+    onSuccess: () => {
+      qc.setQueryData<Notification[]>(key, [])
+      qc.setQueryData<Sync>(syncKey, (sync) => sync && {
+        ...sync,
+        notificationsUnread: 0,
+      })
+    },
+  })
+}
