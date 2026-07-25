@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
+  import { useNotifications } from '@/composables/api/notifications'
   import { useAuthService } from '@shared/composables/services/auth'
   import { Notification } from '@shared/components/common/Notification'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
@@ -18,6 +19,8 @@
 
   const open = defineModel<boolean>('open', { default: false })
 
+  const { data: notifications } = useNotifications(open)
+
   const pending = computed(() => auth.user.value?.verificationPending ?? [])
 
   function onVerify(channel: string) {
@@ -33,7 +36,7 @@
     :width="width"
     :header-height="headerHeight"
   >
-    <div class="py-3">
+    <div class="flex flex-col gap-3 py-3">
       <Notification
         v-for="channel in pending"
         :key="channel"
@@ -41,6 +44,13 @@
         :title="$t(`features.notification.${channel}.title`)"
         :body="$t(`features.notification.${channel}.body`)"
         @action="onVerify(channel)"
+      />
+
+      <Notification
+        v-for="notification in notifications"
+        :key="notification.id"
+        :title="notification.title"
+        :body="notification.body"
       />
     </div>
   </NotificationsSheetMenu>
