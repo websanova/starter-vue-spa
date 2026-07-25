@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { computed } from 'vue'
+  import { useRouter } from 'vue-router'
   import { useAuthService } from '@shared/composables/services/auth'
   import { Notification } from '@shared/components/common/Notification'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
@@ -12,11 +13,17 @@
     side: 'left',
   })
 
+  const router = useRouter()
   const auth = useAuthService()
 
   const open = defineModel<boolean>('open', { default: false })
 
   const pending = computed(() => auth.user.value?.verificationPending ?? [])
+
+  function onVerify(channel: string) {
+    router.push({ name: 'auth-verify-account', query: { channel } })
+    open.value = false
+  }
 </script>
 
 <template>
@@ -33,6 +40,7 @@
         variant="destructive"
         :title="$t(`features.notification.${channel}.title`)"
         :body="$t(`features.notification.${channel}.body`)"
+        @action="onVerify(channel)"
       />
     </div>
   </NotificationsSheetMenu>
