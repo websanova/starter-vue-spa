@@ -1,7 +1,10 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { BellIcon, BookmarkIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
+  import { useSync } from '@/composables/api/sync'
   import { useDarkMode } from '@shared/composables/support/darkMode'
   import { useLogout } from '@shared/composables/support/logout'
+  import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
   import { DropdownMenuItem, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
@@ -13,12 +16,18 @@
 
   const { isDark, toggle } = useDarkMode()
   const onLogout = useLogout()
+
+  const { data: sync } = useSync()
+
+  const hasUnread = computed(() => (sync.value?.notificationsUnread ?? 0) > 0)
 </script>
 
 <template>
   <Navbar>
     <NavItem @click="emit('notifications')">
-      <BellIcon />
+      <Indicator :show="hasUnread">
+        <BellIcon />
+      </Indicator>
     </NavItem>
 
     <NavDropdown
