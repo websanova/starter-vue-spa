@@ -8,6 +8,7 @@ export interface AuthDto {
   locale: string
   role?: string
   timezone: string
+  verification_pending: string[]
 }
 
 export interface Auth {
@@ -20,6 +21,7 @@ export interface Auth {
   locale: string
   role?: string
   timezone: string
+  verificationPending: string[]
 }
 
 export function toAuth(dto: AuthDto): Auth {
@@ -33,5 +35,6 @@ export function toAuth(dto: AuthDto): Auth {
     locale: dto.locale,
     role: dto.role,
     timezone: dto.timezone,
+    verificationPending: dto.verification_pending,
   }
 }
