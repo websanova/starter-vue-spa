@@ -46,6 +46,7 @@
     :width="width"
     :header-height="headerHeight"
     :pending="isPending"
+    :disabled="!notifications?.length"
     @mark-all-read="onMarkAllRead"
   >
     <div class="flex flex-col gap-3 py-3">

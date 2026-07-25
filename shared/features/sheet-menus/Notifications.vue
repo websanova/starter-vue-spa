@@ -7,6 +7,7 @@
     width?: string
     headerHeight?: string
     pending?: boolean
+    disabled?: boolean
   }>(), {
     side: 'left',
   })
@@ -33,6 +34,7 @@
         severity="danger"
         size="sm"
         :pending="pending"
+        :disabled="disabled"
         @click="$emit('mark-all-read')"
       >
         {{ $t('features.lbl.mark_all_read') }}
