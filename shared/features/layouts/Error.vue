@@ -13,7 +13,9 @@
 
     <LayoutBody>
       <LayoutBodyContent centered>
-        <RouterView />
+        <div class="mx-auto w-full max-w-xs">
+          <RouterView />
+        </div>
       </LayoutBodyContent>
     </LayoutBody>
   </Layout>

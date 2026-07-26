@@ -7,8 +7,9 @@
   },
   "error": {
     "404": {
-      "title": "404",
-      "message": "Not Found"
+      "link": "Click here to return home.",
+      "message": "This page could not be found.",
+      "title": "404 Not Found"
     }
   },
   "meta": {

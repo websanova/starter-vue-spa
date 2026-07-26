@@ -12,8 +12,9 @@
   },
   "error": {
     "404": {
-      "title": "404",
-      "message": "Introuvable"
+      "link": "Cliquez ici pour retourner à l'accueil.",
+      "message": "Cette page est introuvable.",
+      "title": "404 Introuvable"
     }
   },
   "meta": {
