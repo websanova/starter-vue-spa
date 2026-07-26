@@ -1,13 +1,12 @@
 import type { App } from "vue"
 import { createRouter as createVueRouter, createWebHistory, type Router } from "vue-router"
 
-// import * as i18n from './interceptors/i18n.js'
 import * as auth from './interceptors/auth'
 import * as content from './interceptors/content'
 import * as i18n from './interceptors/i18n'
 import * as ready from './interceptors/ready'
 import * as verification from './interceptors/verification'
-// import * as scrollToTop from './interceptors/scrollToTop.js'
+import { scrollBehavior } from './scrollBehavior'
 
 import routes from "@routes"
 
@@ -20,7 +19,8 @@ let instance: Router
 function createRouter(app: App) {
   instance = createVueRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior
   })
 
   // Non-blocking loaders. Registered above the ready gate so their fetches
@@ -37,7 +37,6 @@ function createRouter(app: App) {
   // Post-ready guards. Depend on the state ready resolved (auth roles, etc).
   instance.beforeEach(auth.beforeEach)
   instance.beforeEach(verification.beforeEach)
-  // instance.afterEach(scrollToTop.afterEach)
 
   app.use(instance)
 }
