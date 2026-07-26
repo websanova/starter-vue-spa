@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { BellIcon, BookmarkIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
+  import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
   import { useNotificationsUnread } from '@/composables/notificationsUnread'
   import { useDarkMode } from '@shared/composables/support/darkMode'
   import { useLogout } from '@shared/composables/support/logout'
@@ -46,6 +46,13 @@
         <RouterLink :to="{ name: 'user-bookmarks' }">
           <BookmarkIcon />
           {{ $t('features.lbl.bookmarks') }}
+        </RouterLink>
+      </DropdownMenuItem>
+
+      <DropdownMenuItem as-child>
+        <RouterLink :to="{ name: 'user-subscribe-plans' }">
+          <LayersIcon />
+          {{ $t('features.lbl.plans') }}
         </RouterLink>
       </DropdownMenuItem>
 
