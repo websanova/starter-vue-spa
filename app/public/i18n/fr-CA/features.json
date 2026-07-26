@@ -23,6 +23,7 @@
     "refresh": "Actualiser",
     "remove": "Retirer",
     "security": "Sécurité",
+    "select": "Sélectionner",
     "send_reset_code": "Envoyer le code de réinitialisation",
     "settings": "Paramètres",
     "sign_in": "Se connecter",
@@ -105,6 +106,29 @@
     "phone": {
       "title": "Vérifiez votre numéro de téléphone",
       "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
+    }
+  },
+  "subscribe": {
+    "plans": {
+      "features": {
+        "bookmarks": "Signets",
+        "categories": "Catégories",
+        "tags": "Étiquettes"
+      },
+      "free": "Gratuit",
+      "interval": {
+        "monthly": "/mois",
+        "yearly": "/an"
+      },
+      "names": {
+        "free": "Starter Gratuit",
+        "pro": "Starter Pro"
+      },
+      "toggle": {
+        "monthly": "Mensuel",
+        "yearly": "Annuel"
+      },
+      "unlimited": "Illimité"
     }
   },
   "headings": {

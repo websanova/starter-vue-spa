@@ -23,6 +23,7 @@
     "refresh": "Refresh",
     "remove": "Remove",
     "security": "Security",
+    "select": "Select",
     "send_reset_code": "Send reset code",
     "settings": "Settings",
     "sign_in": "Sign in",
@@ -105,6 +106,29 @@
     "phone": {
       "title": "Verify your phone number",
       "body": "Confirm your phone number to secure your account."
+    }
+  },
+  "subscribe": {
+    "plans": {
+      "features": {
+        "bookmarks": "Bookmarks",
+        "categories": "Categories",
+        "tags": "Tags"
+      },
+      "free": "Free",
+      "interval": {
+        "monthly": "/mo",
+        "yearly": "/year"
+      },
+      "names": {
+        "free": "Starter Free",
+        "pro": "Starter Pro"
+      },
+      "toggle": {
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "unlimited": "Unlimited"
     }
   },
   "headings": {

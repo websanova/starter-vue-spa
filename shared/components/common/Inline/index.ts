@@ -9,7 +9,8 @@ export const inlineVariants = cva(
       gap: {
         sm: "gap-1",
         md: "gap-2",
-        lg: "gap-3"
+        lg: "gap-3",
+        xl: "gap-4"
       }
     },
     defaultVariants: {
