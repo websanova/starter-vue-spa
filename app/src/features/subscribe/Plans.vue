@@ -61,6 +61,7 @@
       >
         <PlanCard
           v-for="plan in plans"
+          class="w-full sm:max-w-60"
           :key="plan.id"
           :plan="plan"
           :interval="interval"
