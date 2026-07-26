@@ -66,6 +66,11 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Light and dark themes, remembered across visits
 - Correct theme shown immediately, no flash on load
 
+**Scroll Behavior**
+- Scroll resets to the top on navigation, with back and forward restoring where you left off
+- Routes can be grouped so moving between them keeps the scroll position, handy for tabbed sections
+- Built on Vue Router's own scroll handling, just with the grouping added on top
+
 **Accessibility**
 - Accessible component primitives via reka-ui - keyboard nav, focus management, and ARIA out of the box
 - Icon-only controls and dialogs carry screen-reader labels
