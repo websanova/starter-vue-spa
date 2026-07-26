@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <Heading>
-    Subscribe Plans
+  <Heading center>
+    Plans
   </Heading>
 </template>

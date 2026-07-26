@@ -5,12 +5,14 @@
 
 <template>
   <LayoutBody>
-    <LayoutBodyContent>
-      <RouterView v-slot="{ Component }" >
-        <PageTransition>
-          <component :is="Component" />
-        </PageTransition>
-      </RouterView>
+    <LayoutBodyContent centered>
+      <div class="mx-auto w-full max-w-xl">
+        <RouterView v-slot="{ Component }" >
+          <PageTransition>
+            <component :is="Component" />
+          </PageTransition>
+        </RouterView>
+      </div>
     </LayoutBodyContent>
   </LayoutBody>
 </template>
