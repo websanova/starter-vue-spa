@@ -124,6 +124,8 @@
         "free": "Starter Gratuit",
         "pro": "Starter Pro"
       },
+      "note": "Choisissez le forfait qui vous convient.",
+      "note_sub": "Changez ou annulez à tout moment.",
       "toggle": {
         "monthly": "Mensuel",
         "yearly": "Annuel"

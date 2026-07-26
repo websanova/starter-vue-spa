@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <Card class="w-full max-w-60">
+  <Card class="w-full">
     <CardHeader>
       <CardTitle class="text-center text-2xl">
         {{ $t(`features.subscribe.plans.names.${props.plan.slug}`) }}

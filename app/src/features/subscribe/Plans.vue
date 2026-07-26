@@ -4,6 +4,7 @@
   import PlanCard from '@/components/cards/Plan.vue'
   import { Button } from '@shared/components/ui/button'
   import { Inline } from '@shared/components/common/Inline'
+  import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
   import type { Interval } from '@/models/plan'
 
@@ -16,12 +17,27 @@
 
 <template>
   <div>
-    <p v-if="isPending">Loading...</p>
-    <p v-else-if="error">{{ error.message }}</p>
+    <div
+      v-if="isPending"
+      class="flex justify-center"
+    >
+      <Loading />
+    </div>
+
+    <p
+      v-else-if="error"
+      class="text-center"
+    >
+      {{ error.message }}
+    </p>
 
     <Stack v-else>
       <div class="text-center">
-        Some message goes here
+        <p>{{ $t('features.subscribe.plans.note') }}</p>
+
+        <p class="text-sm text-muted-foreground">
+          {{ $t('features.subscribe.plans.note_sub') }}
+        </p>
       </div>
 
       <Inline

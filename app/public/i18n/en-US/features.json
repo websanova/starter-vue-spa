@@ -124,6 +124,8 @@
         "free": "Starter Free",
         "pro": "Starter Pro"
       },
+      "note": "Choose the plan that fits.",
+      "note_sub": "Upgrade, downgrade, or cancel anytime.",
       "toggle": {
         "monthly": "Monthly",
         "yearly": "Yearly"

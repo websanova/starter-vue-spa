@@ -6,7 +6,7 @@
 <template>
   <LayoutBody>
     <LayoutBodyContent centered>
-      <div class="mx-auto w-full max-w-xl">
+      <div class="mx-auto w-full max-w-xl py-6">
         <RouterView v-slot="{ Component }" >
           <PageTransition>
             <component :is="Component" />
