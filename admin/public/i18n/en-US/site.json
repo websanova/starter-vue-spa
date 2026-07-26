@@ -6,10 +6,6 @@
     }
   },
   "error": {
-    "403": {
-      "title": "403",
-      "message": "Forbidden"
-    },
     "404": {
       "title": "404",
       "message": "Not Found"
@@ -18,7 +14,6 @@
   "meta": {
     "title": {
       "auth-login": "Sign In",
-      "error-403": "403 Forbidden",
       "error-404": "404 Not Found",
       "user-icons": "Icons",
       "user-plans": "Plans",

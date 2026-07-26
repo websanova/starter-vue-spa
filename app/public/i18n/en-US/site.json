@@ -11,10 +11,6 @@
     }
   },
   "error": {
-    "403": {
-      "title": "403",
-      "message": "Forbidden"
-    },
     "404": {
       "title": "404",
       "message": "Not Found"
@@ -24,7 +20,6 @@
     "title": {
       "auth-login": "Sign In",
       "auth-register": "Sign Up",
-      "error-403": "403 Forbidden",
       "error-404": "404 Not Found",
       "user-account-billing": "Billing",
       "user-account-profile": "Profile",

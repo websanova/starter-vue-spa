@@ -11,10 +11,6 @@
     }
   },
   "error": {
-    "403": {
-      "title": "403",
-      "message": "Interdit"
-    },
     "404": {
       "title": "404",
       "message": "Introuvable"
@@ -24,7 +20,6 @@
     "title": {
       "auth-login": "Connexion",
       "auth-register": "Inscription",
-      "error-403": "403 Interdit",
       "error-404": "404 Introuvable",
       "user-account-billing": "Facturation",
       "user-account-profile": "Profil",
