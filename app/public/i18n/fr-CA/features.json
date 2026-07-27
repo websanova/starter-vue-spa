@@ -121,10 +121,6 @@
         "monthly": "/mois",
         "yearly": "/an"
       },
-      "names": {
-        "free": "Starter De Base",
-        "pro": "Starter Pro"
-      },
       "note": "Choisissez le forfait qui vous convient.",
       "note_sub": "Changez ou annulez à tout moment.",
       "toggle": {

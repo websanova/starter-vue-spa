@@ -14,7 +14,7 @@
   <Card>
     <CardHeader>
       <CardTitle class="text-center text-2xl">
-        {{ $t(`features.subscribe.plans.names.${props.plan.slug}`) }}
+        {{ props.plan.name }}
       </CardTitle>
 
       <p class="font-bold text-center">

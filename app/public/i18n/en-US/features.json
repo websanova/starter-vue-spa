@@ -121,10 +121,6 @@
         "monthly": "/mo",
         "yearly": "/year"
       },
-      "names": {
-        "free": "Starter Basic",
-        "pro": "Starter Pro"
-      },
       "note": "Choose the plan that fits.",
       "note_sub": "Upgrade, downgrade, or cancel anytime.",
       "toggle": {
