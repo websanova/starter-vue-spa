@@ -15,6 +15,7 @@ export interface AuthDto {
   role?: string
   subscription: AuthSubscriptionDto | null
   timezone: string
+  trial: AuthTrialDto | null
   verification_pending: string[]
   verification_required: string[]
 }
@@ -29,6 +30,10 @@ export interface AuthPlanDto {
 export interface AuthSubscriptionDto {
   ends_at: string | null
   interval: Interval
+}
+
+export interface AuthTrialDto {
+  ends_at: string | null
 }
 
 export interface Auth {
@@ -46,6 +51,7 @@ export interface Auth {
   role?: string
   subscription: AuthSubscription | null
   timezone: string
+  trial: AuthTrial | null
   verificationPending: string[]
   verificationRequired: string[]
   readonly isAvatar: boolean
@@ -61,6 +67,10 @@ export interface AuthPlan {
 export interface AuthSubscription {
   endsAt: string | null
   interval: Interval
+}
+
+export interface AuthTrial {
+  endsAt: string | null
 }
 
 export function toAuth(dto: AuthDto): Auth {
@@ -79,6 +89,7 @@ export function toAuth(dto: AuthDto): Auth {
     role: dto.role,
     subscription: dto.subscription ? toAuthSubscription(dto.subscription) : null,
     timezone: dto.timezone,
+    trial: dto.trial ? toAuthTrial(dto.trial) : null,
     verificationPending: dto.verification_pending,
     verificationRequired: dto.verification_required,
     get isAvatar() { return this.avatarUrl !== null },
@@ -98,5 +109,11 @@ export function toAuthSubscription(dto: AuthSubscriptionDto): AuthSubscription {
   return {
     endsAt: dto.ends_at,
     interval: dto.interval,
+  }
+}
+
+export function toAuthTrial(dto: AuthTrialDto): AuthTrial {
+  return {
+    endsAt: dto.ends_at,
   }
 }

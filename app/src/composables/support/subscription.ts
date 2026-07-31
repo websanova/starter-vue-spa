@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { useAuthService } from '@shared/composables/services/auth'
+import { useSettingsStore } from '@shared/stores/settings'
 import type { Interval, Plan } from '@/models/plan'
 
 export type PlanAction =
@@ -8,6 +9,7 @@ export type PlanAction =
   | 'downgrade'
   | 'resume'
   | 'select'
+  | 'subscribe'
   | 'switch'
   | 'upgrade'
 
@@ -20,21 +22,34 @@ export type PlanAction =
  */
 export function useSubscription() {
   const auth = useAuthService()
+  const settings = useSettingsStore()
+
+  const hasSubscription = computed(() => !!auth.user.value?.subscription)
+
+  const isCancelled = computed(() => auth.user.value?.isOnGracePeriod ?? false)
 
   const isPaid = computed(() => (auth.user.value?.plan?.tier ?? 0) > 0)
 
-  const isCancelled = computed(() => auth.user.value?.isOnGracePeriod ?? false)
+  /**
+   * A trial is only ever offered once. The trial object stays set once
+   * one has been started, so its absence is what marks a user as never
+   * having taken one.
+   */
+  const isTrialEligible = computed(() =>
+    settings.data.subscriptionMode === 'trial' &&
+    !hasSubscription.value &&
+    !auth.user.value?.trial
+  )
 
   function planAction(plan: Plan, interval: Interval): PlanAction {
     const user = auth.user.value
 
-    // No plan means subscription is required and the user holds nothing
-    // yet, so every plan is a fresh choice rather than a move.
-    if (!user || !user.plan) {
+    // Not reachable. The plans are only ever rendered behind auth.
+    if (!user) {
       return 'select'
     }
 
-    if (plan.id === user.plan.id) {
+    if (user.plan && plan.id === user.plan.id) {
       if (isCancelled.value) {
         return 'resume'
       }
@@ -44,6 +59,16 @@ export function useSubscription() {
       }
 
       return 'current'
+    }
+
+    // Covers the free tier user and the one carrying no plan at all
+    // because subscription is required, neither of whom has ever paid.
+    if (!hasSubscription.value && plan.tier > 0) {
+      return 'subscribe'
+    }
+
+    if (!user.plan) {
+      return 'select'
     }
 
     if (plan.tier > user.plan.tier) {
@@ -58,8 +83,10 @@ export function useSubscription() {
   }
 
   return {
+    hasSubscription,
     isCancelled,
     isPaid,
+    isTrialEligible,
     planAction,
   }
 }

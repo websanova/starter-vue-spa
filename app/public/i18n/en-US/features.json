@@ -117,6 +117,7 @@
         "downgrade": "Downgrade",
         "resume": "Resume",
         "select": "Select",
+        "subscribe": "Subscribe",
         "switch": "Switch",
         "upgrade": "Upgrade"
       },
@@ -136,6 +137,7 @@
         "monthly": "Monthly",
         "yearly": "Yearly"
       },
+      "trial": "Start your free {days} day trial now!",
       "unlimited": "Unlimited"
     }
   },

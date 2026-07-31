@@ -117,6 +117,7 @@
         "downgrade": "Rétrograder",
         "resume": "Reprendre",
         "select": "Sélectionner",
+        "subscribe": "S'abonner",
         "switch": "Changer",
         "upgrade": "Améliorer"
       },
@@ -136,6 +137,7 @@
         "monthly": "Mensuel",
         "yearly": "Annuel"
       },
+      "trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
       "unlimited": "Illimité"
     }
   },

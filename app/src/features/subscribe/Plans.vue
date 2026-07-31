@@ -3,6 +3,7 @@
   import { usePlans } from '@/composables/api/plans'
   import { useSubscription } from '@/composables/support/subscription'
   import { useAuthService } from '@shared/composables/services/auth'
+  import { useSettingsStore } from '@shared/stores/settings'
   import PlanCard from '@/components/cards/Plan.vue'
   import { Button } from '@shared/components/ui/button'
   import { Inline } from '@shared/components/common/Inline'
@@ -13,8 +14,9 @@
   const intervals: Interval[] = ['monthly', 'yearly']
 
   const { data: plans, isPending, error } = usePlans()
-  const { planAction } = useSubscription()
+  const { isTrialEligible, planAction } = useSubscription()
   const auth = useAuthService()
+  const settings = useSettingsStore()
 
   const interval = ref<Interval>(auth.user.value?.subscription?.interval ?? 'monthly')
 </script>
@@ -37,7 +39,13 @@
 
     <Stack v-else>
       <div class="text-center">
-        <p>{{ $t('features.subscribe.plans.note') }}</p>
+        <p v-if="isTrialEligible">
+          {{ $t('features.subscribe.plans.trial', { days: settings.data.subscriptionTrialDays }) }}
+        </p>
+
+        <p v-else>
+          {{ $t('features.subscribe.plans.note') }}
+        </p>
 
         <p class="text-sm text-muted-foreground">
           {{ $t('features.subscribe.plans.note_sub') }}
