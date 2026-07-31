@@ -12,14 +12,7 @@
   }>()
 
   const emit = defineEmits<{
-    cancel: []
-    current: []
-    downgrade: []
-    resume: []
-    select: []
-    subscribe: []
-    switch: []
-    upgrade: []
+    (e: PlanAction): void
   }>()
 </script>
 
