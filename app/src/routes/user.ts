@@ -13,6 +13,7 @@ const BookmarksList     = () => import('@/views/user/bookmarks/List.vue')
 const SubscribeCancel   = () => import('@/views/user/subscribe/Cancel.vue')
 const SubscribeCheckout = () => import('@/views/user/subscribe/Checkout.vue')
 const SubscribePlans    = () => import('@/views/user/subscribe/Plans.vue')
+const SubscribeResume   = () => import('@/views/user/subscribe/Resume.vue')
 
 export default [{
   path: '/u/',
@@ -100,6 +101,10 @@ export default [{
       path: 'plans',
       name: 'user-subscribe-plans',
       component: SubscribePlans
+    }, {
+      path: 'resume',
+      name: 'user-subscribe-resume',
+      component: SubscribeResume
     }]
   }]
 }]

@@ -22,21 +22,20 @@
 
   const interval = ref<Interval>(auth.user.value?.subscription?.interval ?? 'monthly')
 
-  /**
-   * Sends the selection on to the route that handles it. Cancelling is
-   * the only action that leaves the checkout flow, everything else
-   * carries the target plan and interval for checkout to resolve.
-   */
-  function onSelect(plan: Plan) {
-    const action = planAction(plan, interval.value)
+  function onCancel() {
+    router.push({ name: 'user-subscribe-cancel' })
+  }
 
-    if (action === 'cancel') {
-      router.push({ name: 'user-subscribe-cancel' })
-      return
-    }
-
+  function onCheckout(plan: Plan) {
     router.push({
       name: 'user-subscribe-checkout',
+      query: { plan: plan.slug, interval: interval.value },
+    })
+  }
+
+  function onResume(plan: Plan) {
+    router.push({
+      name: 'user-subscribe-resume',
       query: { plan: plan.slug, interval: interval.value },
     })
   }
@@ -99,7 +98,12 @@
           :plan="plan"
           :interval="interval"
           :action="planAction(plan, interval)"
-          @select="onSelect(plan)"
+          @cancel="onCancel"
+          @downgrade="onCheckout(plan)"
+          @resume="onResume(plan)"
+          @subscribe="onCheckout(plan)"
+          @switch="onCheckout(plan)"
+          @upgrade="onCheckout(plan)"
         />
       </Inline>
     </Stack>

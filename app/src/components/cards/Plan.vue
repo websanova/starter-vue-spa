@@ -12,7 +12,14 @@
   }>()
 
   const emit = defineEmits<{
+    cancel: []
+    current: []
+    downgrade: []
+    resume: []
     select: []
+    subscribe: []
+    switch: []
+    upgrade: []
   }>()
 </script>
 
@@ -59,7 +66,7 @@
       <Button
         class="w-full"
         :disabled="props.action === 'current'"
-        @click="emit('select')"
+        @click="emit(props.action)"
       >
         {{ $t(`features.subscribe.plans.action.${props.action}`) }}
       </Button>
