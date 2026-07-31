@@ -21,15 +21,16 @@ export type PlanAction =
 export function useSubscription() {
   const auth = useAuthService()
 
-  const isPaid = computed(() => (auth.user.value?.plan.tier ?? 0) > 0)
+  const isPaid = computed(() => (auth.user.value?.plan?.tier ?? 0) > 0)
 
   const isCancelled = computed(() => auth.user.value?.isOnGracePeriod ?? false)
 
   function planAction(plan: Plan, interval: Interval): PlanAction {
     const user = auth.user.value
 
-    // Not reachable. The profile always carries a plan, defaulting to free.
-    if (!user) {
+    // No plan means subscription is required and the user holds nothing
+    // yet, so every plan is a fresh choice rather than a move.
+    if (!user || !user.plan) {
       return 'select'
     }
 

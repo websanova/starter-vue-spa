@@ -75,7 +75,7 @@ export function toAuth(dto: AuthDto): Auth {
     lastName: dto.last_name,
     locale: dto.locale,
     phone: dto.phone,
-    plan: toAuthPlan(dto.plan),
+    plan: dto.plan ? toAuthPlan(dto.plan) : null,
     role: dto.role,
     subscription: dto.subscription ? toAuthSubscription(dto.subscription) : null,
     timezone: dto.timezone,
