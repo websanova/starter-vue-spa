@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { usePlans } from '@/composables/api/plans'
+  import { useSubscription } from '@/composables/subscription'
+  import { useAuthService } from '@shared/composables/services/auth'
   import PlanCard from '@/components/cards/Plan.vue'
   import { Button } from '@shared/components/ui/button'
   import { Inline } from '@shared/components/common/Inline'
@@ -11,8 +13,10 @@
   const intervals: Interval[] = ['monthly', 'yearly']
 
   const { data: plans, isPending, error } = usePlans()
+  const { planAction } = useSubscription()
+  const auth = useAuthService()
 
-  const interval = ref<Interval>('monthly')
+  const interval = ref<Interval>(auth.user.value?.subscription?.interval ?? 'monthly')
 </script>
 
 <template>
@@ -65,6 +69,7 @@
           :key="plan.id"
           :plan="plan"
           :interval="interval"
+          :action="planAction(plan, interval)"
         />
       </Inline>
     </Stack>

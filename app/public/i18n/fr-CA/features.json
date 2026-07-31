@@ -111,6 +111,15 @@
   },
   "subscribe": {
     "plans": {
+      "action": {
+        "cancel": "Annuler",
+        "current": "Actuel",
+        "downgrade": "Rétrograder",
+        "resume": "Reprendre",
+        "select": "Sélectionner",
+        "switch": "Changer",
+        "upgrade": "Améliorer"
+      },
       "features": {
         "bookmarks": "Signets",
         "categories": "Catégories",

@@ -111,6 +111,15 @@
   },
   "subscribe": {
     "plans": {
+      "action": {
+        "cancel": "Cancel",
+        "current": "Current",
+        "downgrade": "Downgrade",
+        "resume": "Resume",
+        "select": "Select",
+        "switch": "Switch",
+        "upgrade": "Upgrade"
+      },
       "features": {
         "bookmarks": "Bookmarks",
         "categories": "Categories",

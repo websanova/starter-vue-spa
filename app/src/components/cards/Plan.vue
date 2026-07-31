@@ -2,11 +2,13 @@
   import { CheckIcon, XIcon } from '@lucide/vue'
   import { Button } from '@shared/components/ui/button'
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@shared/components/ui/card'
+  import type { PlanAction } from '@/composables/subscription'
   import type { Interval, Plan } from '@/models/plan'
 
   const props = defineProps<{
     plan: Plan
     interval: Interval
+    action: PlanAction
   }>()
 </script>
 
@@ -50,8 +52,11 @@
     </CardContent>
 
     <CardFooter>
-      <Button class="w-full">
-        {{ $t('features.lbl.select') }}
+      <Button
+        class="w-full"
+        :disabled="props.action === 'current'"
+      >
+        {{ $t(`features.subscribe.plans.action.${props.action}`) }}
       </Button>
     </CardFooter>
   </Card>

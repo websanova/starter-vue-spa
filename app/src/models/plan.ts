@@ -13,6 +13,7 @@ export interface PlanDto {
   name: string
   prices: Partial<Record<Interval, PriceDto>>
   slug: string
+  tier: number
 }
 
 export interface Price {
@@ -26,6 +27,7 @@ export interface Plan {
   name: string
   prices: Partial<Record<Interval, Price>>
   slug: string
+  tier: number
 }
 
 export function toPlan(dto: PlanDto): Plan {
@@ -35,5 +37,6 @@ export function toPlan(dto: PlanDto): Plan {
     name: dto.name,
     prices: dto.prices,
     slug: dto.slug,
+    tier: dto.tier,
   }
 }
