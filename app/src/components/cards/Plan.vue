@@ -10,6 +10,10 @@
     interval: Interval
     action: PlanAction
   }>()
+
+  const emit = defineEmits<{
+    select: []
+  }>()
 </script>
 
 <template>
@@ -55,6 +59,7 @@
       <Button
         class="w-full"
         :disabled="props.action === 'current'"
+        @click="emit('select')"
       >
         {{ $t(`features.subscribe.plans.action.${props.action}`) }}
       </Button>

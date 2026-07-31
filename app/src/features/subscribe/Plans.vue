@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
   import { usePlans } from '@/composables/api/plans'
   import { useSubscription } from '@/composables/support/subscription'
   import { useAuthService } from '@shared/composables/services/auth'
@@ -9,16 +10,36 @@
   import { Inline } from '@shared/components/common/Inline'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
-  import type { Interval } from '@/models/plan'
+  import type { Interval, Plan } from '@/models/plan'
 
   const intervals: Interval[] = ['monthly', 'yearly']
 
   const { data: plans, isPending, error } = usePlans()
   const { isTrialEligible, planAction } = useSubscription()
   const auth = useAuthService()
+  const router = useRouter()
   const settings = useSettingsStore()
 
   const interval = ref<Interval>(auth.user.value?.subscription?.interval ?? 'monthly')
+
+  /**
+   * Sends the selection on to the route that handles it. Cancelling is
+   * the only action that leaves the checkout flow, everything else
+   * carries the target plan and interval for checkout to resolve.
+   */
+  function onSelect(plan: Plan) {
+    const action = planAction(plan, interval.value)
+
+    if (action === 'cancel') {
+      router.push({ name: 'user-subscribe-cancel' })
+      return
+    }
+
+    router.push({
+      name: 'user-subscribe-checkout',
+      query: { plan: plan.slug, interval: interval.value },
+    })
+  }
 </script>
 
 <template>
@@ -78,6 +99,7 @@
           :plan="plan"
           :interval="interval"
           :action="planAction(plan, interval)"
+          @select="onSelect(plan)"
         />
       </Inline>
     </Stack>
