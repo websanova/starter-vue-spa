@@ -2,7 +2,7 @@
   import { CheckIcon, XIcon } from '@lucide/vue'
   import { Button } from '@shared/components/ui/button'
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@shared/components/ui/card'
-  import type { PlanAction } from '@/composables/subscription'
+  import type { PlanAction } from '@/composables/support/subscription'
   import type { Interval, Plan } from '@/models/plan'
 
   const props = defineProps<{

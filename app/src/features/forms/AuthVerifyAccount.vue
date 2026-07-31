@@ -2,7 +2,7 @@
   import { computed, ref, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
-  import { useVerifyChannel } from '@/composables/verifyChannel'
+  import { useVerifyChannel } from '@/composables/support/verifyChannel'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useAuthService } from '@shared/composables/services/auth'
   import { useLogout } from '@shared/composables/support/logout'

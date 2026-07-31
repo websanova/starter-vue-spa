@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
-  import { useNotificationsUnread } from '@/composables/notificationsUnread'
+  import { useNotificationsUnread } from '@/composables/support/notificationsUnread'
   import { useDarkMode } from '@shared/composables/support/darkMode'
   import { useLogout } from '@shared/composables/support/logout'
   import { Indicator } from '@shared/components/common/Indicator'

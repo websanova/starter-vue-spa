@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { usePlans } from '@/composables/api/plans'
-  import { useSubscription } from '@/composables/subscription'
+  import { useSubscription } from '@/composables/support/subscription'
   import { useAuthService } from '@shared/composables/services/auth'
   import PlanCard from '@/components/cards/Plan.vue'
   import { Button } from '@shared/components/ui/button'
