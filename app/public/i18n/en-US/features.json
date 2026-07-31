@@ -131,13 +131,13 @@
         "monthly": "/mo",
         "yearly": "/year"
       },
-      "note": "Choose the plan that fits.",
-      "note_sub": "Upgrade, downgrade, or cancel anytime.",
+      "note_cancel": "Upgrade, downgrade, or cancel anytime.",
+      "note_choose": "Choose the plan that fits.",
+      "note_trial": "Start your free {days} day trial now!",
       "toggle": {
         "monthly": "Monthly",
         "yearly": "Yearly"
       },
-      "trial": "Start your free {days} day trial now!",
       "unlimited": "Unlimited"
     }
   },

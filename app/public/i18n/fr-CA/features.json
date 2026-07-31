@@ -131,13 +131,13 @@
         "monthly": "/mois",
         "yearly": "/an"
       },
-      "note": "Choisissez le forfait qui vous convient.",
-      "note_sub": "Changez ou annulez à tout moment.",
+      "note_cancel": "Changez ou annulez à tout moment.",
+      "note_choose": "Choisissez le forfait qui vous convient.",
+      "note_trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
       "toggle": {
         "monthly": "Mensuel",
         "yearly": "Annuel"
       },
-      "trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
       "unlimited": "Illimité"
     }
   },
