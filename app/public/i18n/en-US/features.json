@@ -110,6 +110,10 @@
     }
   },
   "subscribe": {
+    "checkout": {
+      "activating": "Payment received. Activating your plan...",
+      "loading": "Preparing checkout..."
+    },
     "plans": {
       "action": {
         "cancel": "Cancel",

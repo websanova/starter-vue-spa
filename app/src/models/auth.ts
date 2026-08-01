@@ -1,4 +1,5 @@
 import type { Interval } from '@/models/plan'
+import type { SubscriptionStatus } from '@/models/subscription'
 
 export interface AuthDto {
   avatar_url: string | null
@@ -30,6 +31,7 @@ export interface AuthPlanDto {
 export interface AuthSubscriptionDto {
   ends_at: string | null
   interval: Interval
+  status: SubscriptionStatus
 }
 
 export interface AuthTrialDto {
@@ -67,6 +69,7 @@ export interface AuthPlan {
 export interface AuthSubscription {
   endsAt: string | null
   interval: Interval
+  status: SubscriptionStatus
 }
 
 export interface AuthTrial {
@@ -109,6 +112,7 @@ export function toAuthSubscription(dto: AuthSubscriptionDto): AuthSubscription {
   return {
     endsAt: dto.ends_at,
     interval: dto.interval,
+    status: dto.status,
   }
 }
 
