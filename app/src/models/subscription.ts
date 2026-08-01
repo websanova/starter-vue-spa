@@ -7,15 +7,15 @@ export type SubscriptionStatus =
   | 'trialing'
   | 'unpaid'
 
-export interface CheckoutSessionDto {
+export interface SubscriptionCheckoutDto {
   client_secret: string
 }
 
-export interface CheckoutSession {
+export interface SubscriptionCheckout {
   clientSecret: string
 }
 
-export function toCheckoutSession(dto: CheckoutSessionDto): CheckoutSession {
+export function toSubscriptionCheckout(dto: SubscriptionCheckoutDto): SubscriptionCheckout {
   return {
     clientSecret: dto.client_secret,
   }

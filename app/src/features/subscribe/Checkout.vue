@@ -1,13 +1,12 @@
 <script setup lang="ts">
-  import { onBeforeUnmount, ref, watch } from 'vue'
+  import { ref } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import { useCreateCheckoutSession } from '@/composables/api/subscription'
-  import { useStripe } from '@/composables/support/stripe'
+  import { useCreateSubscriptionCheckout } from '@/composables/api/subscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
   import { useAuthService } from '@shared/composables/services/auth'
   import { Loading } from '@shared/components/common/Loading'
   import type { Interval } from '@/models/plan'
-  import type { StripeEmbeddedCheckout } from '@stripe/stripe-js'
 
   const pollAttempts = 8
   const pollInterval = 2000
@@ -16,49 +15,28 @@
   const route = useRoute()
   const router = useRouter()
 
-  const session = useCreateCheckoutSession()
-  const error = useMutationError(session)
-  const { data, isPending } = session
+  const subscriptionCheckout = useCreateSubscriptionCheckout()
+  const error = useMutationError(subscriptionCheckout)
+  const { data, isPending } = subscriptionCheckout
 
-  const container = ref<HTMLDivElement | null>(null)
+  const embeddedCheckout = useStripeCheckout({
+    selector: '#subscription-checkout',
+    onComplete,
+  })
+
   const isActivating = ref<boolean>(false)
-
-  let checkout: StripeEmbeddedCheckout | null = null
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
 
   if (plan && interval) {
-    session.mutate({ plan, interval })
+    subscriptionCheckout.mutate({ plan, interval }, {
+      onSuccess: ({ clientSecret }) => embeddedCheckout.mount(clientSecret),
+    })
   }
   else {
     router.replace({ name: 'user-subscribe-plans' })
   }
-
-  /**
-   * The container only exists once the secret has landed, so the mount is
-   * driven by the ref appearing rather than by the component mounting.
-   */
-  watch(container, async (el) => {
-    const clientSecret = data.value?.clientSecret
-
-    if (!el || !clientSecret) {
-      return
-    }
-
-    const stripe = await useStripe()
-
-    if (!stripe) {
-      return
-    }
-
-    checkout = await stripe.initEmbeddedCheckout({
-      clientSecret,
-      onComplete,
-    })
-
-    checkout.mount(el)
-  })
 
   /**
    * Waits for the webhook to turn the payment into a subscription. Nothing
@@ -68,8 +46,7 @@
    * of the app will pick it up.
    */
   async function onComplete() {
-    checkout?.destroy()
-    checkout = null
+    embeddedCheckout.destroy()
     isActivating.value = true
 
     for (let attempt = 0; attempt < pollAttempts; attempt += 1) {
@@ -89,11 +66,6 @@
     const status = auth.user.value?.subscription?.status
     return status === 'active' || status === 'trialing'
   }
-
-  onBeforeUnmount(() => {
-    checkout?.destroy()
-    checkout = null
-  })
 </script>
 
 <template>
@@ -117,7 +89,7 @@
 
     <div
       v-else-if="data"
-      ref="container"
+      id="subscription-checkout"
       class="w-full"
     />
   </div>

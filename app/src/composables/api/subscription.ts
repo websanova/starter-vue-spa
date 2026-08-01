@@ -1,25 +1,25 @@
 import { useMutation } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
-import { toCheckoutSession } from '@/models/subscription'
+import { toSubscriptionCheckout } from '@/models/subscription'
 import type { Interval } from '@/models/plan'
-import type { CheckoutSessionDto } from '@/models/subscription'
+import type { SubscriptionCheckoutDto } from '@/models/subscription'
 
-interface CreateCheckoutSessionData {
+interface CreateSubscriptionCheckoutData {
   plan: string
   interval: Interval
 }
 
 /**
- * Opens a Stripe Checkout session for the chosen plan. The subscription
- * itself is created by Stripe once the session completes and reaches the
- * API through the webhook, so nothing here is authoritative beyond the
- * secret the embedded form mounts against.
+ * Opens a Stripe checkout for the chosen plan. The subscription itself is
+ * created by Stripe once the checkout completes and reaches the API
+ * through the webhook, so nothing here is authoritative beyond the secret
+ * the embedded form mounts against.
  */
-export function useCreateCheckoutSession() {
+export function useCreateSubscriptionCheckout() {
   return useMutation({
-    mutationFn: async (data: CreateCheckoutSessionData) => {
-      const res = await useHttp().post<{ data: CheckoutSessionDto }>('subscription', data)
-      return toCheckoutSession(res.data)
+    mutationFn: async (data: CreateSubscriptionCheckoutData) => {
+      const res = await useHttp().post<{ data: SubscriptionCheckoutDto }>('subscription/checkout', data)
+      return toSubscriptionCheckout(res.data)
     },
   })
 }
