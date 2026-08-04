@@ -1,5 +1,6 @@
 import { nextTick, onBeforeUnmount } from 'vue'
 import { loadStripe } from '@stripe/stripe-js/pure'
+import { oklchToHex } from '@shared/lib/color'
 import type { Stripe, StripeElements, StripePaymentElement } from '@stripe/stripe-js'
 
 interface StripePaymentOptions {
@@ -38,6 +39,36 @@ export function useStripePayment({ selector, returnUrl }: StripePaymentOptions) 
     return stripe
   }
 
+  /**
+   * Builds the element appearance from the theme tokens so the frame is
+   * styled from the same source as the rest of the app. Stripe has no
+   * access to the page custom properties and only takes hex, so the
+   * tokens are resolved and converted here. Variables cover the frame
+   * as a whole, rules pick out the parts needing their own surface.
+   */
+  function appearance() {
+    const styles = getComputedStyle(document.documentElement)
+
+    const token = (name: string) => styles.getPropertyValue(name).trim()
+    const color = (name: string) => oklchToHex(token(name))
+
+    return {
+      variables: {
+        borderRadius: token('--radius'),
+        colorDanger: color('--destructive'),
+        colorPrimary: color('--primary'),
+        colorText: color('--foreground'),
+        colorTextPlaceholder: color('--muted-foreground'),
+        colorTextSecondary: color('--muted-foreground'),
+      },
+      rules: {
+        '.Input': {
+          backgroundColor: color('--background')
+        },
+      },
+    }
+  }
+
   async function mount(intent: StripeIntent) {
     const stripeClient = await client()
 
@@ -46,8 +77,16 @@ export function useStripePayment({ selector, returnUrl }: StripePaymentOptions) 
     }
 
     intentType = intent.type
-    elements = stripeClient.elements({ clientSecret: intent.clientSecret })
-    paymentElement = elements.create('payment')
+
+    elements = stripeClient.elements({
+      clientSecret: intent.clientSecret,
+      appearance: appearance(),
+    })
+
+    paymentElement = elements.create('payment', {
+      layout: 'tabs',
+      wallets: { link: 'never' },
+    })
 
     await nextTick()
 

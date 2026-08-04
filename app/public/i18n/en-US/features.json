@@ -114,6 +114,7 @@
       "activating": "Payment received. Activating your plan...",
       "failed": "Your payment could not be completed. Please try again.",
       "loading": "Preparing checkout...",
+      "powered": "Powered by",
       "submit": "Subscribe"
     },
     "plans": {

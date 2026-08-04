@@ -114,6 +114,7 @@
       "activating": "Paiement reçu. Activation de votre forfait...",
       "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
       "loading": "Préparation du paiement...",
+      "powered": "Propulsé par",
       "submit": "S'abonner"
     },
     "plans": {

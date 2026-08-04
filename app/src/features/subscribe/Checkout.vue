@@ -8,6 +8,7 @@
   import { useAuthService } from '@shared/composables/services/auth'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
+  import StripeLogo from '@shared/components/logos/Stripe.vue'
   import type { Interval } from '@/models/plan'
   import type { StripeIntent } from '@shared/composables/primitives/useStripePayment'
 
@@ -192,7 +193,17 @@
         {{ paymentError }}
       </p>
 
-      <div id="subscription-checkout" />
+      <div id="subscription-checkout" class="rounded-lg shadow-sm"/>
+
+      <a
+        class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
+        href="https://stripe.com"
+        rel="noopener"
+        target="_blank"
+      >
+        {{ $t('features.subscribe.checkout.powered') }}
+        <StripeLogo class="h-4" />
+      </a>
 
       <FormButton
         class="w-full"
