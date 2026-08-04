@@ -125,7 +125,6 @@
     const message = await payment.confirm()
 
     if (message) {
-      paymentError.value = message
       isConfirming.value = false
       return
     }
@@ -188,7 +187,7 @@
     >
       <p
         v-if="paymentError"
-        class="text-center"
+        class="text-center text-destructive"
       >
         {{ paymentError }}
       </p>
