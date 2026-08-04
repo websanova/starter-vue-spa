@@ -1,12 +1,15 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
-  import { useCreateSubscriptionCheckout } from '@/composables/api/subscription'
+  import { useCreateSubscriptionIntent } from '@/composables/api/subscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
-  import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
+  import { useStripePayment } from '@shared/composables/primitives/useStripePayment'
   import { useAuthService } from '@shared/composables/services/auth'
+  import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import type { Interval } from '@/models/plan'
+  import type { StripeIntent } from '@shared/composables/primitives/useStripePayment'
 
   const pollAttempts = 8
   const pollInterval = 2000
@@ -14,28 +17,119 @@
   const auth = useAuthService()
   const route = useRoute()
   const router = useRouter()
+  const { t } = useI18n()
 
-  const subscriptionCheckout = useCreateSubscriptionCheckout()
-  const error = useMutationError(subscriptionCheckout)
-  const { data, isPending } = subscriptionCheckout
+  const subscriptionIntent = useCreateSubscriptionIntent()
+  const error = useMutationError(subscriptionIntent)
 
-  const embeddedCheckout = useStripeCheckout({
-    selector: '#subscription-checkout',
-    onComplete,
-  })
-
+  const isLoading = ref<boolean>(true)
+  const isConfirming = ref<boolean>(false)
   const isActivating = ref<boolean>(false)
+  const paymentError = ref<string>('')
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
 
-  if (plan && interval) {
-    subscriptionCheckout.mutate({ plan, interval }, {
-      onSuccess: ({ clientSecret }) => embeddedCheckout.mount(clientSecret),
+  const payment = useStripePayment({
+    selector: '#subscription-checkout',
+    returnUrl: buildReturnUrl(),
+  })
+
+  start()
+
+  /**
+   * Sends the customer back to this page carrying the plan they picked,
+   * so an authentication that had to leave the app returns somewhere
+   * able to pick the intent back up.
+   */
+  function buildReturnUrl() {
+    const { href } = router.resolve({
+      name: 'user-subscribe-checkout',
+      query: { plan, interval },
+    })
+
+    return new URL(href, window.location.origin).toString()
+  }
+
+  /**
+   * Picks up an intent the customer was redirected away to authenticate.
+   * Which key Stripe appended also names the intent type, so the secret
+   * and the type are only ever read as a pair.
+   */
+  function returnedIntent(): StripeIntent | null {
+    const paymentSecret = route.query.payment_intent_client_secret as string | undefined
+
+    if (paymentSecret) {
+      return { clientSecret: paymentSecret, type: 'payment' }
+    }
+
+    const setupSecret = route.query.setup_intent_client_secret as string | undefined
+
+    if (setupSecret) {
+      return { clientSecret: setupSecret, type: 'setup' }
+    }
+
+    return null
+  }
+
+  async function start() {
+    const intent = returnedIntent()
+
+    if (intent) {
+      await resume(intent)
+      return
+    }
+
+    if (!plan || !interval) {
+      router.replace({ name: 'user-subscribe-plans' })
+      return
+    }
+
+    subscriptionIntent.mutate({ plan, interval }, {
+      onSuccess: (data) => {
+        isLoading.value = false
+        payment.mount(data)
+      },
+      onError: () => {
+        isLoading.value = false
+      },
     })
   }
-  else {
-    router.replace({ name: 'user-subscribe-plans' })
+
+  /**
+   * Reads how the authentication the customer was sent away for ended.
+   * A refusal leaves the intent confirmable, so the element goes back up
+   * against the same secret and they can try again without opening a
+   * second one.
+   */
+  async function resume(intent: StripeIntent) {
+    const { status, message } = await payment.retrieve(intent)
+
+    if (status === 'succeeded' || status === 'processing') {
+      isLoading.value = false
+      onComplete()
+      return
+    }
+
+    paymentError.value = message || t('features.subscribe.checkout.failed')
+    isLoading.value = false
+
+    await payment.mount(intent)
+  }
+
+  async function onSubmit() {
+    isConfirming.value = true
+    paymentError.value = ''
+
+    const message = await payment.confirm()
+
+    if (message) {
+      paymentError.value = message
+      isConfirming.value = false
+      return
+    }
+
+    onComplete()
   }
 
   /**
@@ -46,7 +140,7 @@
    * of the app will pick it up.
    */
   async function onComplete() {
-    embeddedCheckout.destroy()
+    payment.destroy()
     isActivating.value = true
 
     for (let attempt = 0; attempt < pollAttempts; attempt += 1) {
@@ -71,8 +165,13 @@
 <template>
   <div class="flex justify-center">
     <Loading
-      v-if="isPending"
+      v-if="isLoading"
       :text="$t('features.subscribe.checkout.loading')"
+    />
+
+    <Loading
+      v-else-if="isActivating"
+      :text="$t('features.subscribe.checkout.activating')"
     />
 
     <p
@@ -82,15 +181,25 @@
       {{ error }}
     </p>
 
-    <Loading
-      v-else-if="isActivating"
-      :text="$t('features.subscribe.checkout.activating')"
-    />
+    <Form
+      v-else
+      @submit="onSubmit"
+    >
+      <p
+        v-if="paymentError"
+        class="text-center"
+      >
+        {{ paymentError }}
+      </p>
 
-    <div
-      v-else-if="data"
-      id="subscription-checkout"
-      class="w-full"
-    />
+      <div id="subscription-checkout" />
+
+      <FormButton
+        class="w-full"
+        :pending="isConfirming"
+      >
+        {{ $t('features.subscribe.checkout.submit') }}
+      </FormButton>
+    </Form>
   </div>
 </template>

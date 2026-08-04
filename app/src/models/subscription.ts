@@ -7,16 +7,21 @@ export type SubscriptionStatus =
   | 'trialing'
   | 'unpaid'
 
-export interface SubscriptionCheckoutDto {
+export type IntentType = 'payment' | 'setup'
+
+export interface SubscriptionIntentDto {
   client_secret: string
+  type: IntentType
 }
 
-export interface SubscriptionCheckout {
+export interface SubscriptionIntent {
   clientSecret: string
+  type: IntentType
 }
 
-export function toSubscriptionCheckout(dto: SubscriptionCheckoutDto): SubscriptionCheckout {
+export function toSubscriptionIntent(dto: SubscriptionIntentDto): SubscriptionIntent {
   return {
     clientSecret: dto.client_secret,
+    type: dto.type,
   }
 }

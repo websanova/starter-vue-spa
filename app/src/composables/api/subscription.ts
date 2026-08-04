@@ -1,25 +1,28 @@
 import { useMutation } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
-import { toSubscriptionCheckout } from '@/models/subscription'
+import { toSubscriptionIntent } from '@/models/subscription'
 import type { Interval } from '@/models/plan'
-import type { SubscriptionCheckoutDto } from '@/models/subscription'
+import type { SubscriptionIntentDto } from '@/models/subscription'
 
-interface CreateSubscriptionCheckoutData {
+interface CreateSubscriptionIntentData {
   plan: string
   interval: Interval
 }
 
 /**
- * Opens a Stripe checkout for the chosen plan. The subscription itself is
- * created by Stripe once the checkout completes and reaches the API
- * through the webhook, so nothing here is authoritative beyond the secret
- * the embedded form mounts against.
+ * Opens the intent the payment element confirms against, either a
+ * payment intent for an immediate charge or a setup intent when the
+ * card is only being stored against a trial. Asking again for the same
+ * plan and interval hands back the intent already in flight rather than
+ * opening a second one, so a reload or a failed attempt is safe to
+ * retry. Nothing here is authoritative, the subscription only lands
+ * once Stripe reports the result through the webhook.
  */
-export function useCreateSubscriptionCheckout() {
+export function useCreateSubscriptionIntent() {
   return useMutation({
-    mutationFn: async (data: CreateSubscriptionCheckoutData) => {
-      const res = await useHttp().post<{ data: SubscriptionCheckoutDto }>('subscription/checkout', data)
-      return toSubscriptionCheckout(res.data)
+    mutationFn: async (data: CreateSubscriptionIntentData) => {
+      const res = await useHttp().post<{ data: SubscriptionIntentDto }>('subscription/intent', data)
+      return toSubscriptionIntent(res.data)
     },
   })
 }

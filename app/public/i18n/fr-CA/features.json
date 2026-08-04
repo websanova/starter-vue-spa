@@ -110,6 +110,12 @@
     }
   },
   "subscribe": {
+    "checkout": {
+      "activating": "Paiement reçu. Activation de votre forfait...",
+      "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
+      "loading": "Préparation du paiement...",
+      "submit": "S'abonner"
+    },
     "plans": {
       "action": {
         "cancel": "Annuler",
