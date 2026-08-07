@@ -146,7 +146,7 @@
     for (let attempt = 0; attempt < pollAttempts; attempt += 1) {
       await auth.fetchUser()
 
-      if (isSubscribed()) {
+      if (auth.user.value?.isSubscribed) {
         break
       }
 
@@ -154,11 +154,6 @@
     }
 
     router.push({ name: 'user-landing' })
-  }
-
-  function isSubscribed() {
-    const status = auth.user.value?.subscription?.status
-    return status === 'active' || status === 'trialing'
   }
 </script>
 

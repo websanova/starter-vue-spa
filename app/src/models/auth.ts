@@ -7,6 +7,7 @@ export interface AuthDto {
   first_name: string
   id: number
   is_on_grace_period: boolean
+  is_subscribed: boolean
   is_verification_pending: boolean
   is_verification_required: boolean
   last_name: string
@@ -44,6 +45,7 @@ export interface Auth {
   firstName: string
   id: number
   isOnGracePeriod: boolean
+  isSubscribed: boolean
   isVerificationPending: boolean
   isVerificationRequired: boolean
   lastName: string
@@ -83,6 +85,7 @@ export function toAuth(dto: AuthDto): Auth {
     firstName: dto.first_name,
     id: dto.id,
     isOnGracePeriod: dto.is_on_grace_period,
+    isSubscribed: dto.is_subscribed,
     isVerificationPending: dto.is_verification_pending,
     isVerificationRequired: dto.is_verification_required,
     lastName: dto.last_name,

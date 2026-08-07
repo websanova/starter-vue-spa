@@ -24,7 +24,7 @@ export function useSubscription() {
   const auth = useAuthService()
   const settings = useSettingsStore()
 
-  const hasSubscription = computed(() => !!auth.user.value?.subscription)
+  const isSubscribed = computed(() => auth.user.value?.isSubscribed ?? false)
 
   const isCancelled = computed(() => auth.user.value?.isOnGracePeriod ?? false)
 
@@ -37,7 +37,7 @@ export function useSubscription() {
    */
   const isTrialEligible = computed(() =>
     settings.data.subscriptionMode === 'trial' &&
-    !hasSubscription.value &&
+    !isSubscribed.value &&
     !auth.user.value?.trial
   )
 
@@ -54,7 +54,7 @@ export function useSubscription() {
         return 'resume'
       }
 
-      if (user.subscription && user.subscription.interval !== interval) {
+      if (isSubscribed.value && user.subscription && user.subscription.interval !== interval) {
         return 'switch'
       }
 
@@ -63,7 +63,7 @@ export function useSubscription() {
 
     // Covers the free tier user and the one carrying no plan at all
     // because subscription is required, neither of whom has ever paid.
-    if (!hasSubscription.value && plan.tier > 0) {
+    if (!isSubscribed.value && plan.tier > 0) {
       return 'subscribe'
     }
 
@@ -83,9 +83,9 @@ export function useSubscription() {
   }
 
   return {
-    hasSubscription,
     isCancelled,
     isPaid,
+    isSubscribed,
     isTrialEligible,
     planAction,
   }
