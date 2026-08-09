@@ -1,14 +1,23 @@
 import type { App } from "vue"
-import { createRouter as createVueRouter, createWebHistory, type Router } from "vue-router"
+import { createRouter as createVueRouter, createWebHistory, type NavigationGuard, type NavigationHookAfter, type Router } from "vue-router"
 
 import * as auth from './interceptors/auth'
 import * as content from './interceptors/content'
 import * as i18n from './interceptors/i18n'
 import * as ready from './interceptors/ready'
-import * as verification from './interceptors/verification'
 import { scrollBehavior } from './scrollBehavior'
 
+import interceptors from "@router/interceptors"
 import routes from "@router/routes"
+
+/**
+ * Shape an app level interceptor module exports. Both hooks are optional
+ * so a module only declares the ones it uses.
+ */
+export interface RouterInterceptor {
+  afterEach?: NavigationHookAfter
+  beforeEach?: NavigationGuard
+}
 
 let instance: Router
 
@@ -36,7 +45,18 @@ function createRouter(app: App) {
 
   // Post-ready guards. Depend on the state ready resolved (auth roles, etc).
   instance.beforeEach(auth.beforeEach)
-  instance.beforeEach(verification.beforeEach)
+
+  // App level guards. Registered last so they can depend on everything the
+  // shared chain resolved.
+  interceptors.forEach((interceptor) => {
+    if (interceptor.beforeEach) {
+      instance.beforeEach(interceptor.beforeEach)
+    }
+
+    if (interceptor.afterEach) {
+      instance.afterEach(interceptor.afterEach)
+    }
+  })
 
   app.use(instance)
 }
