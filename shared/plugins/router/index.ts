@@ -8,7 +8,7 @@ import * as ready from './interceptors/ready'
 import * as verification from './interceptors/verification'
 import { scrollBehavior } from './scrollBehavior'
 
-import routes from "@routes"
+import routes from "@router/routes"
 
 let instance: Router
 

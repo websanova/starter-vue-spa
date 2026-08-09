@@ -3,7 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@routes": ["./src/routes"],
+      "@router/*": ["./src/router/*"],
       "@shared/*": ["../shared/*"]
     }
   },

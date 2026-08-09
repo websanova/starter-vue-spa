@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
-        "@routes": fileURLToPath(new URL("./src/routes", import.meta.url)),
+        "@router": fileURLToPath(new URL("./src/router", import.meta.url)),
         "@shared": fileURLToPath(new URL("../shared", import.meta.url))
       }
     },
