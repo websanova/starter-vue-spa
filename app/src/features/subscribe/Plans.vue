@@ -39,6 +39,13 @@
       query: { plan: plan.slug, interval: interval.value },
     })
   }
+
+  function onUpdate(plan: Plan) {
+    router.push({
+      name: 'user-subscribe-update',
+      query: { plan: plan.slug, interval: interval.value },
+    })
+  }
 </script>
 
 <template>
@@ -99,11 +106,11 @@
           :interval="interval"
           :action="planAction(plan, interval)"
           @cancel="onCancel"
-          @downgrade="onCheckout(plan)"
+          @downgrade="onUpdate(plan)"
           @resume="onResume(plan)"
           @subscribe="onCheckout(plan)"
-          @switch="onCheckout(plan)"
-          @upgrade="onCheckout(plan)"
+          @switch="onUpdate(plan)"
+          @upgrade="onUpdate(plan)"
         />
       </Inline>
     </Stack>
