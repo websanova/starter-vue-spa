@@ -5,13 +5,16 @@ export interface AuthDto {
   avatar_url: string | null
   email: string
   first_name: string
+  has_payment_method: boolean
   id: number
   is_on_grace_period: boolean
+  is_on_trial: boolean
   is_subscribed: boolean
   is_verification_pending: boolean
   is_verification_required: boolean
   last_name: string
   locale: string
+  payment_method: AuthPaymentMethodDto | null
   phone: string | null
   plan: AuthPlanDto | null
   role?: string
@@ -20,6 +23,11 @@ export interface AuthDto {
   trial: AuthTrialDto | null
   verification_pending: string[]
   verification_required: string[]
+}
+
+export interface AuthPaymentMethodDto {
+  brand: string
+  last_four: string
 }
 
 export interface AuthPlanDto {
@@ -43,13 +51,16 @@ export interface Auth {
   avatarUrl: string | null
   email: string
   firstName: string
+  hasPaymentMethod: boolean
   id: number
   isOnGracePeriod: boolean
+  isOnTrial: boolean
   isSubscribed: boolean
   isVerificationPending: boolean
   isVerificationRequired: boolean
   lastName: string
   locale: string
+  paymentMethod: AuthPaymentMethod | null
   phone: string | null
   plan: AuthPlan | null
   role?: string
@@ -59,6 +70,11 @@ export interface Auth {
   verificationPending: string[]
   verificationRequired: string[]
   readonly isAvatar: boolean
+}
+
+export interface AuthPaymentMethod {
+  brand: string
+  lastFour: string
 }
 
 export interface AuthPlan {
@@ -83,13 +99,16 @@ export function toAuth(dto: AuthDto): Auth {
     avatarUrl: dto.avatar_url,
     email: dto.email,
     firstName: dto.first_name,
+    hasPaymentMethod: dto.has_payment_method,
     id: dto.id,
     isOnGracePeriod: dto.is_on_grace_period,
+    isOnTrial: dto.is_on_trial,
     isSubscribed: dto.is_subscribed,
     isVerificationPending: dto.is_verification_pending,
     isVerificationRequired: dto.is_verification_required,
     lastName: dto.last_name,
     locale: dto.locale,
+    paymentMethod: dto.payment_method ? toAuthPaymentMethod(dto.payment_method) : null,
     phone: dto.phone,
     plan: dto.plan ? toAuthPlan(dto.plan) : null,
     role: dto.role,
@@ -99,6 +118,13 @@ export function toAuth(dto: AuthDto): Auth {
     verificationPending: dto.verification_pending,
     verificationRequired: dto.verification_required,
     get isAvatar() { return this.avatarUrl !== null },
+  }
+}
+
+export function toAuthPaymentMethod(dto: AuthPaymentMethodDto): AuthPaymentMethod {
+  return {
+    brand: dto.brand,
+    lastFour: dto.last_four,
   }
 }
 

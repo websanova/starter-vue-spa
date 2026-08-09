@@ -53,6 +53,26 @@
     "phone": "Your phone number",
     "timezone": "Select a timezone"
   },
+  "billing": {
+    "action": {
+      "cancel": "Cancel",
+      "resume": "Resume",
+      "update": "Update Plan"
+    },
+    "card": "{brand} ending in {last_four}",
+    "card_none": "No payment method on file.",
+    "interval": {
+      "monthly": "monthly",
+      "yearly": "yearly"
+    },
+    "status": {
+      "active": "You are currently on the {plan} plan, billed {interval}.",
+      "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
+      "free": "You are currently on the {plan} plan.",
+      "none": "You have not chosen a plan yet.",
+      "trialing": "Your {plan} trial ends on {date}."
+    }
+  },
   "cover": {
     "maintenance": {
       "message": "App is down for maintenance.<br>We should be back up shortly."
@@ -149,6 +169,7 @@
     }
   },
   "headings": {
+    "billing": "Billing",
     "login": "Sign In",
     "password_reset": "Reset Password",
     "password_update": "Update Password",

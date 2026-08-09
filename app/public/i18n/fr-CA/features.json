@@ -53,6 +53,26 @@
     "phone": "Votre numéro de téléphone",
     "timezone": "Sélectionnez un fuseau horaire"
   },
+  "billing": {
+    "action": {
+      "cancel": "Annuler",
+      "resume": "Reprendre",
+      "update": "Changer de forfait"
+    },
+    "card": "{brand} se terminant par {last_four}",
+    "card_none": "Aucun moyen de paiement enregistré.",
+    "interval": {
+      "monthly": "mensuellement",
+      "yearly": "annuellement"
+    },
+    "status": {
+      "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
+      "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
+      "free": "Vous êtes présentement sur le forfait {plan}.",
+      "none": "Vous n'avez pas encore choisi de forfait.",
+      "trialing": "Votre essai {plan} prend fin le {date}."
+    }
+  },
   "cover": {
     "maintenance": {
       "message": "L'application est en maintenance.<br>Nous serons de retour sous peu."
@@ -149,6 +169,7 @@
     }
   },
   "headings": {
+    "billing": "Facturation",
     "login": "Se connecter",
     "password_reset": "Réinitialiser le mot de passe",
     "password_update": "Mettre à jour le mot de passe",

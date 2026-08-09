@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { useAuthService } from '@shared/composables/services/auth'
+import { useI18n } from '@shared/plugins/i18n'
 import { useSettingsStore } from '@shared/stores/settings'
 import type { Interval, Plan } from '@/models/plan'
 
@@ -13,6 +14,23 @@ export type PlanAction =
   | 'switch'
   | 'upgrade'
 
+export type StatusAction =
+  | 'cancel'
+  | 'resume'
+  | 'update'
+
+export type StatusKey =
+  | 'active'
+  | 'cancelled'
+  | 'free'
+  | 'none'
+  | 'trialing'
+
+export interface StatusMessage {
+  key: StatusKey
+  params: Record<string, string>
+}
+
 /**
  * Resolves what a given plan means for the current user, which is what
  * the plan cards need to label and disable their buttons. Direction
@@ -22,11 +40,14 @@ export type PlanAction =
  */
 export function useSubscription() {
   const auth = useAuthService()
+  const i18n = useI18n()
   const settings = useSettingsStore()
 
   const isSubscribed = computed(() => auth.user.value?.isSubscribed ?? false)
 
   const isCancelled = computed(() => auth.user.value?.isOnGracePeriod ?? false)
+
+  const isOnTrial = computed(() => auth.user.value?.isOnTrial ?? false)
 
   const isPaid = computed(() => (auth.user.value?.plan?.tier ?? 0) > 0)
 
@@ -40,6 +61,67 @@ export function useSubscription() {
     !isSubscribed.value &&
     !auth.user.value?.trial
   )
+
+  function formatDate(value: string | null | undefined): string {
+    return value ? i18n.d(new Date(value), 'short') : ''
+  }
+
+  /**
+   * Picks the one sentence that describes where the user stands. The
+   * order matters, since a cancelled subscription is still subscribed
+   * until the grace period runs out and a trial is still active while
+   * it lasts, so the narrower state has to win.
+   */
+  // TODO: The past_due, unpaid, incomplete, and incomplete_expired
+  // statuses on SubscriptionStatus all fall through to active or none
+  // here. They need their own message and a "fix payment" action once
+  // the API exposes a way to retry the charge.
+  const status = computed((): StatusMessage => {
+    const user = auth.user.value
+    const plan = user?.plan?.name ?? ''
+
+    if (isCancelled.value) {
+      return { key: 'cancelled', params: { plan, date: formatDate(user?.subscription?.endsAt) } }
+    }
+
+    if (isOnTrial.value) {
+      return { key: 'trialing', params: { plan, date: formatDate(user?.trial?.endsAt) } }
+    }
+
+    if (isSubscribed.value) {
+      const interval = user?.subscription?.interval
+
+      return {
+        key: 'active',
+        params: { plan, interval: interval ? i18n.t(`features.billing.interval.${interval}`) : '' },
+      }
+    }
+
+    if (user?.plan) {
+      return { key: 'free', params: { plan } }
+    }
+
+    return { key: 'none', params: {} }
+  })
+
+  /**
+   * The buttons that go with the current status. Each one maps to a
+   * subscribe route that already guards for the same state, so the two
+   * stay in agreement.
+   */
+  const statusActions = computed((): StatusAction[] => {
+    switch (status.value.key) {
+      case 'cancelled':
+        return ['resume']
+
+      case 'active':
+      case 'trialing':
+        return ['update', 'cancel']
+
+      default:
+        return ['update']
+    }
+  })
 
   function planAction(plan: Plan, interval: Interval): PlanAction {
     const user = auth.user.value
@@ -84,9 +166,12 @@ export function useSubscription() {
 
   return {
     isCancelled,
+    isOnTrial,
     isPaid,
     isSubscribed,
     isTrialEligible,
     planAction,
+    status,
+    statusActions,
   }
 }
