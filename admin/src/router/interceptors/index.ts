@@ -4,4 +4,6 @@ import type { RouterInterceptor } from '@shared/plugins/router'
  * App level interceptors, registered by the shared router after its own
  * chain has run. Order here is the order they run in.
  */
-export default [] satisfies RouterInterceptor[]
+const interceptors: RouterInterceptor[] = []
+
+export default interceptors
