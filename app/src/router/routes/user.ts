@@ -1,3 +1,5 @@
+import { requireActiveSubscription, requireCancelled, requireNotCancelled, requireUnsubscribed } from '@/router/guards/subscription'
+
 const Layout            = () => import('@/features/layouts/User.vue')
 const LayoutAccount     = () => import('@/features/layouts/UserAccount.vue')
 const LayoutBookmarks   = () => import('@/features/layouts/UserBookmarks.vue')
@@ -14,6 +16,7 @@ const SubscribeCancel   = () => import('@/views/user/subscribe/Cancel.vue')
 const SubscribeCheckout = () => import('@/views/user/subscribe/Checkout.vue')
 const SubscribePlans    = () => import('@/views/user/subscribe/Plans.vue')
 const SubscribeResume   = () => import('@/views/user/subscribe/Resume.vue')
+const SubscribeUpdate   = () => import('@/views/user/subscribe/Update.vue')
 
 export default [{
   path: '/u/',
@@ -92,11 +95,13 @@ export default [{
     children: [{
       path: 'cancel',
       name: 'user-subscribe-cancel',
-      component: SubscribeCancel
+      component: SubscribeCancel,
+      beforeEnter: [requireActiveSubscription, requireNotCancelled]
     }, {
       path: 'checkout',
       name: 'user-subscribe-checkout',
-      component: SubscribeCheckout
+      component: SubscribeCheckout,
+      beforeEnter: [requireUnsubscribed]
     }, {
       path: 'plans',
       name: 'user-subscribe-plans',
@@ -104,7 +109,13 @@ export default [{
     }, {
       path: 'resume',
       name: 'user-subscribe-resume',
-      component: SubscribeResume
+      component: SubscribeResume,
+      beforeEnter: [requireActiveSubscription, requireCancelled]
+    }, {
+      path: 'update',
+      name: 'user-subscribe-update',
+      component: SubscribeUpdate,
+      beforeEnter: [requireActiveSubscription, requireNotCancelled]
     }]
   }]
 }]
