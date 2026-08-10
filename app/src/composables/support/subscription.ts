@@ -93,7 +93,7 @@ export function useSubscription() {
 
       return {
         key: 'active',
-        params: { plan, interval: interval ? i18n.t(`features.billing.interval.${interval}`) : '' },
+        params: { plan, interval: interval ? i18n.t(`site.units.interval.billed.${interval}`) : '' },
       }
     }
 

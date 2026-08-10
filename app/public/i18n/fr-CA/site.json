@@ -33,6 +33,20 @@
     }
   },
   "units": {
+    "interval": {
+      "billed": {
+        "monthly": "mensuellement",
+        "yearly": "annuellement"
+      },
+      "label": {
+        "monthly": "Mensuel",
+        "yearly": "Annuel"
+      },
+      "short": {
+        "monthly": "mois",
+        "yearly": "an"
+      }
+    },
     "mb": "{0} Mo"
   }
 }

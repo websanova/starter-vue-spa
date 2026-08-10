@@ -28,7 +28,7 @@
           {{ $n(props.plan.prices[props.interval]!.amount / 100, { key: 'currency', currency: props.plan.prices[props.interval]!.currency.toUpperCase() }) }}
 
           <span class="text-base font-normal text-muted-foreground">
-            {{ $t(`features.subscribe.plans.interval.${props.interval}`) }}
+            /{{ $t(`site.units.interval.short.${props.interval}`) }}
           </span>
         </template>
 

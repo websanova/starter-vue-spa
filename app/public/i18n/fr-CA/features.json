@@ -63,10 +63,6 @@
     },
     "card": "{brand} se terminant par {last_four}",
     "card_none": "Aucun moyen de paiement enregistré.",
-    "interval": {
-      "monthly": "mensuellement",
-      "yearly": "annuellement"
-    },
     "status": {
       "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
       "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
@@ -156,17 +152,9 @@
         "tags": "Étiquettes"
       },
       "free": "Gratuit",
-      "interval": {
-        "monthly": "/mois",
-        "yearly": "/an"
-      },
       "note_cancel": "Changez ou annulez à tout moment.",
       "note_choose": "Choisissez le forfait qui vous convient.",
       "note_trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
-      "toggle": {
-        "monthly": "Mensuel",
-        "yearly": "Annuel"
-      },
       "unlimited": "Illimité"
     }
   },

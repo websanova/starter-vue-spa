@@ -90,7 +90,7 @@
           :variant="interval === value ? 'solid' : 'outline'"
           @click="interval = value"
         >
-          {{ $t(`features.subscribe.plans.toggle.${value}`) }}
+          {{ $t(`site.units.interval.label.${value}`) }}
         </Button>
       </Inline>
 

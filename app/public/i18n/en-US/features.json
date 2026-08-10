@@ -63,10 +63,6 @@
     },
     "card": "{brand} ending in {last_four}",
     "card_none": "No payment method on file.",
-    "interval": {
-      "monthly": "monthly",
-      "yearly": "yearly"
-    },
     "status": {
       "active": "You are currently on the {plan} plan, billed {interval}.",
       "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
@@ -156,17 +152,9 @@
         "tags": "Tags"
       },
       "free": "Free",
-      "interval": {
-        "monthly": "/mo",
-        "yearly": "/year"
-      },
       "note_cancel": "Upgrade, downgrade, or cancel anytime.",
       "note_choose": "Choose the plan that fits.",
       "note_trial": "Start your free {days} day trial now!",
-      "toggle": {
-        "monthly": "Monthly",
-        "yearly": "Yearly"
-      },
       "unlimited": "Unlimited"
     }
   },
