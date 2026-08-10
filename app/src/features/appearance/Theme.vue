@@ -1,22 +1,11 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import { MonitorIcon, MoonIcon, SunIcon } from '@lucide/vue'
+  import { useDarkMode } from '@shared/composables/support/darkMode'
   import { Form } from '@shared/components/common/Form'
   import { Label } from '@shared/components/ui/label'
   import { ToggleGroup, ToggleGroupItem } from '@shared/components/ui/toggle-group'
 
-  const theme = ref('system')
-
-  /**
-   * Reka clears the value when the active item is clicked a second
-   * time. Dropping the empty update keeps one theme selected at all
-   * times.
-   */
-  function onUpdate(value: unknown) {
-    if (typeof value === 'string') {
-      theme.value = value
-    }
-  }
+  const { mode, set } = useDarkMode()
 </script>
 
 <template>
@@ -29,8 +18,8 @@
       <ToggleGroup
         type="single"
         variant="outline"
-        :model-value="theme"
-        @update:model-value="onUpdate"
+        :model-value="mode"
+        @update:model-value="set"
       >
         <ToggleGroupItem
           value="light"
@@ -49,7 +38,7 @@
         </ToggleGroupItem>
 
         <ToggleGroupItem
-          value="system"
+          value="auto"
           class="cursor-pointer"
         >
           <MonitorIcon />

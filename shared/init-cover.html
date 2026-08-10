@@ -22,9 +22,11 @@
 </style>
 
 <script id="script-init">
+  var scheme = localStorage.getItem('color-scheme')
+
   if (
-    localStorage.getItem('color-scheme') === 'dark' ||
-    (!localStorage.getItem('color-scheme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    scheme === 'dark' ||
+    (scheme !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
     document.documentElement.classList.add('dark')
   }

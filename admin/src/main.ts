@@ -9,6 +9,13 @@ import { createStore } from "@shared/plugins/store"
 import { createValidation } from "@shared/plugins/validation"
 import { registerModuleReload } from "@shared/lib/moduleReload"
 
+/**
+ * Imported for its side effects only. Evaluating the module starts the
+ * operating system preference listener and the watcher that syncs the
+ * dark class, neither of which exist until something imports it.
+ */
+import "@shared/composables/support/darkMode"
+
 createApp(App)
   .use(createHttp)
   .use(createI18n)
