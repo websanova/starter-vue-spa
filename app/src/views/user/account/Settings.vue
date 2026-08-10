@@ -9,18 +9,18 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.headings.settings_locale') }}
-      </Heading>
-
-      <SettingsLocaleForm />
-    </section>
-
-    <section>
-      <Heading>
         {{ $t('features.headings.settings_appearance') }}
       </Heading>
 
       <SettingsThemeForm />
+    </section>
+
+    <section>
+      <Heading>
+        {{ $t('features.headings.settings_locale') }}
+      </Heading>
+
+      <SettingsLocaleForm />
     </section>
   </Stack>
 </template>
