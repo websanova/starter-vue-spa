@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
+  import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, UserIcon } from '@lucide/vue'
   import { useNotificationsUnread } from '@/composables/support/notificationsUnread'
-  import { useColorScheme } from '@shared/composables/support/useColorScheme'
   import { useLogout } from '@shared/composables/support/logout'
   import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
@@ -13,7 +12,6 @@
     account: []
   }>()
 
-  const { isDark, toggle } = useColorScheme()
   const onLogout = useLogout()
 
   const { unread } = useNotificationsUnread()
@@ -57,12 +55,6 @@
       </DropdownMenuItem>
 
       <DropdownMenuSeparator />
-
-      <DropdownMenuItem @select="toggle">
-        <SunIcon v-if="isDark" />
-        <MoonIcon v-else />
-        {{ isDark ? $t('features.lbl.light_mode') : $t('features.lbl.dark_mode') }}
-      </DropdownMenuItem>
 
       <DropdownMenuItem @select="onLogout">
         <LogOutIcon />

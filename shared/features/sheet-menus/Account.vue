@@ -2,7 +2,6 @@
   import { LogOutIcon } from '@lucide/vue'
   import { useLogout } from '@shared/composables/support/logout'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
-  import DarkModeToggle from '@shared/features/toggles/DarkMode.vue'
   import { Button } from '@shared/components/ui/button'
 
   withDefaults(defineProps<{
@@ -36,7 +35,7 @@
         {{ $t('features.lbl.sign_out') }}
       </Button>
 
-      <DarkModeToggle class="ms-auto size-8" />
+      <slot name="footer" />
     </template>
   </SheetMenu>
 </template>

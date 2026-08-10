@@ -2,7 +2,7 @@
   import { ref } from 'vue'
   import { Layout, LayoutBody, LayoutBodyAside, LayoutBodyContent, LayoutHeader } from '@shared/components/common/Layout'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
-  import AccountSheetMenu from '@shared/features/sheet-menus/Account.vue'
+  import AccountSheetMenu from '@/features/sheet-menus/Account.vue'
   import HeaderNav from '@/features/navs/Header.vue'
   import ConsoleNav from '@/features/navs/Console.vue'
   import LogoNav from '@shared/features/navs/Logo.vue'
