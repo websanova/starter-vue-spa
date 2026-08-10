@@ -1,7 +1,8 @@
 import { nextTick, onBeforeUnmount } from 'vue'
 import { loadStripe } from '@stripe/stripe-js/pure'
+import { useI18n } from '@shared/plugins/i18n'
 import { oklchToHex } from '@shared/lib/color'
-import type { Stripe, StripeElements, StripePaymentElement } from '@stripe/stripe-js'
+import type { Stripe, StripeElementLocale, StripeElements, StripePaymentElement } from '@stripe/stripe-js'
 
 interface StripePaymentOptions {
   selector: string
@@ -16,6 +17,20 @@ export interface StripeIntent {
 interface StripeIntentResult {
   status: string
   message: string
+}
+
+/**
+ * App locales do not line up with the set Stripe accepts, which is
+ * language codes plus a few regional ones. The mapping is explicit so
+ * that adding an app locale is a deliberate choice here rather than a
+ * silent fall back to the browser.
+ *
+ * https://docs.stripe.com/js/appendix/supported_locales
+ */
+const locales: Record<string, StripeElementLocale> = {
+  'en-US': 'en',
+  'en-CA': 'en',
+  'fr-CA': 'fr-CA',
 }
 
 let stripe: Promise<Stripe | null> | null = null
@@ -81,6 +96,7 @@ export function useStripePayment({ selector, returnUrl }: StripePaymentOptions) 
     elements = stripeClient.elements({
       clientSecret: intent.clientSecret,
       appearance: appearance(),
+      locale: locales[useI18n().locale.value] ?? 'auto',
     })
 
     paymentElement = elements.create('payment', {
