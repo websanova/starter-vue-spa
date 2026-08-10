@@ -1,13 +1,17 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
+  import { usePlans } from '@/composables/api/plans'
   import { useCreateSubscriptionIntent } from '@/composables/api/subscription'
+  import { useSubscription } from '@/composables/support/subscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useStripePayment } from '@shared/composables/primitives/useStripePayment'
   import { useAuthService } from '@shared/composables/services/auth'
+  import { useSettingsStore } from '@shared/stores/settings'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
+  import { Stack } from '@shared/components/common/Stack'
   import StripeLogo from '@shared/components/logos/Stripe.vue'
   import type { Interval } from '@/models/plan'
   import type { StripeIntent } from '@shared/composables/primitives/useStripePayment'
@@ -18,8 +22,11 @@
   const auth = useAuthService()
   const route = useRoute()
   const router = useRouter()
-  const { t } = useI18n()
+  const settings = useSettingsStore()
+  const { n, t } = useI18n()
 
+  const { data: plans } = usePlans()
+  const { isTrialEligible } = useSubscription()
   const subscriptionIntent = useCreateSubscriptionIntent()
   const error = useMutationError(subscriptionIntent)
 
@@ -30,6 +37,42 @@
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
+
+  /**
+   * The query only carries the slug, so the name and the price come from
+   * the plans list. Nothing is rendered until both resolve, since the
+   * list is fetched rather than passed in and a customer returning from
+   * an authentication lands here without it warmed.
+   */
+  const summary = computed(() => {
+    if (!plan || !interval) {
+      return null
+    }
+
+    const selected = plans.value?.find((item) => item.slug === plan)
+    const price = selected?.prices[interval]
+
+    if (!selected || !price) {
+      return null
+    }
+
+    return {
+      days: settings.data.subscriptionTrialDays,
+      interval: t(`site.units.interval.billed.${interval}`),
+      plan: selected.name,
+      price: n(price.amount / 100, { key: 'currency', currency: price.currency.toUpperCase() }),
+    }
+  })
+
+  /**
+   * A trial signup opens a setup intent and charges nothing today, so it
+   * needs the sentence that dates the first payment rather than the one
+   * that claims it is being taken now.
+   */
+  const summaryKey = computed(() => isTrialEligible.value
+    ? 'features.subscribe.checkout.note_summary_trial'
+    : 'features.subscribe.checkout.note_summary'
+  )
 
   const payment = useStripePayment({
     selector: '#subscription-checkout',
@@ -176,35 +219,50 @@
       {{ error }}
     </p>
 
-    <Form
+    <Stack
       v-else
-      @submit="onSubmit"
+      class="w-full sm:max-w-[25rem]"
     >
-      <p
-        v-if="paymentError"
-        class="text-center text-destructive"
-      >
-        {{ paymentError }}
-      </p>
+      <div class="text-center">
+        <p>
+          {{ $t('features.subscribe.checkout.note_complete') }}
+        </p>
 
-      <div id="subscription-checkout" class="rounded-lg shadow-sm"/>
+        <p
+          v-if="summary"
+          class="text-sm text-muted-foreground"
+        >
+          {{ $t(summaryKey, summary) }}
+        </p>
+      </div>
 
-      <a
-        class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
-        href="https://stripe.com"
-        rel="noopener"
-        target="_blank"
-      >
-        {{ $t('features.subscribe.checkout.powered') }}
-        <StripeLogo class="h-4" />
-      </a>
+      <Form @submit="onSubmit">
+        <p
+          v-if="paymentError"
+          class="text-center text-destructive"
+        >
+          {{ paymentError }}
+        </p>
 
-      <FormButton
-        class="w-full"
-        :pending="isConfirming"
-      >
-        {{ $t('features.subscribe.checkout.submit') }}
-      </FormButton>
-    </Form>
+        <div id="subscription-checkout" class="rounded-lg shadow-sm"/>
+
+        <a
+          class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
+          href="https://stripe.com"
+          rel="noopener"
+          target="_blank"
+        >
+          {{ $t('features.subscribe.checkout.powered') }}
+          <StripeLogo class="h-4" />
+        </a>
+
+        <FormButton
+          class="w-full"
+          :pending="isConfirming"
+        >
+          {{ $t('features.subscribe.checkout.submit') }}
+        </FormButton>
+      </Form>
+    </Stack>
   </div>
 </template>

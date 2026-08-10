@@ -132,6 +132,9 @@
       "activating": "Payment received. Activating your plan...",
       "failed": "Your payment could not be completed. Please try again.",
       "loading": "Preparing checkout...",
+      "note_complete": "Complete your subscription.",
+      "note_summary": "{plan} plan, billed {interval} at {price}.",
+      "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}.",
       "powered": "Powered by",
       "submit": "Subscribe"
     },
