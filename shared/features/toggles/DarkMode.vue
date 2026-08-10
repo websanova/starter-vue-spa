@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { MoonIcon, SunIcon } from '@lucide/vue'
-  import { useDarkMode } from '@shared/composables/support/darkMode'
+  import { useColorScheme } from '@shared/composables/support/useColorScheme'
 
-  const { isDark, toggle } = useDarkMode()
+  const { isDark, toggle } = useColorScheme()
 </script>
 
 <template>

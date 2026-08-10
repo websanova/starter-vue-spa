@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, MoonIcon, SunIcon, UserIcon } from '@lucide/vue'
   import { useNotificationsUnread } from '@/composables/support/notificationsUnread'
-  import { useDarkMode } from '@shared/composables/support/darkMode'
+  import { useColorScheme } from '@shared/composables/support/useColorScheme'
   import { useLogout } from '@shared/composables/support/logout'
   import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
@@ -13,7 +13,7 @@
     account: []
   }>()
 
-  const { isDark, toggle } = useDarkMode()
+  const { isDark, toggle } = useColorScheme()
   const onLogout = useLogout()
 
   const { unread } = useNotificationsUnread()

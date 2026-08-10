@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { LogOutIcon, MoonIcon, SunIcon } from '@lucide/vue'
-  import { useDarkMode } from '@shared/composables/support/darkMode'
+  import { useColorScheme } from '@shared/composables/support/useColorScheme'
   import { useLogout } from '@shared/composables/support/logout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
@@ -10,7 +10,7 @@
     account: []
   }>()
 
-  const { isDark, toggle } = useDarkMode()
+  const { isDark, toggle } = useColorScheme()
   const onLogout = useLogout()
 </script>
 

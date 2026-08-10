@@ -14,7 +14,7 @@ import { registerModuleReload } from "@shared/lib/moduleReload"
  * operating system preference listener and the watcher that syncs the
  * dark class, neither of which exist until something imports it.
  */
-import "@shared/composables/support/darkMode"
+import "@shared/composables/support/useColorScheme"
 
 createApp(App)
   .use(createHttp)

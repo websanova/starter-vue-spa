@@ -1,11 +1,11 @@
 <script setup lang="ts">
   import { MonitorIcon, MoonIcon, SunIcon } from '@lucide/vue'
-  import { useDarkMode } from '@shared/composables/support/darkMode'
+  import { useColorScheme } from '@shared/composables/support/useColorScheme'
   import { Form } from '@shared/components/common/Form'
   import { Label } from '@shared/components/ui/label'
   import { ToggleGroup, ToggleGroupItem } from '@shared/components/ui/toggle-group'
 
-  const { mode, set } = useDarkMode()
+  const { mode, set } = useColorScheme()
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
-  import AppearanceTheme from '@/features/appearance/Theme.vue'
   import SettingsLocaleForm from '@/features/forms/SettingsLocale.vue'
+  import SettingsThemeForm from '@/features/forms/SettingsTheme.vue'
 </script>
 
 <template>
@@ -20,7 +20,7 @@
         {{ $t('features.headings.settings_appearance') }}
       </Heading>
 
-      <AppearanceTheme />
+      <SettingsThemeForm />
     </section>
   </Stack>
 </template>

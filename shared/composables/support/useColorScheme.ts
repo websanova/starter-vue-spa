@@ -53,7 +53,7 @@ watchEffect(() => {
   document.documentElement.classList.toggle('dark', isDark.value)
 })
 
-export const useDarkMode = function() {
+export const useColorScheme = function() {
   /**
    * Takes an unknown so it can be handed straight to a control's
    * update event. Anything outside the union is ignored, which also
