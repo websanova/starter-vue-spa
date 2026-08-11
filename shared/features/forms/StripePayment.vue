@@ -142,7 +142,7 @@
 <template>
   <Loading
     v-if="isLoading"
-    :text="$t('features.form.stripe_payment.loading')"
+    class="justify-center"
   />
 
   <Form

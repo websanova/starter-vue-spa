@@ -110,7 +110,6 @@
     },
     "stripe_payment": {
       "failed": "Your payment could not be completed. Please try again.",
-      "loading": "Preparing payment...",
       "powered": "Powered by"
     }
   },
