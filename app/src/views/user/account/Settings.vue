@@ -9,7 +9,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.headings.settings_appearance') }}
+        {{ $t('features.heading.settings_appearance') }}
       </Heading>
 
       <SettingsThemeForm />
@@ -17,7 +17,7 @@
 
     <section>
       <Heading>
-        {{ $t('features.headings.settings_locale') }}
+        {{ $t('features.heading.settings_locale') }}
       </Heading>
 
       <SettingsLocaleForm />

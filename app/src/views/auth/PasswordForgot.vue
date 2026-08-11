@@ -11,7 +11,7 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t('features.headings.password_reset') }}
+      {{ $t('features.heading.password_reset') }}
     </Heading>
 
     <AuthPasswordForgotForm />

@@ -11,7 +11,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.headings.billing') }}
+        {{ $t('features.heading.billing') }}
       </Heading>
 
       <Stack gap="sm">

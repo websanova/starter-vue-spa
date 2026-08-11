@@ -9,7 +9,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.headings.profile_avatar') }}
+        {{ $t('features.heading.profile_avatar') }}
       </Heading>
 
       <ProfileAvatarForm />
@@ -17,7 +17,7 @@
 
     <section>
       <Heading>
-        {{ $t('features.headings.profile_info') }}
+        {{ $t('features.heading.profile_info') }}
       </Heading>
 
       <ProfileEditForm />

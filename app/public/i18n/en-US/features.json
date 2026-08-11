@@ -1,5 +1,5 @@
 {
-  "headings": {
+  "heading": {
     "billing": "Billing",
     "login": "Sign In",
     "password_reset": "Reset Password",

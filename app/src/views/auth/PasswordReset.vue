@@ -11,7 +11,7 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t('features.headings.password_update') }}
+      {{ $t('features.heading.password_update') }}
     </Heading>
 
     <AuthPasswordResetForm />

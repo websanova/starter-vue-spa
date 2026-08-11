@@ -11,7 +11,7 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t('features.headings.login') }}
+      {{ $t('features.heading.login') }}
     </Heading>
 
     <AuthLoginForm />
