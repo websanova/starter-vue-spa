@@ -1,4 +1,17 @@
 {
+  "headings": {
+    "billing": "Facturation",
+    "login": "Se connecter",
+    "password_reset": "Réinitialiser le mot de passe",
+    "password_update": "Mettre à jour le mot de passe",
+    "profile_avatar": "Avatar",
+    "profile_info": "Renseignements",
+    "register": "S'inscrire",
+    "settings_appearance": "Apparence",
+    "settings_locale": "Paramètres régionaux",
+    "verify_email": "Vérifier le courriel",
+    "verify_phone": "Vérifier le numéro de téléphone"
+  },
   "lbl": {
     "account": "Compte",
     "all": "Tout",
@@ -37,13 +50,6 @@
     "upload": "Téléverser",
     "verify": "Vérifier"
   },
-  "sr": {
-    "dark_mode_toggle": "Basculer le mode sombre",
-    "mark_read": "Marquer comme lu",
-    "menu_account": "Menu du compte",
-    "menu_bookmarks": "Menu des signets",
-    "menu_notifications": "Menu des notifications"
-  },
   "ph": {
     "email": "vous{'@'}exemple.com",
     "first_name": "Votre prénom",
@@ -55,6 +61,16 @@
     "phone": "Votre numéro de téléphone",
     "timezone": "Sélectionnez un fuseau horaire"
   },
+  "sr": {
+    "dark_mode_toggle": "Basculer le mode sombre",
+    "mark_read": "Marquer comme lu",
+    "menu_account": "Menu du compte",
+    "menu_bookmarks": "Menu des signets",
+    "menu_notifications": "Menu des notifications"
+  },
+
+
+
   "billing": {
     "payment_method": {
       "card": "{brand} se terminant par {last_four}",
@@ -157,18 +173,5 @@
       "note_trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
       "unlimited": "Illimité"
     }
-  },
-  "headings": {
-    "billing": "Facturation",
-    "login": "Se connecter",
-    "password_reset": "Réinitialiser le mot de passe",
-    "password_update": "Mettre à jour le mot de passe",
-    "profile_avatar": "Avatar",
-    "profile_info": "Renseignements",
-    "register": "S'inscrire",
-    "settings_appearance": "Apparence",
-    "settings_locale": "Paramètres régionaux",
-    "verify_email": "Vérifier le courriel",
-    "verify_phone": "Vérifier le numéro de téléphone"
   }
 }

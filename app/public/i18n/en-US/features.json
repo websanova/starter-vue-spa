@@ -1,4 +1,17 @@
 {
+  "headings": {
+    "billing": "Billing",
+    "login": "Sign In",
+    "password_reset": "Reset Password",
+    "password_update": "Update Password",
+    "profile_avatar": "Avatar",
+    "profile_info": "Info",
+    "register": "Sign Up",
+    "settings_appearance": "Appearance",
+    "settings_locale": "Locale",
+    "verify_email": "Verify Email",
+    "verify_phone": "Verify Phone Number"
+  },
   "lbl": {
     "account": "Account",
     "all": "All",
@@ -37,13 +50,6 @@
     "upload": "Upload",
     "verify": "Verify"
   },
-  "sr": {
-    "dark_mode_toggle": "Toggle dark mode",
-    "mark_read": "Mark as read",
-    "menu_account": "Account menu",
-    "menu_bookmarks": "Bookmarks menu",
-    "menu_notifications": "Notifications menu"
-  },
   "ph": {
     "email": "you{'@'}example.com",
     "first_name": "Your first name",
@@ -55,6 +61,16 @@
     "phone": "Your phone number",
     "timezone": "Select a timezone"
   },
+  "sr": {
+    "dark_mode_toggle": "Toggle dark mode",
+    "mark_read": "Mark as read",
+    "menu_account": "Account menu",
+    "menu_bookmarks": "Bookmarks menu",
+    "menu_notifications": "Notifications menu"
+  },
+
+
+
   "billing": {
     "payment_method": {
       "card": "{brand} ending in {last_four}",
@@ -157,18 +173,5 @@
       "note_trial": "Start your free {days} day trial now!",
       "unlimited": "Unlimited"
     }
-  },
-  "headings": {
-    "billing": "Billing",
-    "login": "Sign In",
-    "password_reset": "Reset Password",
-    "password_update": "Update Password",
-    "profile_avatar": "Avatar",
-    "profile_info": "Info",
-    "register": "Sign Up",
-    "settings_appearance": "Appearance",
-    "settings_locale": "Locale",
-    "verify_email": "Verify Email",
-    "verify_phone": "Verify Phone Number"
   }
 }
