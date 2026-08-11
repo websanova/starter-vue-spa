@@ -27,5 +27,12 @@
     >
       {{ $t('features.billing.payment_method.card_none') }}
     </p>
+
+    <RouterLink
+      :to="{ name: 'user-account-payment-method' }"
+      class="text-link"
+    >
+      {{ $t('features.lbl.update') }}
+    </RouterLink>
   </Inline>
 </template>
