@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js/pure'
 import { useI18n } from '@shared/plugins/i18n'
 import { oklchToHex } from '@shared/lib/color'
 import type { Ref } from 'vue'
-import type { Stripe, StripeElementLocale, StripeElements, StripePaymentElement } from '@stripe/stripe-js'
+import type { Stripe, StripeElementLocale, StripeElements, StripeError, StripePaymentElement } from '@stripe/stripe-js'
 
 interface StripePaymentOptions {
   target: Ref<HTMLElement | null>
@@ -115,33 +115,50 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
   }
 
   /**
-   * Confirms the mounted element and resolves to a message when the
-   * payment was refused. Authentication that cannot run in a frame
-   * sends the customer to the return url instead, in which case this
-   * never resolves. The element is deliberately left in place on a
-   * refusal, since the intent stays confirmable and the customer can
-   * correct the card and submit again without a new secret.
+   * Reads the intent an operation left behind, so confirming and
+   * returning from an authentication both report the same way.
+   *
+   * A validation error carries no message, since the element has already
+   * drawn it under the field it belongs to and repeating it above the
+   * form says the same thing twice.
    */
-  async function confirm() {
+  function toResult(status: string | undefined, error?: StripeError | null): StripeIntentResult {
+    return {
+      status: status ?? '',
+      message: error?.type === 'validation_error' ? '' : error?.message ?? '',
+    }
+  }
+
+  /**
+   * Confirms the mounted element and reports where the intent landed.
+   * Authentication that cannot run in a frame sends the customer to the
+   * return url instead, in which case this never resolves. The element
+   * is deliberately left in place on a refusal, since the intent stays
+   * confirmable and the customer can correct the card and submit again
+   * without a new secret.
+   */
+  async function confirm(): Promise<StripeIntentResult> {
     const stripeClient = await client()
 
     if (!stripeClient || !elements) {
-      return ''
+      return { status: '', message: '' }
     }
 
-    const { error } = intentType === 'setup'
-      ? await stripeClient.confirmSetup({
-        elements,
-        confirmParams: { return_url: returnUrl },
-        redirect: 'if_required',
-      })
-      : await stripeClient.confirmPayment({
-        elements,
-        confirmParams: { return_url: returnUrl },
-        redirect: 'if_required',
-      })
+    const params = {
+      elements,
+      confirmParams: { return_url: returnUrl },
+      redirect: 'if_required' as const,
+    }
 
-    return error?.message ?? ''
+    if (intentType === 'setup') {
+      const { setupIntent, error } = await stripeClient.confirmSetup(params)
+
+      return toResult(setupIntent?.status, error)
+    }
+
+    const { paymentIntent, error } = await stripeClient.confirmPayment(params)
+
+    return toResult(paymentIntent?.status, error)
   }
 
   /**
@@ -160,18 +177,12 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     if (intent.type === 'setup') {
       const { setupIntent } = await stripeClient.retrieveSetupIntent(intent.clientSecret)
 
-      return {
-        status: setupIntent?.status ?? '',
-        message: setupIntent?.last_setup_error?.message ?? '',
-      }
+      return toResult(setupIntent?.status, setupIntent?.last_setup_error)
     }
 
     const { paymentIntent } = await stripeClient.retrievePaymentIntent(intent.clientSecret)
 
-    return {
-      status: paymentIntent?.status ?? '',
-      message: paymentIntent?.last_payment_error?.message ?? '',
-    }
+    return toResult(paymentIntent?.status, paymentIntent?.last_payment_error)
   }
 
   function destroy() {

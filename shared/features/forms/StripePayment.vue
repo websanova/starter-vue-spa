@@ -98,6 +98,15 @@
   }
 
   /**
+   * Processing is treated as done alongside succeeded, since a payment
+   * still clearing is out of the customer hands and nothing more is
+   * asked of them here.
+   */
+  function isSettled(status: string) {
+    return status === 'succeeded' || status === 'processing'
+  }
+
+  /**
    * Reads how the authentication the customer was sent away for ended.
    * A refusal leaves the intent confirmable, so the element goes back up
    * against the same secret and they can try again without opening a
@@ -106,7 +115,7 @@
   async function resume(intent: StripeIntent) {
     const { status, message } = await payment.retrieve(intent)
 
-    if (status === 'succeeded' || status === 'processing') {
+    if (isSettled(status)) {
       isLoading.value = false
       onComplete()
       return
@@ -122,15 +131,15 @@
     isConfirming.value = true
     paymentError.value = ''
 
-    const message = await payment.confirm()
+    const { status, message } = await payment.confirm()
 
-    if (message) {
-      paymentError.value = message
-      isConfirming.value = false
+    if (isSettled(status)) {
+      onComplete()
       return
     }
 
-    onComplete()
+    paymentError.value = message
+    isConfirming.value = false
   }
 
   function onComplete() {
