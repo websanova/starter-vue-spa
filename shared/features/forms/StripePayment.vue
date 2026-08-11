@@ -112,7 +112,7 @@
       return
     }
 
-    paymentError.value = message || t('site.common.stripe.failed')
+    paymentError.value = message || t('features.form.stripe_payment.failed')
     isLoading.value = false
 
     await payment.mount(intent)
@@ -142,7 +142,7 @@
 <template>
   <Loading
     v-if="isLoading"
-    :text="$t('site.common.stripe.loading')"
+    :text="$t('features.form.stripe_payment.loading')"
   />
 
   <Form
@@ -166,7 +166,7 @@
       rel="noopener"
       target="_blank"
     >
-      {{ $t('site.common.stripe.powered') }}
+      {{ $t('features.form.stripe_payment.powered') }}
       <StripeLogo class="h-4" />
     </a>
 

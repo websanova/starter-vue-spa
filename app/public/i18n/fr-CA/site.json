@@ -8,11 +8,6 @@
   "common": {
     "loading": {
       "text": "Chargement..."
-    },
-    "stripe": {
-      "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
-      "loading": "Préparation du paiement...",
-      "powered": "Propulsé par"
     }
   },
   "error": {

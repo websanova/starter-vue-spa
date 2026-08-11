@@ -10,7 +10,7 @@
   import { useSettingsStore } from '@shared/stores/settings'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
-  import { StripePayment } from '@shared/components/common/Stripe'
+  import StripePaymentForm from '@shared/features/forms/StripePayment.vue'
   import type { Interval } from '@/models/plan'
 
   const pollAttempts = 8
@@ -131,12 +131,12 @@
         </p>
       </div>
 
-      <StripePayment
+      <StripePaymentForm
         :create="createIntent"
         @complete="onComplete"
       >
         {{ $t('features.subscribe.checkout.submit') }}
-      </StripePayment>
+      </StripePaymentForm>
     </Stack>
   </div>
 </template>

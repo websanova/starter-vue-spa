@@ -111,6 +111,11 @@
     "settings_locale": {
       "local_time": "Heure locale"
     },
+    "stripe_payment": {
+      "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
+      "loading": "Préparation du paiement...",
+      "powered": "Propulsé par"
+    },
     "verify_account": {
       "note_email": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
       "note_phone": "Entrez le NIP envoyé à votre numéro de téléphone se terminant par {digits}.",

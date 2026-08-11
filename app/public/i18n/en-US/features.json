@@ -111,6 +111,11 @@
     "settings_locale": {
       "local_time": "Local time"
     },
+    "stripe_payment": {
+      "failed": "Your payment could not be completed. Please try again.",
+      "loading": "Preparing payment...",
+      "powered": "Powered by"
+    },
     "verify_account": {
       "note_email": "Enter the pin sent to your email into the input below. If you do not see the email in your inbox please check your spam box.",
       "note_phone": "Enter the pin sent to your phone number ending in {digits}.",
