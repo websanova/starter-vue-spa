@@ -130,12 +130,9 @@
   "subscribe": {
     "checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
-      "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
-      "loading": "Préparation du paiement...",
       "note_complete": "Complétez votre abonnement.",
       "note_summary": "Forfait {plan}, facturé {interval} à {price}.",
       "note_summary_trial": "Essai de {days} jours du forfait {plan}, puis {price} facturé {interval}.",
-      "powered": "Propulsé par",
       "submit": "S'abonner"
     },
     "plans": {

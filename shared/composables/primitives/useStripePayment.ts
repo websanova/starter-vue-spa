@@ -2,10 +2,11 @@ import { nextTick, onBeforeUnmount } from 'vue'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useI18n } from '@shared/plugins/i18n'
 import { oklchToHex } from '@shared/lib/color'
+import type { Ref } from 'vue'
 import type { Stripe, StripeElementLocale, StripeElements, StripePaymentElement } from '@stripe/stripe-js'
 
 interface StripePaymentOptions {
-  selector: string
+  target: Ref<HTMLElement | null>
   returnUrl: string
 }
 
@@ -41,7 +42,7 @@ let stripe: Promise<Stripe | null> | null = null
  * to a payment screen reuses the script already on the page rather than
  * injecting it again.
  */
-export function useStripePayment({ selector, returnUrl }: StripePaymentOptions) {
+export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
   let elements: StripeElements | null = null
   let paymentElement: StripePaymentElement | null = null
   let intentType: StripeIntent['type'] = 'payment'
@@ -106,7 +107,11 @@ export function useStripePayment({ selector, returnUrl }: StripePaymentOptions) 
 
     await nextTick()
 
-    paymentElement.mount(selector)
+    if (!target.value) {
+      return
+    }
+
+    paymentElement.mount(target.value)
   }
 
   /**
