@@ -56,19 +56,23 @@
     "timezone": "Select a timezone"
   },
   "billing": {
-    "action": {
-      "cancel": "Cancel",
-      "resume": "Resume",
-      "update": "Update Plan"
+    "payment_method": {
+      "card": "{brand} ending in {last_four}",
+      "card_none": "No payment method on file."
     },
-    "card": "{brand} ending in {last_four}",
-    "card_none": "No payment method on file.",
-    "status": {
-      "active": "You are currently on the {plan} plan, billed {interval}.",
-      "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
-      "free": "You are currently on the {plan} plan.",
-      "none": "You have not chosen a plan yet.",
-      "trialing": "Your {plan} trial ends on {date}."
+    "subscription": {
+      "action": {
+        "cancel": "Cancel",
+        "resume": "Resume",
+        "update": "Update Plan"
+      },
+      "status": {
+        "active": "You are currently on the {plan} plan, billed {interval}.",
+        "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
+        "free": "You are currently on the {plan} plan.",
+        "none": "You have not chosen a plan yet.",
+        "trialing": "Your {plan} trial ends on {date}."
+      }
     }
   },
   "cover": {

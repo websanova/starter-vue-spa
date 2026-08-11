@@ -56,19 +56,23 @@
     "timezone": "Sélectionnez un fuseau horaire"
   },
   "billing": {
-    "action": {
-      "cancel": "Annuler",
-      "resume": "Reprendre",
-      "update": "Changer de forfait"
+    "payment_method": {
+      "card": "{brand} se terminant par {last_four}",
+      "card_none": "Aucun moyen de paiement enregistré."
     },
-    "card": "{brand} se terminant par {last_four}",
-    "card_none": "Aucun moyen de paiement enregistré.",
-    "status": {
-      "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
-      "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
-      "free": "Vous êtes présentement sur le forfait {plan}.",
-      "none": "Vous n'avez pas encore choisi de forfait.",
-      "trialing": "Votre essai {plan} prend fin le {date}."
+    "subscription": {
+      "action": {
+        "cancel": "Annuler",
+        "resume": "Reprendre",
+        "update": "Changer de forfait"
+      },
+      "status": {
+        "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
+        "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
+        "free": "Vous êtes présentement sur le forfait {plan}.",
+        "none": "Vous n'avez pas encore choisi de forfait.",
+        "trialing": "Votre essai {plan} prend fin le {date}."
+      }
     }
   },
   "cover": {

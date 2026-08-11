@@ -18,14 +18,14 @@
     <CreditCardIcon class="size-5 shrink-0 text-muted-foreground" />
 
     <p v-if="user?.paymentMethod">
-      {{ $t('features.billing.card', { brand, last_four: user.paymentMethod.lastFour }) }}
+      {{ $t('features.billing.payment_method.card', { brand, last_four: user.paymentMethod.lastFour }) }}
     </p>
 
     <p
       v-else
       class="text-muted-foreground"
     >
-      {{ $t('features.billing.card_none') }}
+      {{ $t('features.billing.payment_method.card_none') }}
     </p>
   </Inline>
 </template>
