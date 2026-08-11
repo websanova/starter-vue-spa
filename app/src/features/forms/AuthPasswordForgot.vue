@@ -10,7 +10,7 @@
     v-if="isSuccess"
     class="text-center"
   >
-    {{ $t('features.form.password_forgot.note_success') }}
+    {{ $t('features.form.auth_password_forgot.note_success') }}
   </p>
 
   <Form
@@ -36,7 +36,7 @@
         :to="{ name: 'auth-login' }"
         class="text-link"
       >
-        {{ $t('features.form.password_forgot.back') }}
+        {{ $t('features.form.auth_password_forgot.back') }}
       </RouterLink>
     </p>
   </Form>

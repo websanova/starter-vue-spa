@@ -80,33 +80,30 @@
     }
   },
   "form": {
-    "avatar": {
-      "error_failed": "Impossible de téléverser l'avatar. Veuillez réessayer.",
-      "error_invalid_type": "Veuillez choisir une image {0}.",
-      "error_too_large": "L'image doit être inférieure à {0}.",
-      "note": "L'image doit avoir une taille maximale de {0} et être dans l'un des formats suivants : {1}.",
-      "toast": "Avatar mis à jour"
-    },
-    "login": {
-      "loading": "Connexion en cours...",
+    "auth_login": {
       "reset_password": "Réinitialiser le mot de passe"
     },
-    "password_forgot": {
+    "auth_password_forgot": {
       "back": "Retour à la connexion",
-      "loading": "Envoi en cours...",
       "note_success": "Courriel de réinitialisation envoyé. Vérifiez votre dossier de pourriels s'il n'apparaît pas dans quelques minutes."
     },
-    "password_reset": {
-      "loading": "Mise à jour en cours...",
+    "auth_password_reset": {
       "note_invalid": "Lien de mise à jour du mot de passe invalide.",
       "note_success": "Votre mot de passe a changé. Vous pouvez maintenant {0} avec vos nouveaux identifiants."
     },
-    "profile": {
-      "toast": "Profil enregistré"
+    "auth_register": {
+      "already_member": "Déjà membre?"
     },
-    "register": {
-      "already_member": "Déjà membre?",
-      "loading": "Inscription en cours..."
+    "auth_verify_account": {
+      "note_email": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
+      "note_phone": "Entrez le NIP envoyé à votre numéro de téléphone se terminant par {digits}.",
+      "resend_code": "Renvoyer le code"
+    },
+    "profile_avatar": {
+      "error_failed": "Impossible de téléverser l'avatar. Veuillez réessayer.",
+      "error_invalid_type": "Veuillez choisir une image {0}.",
+      "error_too_large": "L'image doit être inférieure à {0}.",
+      "note": "L'image doit avoir une taille maximale de {0} et être dans l'un des formats suivants : {1}."
     },
     "settings_locale": {
       "local_time": "Heure locale"
@@ -115,11 +112,6 @@
       "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
       "loading": "Préparation du paiement...",
       "powered": "Propulsé par"
-    },
-    "verify_account": {
-      "note_email": "Entrez le NIP envoyé à votre courriel dans le champ ci-dessous. Si vous ne voyez pas le courriel dans votre boîte de réception, veuillez vérifier votre dossier de pourriels.",
-      "note_phone": "Entrez le NIP envoyé à votre numéro de téléphone se terminant par {digits}.",
-      "resend_code": "Renvoyer le code"
     }
   },
   "notification": {

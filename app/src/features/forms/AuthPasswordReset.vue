@@ -19,12 +19,12 @@
     v-if="!isValidLink"
     class="text-center"
   >
-    {{ $t('features.form.password_reset.note_invalid') }}
+    {{ $t('features.form.auth_password_reset.note_invalid') }}
   </p>
 
   <i18n-t
     v-else-if="isSuccess"
-    keypath="features.form.password_reset.note_success"
+    keypath="features.form.auth_password_reset.note_success"
     tag="p"
     class="text-center"
   >

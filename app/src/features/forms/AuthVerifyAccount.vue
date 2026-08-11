@@ -56,7 +56,7 @@
 <template>
   <Form @submit="onVerify">
     <p class="text-center">
-      {{ $t(`features.form.verify_account.note_${channel}`, { digits }) }}
+      {{ $t(`features.form.auth_verify_account.note_${channel}`, { digits }) }}
     </p>
 
     <div class="flex justify-center">
@@ -94,7 +94,7 @@
         variant="link"
         @click="onResend()"
       >
-        {{ $t('features.form.verify_account.resend_code') }}
+        {{ $t('features.form.auth_verify_account.resend_code') }}
       </ButtonLoading>
 
       |

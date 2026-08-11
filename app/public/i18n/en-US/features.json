@@ -80,33 +80,30 @@
     }
   },
   "form": {
-    "avatar": {
-      "error_failed": "Could not upload avatar. Please try again.",
-      "error_invalid_type": "Please choose a {0} image.",
-      "error_too_large": "Image must be smaller than {0}.",
-      "note": "Image must be a maximum of {0} and of the following formats: {1}.",
-      "toast": "Avatar updated"
-    },
-    "login": {
-      "loading": "Signing in...",
+    "auth_login": {
       "reset_password": "Reset password"
     },
-    "password_forgot": {
+    "auth_password_forgot": {
       "back": "Back to sign in",
-      "loading": "Sending...",
       "note_success": "Password reset email sent. Check your spam folder if it doesn't show up in a few minutes."
     },
-    "password_reset": {
-      "loading": "Updating...",
+    "auth_password_reset": {
       "note_invalid": "Invalid password update link.",
       "note_success": "Your password has changed. You can now {0} using your new credentials."
     },
-    "profile": {
-      "toast": "Profile saved"
+    "auth_register": {
+      "already_member": "Already a member?"
     },
-    "register": {
-      "already_member": "Already a member?",
-      "loading": "Signing up..."
+    "auth_verify_account": {
+      "note_email": "Enter the pin sent to your email into the input below. If you do not see the email in your inbox please check your spam box.",
+      "note_phone": "Enter the pin sent to your phone number ending in {digits}.",
+      "resend_code": "Resend code"
+    },
+    "profile_avatar": {
+      "error_failed": "Could not upload avatar. Please try again.",
+      "error_invalid_type": "Please choose a {0} image.",
+      "error_too_large": "Image must be smaller than {0}.",
+      "note": "Image must be a maximum of {0} and of the following formats: {1}."
     },
     "settings_locale": {
       "local_time": "Local time"
@@ -115,11 +112,6 @@
       "failed": "Your payment could not be completed. Please try again.",
       "loading": "Preparing payment...",
       "powered": "Powered by"
-    },
-    "verify_account": {
-      "note_email": "Enter the pin sent to your email into the input below. If you do not see the email in your inbox please check your spam box.",
-      "note_phone": "Enter the pin sent to your phone number ending in {digits}.",
-      "resend_code": "Resend code"
     }
   },
   "notification": {

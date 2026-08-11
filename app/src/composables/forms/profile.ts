@@ -36,9 +36,9 @@ export function useProfileAvatar() {
       maxSize,
       field: 'avatar',
       messages: {
-        failed: () => i18n.t('features.form.avatar.error_failed'),
-        invalidType: () => i18n.t('features.form.avatar.error_invalid_type', [formatsLabel]),
-        tooLarge: () => i18n.t('features.form.avatar.error_too_large', [sizeLabel]),
+        failed: () => i18n.t('features.form.profile_avatar.error_failed'),
+        invalidType: () => i18n.t('features.form.profile_avatar.error_invalid_type', [formatsLabel]),
+        tooLarge: () => i18n.t('features.form.profile_avatar.error_too_large', [sizeLabel]),
       },
       onSubmit: upload.mutateAsync,
     }),

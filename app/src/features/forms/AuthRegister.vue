@@ -53,7 +53,7 @@
     </FormButton>
 
     <p class="self-end text-sm text-muted-foreground">
-      {{ $t('features.form.register.already_member') }}
+      {{ $t('features.form.auth_register.already_member') }}
 
       <RouterLink
         :to="{ name: 'auth-login' }"
