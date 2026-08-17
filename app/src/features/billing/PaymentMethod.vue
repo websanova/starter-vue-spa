@@ -19,6 +19,13 @@
 
     <p v-if="user?.paymentMethod">
       {{ $t('features.billing.payment_method.card', { brand, last_four: user.paymentMethod.lastFour }) }}
+
+      <RouterLink
+        :to="{ name: 'user-account-payment-method' }"
+        class="text-link"
+      >
+        {{ $t('features.lbl.update') }}
+      </RouterLink>
     </p>
 
     <p
@@ -27,12 +34,5 @@
     >
       {{ $t('features.billing.payment_method.card_none') }}
     </p>
-
-    <RouterLink
-      :to="{ name: 'user-account-payment-method' }"
-      class="text-link"
-    >
-      {{ $t('features.lbl.update') }}
-    </RouterLink>
   </Inline>
 </template>
