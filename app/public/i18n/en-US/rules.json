@@ -1,11 +1,16 @@
 {
   "attr": {
+    "city": "City",
+    "country": "Country",
     "email": "Email",
     "first_name": "First Name",
     "language": "Language",
     "last_name": "Last Name",
+    "line1": "Address",
+    "line2": "Address Line 2",
     "password": "Password",
     "phone": "Phone Number",
+    "postal_code": "Postal Code",
     "timezone": "Timezone"
   },
   "confirmed": "The {attribute} confirmation does not match.",

@@ -23,11 +23,13 @@
   ]
 
   const props = defineProps<{
-    create: () => Promise<StripeIntent>
+    intent: StripeIntent | null
+    error?: string
+    pending?: boolean
   }>()
 
   const emit = defineEmits<{
-    complete: []
+    complete: [id: string]
   }>()
 
   const route = useRoute()
@@ -38,6 +40,7 @@
   const isLoading = ref<boolean>(true)
   const isConfirming = ref<boolean>(false)
   const paymentError = ref<string>('')
+  const confirmedId = ref<string>('')
 
   const payment = useStripePayment({
     target: element,
@@ -82,19 +85,25 @@
     return null
   }
 
+  /**
+   * The intent is opened by the caller and handed over ready, since what
+   * it takes to open one, and what to do when that fails, belongs to
+   * whatever screen this is sitting on. Nothing mounts without a secret,
+   * so a missing one only drops out of the loading state.
+   */
   async function start() {
-    const intent = returnedIntent()
+    const returned = returnedIntent()
 
-    if (intent) {
-      await resume(intent)
+    if (returned) {
+      await resume(returned)
       return
     }
 
-    const created = await props.create()
-
     isLoading.value = false
 
-    await payment.mount(created)
+    if (props.intent) {
+      await payment.mount(props.intent)
+    }
   }
 
   /**
@@ -113,11 +122,11 @@
    * second one.
    */
   async function resume(intent: StripeIntent) {
-    const { status, message } = await payment.retrieve(intent)
+    const { id, status, message } = await payment.retrieve(intent)
 
     if (isSettled(status)) {
       isLoading.value = false
-      onComplete()
+      onComplete(id)
       return
     }
 
@@ -127,14 +136,25 @@
     await payment.mount(intent)
   }
 
+  /**
+   * A confirmed intent is spent, so submitting again reports the same
+   * one rather than confirming a second time. That is what lets the
+   * parent retry whatever it does with the result, such as a sync call
+   * that errored, without asking for the card details again.
+   */
   async function onSubmit() {
+    if (confirmedId.value) {
+      emit('complete', confirmedId.value)
+      return
+    }
+
     isConfirming.value = true
     paymentError.value = ''
 
-    const { status, message } = await payment.confirm()
+    const { id, status, message } = await payment.confirm()
 
     if (isSettled(status)) {
-      onComplete()
+      onComplete(id)
       return
     }
 
@@ -142,9 +162,15 @@
     isConfirming.value = false
   }
 
-  function onComplete() {
-    payment.destroy()
-    emit('complete')
+  /**
+   * The element is left standing and the id is kept, since the parent
+   * may still fail at whatever it does next and submit again. Tearing
+   * the element down happens on unmount, once the parent has moved on.
+   */
+  function onComplete(id: string) {
+    confirmedId.value = id
+    isConfirming.value = false
+    emit('complete', id)
   }
 </script>
 
@@ -159,10 +185,10 @@
     @submit="onSubmit"
   >
     <p
-      v-if="paymentError"
+      v-if="paymentError || error"
       class="text-center text-destructive"
     >
-      {{ paymentError }}
+      {{ paymentError || error }}
     </p>
 
     <div
@@ -181,7 +207,7 @@
 
     <FormButton
       class="w-full"
-      :pending="isConfirming"
+      :pending="isConfirming || pending"
     >
       <slot />
     </FormButton>

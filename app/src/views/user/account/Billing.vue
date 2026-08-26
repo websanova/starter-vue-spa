@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
+  import BillingAddress from '@/features/billing/Address.vue'
   import BillingPaymentMethod from '@/features/billing/PaymentMethod.vue'
   import BillingSubscription from '@/features/billing/Subscription.vue'
 
@@ -15,6 +16,8 @@
       </Heading>
 
       <Stack gap="sm">
+        <BillingAddress />
+
         <BillingPaymentMethod />
 
         <BillingSubscription />

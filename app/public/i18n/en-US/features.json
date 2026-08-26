@@ -1,6 +1,7 @@
 {
   "heading": {
     "billing": "Billing",
+    "billing_address": "Billing Address",
     "login": "Sign In",
     "password_reset": "Reset Password",
     "password_update": "Update Password",
@@ -14,10 +15,15 @@
   },
   "lbl": {
     "account": "Account",
+    "add": "Add",
     "all": "All",
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
+    "change": "Change",
+    "city": "City",
+    "continue": "Continue",
+    "country": "Country",
     "create": "Create",
     "dark": "Dark",
     "delete": "Delete",
@@ -26,6 +32,8 @@
     "language": "Language",
     "last_name": "Last Name",
     "light": "Light",
+    "line1": "Address",
+    "line2": "Address Line 2",
     "mark_all_read": "Mark all read",
     "name": "Name",
     "optional": "Optional",
@@ -33,6 +41,7 @@
     "password_confirmation": "Confirm password",
     "phone": "Phone Number",
     "plans": "Plans",
+    "postal_code": "Postal Code",
     "profile": "Profile",
     "refresh": "Refresh",
     "remove": "Remove",
@@ -51,14 +60,19 @@
     "verify": "Verify"
   },
   "ph": {
+    "city": "Your city",
+    "country": "US",
     "email": "you{'@'}example.com",
     "first_name": "Your first name",
     "language": "Select a language",
     "last_name": "Your last name",
+    "line1": "Street address",
+    "line2": "Apartment, suite, unit",
     "name": "Your name",
     "password": "Password",
     "password_confirmation": "Confirm password",
     "phone": "Your phone number",
+    "postal_code": "Postal code",
     "timezone": "Select a timezone"
   },
   "sr": {
@@ -72,6 +86,9 @@
 
 
   "billing": {
+    "address": {
+      "none": "No billing address on file."
+    },
     "payment_method": {
       "card": "{brand} ending in {last_four}",
       "card_none": "No payment method on file."
@@ -146,7 +163,9 @@
   "subscribe": {
     "checkout": {
       "activating": "Payment received. Activating your plan...",
+      "note_address": "Your billing address is needed to work out the tax on your subscription.",
       "note_complete": "Complete your subscription.",
+      "note_payment_method": "Your card will be stored now and charged when your subscription starts.",
       "note_summary": "{plan} plan, billed {interval} at {price}.",
       "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}.",
       "submit": "Subscribe"

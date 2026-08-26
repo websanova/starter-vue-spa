@@ -16,6 +16,7 @@ export interface StripeIntent {
 }
 
 interface StripeIntentResult {
+  id: string
   status: string
   message: string
 }
@@ -71,6 +72,7 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     return {
       variables: {
         borderRadius: token('--radius'),
+        colorBackground: color('--background'),
         colorDanger: color('--destructive'),
         colorPrimary: color('--primary'),
         colorText: color('--foreground'),
@@ -80,6 +82,14 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
       rules: {
         '.Input': {
           backgroundColor: color('--background')
+        },
+        '.Tab': {
+          backgroundColor: color('--background'),
+          color: color('--foreground'),
+        },
+        '.Tab--selected': {
+          backgroundColor: color('--accent'),
+          color: color('--foreground'),
         },
       },
     }
@@ -116,14 +126,17 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
 
   /**
    * Reads the intent an operation left behind, so confirming and
-   * returning from an authentication both report the same way.
+   * returning from an authentication both report the same way. The id
+   * comes back with it, since a stored payment method is only reachable
+   * through the intent that stored it.
    *
    * A validation error carries no message, since the element has already
    * drawn it under the field it belongs to and repeating it above the
    * form says the same thing twice.
    */
-  function toResult(status: string | undefined, error?: StripeError | null): StripeIntentResult {
+  function toResult(id: string | undefined, status: string | undefined, error?: StripeError | null): StripeIntentResult {
     return {
+      id: id ?? '',
       status: status ?? '',
       message: error?.type === 'validation_error' ? '' : error?.message ?? '',
     }
@@ -141,7 +154,7 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     const stripeClient = await client()
 
     if (!stripeClient || !elements) {
-      return { status: '', message: '' }
+      return { id: '', status: '', message: '' }
     }
 
     const params = {
@@ -153,12 +166,12 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     if (intentType === 'setup') {
       const { setupIntent, error } = await stripeClient.confirmSetup(params)
 
-      return toResult(setupIntent?.status, error)
+      return toResult(setupIntent?.id, setupIntent?.status, error)
     }
 
     const { paymentIntent, error } = await stripeClient.confirmPayment(params)
 
-    return toResult(paymentIntent?.status, error)
+    return toResult(paymentIntent?.id, paymentIntent?.status, error)
   }
 
   /**
@@ -171,18 +184,18 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     const stripeClient = await client()
 
     if (!stripeClient) {
-      return { status: '', message: '' }
+      return { id: '', status: '', message: '' }
     }
 
     if (intent.type === 'setup') {
       const { setupIntent } = await stripeClient.retrieveSetupIntent(intent.clientSecret)
 
-      return toResult(setupIntent?.status, setupIntent?.last_setup_error)
+      return toResult(setupIntent?.id, setupIntent?.status, setupIntent?.last_setup_error)
     }
 
     const { paymentIntent } = await stripeClient.retrievePaymentIntent(intent.clientSecret)
 
-    return toResult(paymentIntent?.status, paymentIntent?.last_payment_error)
+    return toResult(paymentIntent?.id, paymentIntent?.status, paymentIntent?.last_payment_error)
   }
 
   function destroy() {

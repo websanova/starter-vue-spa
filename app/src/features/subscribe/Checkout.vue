@@ -1,22 +1,21 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { usePlans } from '@/composables/api/plans'
-  import { useCreateSubscriptionIntent } from '@/composables/api/subscription'
+  import { useBillingAddress, usePaymentMethod } from '@/composables/support/billing'
+  import { useCheckout } from '@/composables/support/checkout'
   import { useSubscription } from '@/composables/support/subscription'
-  import { useMutationError } from '@shared/composables/primitives/useMutationError'
-  import { useAuthService } from '@shared/composables/services/auth'
   import { useSettingsStore } from '@shared/stores/settings'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
-  import StripePaymentForm from '@shared/features/forms/StripePayment.vue'
+  import CheckoutAddress from './CheckoutAddress.vue'
+  import CheckoutPaymentMethod from './CheckoutPaymentMethod.vue'
   import type { Interval } from '@/models/plan'
 
-  const pollAttempts = 8
-  const pollInterval = 2000
+  // TODO: the confirm step. Promo code entry, the subscribe call, the
+  // invoice challenge it can come back with, and the success action.
 
-  const auth = useAuthService()
   const route = useRoute()
   const router = useRouter()
   const settings = useSettingsStore()
@@ -24,10 +23,10 @@
 
   const { data: plans } = usePlans()
   const { isTrialEligible } = useSubscription()
-  const subscriptionIntent = useCreateSubscriptionIntent()
-  const error = useMutationError(subscriptionIntent)
+  const { error: intentError, goTo, intent, isOpening, next, step } = useCheckout()
 
-  const isActivating = ref<boolean>(false)
+  const address = useBillingAddress()
+  const card = usePaymentMethod()
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
@@ -63,61 +62,28 @@
   })
 
   /**
-   * A trial signup opens a setup intent and charges nothing today, so it
-   * needs the sentence that dates the first payment rather than the one
-   * that claims it is being taken now.
+   * A trial signup charges nothing today, so it needs the sentence that
+   * dates the first payment rather than the one that claims it is being
+   * taken now.
    */
   const summaryKey = computed(() => isTrialEligible.value
     ? 'features.subscribe.checkout.note_summary_trial'
     : 'features.subscribe.checkout.note_summary'
   )
 
-  function createIntent() {
-    return subscriptionIntent.mutateAsync({ plan: plan!, interval: interval! })
-  }
-
   /**
-   * Waits for the webhook to turn the payment into a subscription. Nothing
-   * is synced from here, so the profile is refetched until the status
-   * lands or the ceiling is reached. Running out of attempts is not a
-   * failure, the activation simply has not arrived yet and the next load
-   * of the app will pick it up.
+   * A settled step collapses to a summary line with a way back into it.
+   * The step being edited shows the form instead, so its own summary is
+   * held back rather than sitting above a copy of itself.
    */
-  async function onComplete() {
-    isActivating.value = true
+  const showAddress = computed(() => !!address.value && step.value !== 'address')
 
-    for (let attempt = 0; attempt < pollAttempts; attempt += 1) {
-      await auth.fetchUser()
-
-      if (auth.user.value?.isSubscribed) {
-        break
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, pollInterval))
-    }
-
-    router.push({ name: 'user-landing' })
-  }
+  const showCard = computed(() => !!card.value && step.value !== 'payment')
 </script>
 
 <template>
   <div class="flex justify-center">
-    <Loading
-      v-if="isActivating"
-      :text="$t('features.subscribe.checkout.activating')"
-    />
-
-    <p
-      v-else-if="error"
-      class="text-center"
-    >
-      {{ error }}
-    </p>
-
-    <Stack
-      v-else
-      class="w-full sm:max-w-[25rem]"
-    >
+    <Stack class="w-full sm:max-w-[25rem]">
       <div class="text-center">
         <p>
           {{ $t('features.subscribe.checkout.note_complete') }}
@@ -131,12 +97,60 @@
         </p>
       </div>
 
-      <StripePaymentForm
-        :create="createIntent"
-        @complete="onComplete"
+      <Stack
+        v-if="showAddress || showCard"
+        gap="sm"
       >
-        {{ $t('features.subscribe.checkout.submit') }}
-      </StripePaymentForm>
+        <p
+          v-if="showAddress"
+          class="text-sm text-muted-foreground"
+        >
+          {{ address }}
+
+          <button
+            type="button"
+            class="text-link"
+            @click="goTo('address')"
+          >
+            {{ $t('features.lbl.change') }}
+          </button>
+        </p>
+
+        <p
+          v-if="showCard && card"
+          class="text-sm text-muted-foreground"
+        >
+          {{ $t('features.billing.payment_method.card', card) }}
+
+          <button
+            type="button"
+            class="text-link"
+            @click="goTo('payment')"
+          >
+            {{ $t('features.lbl.change') }}
+          </button>
+        </p>
+      </Stack>
+
+      <div
+        v-if="!step"
+        class="flex justify-center"
+      >
+        <Loading />
+      </div>
+
+      <CheckoutAddress
+        v-else-if="step === 'address'"
+        :error="intentError"
+        :pending="isOpening"
+        @complete="next"
+      />
+
+      <CheckoutPaymentMethod
+        v-else-if="step === 'payment'"
+        :intent="intent"
+        @complete="next"
+      />
     </Stack>
   </div>
 </template>

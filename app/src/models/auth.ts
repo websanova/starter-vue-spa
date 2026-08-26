@@ -3,6 +3,7 @@ import type { SubscriptionStatus } from '@/models/subscription'
 
 export interface AuthDto {
   avatar_url: string | null
+  billing_address: AuthBillingAddressDto | null
   email: string
   first_name: string
   has_payment_method: boolean
@@ -23,6 +24,14 @@ export interface AuthDto {
   trial: AuthTrialDto | null
   verification_pending: string[]
   verification_required: string[]
+}
+
+export interface AuthBillingAddressDto {
+  city: string
+  country: string
+  line1: string
+  line2: string | null
+  postal_code: string
 }
 
 export interface AuthPaymentMethodDto {
@@ -49,6 +58,7 @@ export interface AuthTrialDto {
 
 export interface Auth {
   avatarUrl: string | null
+  billingAddress: AuthBillingAddress | null
   email: string
   firstName: string
   hasPaymentMethod: boolean
@@ -70,6 +80,15 @@ export interface Auth {
   verificationPending: string[]
   verificationRequired: string[]
   readonly isAvatar: boolean
+  readonly isBillingAddress: boolean
+}
+
+export interface AuthBillingAddress {
+  city: string
+  country: string
+  line1: string
+  line2: string | null
+  postalCode: string
 }
 
 export interface AuthPaymentMethod {
@@ -97,6 +116,7 @@ export interface AuthTrial {
 export function toAuth(dto: AuthDto): Auth {
   return {
     avatarUrl: dto.avatar_url,
+    billingAddress: dto.billing_address ? toAuthBillingAddress(dto.billing_address) : null,
     email: dto.email,
     firstName: dto.first_name,
     hasPaymentMethod: dto.has_payment_method,
@@ -118,6 +138,17 @@ export function toAuth(dto: AuthDto): Auth {
     verificationPending: dto.verification_pending,
     verificationRequired: dto.verification_required,
     get isAvatar() { return this.avatarUrl !== null },
+    get isBillingAddress() { return this.billingAddress !== null },
+  }
+}
+
+export function toAuthBillingAddress(dto: AuthBillingAddressDto): AuthBillingAddress {
+  return {
+    city: dto.city,
+    country: dto.country,
+    line1: dto.line1,
+    line2: dto.line2,
+    postalCode: dto.postal_code,
   }
 }
 

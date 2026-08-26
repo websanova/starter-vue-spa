@@ -6,6 +6,7 @@ const LayoutBookmarks   = () => import('@/features/layouts/UserBookmarks.vue')
 const LayoutSubscribe   = () => import('@/features/layouts/UserSubscribe.vue')
 
 const AccountBilling    = () => import('@/views/user/account/Billing.vue')
+const AccountBillingAddress = () => import('@/views/user/account/BillingAddress.vue')
 const AccountPaymentMethod = () => import('@/views/user/account/PaymentMethod.vue')
 const AccountProfile    = () => import('@/views/user/account/Profile.vue')
 const AccountSecurity   = () => import('@/views/user/account/Security.vue')
@@ -58,6 +59,10 @@ export default [{
       path: 'billing',
       name: 'user-account-billing',
       component: AccountBilling
+    }, {
+      path: 'billing-address',
+      name: 'user-account-billing-address',
+      component: AccountBillingAddress
     }, {
       path: 'payment-method',
       name: 'user-account-payment-method',

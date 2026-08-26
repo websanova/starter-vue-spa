@@ -1,6 +1,7 @@
 {
   "heading": {
     "billing": "Facturation",
+    "billing_address": "Adresse de facturation",
     "login": "Se connecter",
     "password_reset": "Réinitialiser le mot de passe",
     "password_update": "Mettre à jour le mot de passe",
@@ -14,10 +15,15 @@
   },
   "lbl": {
     "account": "Compte",
+    "add": "Ajouter",
     "all": "Tout",
     "billing": "Facturation",
     "bookmarks": "Signets",
     "cancel": "Annuler",
+    "change": "Modifier",
+    "city": "Ville",
+    "continue": "Continuer",
+    "country": "Pays",
     "create": "Créer",
     "dark": "Sombre",
     "delete": "Supprimer",
@@ -26,6 +32,8 @@
     "language": "Langue",
     "last_name": "Nom",
     "light": "Clair",
+    "line1": "Adresse",
+    "line2": "Adresse ligne 2",
     "mark_all_read": "Tout marquer comme lu",
     "name": "Nom",
     "optional": "Facultatif",
@@ -33,6 +41,7 @@
     "password_confirmation": "Confirmer le mot de passe",
     "phone": "Numéro de téléphone",
     "plans": "Forfaits",
+    "postal_code": "Code postal",
     "profile": "Profil",
     "refresh": "Actualiser",
     "remove": "Retirer",
@@ -51,14 +60,19 @@
     "verify": "Vérifier"
   },
   "ph": {
+    "city": "Votre ville",
+    "country": "CA",
     "email": "vous{'@'}exemple.com",
     "first_name": "Votre prénom",
     "language": "Sélectionnez une langue",
     "last_name": "Votre nom",
+    "line1": "Numéro et rue",
+    "line2": "Appartement, bureau, unité",
     "name": "Votre nom",
     "password": "Mot de passe",
     "password_confirmation": "Confirmer le mot de passe",
     "phone": "Votre numéro de téléphone",
+    "postal_code": "Code postal",
     "timezone": "Sélectionnez un fuseau horaire"
   },
   "sr": {
@@ -72,6 +86,9 @@
 
 
   "billing": {
+    "address": {
+      "none": "Aucune adresse de facturation enregistrée."
+    },
     "payment_method": {
       "card": "{brand} se terminant par {last_four}",
       "card_none": "Aucun moyen de paiement enregistré."
@@ -146,7 +163,9 @@
   "subscribe": {
     "checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
+      "note_address": "Votre adresse de facturation est nécessaire pour calculer la taxe sur votre abonnement.",
       "note_complete": "Complétez votre abonnement.",
+      "note_payment_method": "Votre carte sera enregistrée maintenant et débitée au début de votre abonnement.",
       "note_summary": "Forfait {plan}, facturé {interval} à {price}.",
       "note_summary_trial": "Essai de {days} jours du forfait {plan}, puis {price} facturé {interval}.",
       "submit": "S'abonner"

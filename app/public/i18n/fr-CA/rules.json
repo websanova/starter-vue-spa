@@ -1,11 +1,16 @@
 {
   "attr": {
+    "city": "Ville",
+    "country": "Pays",
     "email": "Courriel",
     "first_name": "Prénom",
     "language": "Langue",
     "last_name": "Nom",
+    "line1": "Adresse",
+    "line2": "Adresse ligne 2",
     "password": "Mot de passe",
     "phone": "Numéro de téléphone",
+    "postal_code": "Code postal",
     "timezone": "Fuseau horaire"
   },
   "confirmed": "La confirmation du champ {attribute} ne correspond pas.",

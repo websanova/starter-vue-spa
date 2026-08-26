@@ -1,24 +1,17 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { CreditCardIcon } from '@lucide/vue'
-  import { useAuthService } from '@shared/composables/services/auth'
+  import { usePaymentMethod } from '@/composables/support/billing'
   import { Inline } from '@shared/components/common/Inline'
 
-  const { user } = useAuthService()
-
-  const brand = computed(() => {
-    const value = user.value?.paymentMethod?.brand ?? ''
-
-    return value.charAt(0).toUpperCase() + value.slice(1)
-  })
+  const card = usePaymentMethod()
 </script>
 
 <template>
   <Inline>
     <CreditCardIcon class="size-5 shrink-0 text-muted-foreground" />
 
-    <p v-if="user?.paymentMethod">
-      {{ $t('features.billing.payment_method.card', { brand, last_four: user.paymentMethod.lastFour }) }}
+    <p v-if="card">
+      {{ $t('features.billing.payment_method.card', card) }}
 
       <RouterLink
         :to="{ name: 'user-account-payment-method' }"

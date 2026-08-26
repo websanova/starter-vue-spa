@@ -28,6 +28,7 @@ export type ResponseError = (err: unknown) => unknown
 export interface HttpClient {
   get: <T>(url: string, options?: RequestOptions) => Promise<T>
   post: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
+  put: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
   patch: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
   delete: <T>(url: string, options?: RequestOptions) => Promise<T>
   interceptors: {
@@ -179,6 +180,7 @@ export function createClient(config: ClientConfig): HttpClient {
   return {
     get: (url, options) => request('GET', url, undefined, options),
     post: (url, body, options) => request('POST', url, body, options),
+    put: (url, body, options) => request('PUT', url, body, options),
     patch: (url, body, options) => request('PATCH', url, body, options),
     delete: (url, options) => request('DELETE', url, undefined, options),
     interceptors: {
