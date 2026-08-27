@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useSyncPaymentMethod } from '@/composables/api/paymentMethod'
+  import { useSubscription } from '@/composables/support/subscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { Stack } from '@shared/components/common/Stack'
   import StripePaymentForm from '@shared/features/forms/StripePayment.vue'
@@ -14,6 +15,8 @@
   }>()
 
   const sync = useSyncPaymentMethod()
+
+  const { isTrialEligible } = useSubscription()
 
   const error = useMutationError(sync)
 
@@ -35,10 +38,6 @@
 
 <template>
   <Stack gap="sm">
-    <p class="text-sm text-muted-foreground">
-      {{ $t('features.subscribe.checkout.note_payment_method') }}
-    </p>
-
     <StripePaymentForm
       :intent="intent"
       :error="error"
@@ -47,5 +46,12 @@
     >
       {{ $t('features.lbl.continue') }}
     </StripePaymentForm>
+
+    <p
+      v-if="isTrialEligible"
+      class="text-center text-sm text-muted-foreground"
+    >
+      * {{ $t('features.subscribe.checkout.note_payment_method') }}
+    </p>
   </Stack>
 </template>

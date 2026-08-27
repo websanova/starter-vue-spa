@@ -165,7 +165,7 @@
       "activating": "Payment received. Activating your plan...",
       "note_address": "Your billing address is needed for tax purposes.",
       "note_complete": "Complete your subscription",
-      "note_payment_method": "Your card will be stored now and charged when your subscription starts.",
+      "note_payment_method": "You won't be charged until your trial ends",
       "note_summary": "{plan} plan, billed {interval} at {price}",
       "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}",
       "submit": "Subscribe"
