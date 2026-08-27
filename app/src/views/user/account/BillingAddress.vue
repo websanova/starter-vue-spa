@@ -11,9 +11,7 @@
         {{ $t('features.heading.billing_address') }}
       </Heading>
 
-      <BillingAddressForm>
-        {{ $t('features.lbl.update') }}
-      </BillingAddressForm>
+      <BillingAddressForm :submit-label="$t('features.lbl.update')" />
     </section>
   </Stack>
 </template>

@@ -85,13 +85,13 @@
   <div class="flex justify-center">
     <Stack class="w-full sm:max-w-[25rem]">
       <div class="text-center">
-        <p>
+        <p class="text-2xl font-bold">
           {{ $t('features.subscribe.checkout.note_complete') }}
         </p>
 
         <p
           v-if="summary"
-          class="text-sm text-muted-foreground"
+          class="text-xl text-muted-foreground"
         >
           {{ $t(summaryKey, summary) }}
         </p>

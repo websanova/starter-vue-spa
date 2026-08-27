@@ -163,11 +163,11 @@
   "subscribe": {
     "checkout": {
       "activating": "Payment received. Activating your plan...",
-      "note_address": "Your billing address is needed to work out the tax on your subscription.",
-      "note_complete": "Complete your subscription.",
+      "note_address": "Your billing address is needed for tax purposes.",
+      "note_complete": "Complete your subscription",
       "note_payment_method": "Your card will be stored now and charged when your subscription starts.",
-      "note_summary": "{plan} plan, billed {interval} at {price}.",
-      "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}.",
+      "note_summary": "{plan} plan, billed {interval} at {price}",
+      "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}",
       "submit": "Subscribe"
     },
     "plans": {

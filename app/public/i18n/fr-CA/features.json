@@ -163,11 +163,11 @@
   "subscribe": {
     "checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
-      "note_address": "Votre adresse de facturation est nécessaire pour calculer la taxe sur votre abonnement.",
-      "note_complete": "Complétez votre abonnement.",
+      "note_address": "Votre adresse de facturation est requise à des fins fiscales.",
+      "note_complete": "Complétez votre abonnement",
       "note_payment_method": "Votre carte sera enregistrée maintenant et débitée au début de votre abonnement.",
-      "note_summary": "Forfait {plan}, facturé {interval} à {price}.",
-      "note_summary_trial": "Essai de {days} jours du forfait {plan}, puis {price} facturé {interval}.",
+      "note_summary": "Forfait {plan}, facturé {interval} à {price}",
+      "note_summary_trial": "Essai de {days} jours du forfait {plan}, puis {price} facturé {interval}",
       "submit": "S'abonner"
     },
     "plans": {

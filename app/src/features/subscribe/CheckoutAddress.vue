@@ -14,9 +14,6 @@
 
 <template>
   <Stack gap="sm">
-    <p class="text-sm text-muted-foreground">
-      {{ $t('features.subscribe.checkout.note_address') }}
-    </p>
 
     <p
       v-if="error"
@@ -26,10 +23,13 @@
     </p>
 
     <BillingAddressForm
+      :submit-label="$t('features.lbl.continue')"
       :pending="pending"
       @success="emit('complete')"
-    >
-      {{ $t('features.lbl.continue') }}
-    </BillingAddressForm>
+    />
+
+    <p class="text-center text-sm text-muted-foreground">
+      * {{ $t('features.subscribe.checkout.note_address') }}
+    </p>
   </Stack>
 </template>

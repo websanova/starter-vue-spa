@@ -3,6 +3,7 @@
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   defineProps<{
+    submitLabel: string
     pending?: boolean
   }>()
 
@@ -59,7 +60,7 @@
       class="w-full"
       :pending="isPending || pending"
     >
-      <slot />
+      {{ submitLabel }}
     </FormButton>
   </Form>
 </template>
