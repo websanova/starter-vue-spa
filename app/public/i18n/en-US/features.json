@@ -17,6 +17,7 @@
     "account": "Account",
     "add": "Add",
     "all": "All",
+    "apply": "Apply",
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
@@ -73,6 +74,7 @@
     "password_confirmation": "Confirm password",
     "phone": "Your phone number",
     "postal_code": "Postal code",
+    "promotion_code": "Promotion code",
     "timezone": "Select a timezone"
   },
   "sr": {
@@ -163,12 +165,9 @@
   "subscribe": {
     "checkout": {
       "activating": "Payment received. Activating your plan...",
-      "note_address": "Your billing address is needed for tax purposes.",
       "note_complete": "Complete your subscription",
-      "note_payment_method": "You won't be charged until your trial ends",
-      "note_summary": "{plan} plan, billed {interval} at {price}",
-      "note_summary_trial": "{days} day trial of the {plan} plan, then {price} billed {interval}",
-      "submit": "Subscribe"
+      "submit": "Subscribe",
+      "total": "Total"
     },
     "plans": {
       "action": {

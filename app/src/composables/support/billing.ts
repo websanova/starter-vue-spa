@@ -15,7 +15,7 @@ export function useBillingAddress() {
       return ''
     }
 
-    return [value.line1, value.line2, value.city, value.postalCode, value.country]
+    return [value.line1, value.line2, value.city, value.state, value.postalCode, value.country]
       .filter(Boolean)
       .join(', ')
   })

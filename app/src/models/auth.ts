@@ -32,6 +32,7 @@ export interface AuthBillingAddressDto {
   line1: string
   line2: string | null
   postal_code: string
+  state: string | null
 }
 
 export interface AuthPaymentMethodDto {
@@ -89,6 +90,7 @@ export interface AuthBillingAddress {
   line1: string
   line2: string | null
   postalCode: string
+  state: string | null
 }
 
 export interface AuthPaymentMethod {
@@ -149,6 +151,7 @@ export function toAuthBillingAddress(dto: AuthBillingAddressDto): AuthBillingAdd
     line1: dto.line1,
     line2: dto.line2,
     postalCode: dto.postal_code,
+    state: dto.state,
   }
 }
 

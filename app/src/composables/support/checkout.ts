@@ -1,108 +1,227 @@
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { useCreatePaymentMethodIntent } from '@/composables/api/paymentMethod'
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCreateSubscriptionSession, useSyncSubscription } from '@/composables/api/subscription'
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
+import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
 import { useAuthService } from '@shared/composables/services/auth'
-import type { StripeIntent } from '@shared/composables/primitives/useStripePayment'
+import { useI18n } from '@shared/plugins/i18n'
+import type { Interval } from '@/models/plan'
+import type { StripeCheckoutContact } from '@stripe/stripe-js'
+import type { Ref } from 'vue'
 
-export type CheckoutStep =
-  | 'address'
-  | 'confirm'
-  | 'payment'
+interface CheckoutOptions {
+  addressTarget: Ref<HTMLElement | null>
+  interval: Interval | undefined
+  paymentTarget: Ref<HTMLElement | null>
+  plan: string | undefined
+}
 
 /**
- * Drives the subscribe wizard. Nothing about the plan lives here, only
- * which of the three steps is open and the setup intent the card step
- * needs, since the plan travels on the query and is settled at the end
- * rather than along the way.
+ * Survives the trip to a bank and back. Stripe returns the customer to
+ * a freshly loaded page, and the session is confirmed again rather than
+ * replaced, so the secret has to outlive the reload.
  */
-export function useCheckout() {
+const storageKey = 'subscribe.session'
+
+/**
+ * Drives the subscribe page. One checkout session carries the address,
+ * the card, the promotion code and the totals, so there are no steps to
+ * sequence and nothing exists at Stripe until the customer confirms.
+ */
+export function useCheckout({ addressTarget, interval, paymentTarget, plan }: CheckoutOptions) {
   const auth = useAuthService()
-  const route = useRoute()
-  const createIntent = useCreatePaymentMethodIntent()
+  const i18n = useI18n()
+  const router = useRouter()
+
+  const createSubscriptionSession = useCreateSubscriptionSession()
+  const syncSubscription = useSyncSubscription()
+
+  const checkout = useStripeCheckout({ addressTarget, paymentTarget })
+
+  const isLoading = ref<boolean>(true)
+  const isConfirming = ref<boolean>(false)
+  const isApplying = ref<boolean>(false)
+  const isFailed = ref<boolean>(false)
+  const stripeError = ref<string>('')
+
+  const mutationError = useMutationError(createSubscriptionSession, syncSubscription)
 
   /**
-   * Nothing shows until the opening step is settled, since landing on
-   * the card step has an intent to open first and rendering the form
-   * before it arrives leaves an element with no secret to mount against.
+   * Anything that is not an HTTP error carries no message of its own, a
+   * dead stripe.js and a malformed response among them. Those still get
+   * a sentence rather than an empty page where the form should be.
    */
-  const step = ref<CheckoutStep | null>(null)
-  const intent = ref<StripeIntent | null>(null)
-  const error = useMutationError(createIntent)
+  const error = computed(() => {
+    const message = stripeError.value || mutationError.value
 
-  /**
-   * A secret on the query means the customer is coming back from a bank
-   * challenge with a payment method already stored. That has to win over
-   * the checks below, which see no card on file yet and would open a
-   * second intent over one that is already confirmed. The element reads
-   * the secret off the query itself, so no intent is opened here.
-   */
-  if (route.query.setup_intent_client_secret) {
-    step.value = 'payment'
-  } else {
-    goTo(resolve())
-  }
-
-  /**
-   * The first step that is not already done. Both settled means there is
-   * nothing left to collect and the wizard opens on confirm.
-   */
-  function resolve(): CheckoutStep {
-    const user = auth.user.value
-
-    if (!user?.isBillingAddress) {
-      return 'address'
+    if (message) {
+      return message
     }
 
-    if (!user.hasPaymentMethod) {
-      return 'payment'
+    return isFailed.value ? i18n.t('features.form.stripe_payment.failed') : ''
+  })
+
+  /**
+   * The session is the only thing that knows what this costs. Tax comes
+   * off the address and the discount off the promotion code, both
+   * calculated by Stripe, so nothing is priced or estimated here.
+   */
+  const total = computed(() => checkout.session.value?.total.total.amount ?? '')
+
+  const lineItems = computed(() => checkout.session.value?.lineItems ?? [])
+
+  start()
+
+  /**
+   * The address on file is a prefill and nothing more. It is not written
+   * to the customer and the element is free to be edited over it, since
+   * the address that counts is whatever is in the element at confirm.
+   */
+  function defaultBillingAddress(): StripeCheckoutContact | null {
+    const value = auth.user.value?.billingAddress
+
+    if (!value) {
+      return null
     }
 
-    return 'confirm'
+    return {
+      address: {
+        city: value.city,
+        country: value.country,
+        line1: value.line1,
+        line2: value.line2,
+        postal_code: value.postalCode,
+        state: value.state,
+      },
+    }
   }
 
   /**
-   * Opens the intent on the way into the card step rather than once it
-   * is showing. The API checks the address against Stripe to get here,
-   * so a location it cannot place is reported on the step that can fix
-   * it instead of on a card form that was never going to mount.
+   * A secret in storage means the customer is coming back from a bank
+   * challenge. That session is re-initialised rather than replaced,
+   * since it may already have completed while they were away and a new
+   * one would subscribe them twice.
    */
-  async function open() {
-    try {
-      const { clientSecret } = await createIntent.mutateAsync()
+  async function start() {
+    const stored = sessionStorage.getItem(storageKey)
 
-      intent.value = { clientSecret, type: 'setup' }
-      step.value = 'payment'
-    } catch {
-      step.value = 'address'
-    }
-  }
-
-  /**
-   * Run once a step reports itself done. Resolving again rather than
-   * advancing by position is what sends a customer who came from the
-   * summary back to confirm instead of walking them through the rest of
-   * the wizard a second time.
-   */
-  function next() {
-    goTo(resolve())
-  }
-
-  function goTo(value: CheckoutStep) {
-    if (value === 'payment') {
-      open()
+    if (stored) {
+      await open(stored)
       return
     }
 
-    step.value = value
+    // Not reachable. The page redirects itself off a query missing
+    // either half of the plan it is supposed to be selling.
+    if (!plan || !interval) {
+      return
+    }
+
+    try {
+      const { clientSecret } = await createSubscriptionSession.mutateAsync({ interval, plan })
+
+      sessionStorage.setItem(storageKey, clientSecret)
+
+      await open(clientSecret)
+    } catch {
+      isFailed.value = true
+      isLoading.value = false
+    }
+  }
+
+  /**
+   * Without a session there is nothing to mount, so the failure is shown
+   * rather than an empty page where the form should be. The elements go
+   * up after the loading state drops, since that is the render their
+   * targets first exist in.
+   */
+  async function open(clientSecret: string) {
+    const { message, session } = await checkout.load(clientSecret, defaultBillingAddress())
+
+    isLoading.value = false
+
+    if (!session) {
+      isFailed.value = true
+      stripeError.value = message
+      return
+    }
+
+    if (session.status.type === 'complete') {
+      await sync()
+      return
+    }
+
+    await checkout.mount()
+  }
+
+  async function applyPromotionCode(code: string) {
+    isApplying.value = true
+    isFailed.value = false
+    stripeError.value = ''
+
+    const { message } = await checkout.applyPromotionCode(code)
+
+    stripeError.value = message
+    isApplying.value = false
+  }
+
+  /**
+   * One call submits the address and the card, creates the subscription
+   * and settles the first invoice. A refusal creates nothing, so the
+   * elements stay up and the customer confirms again on the same
+   * session rather than starting over on a new one.
+   */
+  async function confirm() {
+    isConfirming.value = true
+    isFailed.value = false
+    stripeError.value = ''
+
+    const { message, session } = await checkout.confirm()
+
+    if (!session || session.status.type !== 'complete') {
+      stripeError.value = message
+      isConfirming.value = false
+      return
+    }
+
+    await sync()
+  }
+
+  /**
+   * The local rows are the only thing left behind Stripe at this point.
+   * A failure here leaves the subscription live and correct, so the
+   * customer is held on the page with the error and can submit again,
+   * and the webhook lands regardless.
+   */
+  async function sync() {
+    const session = checkout.session.value
+
+    if (!session) {
+      return
+    }
+
+    try {
+      await syncSubscription.mutateAsync({ checkout_session: session.id })
+
+      sessionStorage.removeItem(storageKey)
+      checkout.destroy()
+
+      router.replace({ name: 'user-account-billing' })
+    } catch {
+      isFailed.value = true
+    } finally {
+      isConfirming.value = false
+    }
   }
 
   return {
+    applyPromotionCode,
+    confirm,
     error,
-    goTo,
-    intent,
-    isOpening: createIntent.isPending,
-    next,
-    step,
+    isApplying,
+    isConfirming,
+    isLoading,
+    lineItems,
+    session: checkout.session,
+    total,
   }
 }
