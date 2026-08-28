@@ -1,7 +1,9 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useCheckout } from '@/composables/support/checkout'
+  import { useSettingsStore } from '@shared/stores/settings'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
@@ -10,6 +12,8 @@
 
   const route = useRoute()
   const router = useRouter()
+  const settings = useSettingsStore()
+  const { t } = useI18n()
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
@@ -29,6 +33,8 @@
     isApplying,
     isConfirming,
     isLoading,
+    isTaxPending,
+    isTrial,
     lineItems,
     total,
   } = useCheckout({
@@ -37,14 +43,52 @@
     paymentTarget,
     plan,
   })
+
+  /**
+   * The plan and the price come off the session rather than the plans
+   * list, since the session is what was actually opened and its total
+   * already carries whatever tax and discount apply.
+   */
+  const summary = computed(() => ({
+    days: settings.data.subscriptionTrialDays,
+    interval: t(`site.units.interval.billed.${interval}`),
+    plan: lineItems.value[0]?.name ?? '',
+    price: total.value,
+  }))
+
+  /**
+   * A trial signup charges nothing today, so it needs the sentence that
+   * dates the first payment rather than the one that claims it is being
+   * taken now.
+   */
+  const summaryKey = computed(() => isTrial.value
+    ? 'features.subscribe.checkout.note_summary_trial'
+    : 'features.subscribe.checkout.note_summary'
+  )
 </script>
 
 <template>
   <div class="flex justify-center">
     <Stack class="w-full sm:max-w-[25rem]">
-      <p class="text-center text-2xl font-bold">
-        {{ $t('features.subscribe.checkout.note_complete') }}
-      </p>
+      <div class="text-center">
+        <p class="text-2xl font-bold">
+          {{ $t('features.subscribe.checkout.note_complete') }}
+        </p>
+
+        <p
+          v-if="!isLoading"
+          class="text-lg text-muted-foreground"
+        >
+          {{ $t(summaryKey, summary) }}
+
+          <span
+            v-if="isTaxPending"
+            class="text-xs"
+          >
+            {{ $t('features.subscribe.checkout.note_tax') }}
+          </span>
+        </p>
+      </div>
 
       <div
         v-if="isLoading"
@@ -62,26 +106,15 @@
         </p>
 
         <Stack gap="sm">
-          <p
-            v-for="item in lineItems"
-            :key="item.id"
-            class="text-sm text-muted-foreground"
-          >
-            {{ item.name }}
-          </p>
-
-          <p class="flex justify-between font-medium">
-            <span>{{ $t('features.subscribe.checkout.total') }}</span>
-            <span>{{ total }}</span>
-          </p>
-        </Stack>
-
-        <Stack gap="sm">
           <p class="text-lg font-bold">
             {{ $t('features.heading.billing_address') }}
           </p>
 
           <div ref="addressTarget" />
+
+          <p class="text-sm text-muted-foreground">
+            * {{ $t('features.subscribe.checkout.note_address') }}
+          </p>
         </Stack>
 
         <Stack gap="sm">
@@ -90,6 +123,13 @@
           </p>
 
           <div ref="paymentTarget" />
+
+          <p
+            v-if="isTrial"
+            class="text-sm text-muted-foreground"
+          >
+            * {{ $t('features.subscribe.checkout.note_payment_method') }}
+          </p>
         </Stack>
 
         <div class="flex gap-2">

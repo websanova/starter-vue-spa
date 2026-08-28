@@ -166,9 +166,13 @@
   "subscribe": {
     "checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
+      "note_address": "Votre adresse de facturation est requise à des fins fiscales.",
       "note_complete": "Complétez votre abonnement",
-      "submit": "S'abonner",
-      "total": "Total"
+      "note_payment_method": "Vous ne serez pas débité avant la fin de votre essai",
+      "note_summary": "Forfait {plan}, facturé {interval} à {price}",
+      "note_summary_trial": "Essai de {days} jours du forfait {plan}, puis {price} facturé {interval}",
+      "note_tax": "+ taxes applicables",
+      "submit": "S'abonner"
     },
     "plans": {
       "action": {

@@ -70,6 +70,25 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   const lineItems = computed(() => checkout.session.value?.lineItems ?? [])
 
+  /**
+   * Whether this signup carries a trial. The API decided that when it
+   * created the session, so the client reads the answer off it rather
+   * than working out eligibility of its own.
+   */
+  const isTrial = computed(() => !!checkout.session.value?.recurring?.trial)
+
+  /**
+   * Tax reports as pending until the session carries an address to
+   * calculate it against, and the address element does not push itself
+   * onto the session before confirm. So the total on screen is the one
+   * before tax until then, and it needs saying.
+   */
+  const isTaxPending = computed(() => {
+    const session = checkout.session.value
+
+    return !!session && session.tax.status !== 'ready'
+  })
+
   start()
 
   /**
@@ -220,6 +239,8 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isApplying,
     isConfirming,
     isLoading,
+    isTaxPending,
+    isTrial,
     lineItems,
     session: checkout.session,
     total,
