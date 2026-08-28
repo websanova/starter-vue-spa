@@ -46,6 +46,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const isConfirming = ref<boolean>(false)
   const isApplying = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
+  const promotionError = ref<string>('')
   const stripeError = ref<string>('')
 
   /**
@@ -256,14 +257,17 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isSavedCard.value = false
   }
 
+  /**
+   * A rejected code belongs to the field it was typed into rather than
+   * to the page, since nothing else about the checkout has gone wrong.
+   */
   async function applyPromotionCode(code: string) {
     isApplying.value = true
-    isFailed.value = false
-    stripeError.value = ''
+    promotionError.value = ''
 
     const { message } = await checkout.applyPromotionCode(code)
 
-    stripeError.value = message
+    promotionError.value = message
     isApplying.value = false
   }
 
@@ -334,6 +338,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isTrial,
     lineItems,
     next,
+    promotionError,
     session: checkout.session,
     step,
     total,

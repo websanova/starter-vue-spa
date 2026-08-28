@@ -43,6 +43,7 @@
     isTrial,
     lineItems,
     next,
+    promotionError,
     step,
     total,
   } = useCheckout({
@@ -154,21 +155,30 @@
         </template>
 
         <template v-else>
-          <div class="flex gap-2">
-            <Input
-              v-model="promotionCode"
-              :placeholder="$t('features.ph.promotion_code')"
-            />
+          <Stack gap="sm">
+            <div class="flex gap-2">
+              <Input
+                v-model="promotionCode"
+                :placeholder="$t('features.ph.promotion_code')"
+              />
 
-            <ButtonLoading
-              variant="outline"
-              :disabled="!promotionCode"
-              :pending="isApplying"
-              @click="applyPromotionCode(promotionCode)"
+              <ButtonLoading
+                variant="outline"
+                :disabled="!promotionCode"
+                :pending="isApplying"
+                @click="applyPromotionCode(promotionCode)"
+              >
+                {{ $t('features.lbl.apply') }}
+              </ButtonLoading>
+            </div>
+
+            <p
+              v-if="promotionError"
+              class="text-sm text-destructive"
             >
-              {{ $t('features.lbl.apply') }}
-            </ButtonLoading>
-          </div>
+              {{ promotionError }}
+            </p>
+          </Stack>
 
           <ButtonLoading
             class="w-full"

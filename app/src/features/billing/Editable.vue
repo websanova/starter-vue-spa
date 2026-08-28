@@ -26,7 +26,7 @@
 
       <button
         type="button"
-        class="text-link"
+        class="cursor-pointer text-link"
         @click="emit('change')"
       >
         {{ $t('features.lbl.change') }}
