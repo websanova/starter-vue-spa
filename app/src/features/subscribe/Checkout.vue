@@ -76,12 +76,21 @@
           </p>
         </Stack>
 
-        <div
-          ref="addressTarget"
-          class="rounded-md border p-3"
-        />
+        <Stack gap="sm">
+          <p class="text-lg font-bold">
+            {{ $t('features.heading.billing_address') }}
+          </p>
 
-        <div ref="paymentTarget" />
+          <div ref="addressTarget" />
+        </Stack>
+
+        <Stack gap="sm">
+          <p class="text-lg font-bold">
+            {{ $t('features.heading.payment_method') }}
+          </p>
+
+          <div ref="paymentTarget" />
+        </Stack>
 
         <div class="flex gap-2">
           <Input

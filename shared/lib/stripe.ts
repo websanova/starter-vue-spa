@@ -59,6 +59,7 @@ export function stripeAppearance() {
   document.body.appendChild(probe)
 
   const color = (name: string) => oklchToHex(styles.getPropertyValue(name).trim())
+
   const style = (property: string, value: string) => {
     probe.style.setProperty(property, value)
 
@@ -76,9 +77,6 @@ export function stripeAppearance() {
       colorTextSecondary: color('--muted-foreground'),
     },
     rules: {
-      '.AccordionItem': {
-        padding: style('padding', 'calc(var(--spacing) * 3)'),
-      },
       '.Input': {
         backgroundColor: color('--background')
       },

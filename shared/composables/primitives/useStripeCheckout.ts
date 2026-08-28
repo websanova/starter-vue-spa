@@ -87,7 +87,10 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
     }
 
     addressElement = sdk.createBillingAddressElement()
-    paymentElement = sdk.createPaymentElement()
+
+    paymentElement = sdk.createPaymentElement({
+      layout: { type: 'tabs' },
+    })
 
     await nextTick()
 
