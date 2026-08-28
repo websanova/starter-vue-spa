@@ -76,7 +76,10 @@
           </p>
         </Stack>
 
-        <div ref="addressTarget" />
+        <div
+          ref="addressTarget"
+          class="rounded-md border p-3"
+        />
 
         <div ref="paymentTarget" />
 

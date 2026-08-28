@@ -42,16 +42,32 @@ export function stripeLocale(): StripeElementLocale {
  * access to the page custom properties and only takes hex, so the
  * tokens are resolved and converted here. Variables cover the frame
  * as a whole, rules pick out the parts needing their own surface.
+ *
+ * Custom properties read back as their literal text, so anything built
+ * out of calc() comes back as the calc itself and references variables
+ * that do not exist inside the Stripe frame. The probe is what those
+ * are measured against, and it only has to live as long as it takes to
+ * build the object.
  */
 export function stripeAppearance() {
   const styles = getComputedStyle(document.documentElement)
+  const probe = document.createElement('div')
 
-  const token = (name: string) => styles.getPropertyValue(name).trim()
-  const color = (name: string) => oklchToHex(token(name))
+  probe.style.position = 'absolute'
+  probe.style.visibility = 'hidden'
 
-  return {
+  document.body.appendChild(probe)
+
+  const color = (name: string) => oklchToHex(styles.getPropertyValue(name).trim())
+  const style = (property: string, value: string) => {
+    probe.style.setProperty(property, value)
+
+    return getComputedStyle(probe).getPropertyValue(property)
+  }
+
+  const appearance = {
     variables: {
-      borderRadius: token('--radius'),
+      borderRadius: style('border-radius', 'var(--radius-md)'),
       colorBackground: color('--background'),
       colorDanger: color('--destructive'),
       colorPrimary: color('--primary'),
@@ -60,6 +76,9 @@ export function stripeAppearance() {
       colorTextSecondary: color('--muted-foreground'),
     },
     rules: {
+      '.AccordionItem': {
+        padding: style('padding', 'calc(var(--spacing) * 3)'),
+      },
       '.Input': {
         backgroundColor: color('--background')
       },
@@ -73,4 +92,8 @@ export function stripeAppearance() {
       },
     },
   }
+
+  probe.remove()
+
+  return appearance
 }
