@@ -102,8 +102,14 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
       address = { name: event.value.name, address: event.value.address }
     })
 
+    /**
+     * The name comes off the address element, which collects one and
+     * offers no way not to. Stripe refuses to confirm while both are
+     * collecting it, so the card side stands down.
+     */
     paymentElement = sdk.createPaymentElement({
       layout: { type: 'tabs' },
+      fields: { billingDetails: { name: 'never' } },
     })
 
     await nextTick()
@@ -140,6 +146,11 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
    * Pushes the address held from the element onto the session. Worth
    * doing on the way out of an address step, since it is what makes the
    * totals on the next step carry tax for the address just entered.
+   *
+   * The element comes down with it. Stripe refuses to confirm while an
+   * Address Element is mounted and the address has also been set this
+   * way, since the two are competing sources. Unmounting keeps the
+   * instance and its values, so showing it again is a remount.
    */
   async function submitAddress(): Promise<StripeCheckoutResult> {
     if (!actions || !address) {
@@ -152,7 +163,19 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
       return { message: result.error.message, session: session.value }
     }
 
+    addressElement?.unmount()
+
     return { message: '', session: result.session }
+  }
+
+  /**
+   * Puts the address element back after it was taken down, for a
+   * customer going back to change what they entered.
+   */
+  function mountAddress() {
+    if (addressElement && addressTarget.value) {
+      addressElement.mount(addressTarget.value)
+    }
   }
 
   /**
@@ -200,6 +223,7 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
     isAddressComplete,
     load,
     mount,
+    mountAddress,
     session,
     submitAddress,
   }

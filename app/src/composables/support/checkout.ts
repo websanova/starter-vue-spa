@@ -23,9 +23,10 @@ export type CheckoutStep =
 /**
  * Survives the trip to a bank and back. Stripe returns the customer to
  * a freshly loaded page, and the session is confirmed again rather than
- * replaced, so the secret has to outlive the reload.
+ * replaced, so the secret has to outlive the reload. Scoped to the user
+ * so a session one account left behind is not picked up by the next.
  */
-const storageKey = 'subscribe.session'
+const storagePrefix = 'subscribe.session'
 
 /**
  * Drives the subscribe page. One checkout session carries the address,
@@ -57,6 +58,10 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    */
   const step = ref<CheckoutStep>('address')
   const isSavedCard = ref<boolean>(true)
+
+  function storageKey(): string {
+    return `${storagePrefix}.${auth.user.value?.id ?? ''}`
+  }
 
   const mutationError = useMutationError(createSubscriptionSession, syncSubscription)
 
@@ -171,14 +176,19 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * challenge. That session is re-initialised rather than replaced,
    * since it may already have completed while they were away and a new
    * one would subscribe them twice.
+   *
+   * A stored secret that will not load is spent or expired, and a fresh
+   * one is opened over it. The key carries the user id, so the session
+   * one account left behind is never picked up by the next.
    */
   async function start() {
-    const stored = sessionStorage.getItem(storageKey)
+    const stored = sessionStorage.getItem(storageKey())
 
-    if (stored) {
-      await open(stored)
+    if (stored && await open(stored)) {
       return
     }
+
+    sessionStorage.removeItem(storageKey())
 
     // Not reachable. The page redirects itself off a query missing
     // either half of the plan it is supposed to be selling.
@@ -189,10 +199,11 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     try {
       const { clientSecret } = await createSubscriptionSession.mutateAsync({ interval, plan })
 
-      sessionStorage.setItem(storageKey, clientSecret)
+      sessionStorage.setItem(storageKey(), clientSecret)
 
       await open(clientSecret)
-    } catch {
+    } catch (err) {
+      console.error(err)
       isFailed.value = true
       isLoading.value = false
     }
@@ -204,7 +215,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * up after the loading state drops, since that is the render their
    * targets first exist in.
    */
-  async function open(clientSecret: string) {
+  async function open(clientSecret: string): Promise<boolean> {
     const { message, session } = await checkout.load(clientSecret, defaultBillingAddress())
 
     isLoading.value = false
@@ -212,12 +223,12 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     if (!session) {
       isFailed.value = true
       stripeError.value = message
-      return
+      return false
     }
 
     if (session.status.type === 'complete') {
       await sync()
-      return
+      return true
     }
 
     // An address already on the session is a step with nothing left to
@@ -225,6 +236,8 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     step.value = addressSummary.value ? 'payment' : 'address'
 
     await checkout.mount()
+
+    return true
   }
 
   /**
@@ -237,20 +250,33 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isFailed.value = false
     stripeError.value = ''
 
-    const { message } = await checkout.submitAddress()
+    try {
+      const { message } = await checkout.submitAddress()
 
-    isContinuing.value = false
+      if (message) {
+        stripeError.value = message
+        return
+      }
 
-    if (message) {
-      stripeError.value = message
-      return
+      step.value = 'payment'
+    } catch (err) {
+      console.error(err)
+      isFailed.value = true
+    } finally {
+      isContinuing.value = false
     }
-
-    step.value = 'payment'
   }
 
+  /**
+   * Going back to the address puts its element up again, since leaving
+   * the step took it down.
+   */
   function goTo(value: CheckoutStep) {
     step.value = value
+
+    if (value === 'address') {
+      checkout.mountAddress()
+    }
   }
 
   /**
@@ -286,18 +312,26 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isFailed.value = false
     stripeError.value = ''
 
-    const { message, session } = await checkout.confirm(
-      isSavedCard.value ? savedCard.value?.id : undefined
-    )
+    try {
+      const { message, session } = await checkout.confirm(
+        isSavedCard.value ? savedCard.value?.id : undefined
+      )
 
-    if (!session || session.status.type !== 'complete') {
-      stripeError.value = message
+      if (!session || session.status.type !== 'complete') {
+        stripeError.value = message
+        isConfirming.value = false
+        return
+      }
+    } catch (err) {
+      console.error(err)
+      isFailed.value = true
       isConfirming.value = false
       return
     }
 
     await sync()
   }
+
 
   /**
    * The local rows are the only thing left behind Stripe at this point.
@@ -315,11 +349,12 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     try {
       await syncSubscription.mutateAsync({ checkout_session: session.id })
 
-      sessionStorage.removeItem(storageKey)
+      sessionStorage.removeItem(storageKey())
       checkout.destroy()
 
       router.replace({ name: 'user-account-billing' })
-    } catch {
+    } catch (err) {
+      console.error(err)
       isFailed.value = true
     } finally {
       isConfirming.value = false
