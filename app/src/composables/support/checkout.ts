@@ -5,6 +5,7 @@ import { useMutationError } from '@shared/composables/primitives/useMutationErro
 import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
 import { useAuthService } from '@shared/composables/services/auth'
 import { useI18n } from '@shared/plugins/i18n'
+import { HttpError } from '@shared/plugins/http/client'
 import type { Interval } from '@/models/plan'
 import type { StripeCheckoutContact } from '@stripe/stripe-js'
 import type { Ref } from 'vue'
@@ -203,10 +204,40 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
       await open(clientSecret)
     } catch (err) {
-      console.error(err)
-      isFailed.value = true
       isLoading.value = false
+
+      refuse(errorCode(err))
     }
+  }
+
+  /**
+   * A refusal carries no secret, so there is nothing to mount either
+   * way. The two that name a place to go are sent there. Anything else
+   * stays put with its message, since a provider that is unreachable is
+   * worth trying again on.
+   */
+  function refuse(code: string) {
+    if (code === 'already_subscribed') {
+      router.replace({ name: 'user-account-billing' })
+      return
+    }
+
+    if (code === 'payment_required') {
+      router.replace({ name: 'user-account-payment-method' })
+      return
+    }
+
+    isFailed.value = true
+  }
+
+  /**
+   * The code rather than the message, since the message is translated
+   * and moves with the locale.
+   */
+  function errorCode(err: unknown): string {
+    return err instanceof HttpError
+      ? (err.response.data as { error?: string }).error ?? ''
+      : ''
   }
 
   /**
