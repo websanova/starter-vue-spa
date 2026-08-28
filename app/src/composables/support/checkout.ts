@@ -347,7 +347,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     }
 
     try {
-      await syncSubscription.mutateAsync({ checkout_session: session.id })
+      await syncSubscription.mutateAsync({ session: session.id })
 
       sessionStorage.removeItem(storageKey())
       checkout.destroy()

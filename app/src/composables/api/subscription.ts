@@ -11,7 +11,7 @@ interface CreateSubscriptionSessionData {
 }
 
 interface SyncSubscriptionData {
-  checkout_session: string
+  session: string
 }
 
 /**
