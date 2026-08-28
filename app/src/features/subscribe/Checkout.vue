@@ -8,6 +8,7 @@
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
   import { Input } from '@shared/components/ui/input'
+  import Editable from '@/features/billing/Editable.vue'
   import type { Interval } from '@/models/plan'
 
   const route = useRoute()
@@ -27,15 +28,22 @@
   const promotionCode = ref<string>('')
 
   const {
+    addressSummary,
     applyPromotionCode,
+    cardSummary,
+    changeCard,
     confirm,
     error,
+    goTo,
+    isAddressComplete,
     isApplying,
     isConfirming,
     isLoading,
     isTaxPending,
     isTrial,
     lineItems,
+    next,
+    step,
     total,
   } = useCheckout({
     addressTarget,
@@ -105,56 +113,71 @@
           {{ error }}
         </p>
 
-        <Stack gap="sm">
-          <p class="text-lg font-bold">
-            {{ $t('features.heading.billing_address') }}
-          </p>
-
+        <Editable
+          :heading="$t('features.heading.billing_address')"
+          :open="step === 'address'"
+          :summary="addressSummary"
+          @change="goTo('address')"
+        >
           <div ref="addressTarget" />
 
-          <p class="text-sm text-muted-foreground">
+          <p class="mt-2 text-sm text-muted-foreground">
             * {{ $t('features.subscribe.checkout.note_address') }}
           </p>
-        </Stack>
+        </Editable>
 
-        <Stack gap="sm">
-          <p class="text-lg font-bold">
-            {{ $t('features.heading.payment_method') }}
-          </p>
-
+        <Editable
+          v-show="step === 'payment'"
+          :heading="$t('features.heading.payment_method')"
+          :open="!cardSummary"
+          :summary="cardSummary"
+          @change="changeCard"
+        >
           <div ref="paymentTarget" />
 
           <p
             v-if="isTrial"
-            class="text-sm text-muted-foreground"
+            class="mt-2 text-sm text-muted-foreground"
           >
             * {{ $t('features.subscribe.checkout.note_payment_method') }}
           </p>
-        </Stack>
+        </Editable>
 
-        <div class="flex gap-2">
-          <Input
-            v-model="promotionCode"
-            :placeholder="$t('features.ph.promotion_code')"
-          />
+        <template v-if="step === 'address'">
+          <ButtonLoading
+            class="w-full"
+            :disabled="!isAddressComplete"
+            @click="next"
+          >
+            {{ $t('features.lbl.continue') }}
+          </ButtonLoading>
+        </template>
+
+        <template v-else>
+          <div class="flex gap-2">
+            <Input
+              v-model="promotionCode"
+              :placeholder="$t('features.ph.promotion_code')"
+            />
+
+            <ButtonLoading
+              variant="outline"
+              :disabled="!promotionCode"
+              :pending="isApplying"
+              @click="applyPromotionCode(promotionCode)"
+            >
+              {{ $t('features.lbl.apply') }}
+            </ButtonLoading>
+          </div>
 
           <ButtonLoading
-            variant="outline"
-            :disabled="!promotionCode"
-            :pending="isApplying"
-            @click="applyPromotionCode(promotionCode)"
+            class="w-full"
+            :pending="isConfirming"
+            @click="confirm"
           >
-            {{ $t('features.lbl.apply') }}
+            {{ $t('features.subscribe.checkout.submit') }}
           </ButtonLoading>
-        </div>
-
-        <ButtonLoading
-          class="w-full"
-          :pending="isConfirming"
-          @click="confirm"
-        >
-          {{ $t('features.subscribe.checkout.submit') }}
-        </ButtonLoading>
+        </template>
       </template>
     </Stack>
   </div>

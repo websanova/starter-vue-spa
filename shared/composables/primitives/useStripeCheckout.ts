@@ -1,4 +1,4 @@
-import { nextTick, onBeforeUnmount, shallowRef } from 'vue'
+import { nextTick, onBeforeUnmount, ref, shallowRef } from 'vue'
 import { stripeAppearance, stripeClient } from '@shared/lib/stripe'
 import type { Ref } from 'vue'
 import type {
@@ -32,7 +32,10 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   let addressElement: StripeAddressElement | null = null
   let paymentElement: StripePaymentElement | null = null
 
+  let address: StripeCheckoutContact | null = null
+
   const session = shallowRef<StripeCheckoutSession | null>(null)
+  const isAddressComplete = ref<boolean>(false)
 
   /**
    * Loads the session and the actions the page runs on, and reports its
@@ -88,6 +91,17 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
 
     addressElement = sdk.createBillingAddressElement()
 
+    /**
+     * The element does not write itself onto the session, so its value
+     * is held here for the step that pushes it. Completeness comes from
+     * the same event, since it is what says an address is ready to be
+     * moved on from.
+     */
+    addressElement.on('change', (event) => {
+      isAddressComplete.value = event.complete
+      address = { name: event.value.name, address: event.value.address }
+    })
+
     paymentElement = sdk.createPaymentElement({
       layout: { type: 'tabs' },
     })
@@ -123,18 +137,43 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   }
 
   /**
+   * Pushes the address held from the element onto the session. Worth
+   * doing on the way out of an address step, since it is what makes the
+   * totals on the next step carry tax for the address just entered.
+   */
+  async function submitAddress(): Promise<StripeCheckoutResult> {
+    if (!actions || !address) {
+      return { message: '', session: session.value }
+    }
+
+    const result = await actions.updateBillingAddress(address)
+
+    if (result.type === 'error') {
+      return { message: result.error.message, session: session.value }
+    }
+
+    return { message: '', session: result.session }
+  }
+
+  /**
    * Submits the address and the card, creates the subscription and
    * settles the first invoice, all in the one call. A bank challenge
    * either runs in a dialog or sends the customer to the return url, in
    * which case this never resolves. A refusal creates nothing, so the
    * elements are left standing and the same session is confirmed again.
+   *
+   * A payment method id confirms against a card already on the customer
+   * and leaves the element out of it.
    */
-  async function confirm(): Promise<StripeCheckoutResult> {
+  async function confirm(paymentMethod?: string): Promise<StripeCheckoutResult> {
     if (!actions) {
       return { message: '', session: null }
     }
 
-    const result = await actions.confirm({ redirect: 'if_required' })
+    const result = await actions.confirm({
+      redirect: 'if_required',
+      ...(paymentMethod ? { paymentMethod } : {}),
+    })
 
     if (result.type === 'error') {
       return { message: result.error.message, session: session.value }
@@ -158,8 +197,10 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
     applyPromotionCode,
     confirm,
     destroy,
+    isAddressComplete,
     load,
     mount,
     session,
+    submitAddress,
   }
 }

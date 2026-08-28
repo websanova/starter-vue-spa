@@ -16,6 +16,10 @@ interface CheckoutOptions {
   plan: string | undefined
 }
 
+export type CheckoutStep =
+  | 'address'
+  | 'payment'
+
 /**
  * Survives the trip to a bank and back. Stripe returns the customer to
  * a freshly loaded page, and the session is confirmed again rather than
@@ -43,6 +47,14 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const isApplying = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
   const stripeError = ref<string>('')
+
+  /**
+   * Which step is open, and whether the card already on the customer is
+   * the one being subscribed with. Hitting change on the card drops it,
+   * since from that point the element is the source.
+   */
+  const step = ref<CheckoutStep>('address')
+  const isSavedCard = ref<boolean>(true)
 
   const mutationError = useMutationError(createSubscriptionSession, syncSubscription)
 
@@ -87,6 +99,43 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     const session = checkout.session.value
 
     return !!session && session.tax.status !== 'ready'
+  })
+
+  /**
+   * The card already on the customer, read off the session rather than
+   * the local row, since confirming against it needs the id and only
+   * the session carries one.
+   */
+  const savedCard = computed(() => checkout.session.value?.savedPaymentMethods?.[0] ?? null)
+
+  /**
+   * What each step shows once it is settled. An empty address summary
+   * is what keeps the wizard on the address step, since it means the
+   * session is carrying nothing to move on from.
+   */
+  const addressSummary = computed(() => {
+    const value = checkout.session.value?.billingAddress?.address
+
+    if (!value) {
+      return ''
+    }
+
+    return [value.line1, value.line2, value.city, value.state, value.postal_code, value.country]
+      .filter(Boolean)
+      .join(', ')
+  })
+
+  const cardSummary = computed(() => {
+    const card = savedCard.value
+
+    if (!card || !isSavedCard.value) {
+      return ''
+    }
+
+    return i18n.t('features.billing.payment_method.card', {
+      brand: card.card.brand.charAt(0).toUpperCase() + card.card.brand.slice(1),
+      last_four: card.card.last4,
+    })
   })
 
   start()
@@ -169,7 +218,42 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
       return
     }
 
+    // An address already on the session is a step with nothing left to
+    // collect, so the wizard opens past it.
+    step.value = addressSummary.value ? 'payment' : 'address'
+
     await checkout.mount()
+  }
+
+  /**
+   * Moves off the address step. The value is pushed onto the session on
+   * the way, so the totals on the payment step carry tax for the
+   * address just entered rather than for whatever the session had.
+   */
+  async function next() {
+    isFailed.value = false
+    stripeError.value = ''
+
+    const { message } = await checkout.submitAddress()
+
+    if (message) {
+      stripeError.value = message
+      return
+    }
+
+    step.value = 'payment'
+  }
+
+  function goTo(value: CheckoutStep) {
+    step.value = value
+  }
+
+  /**
+   * Replacing the card takes the saved one out of play, so the element
+   * becomes what confirm reads and the summary gives way to it.
+   */
+  function changeCard() {
+    isSavedCard.value = false
   }
 
   async function applyPromotionCode(code: string) {
@@ -194,7 +278,9 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isFailed.value = false
     stripeError.value = ''
 
-    const { message, session } = await checkout.confirm()
+    const { message, session } = await checkout.confirm(
+      isSavedCard.value ? savedCard.value?.id : undefined
+    )
 
     if (!session || session.status.type !== 'complete') {
       stripeError.value = message
@@ -233,16 +319,23 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   return {
+    addressSummary,
     applyPromotionCode,
+    cardSummary,
+    changeCard,
     confirm,
     error,
+    goTo,
+    isAddressComplete: checkout.isAddressComplete,
     isApplying,
     isConfirming,
     isLoading,
     isTaxPending,
     isTrial,
     lineItems,
+    next,
     session: checkout.session,
+    step,
     total,
   }
 }
