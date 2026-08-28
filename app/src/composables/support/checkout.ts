@@ -45,6 +45,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const isLoading = ref<boolean>(true)
   const isConfirming = ref<boolean>(false)
   const isApplying = ref<boolean>(false)
+  const isContinuing = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
   const promotionError = ref<string>('')
   const stripeError = ref<string>('')
@@ -232,10 +233,13 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * address just entered rather than for whatever the session had.
    */
   async function next() {
+    isContinuing.value = true
     isFailed.value = false
     stripeError.value = ''
 
     const { message } = await checkout.submitAddress()
+
+    isContinuing.value = false
 
     if (message) {
       stripeError.value = message
@@ -333,6 +337,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isAddressComplete: checkout.isAddressComplete,
     isApplying,
     isConfirming,
+    isContinuing,
     isLoading,
     isTaxPending,
     isTrial,

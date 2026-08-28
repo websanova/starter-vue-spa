@@ -38,6 +38,7 @@
     isAddressComplete,
     isApplying,
     isConfirming,
+    isContinuing,
     isLoading,
     isTaxPending,
     isTrial,
@@ -121,37 +122,33 @@
           @change="goTo('address')"
         >
           <div ref="addressTarget" />
-
-          <p class="mt-2 text-sm text-muted-foreground">
-            * {{ $t('features.subscribe.checkout.note_address') }}
-          </p>
         </Editable>
 
-        <Editable
-          v-show="step === 'payment'"
-          :heading="$t('features.heading.payment_method')"
-          :open="!cardSummary"
-          :summary="cardSummary"
-          @change="changeCard"
-        >
-          <div ref="paymentTarget" />
-
-          <p
-            v-if="isTrial"
-            class="mt-2 text-sm text-muted-foreground"
+        <Transition name="fade-in">
+          <Editable
+            v-show="step === 'payment'"
+            :heading="$t('features.heading.payment_method')"
+            :open="!cardSummary"
+            :summary="cardSummary"
+            @change="changeCard"
           >
-            * {{ $t('features.subscribe.checkout.note_payment_method') }}
-          </p>
-        </Editable>
+            <div ref="paymentTarget" />
+          </Editable>
+        </Transition>
 
         <template v-if="step === 'address'">
           <ButtonLoading
             class="w-full"
             :disabled="!isAddressComplete"
+            :pending="isContinuing"
             @click="next"
           >
             {{ $t('features.lbl.continue') }}
           </ButtonLoading>
+
+          <p class="text-center text-sm text-muted-foreground">
+            * {{ $t('features.subscribe.checkout.note_address') }}
+          </p>
         </template>
 
         <template v-else>
@@ -187,6 +184,13 @@
           >
             {{ $t('features.subscribe.checkout.submit') }}
           </ButtonLoading>
+
+          <p
+            v-if="isTrial"
+            class="text-center text-sm text-muted-foreground"
+          >
+            * {{ $t('features.subscribe.checkout.note_payment_method') }}
+          </p>
         </template>
       </template>
     </Stack>

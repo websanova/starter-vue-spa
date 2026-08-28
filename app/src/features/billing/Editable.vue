@@ -18,27 +18,31 @@
       {{ heading }}
     </p>
 
-    <p
-      v-if="!open"
-      class="text-sm text-muted-foreground"
-    >
-      {{ summary }}
-
-      <button
-        type="button"
-        class="cursor-pointer text-link"
-        @click="emit('change')"
+    <Transition name="fade-in">
+      <p
+        v-if="!open"
+        class="text-sm text-muted-foreground"
       >
-        {{ $t('features.lbl.change') }}
-      </button>
-    </p>
+        {{ summary }}
+
+        <button
+          type="button"
+          class="cursor-pointer text-link"
+          @click="emit('change')"
+        >
+          {{ $t('features.lbl.change') }}
+        </button>
+      </p>
+    </Transition>
 
     <!--
       Hidden rather than removed. A Stripe element is mounted into this
       slot, and taking it out of the document tears the mount down.
     -->
-    <div v-show="open">
-      <slot />
-    </div>
+    <Transition name="fade-in">
+      <div v-show="open">
+        <slot />
+      </div>
+    </Transition>
   </Stack>
 </template>
