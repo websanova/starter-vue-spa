@@ -23,9 +23,11 @@ export type CheckoutStep =
 
 /**
  * Survives the trip to a bank and back. Stripe returns the customer to
- * a freshly loaded page, and the session is confirmed again rather than
- * replaced, so the secret has to outlive the reload. Scoped to the user
- * so a session one account left behind is not picked up by the next.
+ * a freshly loaded page, and the session being confirmed has to be the
+ * one they left on rather than a replacement. Written on the way into
+ * confirm and cleared as soon as it lands, so it only ever holds a
+ * session with a confirm in flight. Scoped to the user so a session one
+ * account left behind is not picked up by the next.
  */
 const storagePrefix = 'subscribe.session'
 
@@ -43,6 +45,8 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const syncSubscription = useSyncSubscription()
 
   const checkout = useStripeCheckout({ addressTarget, paymentTarget })
+
+  let secret = ''
 
   const isLoading = ref<boolean>(true)
   const isConfirming = ref<boolean>(false)
@@ -173,20 +177,26 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   /**
-   * A secret in storage means the customer is coming back from a bank
-   * challenge. That session is re-initialised rather than replaced,
-   * since it may already have completed while they were away and a new
-   * one would subscribe them twice.
+   * A secret in storage means a confirm was in flight, so the customer
+   * is coming back from a bank. That session is re-initialised rather
+   * than replaced, since it may already have completed while they were
+   * away and a new one would subscribe them twice.
    *
-   * A stored secret that will not load is spent or expired, and a fresh
-   * one is opened over it. The key carries the user id, so the session
-   * one account left behind is never picked up by the next.
+   * Every other visit creates. The create is where the server expires
+   * the customer's other open sessions and refuses anyone already
+   * subscribed, and reusing a session from a previous visit would walk
+   * past both. A stored secret that will not load is spent or expired,
+   * and a fresh one is opened over it.
    */
   async function start() {
     const stored = sessionStorage.getItem(storageKey())
 
-    if (stored && await open(stored)) {
-      return
+    if (stored) {
+      secret = stored
+
+      if (await open(stored)) {
+        return
+      }
     }
 
     sessionStorage.removeItem(storageKey())
@@ -200,7 +210,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     try {
       const { clientSecret } = await createSubscriptionSession.mutateAsync({ interval, plan })
 
-      sessionStorage.setItem(storageKey(), clientSecret)
+      secret = clientSecret
 
       await open(clientSecret)
     } catch (err) {
@@ -343,17 +353,24 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isFailed.value = false
     stripeError.value = ''
 
+    // Held only for the length of the call. A challenge that leaves the
+    // page comes back to nothing else, and anything that resolves here
+    // clears it rather than leaving a session behind for the next visit.
+    sessionStorage.setItem(storageKey(), secret)
+
     try {
       const { message, session } = await checkout.confirm(
         isSavedCard.value ? savedCard.value?.id : undefined
       )
 
       if (!session || session.status.type !== 'complete') {
+        sessionStorage.removeItem(storageKey())
         stripeError.value = message
         isConfirming.value = false
         return
       }
     } catch (err) {
+      sessionStorage.removeItem(storageKey())
       console.error(err)
       isFailed.value = true
       isConfirming.value = false
