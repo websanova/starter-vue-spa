@@ -26,13 +26,6 @@
       class="text-muted-foreground"
     >
       {{ $t('features.billing.address.none') }}
-
-      <RouterLink
-        :to="{ name: 'user-account-billing-address' }"
-        class="text-link"
-      >
-        {{ $t('features.lbl.add') }}
-      </RouterLink>
     </p>
   </Inline>
 </template>

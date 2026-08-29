@@ -1,13 +1,13 @@
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCreateSubscriptionSession, useSyncSubscription } from '@/composables/api/subscription'
+import { useBillingAddressDefaults } from '@/composables/support/billing'
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
 import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
 import { useAuthService } from '@shared/composables/services/auth'
 import { useI18n } from '@shared/plugins/i18n'
 import { HttpError } from '@shared/plugins/http/client'
 import type { Interval } from '@/models/plan'
-import type { StripeCheckoutContact } from '@stripe/stripe-js'
 import type { Ref } from 'vue'
 
 interface CheckoutOptions {
@@ -45,6 +45,13 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const syncSubscription = useSyncSubscription()
 
   const checkout = useStripeCheckout({ addressTarget, paymentTarget })
+
+  /**
+   * The address on file is a prefill and nothing more. It is not written
+   * to the customer and the element is free to be edited over it, since
+   * the address that counts is whatever is in the element at confirm.
+   */
+  const billingAddressDefaults = useBillingAddressDefaults()
 
   let secret = ''
 
@@ -153,30 +160,6 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   start()
 
   /**
-   * The address on file is a prefill and nothing more. It is not written
-   * to the customer and the element is free to be edited over it, since
-   * the address that counts is whatever is in the element at confirm.
-   */
-  function defaultBillingAddress(): StripeCheckoutContact | null {
-    const value = auth.user.value?.billingAddress
-
-    if (!value) {
-      return null
-    }
-
-    return {
-      address: {
-        city: value.city,
-        country: value.country,
-        line1: value.line1,
-        line2: value.line2,
-        postal_code: value.postalCode,
-        state: value.state,
-      },
-    }
-  }
-
-  /**
    * A secret in storage means a confirm was in flight, so the customer
    * is coming back from a bank. That session is re-initialised rather
    * than replaced, since it may already have completed while they were
@@ -257,7 +240,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * targets first exist in.
    */
   async function open(clientSecret: string): Promise<boolean> {
-    const { message, session } = await checkout.load(clientSecret, defaultBillingAddress())
+    const { message, session } = await checkout.load(clientSecret, billingAddressDefaults.value)
 
     isLoading.value = false
 

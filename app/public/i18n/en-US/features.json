@@ -16,16 +16,13 @@
   },
   "lbl": {
     "account": "Account",
-    "add": "Add",
     "all": "All",
     "apply": "Apply",
     "billing": "Billing",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
     "change": "Change",
-    "city": "City",
     "continue": "Continue",
-    "country": "Country",
     "create": "Create",
     "dark": "Dark",
     "delete": "Delete",
@@ -34,8 +31,6 @@
     "language": "Language",
     "last_name": "Last Name",
     "light": "Light",
-    "line1": "Address",
-    "line2": "Address Line 2",
     "mark_all_read": "Mark all read",
     "name": "Name",
     "optional": "Optional",
@@ -43,7 +38,6 @@
     "password_confirmation": "Confirm password",
     "phone": "Phone Number",
     "plans": "Plans",
-    "postal_code": "Postal Code",
     "profile": "Profile",
     "refresh": "Refresh",
     "remove": "Remove",
@@ -62,19 +56,14 @@
     "verify": "Verify"
   },
   "ph": {
-    "city": "Your city",
-    "country": "US",
     "email": "you{'@'}example.com",
     "first_name": "Your first name",
     "language": "Select a language",
     "last_name": "Your last name",
-    "line1": "Street address",
-    "line2": "Apartment, suite, unit",
     "name": "Your name",
     "password": "Password",
     "password_confirmation": "Confirm password",
     "phone": "Your phone number",
-    "postal_code": "Postal code",
     "promotion_code": "Promotion code",
     "timezone": "Select a timezone"
   },
@@ -90,6 +79,7 @@
 
   "billing": {
     "address": {
+      "failed": "Your billing address could not be saved. Please try again.",
       "none": "No billing address on file."
     },
     "payment_method": {

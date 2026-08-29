@@ -16,16 +16,13 @@
   },
   "lbl": {
     "account": "Compte",
-    "add": "Ajouter",
     "all": "Tout",
     "apply": "Appliquer",
     "billing": "Facturation",
     "bookmarks": "Signets",
     "cancel": "Annuler",
     "change": "Modifier",
-    "city": "Ville",
     "continue": "Continuer",
-    "country": "Pays",
     "create": "Créer",
     "dark": "Sombre",
     "delete": "Supprimer",
@@ -34,8 +31,6 @@
     "language": "Langue",
     "last_name": "Nom",
     "light": "Clair",
-    "line1": "Adresse",
-    "line2": "Adresse ligne 2",
     "mark_all_read": "Tout marquer comme lu",
     "name": "Nom",
     "optional": "Facultatif",
@@ -43,7 +38,6 @@
     "password_confirmation": "Confirmer le mot de passe",
     "phone": "Numéro de téléphone",
     "plans": "Forfaits",
-    "postal_code": "Code postal",
     "profile": "Profil",
     "refresh": "Actualiser",
     "remove": "Retirer",
@@ -62,19 +56,14 @@
     "verify": "Vérifier"
   },
   "ph": {
-    "city": "Votre ville",
-    "country": "CA",
     "email": "vous{'@'}exemple.com",
     "first_name": "Votre prénom",
     "language": "Sélectionnez une langue",
     "last_name": "Votre nom",
-    "line1": "Numéro et rue",
-    "line2": "Appartement, bureau, unité",
     "name": "Votre nom",
     "password": "Mot de passe",
     "password_confirmation": "Confirmer le mot de passe",
     "phone": "Votre numéro de téléphone",
-    "postal_code": "Code postal",
     "promotion_code": "Code promotionnel",
     "timezone": "Sélectionnez un fuseau horaire"
   },
@@ -90,6 +79,7 @@
 
   "billing": {
     "address": {
+      "failed": "Votre adresse de facturation n'a pas pu être enregistrée. Veuillez réessayer.",
       "none": "Aucune adresse de facturation enregistrée."
     },
     "payment_method": {

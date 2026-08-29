@@ -31,6 +31,7 @@ export interface AuthBillingAddressDto {
   country: string
   line1: string
   line2: string | null
+  name: string | null
   postal_code: string
   state: string | null
 }
@@ -89,6 +90,7 @@ export interface AuthBillingAddress {
   country: string
   line1: string
   line2: string | null
+  name: string | null
   postalCode: string
   state: string | null
 }
@@ -150,6 +152,7 @@ export function toAuthBillingAddress(dto: AuthBillingAddressDto): AuthBillingAdd
     country: dto.country,
     line1: dto.line1,
     line2: dto.line2,
+    name: dto.name,
     postalCode: dto.postal_code,
     state: dto.state,
   }
