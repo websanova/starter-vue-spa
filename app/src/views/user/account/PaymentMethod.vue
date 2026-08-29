@@ -1,11 +1,17 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
-
-  // TODO: setup intent form to add or replace the card on file.
+  import { Stack } from '@shared/components/common/Stack'
+  import PaymentMethodForm from '@/features/billing/PaymentMethodForm.vue'
 </script>
 
 <template>
-  <Heading>
-    Account Billing Payment Method
-  </Heading>
+  <Stack>
+    <section>
+      <Heading>
+        {{ $t('features.heading.payment_method') }}
+      </Heading>
+
+      <PaymentMethodForm />
+    </section>
+  </Stack>
 </template>

@@ -1,3 +1,4 @@
+import { requireBillingAddress, requirePaymentMethod } from '@/router/guards/billing'
 import { requireActiveSubscription, requireCancelled, requireNotCancelled, requireUnsubscribed } from '@/router/guards/subscription'
 
 const Layout            = () => import('@/features/layouts/User.vue')
@@ -62,11 +63,13 @@ export default [{
     }, {
       path: 'billing-address',
       name: 'user-account-billing-address',
-      component: AccountBillingAddress
+      component: AccountBillingAddress,
+      beforeEnter: [requireBillingAddress]
     }, {
       path: 'payment-method',
       name: 'user-account-payment-method',
-      component: AccountPaymentMethod
+      component: AccountPaymentMethod,
+      beforeEnter: [requirePaymentMethod]
     }, {
       path: 'profile',
       name: 'user-account-profile',

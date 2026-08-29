@@ -84,7 +84,8 @@
     },
     "payment_method": {
       "card": "{brand} se terminant par {last_four}",
-      "card_none": "Aucun moyen de paiement enregistré."
+      "card_none": "Aucun moyen de paiement enregistré.",
+      "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer."
     },
     "subscription": {
       "action": {
@@ -139,7 +140,7 @@
       "local_time": "Heure locale"
     },
     "stripe_payment": {
-      "failed": "Votre paiement n'a pas pu être complété. Veuillez réessayer.",
+      "failed": "Vos informations de paiement n'ont pas pu être confirmées. Veuillez réessayer.",
       "powered": "Propulsé par"
     }
   },

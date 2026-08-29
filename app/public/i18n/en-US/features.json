@@ -84,7 +84,8 @@
     },
     "payment_method": {
       "card": "{brand} ending in {last_four}",
-      "card_none": "No payment method on file."
+      "card_none": "No payment method on file.",
+      "failed": "Your payment method could not be saved. Please try again."
     },
     "subscription": {
       "action": {
@@ -139,7 +140,7 @@
       "local_time": "Local time"
     },
     "stripe_payment": {
-      "failed": "Your payment could not be completed. Please try again.",
+      "failed": "Your payment details could not be confirmed. Please try again.",
       "powered": "Powered by"
     }
   },
