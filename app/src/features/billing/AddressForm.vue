@@ -1,9 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useBillingAddressForm } from '@/composables/support/billingAddress'
-  import { ButtonLoading } from '@shared/components/common/ButtonLoading'
+  import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
-  import { Stack } from '@shared/components/common/Stack'
 
   const target = ref<HTMLElement | null>(null)
 
@@ -21,7 +20,10 @@
     before the loading state drops, and taking it out of the document
     tears the mount down.
   -->
-  <Stack v-show="!isLoading">
+  <Form
+    v-show="!isLoading"
+    @submit="submit"
+  >
     <p
       v-if="error"
       class="text-center text-destructive"
@@ -31,13 +33,11 @@
 
     <div ref="target" />
 
-    <ButtonLoading
-      class="w-full"
+    <FormButton
       :disabled="!isComplete"
       :pending="isPending"
-      @click="submit"
     >
       {{ $t('features.lbl.update') }}
-    </ButtonLoading>
-  </Stack>
+    </FormButton>
+  </Form>
 </template>

@@ -1,9 +1,13 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
   import { usePaymentMethodForm } from '@/composables/support/paymentMethod'
+  import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
-  import StripePayment from '@shared/features/forms/StripePayment.vue'
+  import StripeLogo from '@shared/components/logos/Stripe.vue'
 
-  const { complete, error, intent, isLoading, isPending } = usePaymentMethodForm()
+  const target = ref<HTMLElement | null>(null)
+
+  const { error, isLoading, isPending, submit } = usePaymentMethodForm({ target })
 </script>
 
 <template>
@@ -13,17 +17,35 @@
   />
 
   <!--
-    Held back until the intent settles, since the element mounts against
-    it on the form's first render. A user returning from a bank arrives
-    with no intent and the form reads the secret off the url instead.
+    Hidden rather than removed. The element is mounted into this target
+    before the loading state drops, and taking it out of the document
+    tears the mount down.
   -->
-  <StripePayment
-    v-else
-    :error="error"
-    :intent="intent"
-    :pending="isPending"
-    @complete="complete"
+  <Form
+    v-show="!isLoading"
+    @submit="submit"
   >
-    {{ $t('features.lbl.update') }}
-  </StripePayment>
+    <p
+      v-if="error"
+      class="text-center text-destructive"
+    >
+      {{ error }}
+    </p>
+
+    <div ref="target" />
+
+    <a
+      class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
+      href="https://stripe.com"
+      rel="noopener"
+      target="_blank"
+    >
+      {{ $t('features.form.stripe_payment.powered') }}
+      <StripeLogo class="h-4" />
+    </a>
+
+    <FormButton :pending="isPending">
+      {{ $t('features.lbl.update') }}
+    </FormButton>
+  </Form>
 </template>
