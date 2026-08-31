@@ -1,4 +1,5 @@
 import { nextTick, onBeforeUnmount } from 'vue'
+import { useStripeAppearance } from '@shared/composables/primitives/useStripeAppearance'
 import { stripeAppearance, stripeClient, stripeLocale } from '@shared/lib/stripe'
 import type { Ref } from 'vue'
 import type { StripeElements, StripeError, StripePaymentElement } from '@stripe/stripe-js'
@@ -29,6 +30,8 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
   let elements: StripeElements | null = null
   let paymentElement: StripePaymentElement | null = null
   let intentType: StripeIntent['type'] = 'payment'
+
+  useStripeAppearance(() => elements)
 
   async function mount(intent: StripeIntent) {
     const stripe = await stripeClient()

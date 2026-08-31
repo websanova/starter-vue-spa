@@ -1,7 +1,8 @@
 import { nextTick, onBeforeUnmount, ref } from 'vue'
+import { useStripeAppearance } from '@shared/composables/primitives/useStripeAppearance'
 import { stripeAppearance, stripeClient, stripeLocale } from '@shared/lib/stripe'
 import type { Ref } from 'vue'
-import type { StripeAddressElement, StripeAddressElementOptions } from '@stripe/stripe-js'
+import type { StripeAddressElement, StripeAddressElementOptions, StripeElements } from '@stripe/stripe-js'
 
 interface StripeAddressOptions {
   target: Ref<HTMLElement | null>
@@ -18,9 +19,12 @@ interface StripeAddressOptions {
  * reason it is here rather than a form of our own.
  */
 export function useStripeAddress({ target }: StripeAddressOptions) {
+  let elements: StripeElements | null = null
   let addressElement: StripeAddressElement | null = null
 
   const isComplete = ref<boolean>(false)
+
+  useStripeAppearance(() => elements)
 
   /**
    * Reports whether the element went up, since a dead stripe.js leaves
@@ -34,7 +38,7 @@ export function useStripeAddress({ target }: StripeAddressOptions) {
       return false
     }
 
-    const elements = stripe.elements({
+    elements = stripe.elements({
       appearance: stripeAppearance(),
       locale: stripeLocale(),
     })
@@ -81,6 +85,7 @@ export function useStripeAddress({ target }: StripeAddressOptions) {
   function destroy() {
     addressElement?.destroy()
     addressElement = null
+    elements = null
   }
 
   onBeforeUnmount(destroy)

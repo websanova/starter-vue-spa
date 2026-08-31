@@ -1,12 +1,17 @@
-const OKLCH = /oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)/
+const OKLCH = /oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*(?:\/\s*([\d.]+)(%?))?/
 
 /**
- * Converts an oklch color to hex. Stripe renders in a frame with no
- * access to the page custom properties and only takes hex, and no
- * browser API resolves oklch to sRGB, so the conversion happens here.
+ * Converts an oklch color to one Stripe can parse. Stripe renders in a
+ * frame with no access to the page custom properties and does not
+ * understand oklch, and no browser API resolves it to sRGB, so the
+ * conversion happens here. Opaque colors come back as hex and
+ * translucent ones as rgba, either of which the appearance API takes.
+ *
+ * The alpha argument multiplies whatever the token already carries,
+ * which is how tailwind reads a slash opacity such as ring-ring/50.
  * Values that are not oklch pass through untouched.
  */
-export function oklchToHex(value: string): string {
+export function oklchToColor(value: string, alpha = 1): string {
   const match = OKLCH.exec(value)
 
   if (!match) {
@@ -32,11 +37,27 @@ export function oklchToHex(value: string): string {
     -0.0041960863 * lms[0] - 0.7034186147 * lms[1] + 1.7076147010 * lms[2],
   ]
 
-  return '#' + rgb.map((channel) => {
+  const channels = rgb.map((channel) => {
     const srgb = channel <= 0.0031308
       ? channel * 12.92
       : 1.055 * channel ** (1 / 2.4) - 0.055
 
-    return Math.round(Math.min(Math.max(srgb, 0), 1) * 255).toString(16).padStart(2, '0')
-  }).join('')
+    return Math.round(Math.min(Math.max(srgb, 0), 1) * 255)
+  })
+
+  /**
+   * The alpha on a token is written either as a fraction or as a
+   * percentage, and a token without one is fully opaque.
+   */
+  const parsed = match[4] === undefined
+    ? 1
+    : Number(match[4]) / (match[5] === '%' ? 100 : 1)
+
+  const opacity = parsed * alpha
+
+  if (opacity >= 1) {
+    return '#' + channels.map((channel) => channel.toString(16).padStart(2, '0')).join('')
+  }
+
+  return `rgba(${channels.join(', ')}, ${Number(opacity.toFixed(3))})`
 }
