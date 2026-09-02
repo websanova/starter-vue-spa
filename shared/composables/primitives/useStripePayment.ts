@@ -33,11 +33,16 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
 
   useStripeAppearance(() => elements)
 
+  /**
+   * Throws rather than returning quietly when there is nothing to mount
+   * against, so the caller shows the failure instead of an empty form
+   * with a live submit button under it.
+   */
   async function mount(intent: StripeIntent) {
     const stripe = await stripeClient()
 
     if (!stripe) {
-      return
+      throw new Error('Stripe failed to load.')
     }
 
     intentType = intent.type
@@ -56,7 +61,7 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
     await nextTick()
 
     if (!target.value) {
-      return
+      throw new Error('Stripe payment element has no target to mount into.')
     }
 
     paymentElement.mount(target.value)

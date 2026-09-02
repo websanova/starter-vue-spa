@@ -109,12 +109,12 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
   async function start() {
     const returned = returnedIntent()
 
-    if (returned) {
-      await resume(returned)
-      return
-    }
-
     try {
+      if (returned) {
+        await resume(returned)
+        return
+      }
+
       const { clientSecret } = await create.mutateAsync()
 
       await payment.mount({ clientSecret, type: 'setup' })
