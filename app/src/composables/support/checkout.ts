@@ -205,18 +205,15 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   /**
    * A refusal carries no secret, so there is nothing to mount either
-   * way. The two that name a place to go are sent there. Anything else
-   * stays put with its message, since a provider that is unreachable is
-   * worth trying again on.
+   * way. Both of the codes that name a subscription already existing go
+   * to billing, past due included, since nothing on the payment method
+   * page settles what a failed renewal left open. Anything else stays
+   * put with its message, since a provider that is unreachable is worth
+   * trying again on.
    */
   function refuse(code: string) {
-    if (code === 'already_subscribed') {
+    if (code === 'already_subscribed' || code === 'payment_required') {
       router.replace({ name: 'user-account-billing' })
-      return
-    }
-
-    if (code === 'payment_required') {
-      router.replace({ name: 'user-account-payment-method' })
       return
     }
 
