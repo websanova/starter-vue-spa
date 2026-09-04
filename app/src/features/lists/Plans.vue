@@ -67,15 +67,15 @@
     <Stack v-else>
       <div class="text-center">
         <p v-if="isTrialEligible">
-          {{ $t('features.subscribe.plans.note_trial', { days: settings.data.subscriptionTrialDays }) }}
+          {{ $t('features.list.plans.note_trial', { days: settings.data.subscriptionTrialDays }) }}
         </p>
 
         <p v-else>
-          {{ $t('features.subscribe.plans.note_choose') }}
+          {{ $t('features.list.plans.note_choose') }}
         </p>
 
         <p class="text-sm text-muted-foreground">
-          {{ $t('features.subscribe.plans.note_cancel') }}
+          {{ $t('features.list.plans.note_cancel') }}
         </p>
       </div>
 

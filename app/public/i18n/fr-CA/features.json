@@ -95,6 +95,29 @@
       "title": "Supprimer le moyen de paiement"
     }
   },
+  "display": {
+    "billing_address": {
+      "none": "Aucune adresse de facturation enregistrée."
+    },
+    "billing_payment_method": {
+      "card": "{brand} se terminant par {last_four}",
+      "card_none": "Aucun moyen de paiement enregistré."
+    },
+    "billing_subscription": {
+      "action": {
+        "cancel": "Annuler",
+        "resume": "Reprendre",
+        "update": "Changer de forfait"
+      },
+      "status": {
+        "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
+        "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
+        "free": "Vous êtes présentement sur le forfait {plan}.",
+        "none": "Vous n'avez pas encore choisi de forfait.",
+        "trialing": "Votre essai {plan} prend fin le {date}."
+      }
+    }
+  },
   "form": {
     "auth_login": {
       "reset_password": "Réinitialiser le mot de passe"
@@ -124,36 +147,12 @@
     "settings_locale": {
       "local_time": "Heure locale"
     },
-    "stripe_address": {
+    "stripe_billing_address": {
       "failed": "Votre adresse de facturation n'a pas pu être enregistrée. Veuillez réessayer."
     },
-    "stripe_payment": {
-      "failed": "Vos informations de paiement n'ont pas pu être confirmées. Veuillez réessayer.",
-      "powered": "Propulsé par"
-    },
-    "stripe_payment_method": {
-      "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer."
-    }
-  },
-  "notification": {
-    "email": {
-      "title": "Vérifiez votre courriel",
-      "body": "Confirmez votre adresse courriel pour sécuriser votre compte."
-    },
-    "phone": {
-      "title": "Vérifiez votre numéro de téléphone",
-      "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
-    }
-  },
-  "subscribe": {
-    "cancel": {
-      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours.",
-      "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
-      "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
-      "submit": "Annuler l'abonnement"
-    },
-    "checkout": {
+    "stripe_checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
+      "failed": "Vos informations de paiement n'ont pas pu être confirmées. Veuillez réessayer.",
       "note_address": "Votre adresse de facturation est requise à des fins fiscales.",
       "note_complete": "Complétez votre abonnement",
       "note_payment_method": "Vous ne serez pas débité avant la fin de votre essai",
@@ -162,6 +161,12 @@
       "note_tax": "+ taxes applicables",
       "submit": "S'abonner"
     },
+    "stripe_payment_method": {
+      "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer.",
+      "powered": "Propulsé par"
+    }
+  },
+  "list": {
     "plans": {
       "action": {
         "cancel": "Annuler",
@@ -185,27 +190,22 @@
       "unlimited": "Illimité"
     }
   },
-  "text": {
-    "address": {
-      "none": "Aucune adresse de facturation enregistrée."
+  "notification": {
+    "email": {
+      "title": "Vérifiez votre courriel",
+      "body": "Confirmez votre adresse courriel pour sécuriser votre compte."
     },
-    "payment_method": {
-      "card": "{brand} se terminant par {last_four}",
-      "card_none": "Aucun moyen de paiement enregistré."
-    },
-    "subscription": {
-      "action": {
-        "cancel": "Annuler",
-        "resume": "Reprendre",
-        "update": "Changer de forfait"
-      },
-      "status": {
-        "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
-        "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
-        "free": "Vous êtes présentement sur le forfait {plan}.",
-        "none": "Vous n'avez pas encore choisi de forfait.",
-        "trialing": "Votre essai {plan} prend fin le {date}."
-      }
+    "phone": {
+      "title": "Vérifiez votre numéro de téléphone",
+      "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
+    }
+  },
+  "subscribe": {
+    "cancel": {
+      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours.",
+      "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
+      "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
+      "submit": "Annuler l'abonnement"
     }
   }
 }

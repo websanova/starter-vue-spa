@@ -25,7 +25,7 @@
       v-else
       class="text-muted-foreground"
     >
-      {{ $t('features.text.address.none') }}
+      {{ $t('features.display.billing_address.none') }}
     </p>
   </Inline>
 </template>

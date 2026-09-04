@@ -33,7 +33,7 @@
         </template>
 
         <template v-else>
-          {{ $t('features.subscribe.plans.free') }}
+          {{ $t('features.list.plans.free') }}
         </template>
       </p>
     </CardHeader>
@@ -45,11 +45,11 @@
           :key="key"
           class="flex items-center justify-between"
         >
-          <span>{{ $t(`features.subscribe.plans.features.${key}`) }}</span>
+          <span>{{ $t(`features.list.plans.features.${key}`) }}</span>
 
           <CheckIcon v-if="value === true" />
           <XIcon v-else-if="value === false" />
-          <span v-else-if="value === null">{{ $t('features.subscribe.plans.unlimited') }}</span>
+          <span v-else-if="value === null">{{ $t('features.list.plans.unlimited') }}</span>
           <span v-else>{{ value }}</span>
         </li>
       </ul>
@@ -61,7 +61,7 @@
         :disabled="props.action === 'current'"
         @click="emit(props.action)"
       >
-        {{ $t(`features.subscribe.plans.action.${props.action}`) }}
+        {{ $t(`features.list.plans.action.${props.action}`) }}
       </Button>
     </CardFooter>
   </Card>

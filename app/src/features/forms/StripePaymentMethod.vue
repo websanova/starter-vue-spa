@@ -40,7 +40,7 @@
       rel="noopener"
       target="_blank"
     >
-      {{ $t('features.form.stripe_payment.powered') }}
+      {{ $t('features.form.stripe_payment_method.powered') }}
       <StripeLogo class="h-4" />
     </a>
 

@@ -95,6 +95,29 @@
       "title": "Remove payment method"
     }
   },
+  "display": {
+    "billing_address": {
+      "none": "No billing address on file."
+    },
+    "billing_payment_method": {
+      "card": "{brand} ending in {last_four}",
+      "card_none": "No payment method on file."
+    },
+    "billing_subscription": {
+      "action": {
+        "cancel": "Cancel",
+        "resume": "Resume",
+        "update": "Update Plan"
+      },
+      "status": {
+        "active": "You are currently on the {plan} plan, billed {interval}.",
+        "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
+        "free": "You are currently on the {plan} plan.",
+        "none": "You have not chosen a plan yet.",
+        "trialing": "Your {plan} trial ends on {date}."
+      }
+    }
+  },
   "form": {
     "auth_login": {
       "reset_password": "Reset password"
@@ -124,36 +147,12 @@
     "settings_locale": {
       "local_time": "Local time"
     },
-    "stripe_address": {
+    "stripe_billing_address": {
       "failed": "Your billing address could not be saved. Please try again."
     },
-    "stripe_payment": {
-      "failed": "Your payment details could not be confirmed. Please try again.",
-      "powered": "Powered by"
-    },
-    "stripe_payment_method": {
-      "failed": "Your payment method could not be saved. Please try again."
-    }
-  },
-  "notification": {
-    "email": {
-      "title": "Verify your email",
-      "body": "Confirm your email address to secure your account."
-    },
-    "phone": {
-      "title": "Verify your phone number",
-      "body": "Confirm your phone number to secure your account."
-    }
-  },
-  "subscribe": {
-    "cancel": {
-      "note": "Your plan stays active until the end of your current billing period.",
-      "note_failed": "Your subscription could not be cancelled. Please try again.",
-      "note_trial": "Your trial stays active until {date}. You won't be charged.",
-      "submit": "Cancel Subscription"
-    },
-    "checkout": {
+    "stripe_checkout": {
       "activating": "Payment received. Activating your plan...",
+      "failed": "Your payment details could not be confirmed. Please try again.",
       "note_address": "Your billing address is needed for tax purposes.",
       "note_complete": "Complete your subscription",
       "note_payment_method": "You won't be charged until your trial ends",
@@ -162,6 +161,12 @@
       "note_tax": "+ applicable taxes",
       "submit": "Subscribe"
     },
+    "stripe_payment_method": {
+      "failed": "Your payment method could not be saved. Please try again.",
+      "powered": "Powered by"
+    }
+  },
+  "list": {
     "plans": {
       "action": {
         "cancel": "Cancel",
@@ -185,27 +190,22 @@
       "unlimited": "Unlimited"
     }
   },
-  "text": {
-    "address": {
-      "none": "No billing address on file."
+  "notification": {
+    "email": {
+      "title": "Verify your email",
+      "body": "Confirm your email address to secure your account."
     },
-    "payment_method": {
-      "card": "{brand} ending in {last_four}",
-      "card_none": "No payment method on file."
-    },
-    "subscription": {
-      "action": {
-        "cancel": "Cancel",
-        "resume": "Resume",
-        "update": "Update Plan"
-      },
-      "status": {
-        "active": "You are currently on the {plan} plan, billed {interval}.",
-        "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
-        "free": "You are currently on the {plan} plan.",
-        "none": "You have not chosen a plan yet.",
-        "trialing": "Your {plan} trial ends on {date}."
-      }
+    "phone": {
+      "title": "Verify your phone number",
+      "body": "Confirm your phone number to secure your account."
+    }
+  },
+  "subscribe": {
+    "cancel": {
+      "note": "Your plan stays active until the end of your current billing period.",
+      "note_failed": "Your subscription could not be cancelled. Please try again.",
+      "note_trial": "Your trial stays active until {date}. You won't be charged.",
+      "submit": "Cancel Subscription"
     }
   }
 }

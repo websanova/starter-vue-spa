@@ -29,7 +29,7 @@
 <template>
   <Stack gap="sm">
     <p>
-      {{ $t(`features.text.subscription.status.${status.key}`, status.params) }}
+      {{ $t(`features.display.billing_subscription.status.${status.key}`, status.params) }}
     </p>
 
     <Inline>
@@ -40,7 +40,7 @@
         :color="action === 'cancel' ? 'destructive' : 'primary'"
         @click="onAction(action)"
       >
-        {{ $t(`features.text.subscription.action.${action}`) }}
+        {{ $t(`features.display.billing_subscription.action.${action}`) }}
       </Button>
     </Inline>
   </Stack>

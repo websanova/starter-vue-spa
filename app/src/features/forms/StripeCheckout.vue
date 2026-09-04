@@ -72,8 +72,8 @@
    * taken now.
    */
   const summaryKey = computed(() => isTrial.value
-    ? 'features.subscribe.checkout.note_summary_trial'
-    : 'features.subscribe.checkout.note_summary'
+    ? 'features.form.stripe_checkout.note_summary_trial'
+    : 'features.form.stripe_checkout.note_summary'
   )
 </script>
 
@@ -82,7 +82,7 @@
     <Stack class="w-full sm:max-w-[25rem]">
       <div class="text-center">
         <p class="text-2xl font-bold">
-          {{ $t('features.subscribe.checkout.note_complete') }}
+          {{ $t('features.form.stripe_checkout.note_complete') }}
         </p>
 
         <p
@@ -95,7 +95,7 @@
             v-if="isTaxPending"
             class="text-xs"
           >
-            {{ $t('features.subscribe.checkout.note_tax') }}
+            {{ $t('features.form.stripe_checkout.note_tax') }}
           </span>
         </p>
       </div>
@@ -147,7 +147,7 @@
           </ButtonLoading>
 
           <p class="text-center text-sm text-muted-foreground">
-            * {{ $t('features.subscribe.checkout.note_address') }}
+            * {{ $t('features.form.stripe_checkout.note_address') }}
           </p>
         </template>
 
@@ -182,14 +182,14 @@
             :pending="isConfirming"
             @click="confirm"
           >
-            {{ $t('features.subscribe.checkout.submit') }}
+            {{ $t('features.form.stripe_checkout.submit') }}
           </ButtonLoading>
 
           <p
             v-if="isTrial"
             class="text-center text-sm text-muted-foreground"
           >
-            * {{ $t('features.subscribe.checkout.note_payment_method') }}
+            * {{ $t('features.form.stripe_checkout.note_payment_method') }}
           </p>
         </template>
       </template>
