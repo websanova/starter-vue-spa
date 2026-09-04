@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import { CreditCardIcon } from '@lucide/vue'
   import { usePaymentMethod } from '@/composables/support/billing'
-  import PaymentMethodDelete from '@/features/dialogs/PaymentMethodDelete.vue'
   import { Inline } from '@shared/components/common/Inline'
 
-  const card = usePaymentMethod()
+  defineEmits<{
+    delete: []
+  }>()
 
-  const isDeleteOpen = ref<boolean>(false)
+  const card = usePaymentMethod()
 </script>
 
 <template>
@@ -29,7 +29,7 @@
       <button
         type="button"
         class="text-destructive cursor-pointer"
-        @click="isDeleteOpen = true"
+        @click="$emit('delete')"
       >
         {{ $t('features.lbl.delete') }}
       </button>
@@ -41,10 +41,5 @@
     >
       {{ $t('features.billing.payment_method.card_none') }}
     </p>
-
-    <PaymentMethodDelete
-      v-if="card"
-      v-model:open="isDeleteOpen"
-    />
   </Inline>
 </template>
