@@ -147,7 +147,7 @@
   },
   "subscribe": {
     "cancel": {
-      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours. Vous ne serez plus débité et aucun remboursement n'est effectué.",
+      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours.",
       "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
       "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
       "submit": "Annuler l'abonnement"
