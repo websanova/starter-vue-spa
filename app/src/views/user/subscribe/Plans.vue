@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import Plans from '@/features/subscribe/Plans.vue'
+  import PlansList from '@/features/lists/Plans.vue'
 </script>
 
 <template>
-  <Plans />
+  <PlansList />
 </template>

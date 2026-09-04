@@ -7,8 +7,8 @@
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
+  import { WizardStep } from '@shared/components/common/WizardStep'
   import { Input } from '@shared/components/ui/input'
-  import SubscriptionEditableToggle from '@/features/toggles/SubscriptionEditable.vue'
   import type { Interval } from '@/models/plan'
 
   const route = useRoute()
@@ -115,17 +115,17 @@
           {{ error }}
         </p>
 
-        <SubscriptionEditableToggle
+        <WizardStep
           :heading="$t('features.heading.billing_address')"
           :open="step === 'address'"
           :summary="addressSummary"
           @change="goTo('address')"
         >
           <div ref="addressTarget" />
-        </SubscriptionEditableToggle>
+        </WizardStep>
 
         <Transition name="fade-in">
-          <SubscriptionEditableToggle
+          <WizardStep
             v-show="step === 'payment'"
             :heading="$t('features.heading.payment_method')"
             :open="!cardSummary"
@@ -133,7 +133,7 @@
             @change="changeCard"
           >
             <div ref="paymentTarget" />
-          </SubscriptionEditableToggle>
+          </WizardStep>
         </Transition>
 
         <template v-if="step === 'address'">

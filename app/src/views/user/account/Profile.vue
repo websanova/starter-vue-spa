@@ -2,7 +2,7 @@
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
   import ProfileAvatarForm from '@/features/forms/ProfileAvatar.vue'
-  import ProfileEditForm from '@/features/forms/ProfileEdit.vue'
+  import ProfileInfoForm from '@/features/forms/ProfileInfo.vue'
 </script>
 
 <template>
@@ -20,7 +20,7 @@
         {{ $t('features.heading.profile_info') }}
       </Heading>
 
-      <ProfileEditForm />
+      <ProfileInfoForm />
     </section>
   </Stack>
 </template>

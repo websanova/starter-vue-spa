@@ -3,9 +3,9 @@
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
   import PaymentMethodDeleteDialog from '@/features/dialogs/PaymentMethodDelete.vue'
-  import AddressText from '@/features/text/Address.vue'
-  import PaymentMethodText from '@/features/text/PaymentMethod.vue'
-  import SubscriptionText from '@/features/text/Subscription.vue'
+  import BillingAddressDisplay from '@/features/displays/BillingAddress.vue'
+  import BillingPaymentMethodDisplay from '@/features/displays/BillingPaymentMethod.vue'
+  import BillingSubscriptionDisplay from '@/features/displays/BillingSubscription.vue'
 
   const isPaymentMethodDeleteOpen = ref<boolean>(false)
 
@@ -20,11 +20,11 @@
       </Heading>
 
       <Stack gap="sm">
-        <AddressText />
+        <BillingAddressDisplay />
 
-        <PaymentMethodText @delete="isPaymentMethodDeleteOpen = true" />
+        <BillingPaymentMethodDisplay @delete="isPaymentMethodDeleteOpen = true" />
 
-        <SubscriptionText />
+        <BillingSubscriptionDisplay />
       </Stack>
     </section>
 

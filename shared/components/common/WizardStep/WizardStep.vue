@@ -2,6 +2,7 @@
   import { Stack } from '@shared/components/common/Stack'
 
   defineProps<{
+    changeLabel?: string
     heading: string
     open?: boolean
     summary?: string
@@ -30,7 +31,7 @@
           class="cursor-pointer text-link"
           @click="emit('change')"
         >
-          {{ $t('features.lbl.change') }}
+          {{ changeLabel ?? $t('features.lbl.change') }}
         </button>
       </p>
     </Transition>

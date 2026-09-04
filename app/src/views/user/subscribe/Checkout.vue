@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import Checkout from '@/features/subscribe/Checkout.vue'
+  import StripeCheckoutForm from '@/features/forms/StripeCheckout.vue'
 </script>
 
 <template>
-  <Checkout />
+  <StripeCheckoutForm />
 </template>
