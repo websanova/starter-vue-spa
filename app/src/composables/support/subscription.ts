@@ -52,6 +52,14 @@ export function useSubscription() {
   const isPaid = computed(() => (auth.user.value?.plan?.tier ?? 0) > 0)
 
   /**
+   * Whether anything further is going to be billed. A cancelled
+   * subscription running out its paid term is not, and neither is one
+   * that has ended, since isSubscribed only holds until the grace
+   * period does. A trial still converts, so it counts as chargeable.
+   */
+  const isChargeable = computed(() => isSubscribed.value && !isCancelled.value)
+
+  /**
    * A trial is only ever offered once. The trial object stays set once
    * one has been started, so its absence is what marks a user as never
    * having taken one.
@@ -166,6 +174,7 @@ export function useSubscription() {
 
   return {
     isCancelled,
+    isChargeable,
     isOnTrial,
     isPaid,
     isSubscribed,

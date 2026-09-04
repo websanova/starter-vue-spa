@@ -25,6 +25,23 @@ export function useCreatePaymentMethodIntent() {
 }
 
 /**
+ * Removes the payment method on file. No body, the card is resolved
+ * from the user on the API side. Nothing is charged and nothing
+ * settles afterwards, so the response is the answer. The user is
+ * refetched after, since the billing page reads the card off it.
+ */
+export function useDeletePaymentMethod() {
+  const { fetchUser } = useAuthService()
+
+  return useMutation({
+    mutationFn: async () => {
+      await useHttp().delete('billing/payment-method')
+      await fetchUser()
+    },
+  })
+}
+
+/**
  * Turns a confirmed setup intent into the payment method on file. A
  * confirmed intent only attaches the card, so without this call the
  * customer carries no default and nothing would charge it. The webhook

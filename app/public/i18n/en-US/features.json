@@ -48,6 +48,7 @@
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "sign_up": "Sign up",
+    "submit": "Submit",
     "system": "System",
     "theme": "Theme",
     "timezone": "Timezone",
@@ -108,6 +109,14 @@
     },
     "update": {
       "message": "The app has been updated."
+    }
+  },
+  "dialog": {
+    "payment_method_delete": {
+      "note": "This removes your payment method for good. Subscribing again later means entering your card from scratch.",
+      "note_blocked": "Your payment method cannot be removed while your subscription is active. Cancel your subscription first, then remove it once the current term ends.",
+      "note_failed": "Your payment method could not be removed. Please try again.",
+      "title": "Remove payment method"
     }
   },
   "form": {
