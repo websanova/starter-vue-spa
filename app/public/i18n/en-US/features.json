@@ -11,6 +11,7 @@
     "register": "Sign Up",
     "settings_appearance": "Appearance",
     "settings_locale": "Locale",
+    "subscription_cancel": "Cancel Subscription",
     "verify_email": "Verify Email",
     "verify_phone": "Verify Phone Number"
   },
@@ -145,6 +146,12 @@
     }
   },
   "subscribe": {
+    "cancel": {
+      "note": "Your plan stays active until the end of your current billing period. You won't be charged again, and nothing is refunded.",
+      "note_failed": "Your subscription could not be cancelled. Please try again.",
+      "note_trial": "Your trial stays active until {date}. You won't be charged.",
+      "submit": "Cancel Subscription"
+    },
     "checkout": {
       "activating": "Payment received. Activating your plan...",
       "note_address": "Your billing address is needed for tax purposes.",

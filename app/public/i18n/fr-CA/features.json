@@ -11,6 +11,7 @@
     "register": "S'inscrire",
     "settings_appearance": "Apparence",
     "settings_locale": "Paramètres régionaux",
+    "subscription_cancel": "Annuler l'abonnement",
     "verify_email": "Vérifier le courriel",
     "verify_phone": "Vérifier le numéro de téléphone"
   },
@@ -145,6 +146,12 @@
     }
   },
   "subscribe": {
+    "cancel": {
+      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours. Vous ne serez plus débité et aucun remboursement n'est effectué.",
+      "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
+      "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
+      "submit": "Annuler l'abonnement"
+    },
     "checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
       "note_address": "Votre adresse de facturation est requise à des fins fiscales.",

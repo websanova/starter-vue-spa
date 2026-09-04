@@ -15,6 +15,24 @@ interface SyncSubscriptionData {
 }
 
 /**
+ * Cancels the subscription at the end of the current term. No body, the
+ * subscription is resolved from the user on the API side. Nothing is
+ * charged, nothing is refunded and nothing settles afterwards, so the
+ * response is the answer. The user is refetched after, since the
+ * cancelled state is spread across flags read off it everywhere.
+ */
+export function useCancelSubscription() {
+  const { fetchUser } = useAuthService()
+
+  return useMutation({
+    mutationFn: async () => {
+      await useHttp().post('subscription/cancel')
+      await fetchUser()
+    },
+  })
+}
+
+/**
  * Opens the checkout session both elements mount against. Nothing is
  * created beyond the session itself, so a customer who abandons the
  * page leaves one that ages out on its own and there is nothing to
