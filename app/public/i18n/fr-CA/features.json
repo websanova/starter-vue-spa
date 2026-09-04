@@ -11,7 +11,6 @@
     "register": "S'inscrire",
     "settings_appearance": "Apparence",
     "settings_locale": "Paramètres régionaux",
-    "subscription_cancel": "Annuler l'abonnement",
     "verify_email": "Vérifier le courriel",
     "verify_phone": "Vérifier le numéro de téléphone"
   },
@@ -164,6 +163,13 @@
     "stripe_payment_method": {
       "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer.",
       "powered": "Propulsé par"
+    },
+    "subscription_cancel": {
+      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours.",
+      "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
+      "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
+      "submit": "Annuler l'abonnement",
+      "title": "Annulez votre abonnement"
     }
   },
   "list": {
@@ -198,14 +204,6 @@
     "phone": {
       "title": "Vérifiez votre numéro de téléphone",
       "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
-    }
-  },
-  "subscribe": {
-    "cancel": {
-      "note": "Votre forfait reste actif jusqu'à la fin de votre période de facturation en cours.",
-      "note_failed": "Votre abonnement n'a pas pu être annulé. Veuillez réessayer.",
-      "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
-      "submit": "Annuler l'abonnement"
     }
   }
 }

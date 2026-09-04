@@ -11,7 +11,6 @@
     "register": "Sign Up",
     "settings_appearance": "Appearance",
     "settings_locale": "Locale",
-    "subscription_cancel": "Cancel Subscription",
     "verify_email": "Verify Email",
     "verify_phone": "Verify Phone Number"
   },
@@ -164,6 +163,13 @@
     "stripe_payment_method": {
       "failed": "Your payment method could not be saved. Please try again.",
       "powered": "Powered by"
+    },
+    "subscription_cancel": {
+      "note": "Your plan stays active until the end of your current billing period.",
+      "note_failed": "Your subscription could not be cancelled. Please try again.",
+      "note_trial": "Your trial stays active until {date}. You won't be charged.",
+      "submit": "Cancel Subscription",
+      "title": "Cancel your subscription"
     }
   },
   "list": {
@@ -198,14 +204,6 @@
     "phone": {
       "title": "Verify your phone number",
       "body": "Confirm your phone number to secure your account."
-    }
-  },
-  "subscribe": {
-    "cancel": {
-      "note": "Your plan stays active until the end of your current billing period.",
-      "note_failed": "Your subscription could not be cancelled. Please try again.",
-      "note_trial": "Your trial stays active until {date}. You won't be charged.",
-      "submit": "Cancel Subscription"
     }
   }
 }
