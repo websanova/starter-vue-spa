@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
-  import BillingAddressForm from '@/features/billing/AddressForm.vue'
+  import StripeAddressForm from '@/features/forms/StripeAddress.vue'
 </script>
 
 <template>
@@ -11,7 +11,7 @@
         {{ $t('features.heading.billing_address') }}
       </Heading>
 
-      <BillingAddressForm />
+      <StripeAddressForm />
     </section>
   </Stack>
 </template>

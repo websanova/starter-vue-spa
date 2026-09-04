@@ -151,7 +151,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
       return ''
     }
 
-    return i18n.t('features.billing.payment_method.card', {
+    return i18n.t('features.text.payment_method.card', {
       brand: card.card.brand.charAt(0).toUpperCase() + card.card.brand.slice(1),
       last_four: card.card.last4,
     })

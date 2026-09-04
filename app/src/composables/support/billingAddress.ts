@@ -42,7 +42,7 @@ export function useBillingAddressForm({ target }: BillingAddressOptions) {
       return mutationError.value
     }
 
-    return isFailed.value ? i18n.t('features.billing.address.failed') : ''
+    return isFailed.value ? i18n.t('features.form.stripe_address.failed') : ''
   })
 
   start()

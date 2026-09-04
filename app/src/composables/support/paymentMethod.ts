@@ -65,7 +65,7 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
       return message
     }
 
-    return isFailed.value ? i18n.t('features.billing.payment_method.failed') : ''
+    return isFailed.value ? i18n.t('features.form.stripe_payment_method.failed') : ''
   })
 
   start()

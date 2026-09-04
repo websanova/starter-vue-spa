@@ -8,7 +8,7 @@
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
   import { Input } from '@shared/components/ui/input'
-  import Editable from '@/features/billing/Editable.vue'
+  import SubscriptionEditableToggle from '@/features/toggles/SubscriptionEditable.vue'
   import type { Interval } from '@/models/plan'
 
   const route = useRoute()
@@ -115,17 +115,17 @@
           {{ error }}
         </p>
 
-        <Editable
+        <SubscriptionEditableToggle
           :heading="$t('features.heading.billing_address')"
           :open="step === 'address'"
           :summary="addressSummary"
           @change="goTo('address')"
         >
           <div ref="addressTarget" />
-        </Editable>
+        </SubscriptionEditableToggle>
 
         <Transition name="fade-in">
-          <Editable
+          <SubscriptionEditableToggle
             v-show="step === 'payment'"
             :heading="$t('features.heading.payment_method')"
             :open="!cardSummary"
@@ -133,7 +133,7 @@
             @change="changeCard"
           >
             <div ref="paymentTarget" />
-          </Editable>
+          </SubscriptionEditableToggle>
         </Transition>
 
         <template v-if="step === 'address'">

@@ -78,31 +78,6 @@
 
 
 
-  "billing": {
-    "address": {
-      "failed": "Your billing address could not be saved. Please try again.",
-      "none": "No billing address on file."
-    },
-    "payment_method": {
-      "card": "{brand} ending in {last_four}",
-      "card_none": "No payment method on file.",
-      "failed": "Your payment method could not be saved. Please try again."
-    },
-    "subscription": {
-      "action": {
-        "cancel": "Cancel",
-        "resume": "Resume",
-        "update": "Update Plan"
-      },
-      "status": {
-        "active": "You are currently on the {plan} plan, billed {interval}.",
-        "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
-        "free": "You are currently on the {plan} plan.",
-        "none": "You have not chosen a plan yet.",
-        "trialing": "Your {plan} trial ends on {date}."
-      }
-    }
-  },
   "cover": {
     "maintenance": {
       "message": "App is down for maintenance.<br>We should be back up shortly."
@@ -148,9 +123,15 @@
     "settings_locale": {
       "local_time": "Local time"
     },
+    "stripe_address": {
+      "failed": "Your billing address could not be saved. Please try again."
+    },
     "stripe_payment": {
       "failed": "Your payment details could not be confirmed. Please try again.",
       "powered": "Powered by"
+    },
+    "stripe_payment_method": {
+      "failed": "Your payment method could not be saved. Please try again."
     }
   },
   "notification": {
@@ -195,6 +176,29 @@
       "note_choose": "Choose the plan that fits.",
       "note_trial": "Start your free {days} day trial now!",
       "unlimited": "Unlimited"
+    }
+  },
+  "text": {
+    "address": {
+      "none": "No billing address on file."
+    },
+    "payment_method": {
+      "card": "{brand} ending in {last_four}",
+      "card_none": "No payment method on file."
+    },
+    "subscription": {
+      "action": {
+        "cancel": "Cancel",
+        "resume": "Resume",
+        "update": "Update Plan"
+      },
+      "status": {
+        "active": "You are currently on the {plan} plan, billed {interval}.",
+        "cancelled": "Your {plan} plan has been cancelled and ends on {date}.",
+        "free": "You are currently on the {plan} plan.",
+        "none": "You have not chosen a plan yet.",
+        "trialing": "Your {plan} trial ends on {date}."
+      }
     }
   }
 }

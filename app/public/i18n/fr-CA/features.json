@@ -78,31 +78,6 @@
 
 
 
-  "billing": {
-    "address": {
-      "failed": "Votre adresse de facturation n'a pas pu être enregistrée. Veuillez réessayer.",
-      "none": "Aucune adresse de facturation enregistrée."
-    },
-    "payment_method": {
-      "card": "{brand} se terminant par {last_four}",
-      "card_none": "Aucun moyen de paiement enregistré.",
-      "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer."
-    },
-    "subscription": {
-      "action": {
-        "cancel": "Annuler",
-        "resume": "Reprendre",
-        "update": "Changer de forfait"
-      },
-      "status": {
-        "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
-        "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
-        "free": "Vous êtes présentement sur le forfait {plan}.",
-        "none": "Vous n'avez pas encore choisi de forfait.",
-        "trialing": "Votre essai {plan} prend fin le {date}."
-      }
-    }
-  },
   "cover": {
     "maintenance": {
       "message": "L'application est en maintenance.<br>Nous serons de retour sous peu."
@@ -148,9 +123,15 @@
     "settings_locale": {
       "local_time": "Heure locale"
     },
+    "stripe_address": {
+      "failed": "Votre adresse de facturation n'a pas pu être enregistrée. Veuillez réessayer."
+    },
     "stripe_payment": {
       "failed": "Vos informations de paiement n'ont pas pu être confirmées. Veuillez réessayer.",
       "powered": "Propulsé par"
+    },
+    "stripe_payment_method": {
+      "failed": "Votre moyen de paiement n'a pas pu être enregistré. Veuillez réessayer."
     }
   },
   "notification": {
@@ -195,6 +176,29 @@
       "note_choose": "Choisissez le forfait qui vous convient.",
       "note_trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
       "unlimited": "Illimité"
+    }
+  },
+  "text": {
+    "address": {
+      "none": "Aucune adresse de facturation enregistrée."
+    },
+    "payment_method": {
+      "card": "{brand} se terminant par {last_four}",
+      "card_none": "Aucun moyen de paiement enregistré."
+    },
+    "subscription": {
+      "action": {
+        "cancel": "Annuler",
+        "resume": "Reprendre",
+        "update": "Changer de forfait"
+      },
+      "status": {
+        "active": "Vous êtes présentement sur le forfait {plan}, facturé {interval}.",
+        "cancelled": "Votre forfait {plan} a été annulé et prend fin le {date}.",
+        "free": "Vous êtes présentement sur le forfait {plan}.",
+        "none": "Vous n'avez pas encore choisi de forfait.",
+        "trialing": "Votre essai {plan} prend fin le {date}."
+      }
     }
   }
 }

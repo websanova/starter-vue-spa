@@ -15,7 +15,7 @@
     <CreditCardIcon class="size-5 shrink-0 text-muted-foreground" />
 
     <p v-if="card">
-      {{ $t('features.billing.payment_method.card', card) }}
+      {{ $t('features.text.payment_method.card', card) }}
 
       <RouterLink
         :to="{ name: 'user-account-payment-method' }"
@@ -39,7 +39,7 @@
       v-else
       class="text-muted-foreground"
     >
-      {{ $t('features.billing.payment_method.card_none') }}
+      {{ $t('features.text.payment_method.card_none') }}
     </p>
   </Inline>
 </template>
