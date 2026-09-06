@@ -1,11 +1,16 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import { usePaymentMethodForm } from '@/composables/support/paymentMethod'
+  import { useAuthService } from '@shared/composables/services/auth'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import StripeLogo from '@shared/components/logos/Stripe.vue'
 
+  const auth = useAuthService()
+
   const target = ref<HTMLElement | null>(null)
+
+  const hasPaymentMethod = computed(() => !!auth.user.value?.hasPaymentMethod)
 
   const { error, isLoading, isPending, submit } = usePaymentMethodForm({ target })
 </script>
@@ -45,7 +50,7 @@
     </a>
 
     <FormButton :pending="isPending">
-      {{ $t('features.lbl.update') }}
+      {{ hasPaymentMethod ? $t('features.lbl.update') : $t('features.lbl.add') }}
     </FormButton>
   </Form>
 </template>
