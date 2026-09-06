@@ -33,11 +33,8 @@
     })
   }
 
-  function onResume(plan: Plan) {
-    router.push({
-      name: 'user-subscribe-resume',
-      query: { plan: plan.slug, interval: interval.value },
-    })
+  function onResume() {
+    router.push({ name: 'user-subscribe-resume' })
   }
 
   function onUpdate(plan: Plan) {
@@ -107,7 +104,7 @@
           :action="planAction(plan, interval)"
           @cancel="onCancel"
           @downgrade="onUpdate(plan)"
-          @resume="onResume(plan)"
+          @resume="onResume"
           @subscribe="onCheckout(plan)"
           @switch="onUpdate(plan)"
           @upgrade="onUpdate(plan)"

@@ -170,6 +170,12 @@
       "note_trial": "Votre essai reste actif jusqu'au {date}. Vous ne serez pas débité.",
       "submit": "Annuler l'abonnement",
       "title": "Annulez votre abonnement"
+    },
+    "subscription_resume": {
+      "note": "Votre forfait {plan} se poursuit, facturé {interval}. La facturation reprend le {date}.",
+      "note_failed": "Votre abonnement n'a pas pu être repris. Veuillez réessayer.",
+      "submit": "Reprendre l'abonnement",
+      "title": "Reprenez votre abonnement"
     }
   },
   "list": {

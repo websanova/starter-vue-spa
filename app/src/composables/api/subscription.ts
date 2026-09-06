@@ -49,6 +49,25 @@ export function useCreateSubscriptionSession() {
 }
 
 /**
+ * Resumes a subscription cancelled inside its paid term. No body, the
+ * subscription is resolved from the user on the API side. The existing
+ * subscription carries on, so the plan and the interval are not picked
+ * again, nothing is charged and nothing settles afterwards. The user is
+ * refetched after, since the cancelled state is spread across flags
+ * read off it everywhere.
+ */
+export function useResumeSubscription() {
+  const { fetchUser } = useAuthService()
+
+  return useMutation({
+    mutationFn: async () => {
+      await useHttp().post('subscription/resume')
+      await fetchUser()
+    },
+  })
+}
+
+/**
  * Writes the local rows once the session completes. The subscription,
  * the address and the card all come off the one session, so this is a
  * single call rather than one per row. The webhook runs the same writes

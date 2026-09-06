@@ -1,5 +1,5 @@
 import { requireBillingAddress, requirePaymentMethod } from '@/router/guards/billing'
-import { requireActiveSubscription, requireCancelled, requireNotCancelled, requireUnsubscribed } from '@/router/guards/subscription'
+import { redirectCancelledToResume, requireActiveSubscription, requireCancelled, requireNotCancelled, requireUnsubscribed } from '@/router/guards/subscription'
 
 const Layout            = () => import('@/features/layouts/User.vue')
 const LayoutAccount     = () => import('@/features/layouts/UserAccount.vue')
@@ -118,7 +118,8 @@ export default [{
     }, {
       path: 'plans',
       name: 'user-subscribe-plans',
-      component: SubscribePlans
+      component: SubscribePlans,
+      beforeEnter: [redirectCancelledToResume]
     }, {
       path: 'resume',
       name: 'user-subscribe-resume',

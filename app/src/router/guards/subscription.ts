@@ -51,3 +51,16 @@ export function requireNotCancelled(): RouteLocationRaw | undefined {
     return redirect
   }
 }
+
+/**
+ * Guards the plans page while a subscription is cancelled. Nothing on
+ * it applies until the subscription is resumed, since the plan and the
+ * interval are not picked again, so the user goes straight to resume.
+ */
+export function redirectCancelledToResume(): RouteLocationRaw | undefined {
+  const auth = useAuthService()
+
+  if (auth.user.value?.isOnGracePeriod) {
+    return { name: 'user-subscribe-resume' }
+  }
+}

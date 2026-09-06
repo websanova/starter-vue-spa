@@ -170,6 +170,12 @@
       "note_trial": "Your trial stays active until {date}. You won't be charged.",
       "submit": "Cancel Subscription",
       "title": "Cancel your subscription"
+    },
+    "subscription_resume": {
+      "note": "Your {plan} plan carries on, billed {interval}. Billing picks back up on {date}.",
+      "note_failed": "Your subscription could not be resumed. Please try again.",
+      "submit": "Resume Subscription",
+      "title": "Resume your subscription"
     }
   },
   "list": {

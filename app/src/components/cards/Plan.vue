@@ -8,7 +8,7 @@
   const props = defineProps<{
     plan: Plan
     interval: Interval
-    action: PlanAction
+    action: PlanAction | null
   }>()
 
   const emit = defineEmits<{
@@ -55,11 +55,11 @@
       </ul>
     </CardContent>
 
-    <CardFooter>
+    <CardFooter v-if="props.action">
       <Button
         class="w-full"
         :disabled="props.action === 'current'"
-        @click="emit(props.action)"
+        @click="props.action && emit(props.action)"
       >
         {{ $t(`features.list.plans.action.${props.action}`) }}
       </Button>

@@ -115,12 +115,14 @@ export function useSubscription() {
   /**
    * The buttons that go with the current status. Each one maps to a
    * subscribe route that already guards for the same state, so the two
-   * stay in agreement.
+   * stay in agreement. Resume needs a card on file on top of that,
+   * since resuming without one only defers the failure to the renewal,
+   * where the invoice cannot be paid.
    */
   const statusActions = computed((): StatusAction[] => {
     switch (status.value.key) {
       case 'cancelled':
-        return ['resume']
+        return auth.user.value?.hasPaymentMethod ? ['resume'] : []
 
       case 'active':
       case 'trialing':
@@ -131,7 +133,7 @@ export function useSubscription() {
     }
   })
 
-  function planAction(plan: Plan, interval: Interval): PlanAction {
+  function planAction(plan: Plan, interval: Interval): PlanAction | null {
     const user = auth.user.value
 
     // Not reachable. The plans are only ever rendered behind auth.
@@ -139,11 +141,20 @@ export function useSubscription() {
       return 'select'
     }
 
-    if (user.plan && plan.id === user.plan.id) {
-      if (isCancelled.value) {
+    /**
+     * A cancelled subscription resumes onto the plan and the interval it
+     * was already on, so that one card carries the only action and the
+     * rest carry none at all.
+     */
+    if (isCancelled.value) {
+      if (user.plan && plan.id === user.plan.id && user.subscription?.interval === interval) {
         return 'resume'
       }
 
+      return null
+    }
+
+    if (user.plan && plan.id === user.plan.id) {
       if (isSubscribed.value && user.subscription && user.subscription.interval !== interval) {
         return 'switch'
       }
