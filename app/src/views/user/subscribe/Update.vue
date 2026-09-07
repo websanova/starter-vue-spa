@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  import { Heading } from '@shared/components/common/Heading'
-
+  import SubscriptionUpdateForm from '@/features/forms/SubscriptionUpdate.vue'
 </script>
 
 <template>
-  <Heading>
-    Subscribe Update
-  </Heading>
+  <SubscriptionUpdateForm />
 </template>

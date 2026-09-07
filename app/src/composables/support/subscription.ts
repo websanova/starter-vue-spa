@@ -117,7 +117,10 @@ export function useSubscription() {
    * subscribe route that already guards for the same state, so the two
    * stay in agreement. Resume needs a card on file on top of that,
    * since resuming without one only defers the failure to the renewal,
-   * where the invoice cannot be paid.
+   * where the invoice cannot be paid. Changing plan needs one for the
+   * same reason, the difference is charged the moment it is confirmed.
+   * A user with no subscription at all is picking a first plan and
+   * enters their card on the way, so nothing is required of them.
    */
   const statusActions = computed((): StatusAction[] => {
     switch (status.value.key) {
@@ -126,7 +129,7 @@ export function useSubscription() {
 
       case 'active':
       case 'trialing':
-        return ['update', 'cancel']
+        return auth.user.value?.hasPaymentMethod ? ['update', 'cancel'] : ['cancel']
 
       default:
         return ['update']

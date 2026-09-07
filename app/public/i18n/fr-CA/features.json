@@ -176,6 +176,15 @@
       "note_failed": "Votre abonnement n'a pas pu être repris. Veuillez réessayer.",
       "submit": "Reprendre l'abonnement",
       "title": "Reprenez votre abonnement"
+    },
+    "subscription_update": {
+      "from": "Forfait actuel",
+      "note_declined": "Votre forfait a été modifié, mais le paiement a été refusé. La facture en souffrance sera relancée automatiquement.",
+      "note_failed": "Votre forfait n'a pas pu être modifié. Veuillez réessayer.",
+      "plan": "{plan} - {price} / {interval}",
+      "submit": "Confirmer le changement",
+      "title": "Changez votre forfait",
+      "to": "Nouveau forfait"
     }
   },
   "list": {

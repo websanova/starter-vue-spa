@@ -176,6 +176,15 @@
       "note_failed": "Your subscription could not be resumed. Please try again.",
       "submit": "Resume Subscription",
       "title": "Resume your subscription"
+    },
+    "subscription_update": {
+      "from": "Currently on",
+      "note_declined": "Your plan has changed, but the payment was declined. The outstanding invoice will be retried automatically.",
+      "note_failed": "Your plan could not be changed. Please try again.",
+      "plan": "{plan} - {price} / {interval}",
+      "submit": "Confirm Change",
+      "title": "Change your plan",
+      "to": "Changing to"
     }
   },
   "list": {

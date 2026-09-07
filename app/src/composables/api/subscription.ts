@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/vue-query'
 import { useAuthService } from '@shared/composables/services/auth'
 import { useHttp } from '@shared/plugins/http'
-import { toSubscriptionSession } from '@/models/subscription'
+import { toSubscriptionPayment, toSubscriptionSession } from '@/models/subscription'
 import type { Interval } from '@/models/plan'
-import type { SubscriptionSessionDto } from '@/models/subscription'
+import type { SubscriptionPaymentDto, SubscriptionSessionDto } from '@/models/subscription'
 
 interface CreateSubscriptionSessionData {
   interval: Interval
@@ -12,6 +12,11 @@ interface CreateSubscriptionSessionData {
 
 interface SyncSubscriptionData {
   session: string
+}
+
+interface UpdateSubscriptionData {
+  interval: Interval
+  plan: string
 }
 
 /**
@@ -83,6 +88,31 @@ export function useSyncSubscription() {
     mutationFn: async (data: SyncSubscriptionData) => {
       await useHttp().post('subscription/sync', data)
       await fetchUser()
+    },
+  })
+}
+
+/**
+ * Swaps the plan or the interval on the existing subscription. Nothing
+ * is cancelled and nothing is created, the same subscription carries on
+ * against a different price and the difference is prorated and invoiced
+ * on the spot.
+ *
+ * Stripe applies the price and raises the invoice as two separate
+ * things, so the plan has changed by the time the call returns whether
+ * or not the invoice settled. The payment field carries the invoice when
+ * it did not, either a secret for the bank to challenge against or a
+ * flat decline, and the user is refetched ahead of all three since the
+ * plan is already different on every one of them.
+ */
+export function useUpdateSubscription() {
+  const { fetchUser } = useAuthService()
+
+  return useMutation({
+    mutationFn: async (data: UpdateSubscriptionData) => {
+      const res = await useHttp().post<{ payment: SubscriptionPaymentDto | null }>('subscription/update', data)
+      await fetchUser()
+      return res.payment ? toSubscriptionPayment(res.payment) : null
     },
   })
 }
