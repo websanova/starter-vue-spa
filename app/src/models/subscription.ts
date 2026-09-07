@@ -8,12 +8,12 @@ export interface SubscriptionSession {
 
 export type SubscriptionPaymentStatus =
   | 'failed'
+  | 'paid'
   | 'requires_action'
 
 export interface SubscriptionPaymentDto {
   client_secret?: string
   status: SubscriptionPaymentStatus
-  type: string
 }
 
 export interface SubscriptionPayment {
@@ -37,8 +37,9 @@ export function toSubscriptionSession(dto: SubscriptionSessionDto): Subscription
 }
 
 /**
- * The invoice id only comes back on a decline and there is nothing in
- * the app that settles one, so it is left off until there is.
+ * The secret only comes back on a challenge and the invoice id only on
+ * a decline. The id is left off entirely, since there is nothing in the
+ * app that settles one.
  */
 export function toSubscriptionPayment(dto: SubscriptionPaymentDto): SubscriptionPayment {
   return {

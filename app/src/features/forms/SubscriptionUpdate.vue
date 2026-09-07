@@ -91,12 +91,12 @@
     try {
       const payment = await update.mutateAsync({ interval, plan })
 
-      if (payment?.status === 'requires_action') {
+      if (payment.status === 'requires_action') {
         await authenticate(payment.clientSecret)
         return
       }
 
-      if (payment?.status === 'failed') {
+      if (payment.status === 'failed') {
         paymentError.value = i18n.t('features.form.subscription_update.note_declined')
         isConfirming.value = false
         return

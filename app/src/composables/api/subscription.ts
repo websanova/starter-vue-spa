@@ -100,19 +100,18 @@ export function useSyncSubscription() {
  *
  * Stripe applies the price and raises the invoice as two separate
  * things, so the plan has changed by the time the call returns whether
- * or not the invoice settled. The payment field carries the invoice when
- * it did not, either a secret for the bank to challenge against or a
- * flat decline, and the user is refetched ahead of all three since the
- * plan is already different on every one of them.
+ * or not the invoice settled. The status says which of the three
+ * happened, and the user is refetched ahead of all of them since the
+ * plan is already different on every one.
  */
 export function useUpdateSubscription() {
   const { fetchUser } = useAuthService()
 
   return useMutation({
     mutationFn: async (data: UpdateSubscriptionData) => {
-      const res = await useHttp().post<{ payment: SubscriptionPaymentDto | null }>('subscription/update', data)
+      const res = await useHttp().post<{ data: SubscriptionPaymentDto }>('subscription/update', data)
       await fetchUser()
-      return res.payment ? toSubscriptionPayment(res.payment) : null
+      return toSubscriptionPayment(res.data)
     },
   })
 }
