@@ -176,7 +176,7 @@
               {{ $t('features.form.subscription_update.to') }}
             </p>
 
-            <p class="font-bold">{{ to }}</p>
+            <p>{{ to }}</p>
           </div>
         </Stack>
 
