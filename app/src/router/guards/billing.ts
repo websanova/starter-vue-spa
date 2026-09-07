@@ -15,3 +15,16 @@ export function requireBillingAddress(): RouteLocationRaw | undefined {
     return redirect
   }
 }
+
+/**
+ * Guards the payment method page. The card being replaced was entered
+ * during subscribe, so a user without one has nothing to swap and the
+ * page has no intent to open for them.
+ */
+export function requirePaymentMethod(): RouteLocationRaw | undefined {
+  const auth = useAuthService()
+
+  if (!auth.user.value?.hasPaymentMethod) {
+    return redirect
+  }
+}

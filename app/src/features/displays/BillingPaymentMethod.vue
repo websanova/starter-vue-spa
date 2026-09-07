@@ -40,13 +40,6 @@
       class="text-muted-foreground"
     >
       {{ $t('features.display.billing_payment_method.card_none') }}
-
-      <RouterLink
-        :to="{ name: 'user-account-payment-method' }"
-        class="text-link"
-      >
-        {{ $t('features.lbl.add') }}
-      </RouterLink>
     </p>
   </Inline>
 </template>
