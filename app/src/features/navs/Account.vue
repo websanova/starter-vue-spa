@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { CreditCardIcon, LayersIcon, SettingsIcon, ShieldIcon, UserIcon } from '@lucide/vue'
+  import { CreditCardIcon, LayersIcon, SettingsIcon, UserIcon } from '@lucide/vue'
   import { Navbar, NavDivider, NavItem } from '@shared/components/common/Navbar'
 </script>
 
@@ -22,10 +22,12 @@
       {{ $t('features.lbl.settings') }}
     </NavItem>
 
+    <!--
     <NavItem :to="{ name: 'user-account-security' }">
       <ShieldIcon />
       {{ $t('features.lbl.security') }}
     </NavItem>
+    -->
 
     <NavDivider class="sm:hidden" />
 
