@@ -75,3 +75,7 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Accessible component primitives via reka-ui - keyboard nav, focus management, and ARIA out of the box
 - Icon-only controls and dialogs carry screen-reader labels
 - Work in progress, not yet fully audited - more support coming soon
+
+## License
+
+MIT - see [LICENSE](LICENSE).
