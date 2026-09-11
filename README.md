@@ -8,7 +8,15 @@ A Vite + Vue 3 starter with two apps - `app` and `admin` - sharing a central
 Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com/docs/starter-vue-spa).
 
 - [Docker Setup](docs/docker-setup.md)
-- [Dev Commands](docs/dev-commands.md)
+- [shadcn/ui](docs/shadcn-ui.md)
+
+## Projects
+
+| Project | Repo | Demo |
+| ------- | ---- | ---- |
+| Starter Flows | [starter-flows](https://github.com/websanova/starter-flows) | [flows](https://starter-flows.websanova.com) |
+| Starter Laravel API | [starter-laravel-api](https://github.com/websanova/starter-laravel-api) | [api](https://starter-laravel-api.websanova.com) |
+| Starter Vue SPA | [starter-vue-spa](https://github.com/websanova/starter-vue-spa) | [app](https://starter-vue-spa-app.websanova.com), [admin](https://starter-vue-spa-admin.websanova.com) |
 
 ## Features
 
