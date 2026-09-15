@@ -2,17 +2,13 @@
   import { useRoute } from 'vue-router'
   import { PencilIcon, TagIcon, Trash2Icon } from '@lucide/vue'
   import { useTags } from '@/composables/api/tags'
+  import { useDialogService } from '@shared/composables/services/dialog'
   import { Loading } from '@shared/components/common/Loading'
   import { Navbar, NavDivider, NavItem, NavItemMenu } from '@shared/components/common/Navbar'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
-  import type { Tag } from '@/models/tag'
-
-  const emit = defineEmits<{
-    edit: [tag: Tag]
-    delete: [tag: Tag]
-  }>()
 
   const route = useRoute()
+  const dialog = useDialogService()
 
   const { data: tags, isPending, error } = useTags()
 </script>
@@ -50,12 +46,12 @@
       <span class="truncate">{{ tag.name }}</span>
 
       <template #actions>
-        <DropdownMenuItem @select="emit('edit', tag)">
+        <DropdownMenuItem @select="dialog.open('tagUpdate', { tag })">
           <PencilIcon />
           {{ $t('features.lbl.edit') }}
         </DropdownMenuItem>
 
-        <DropdownMenuItem @select="emit('delete', tag)">
+        <DropdownMenuItem @select="dialog.open('tagDelete', { tag })">
           <Trash2Icon />
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>

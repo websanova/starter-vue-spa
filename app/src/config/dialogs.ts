@@ -1,4 +1,7 @@
 import PaymentMethodDeleteDialog from '@/features/dialogs/PaymentMethodDelete.vue'
+import TagCreateDialog from '@/features/dialogs/TagCreate.vue'
+import TagDeleteDialog from '@/features/dialogs/TagDelete.vue'
+import TagUpdateDialog from '@/features/dialogs/TagUpdate.vue'
 
 /**
  * Every dialog the app can open through useDialogService. The props each one
@@ -6,6 +9,9 @@ import PaymentMethodDeleteDialog from '@/features/dialogs/PaymentMethodDelete.vu
  */
 export const dialogs = {
   paymentMethodDelete: PaymentMethodDeleteDialog,
+  tagCreate: TagCreateDialog,
+  tagDelete: TagDeleteDialog,
+  tagUpdate: TagUpdateDialog,
 }
 
 export type DialogName = keyof typeof dialogs

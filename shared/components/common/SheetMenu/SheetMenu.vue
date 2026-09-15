@@ -1,5 +1,7 @@
 <script setup lang="ts">
+  import { watch } from 'vue'
   import { XIcon } from '@lucide/vue'
+  import { useDialogService } from '@shared/composables/services/dialog'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
   import { Sheet, SheetClose, SheetContent, SheetTitle } from '@shared/components/ui/sheet'
 
@@ -15,6 +17,18 @@
   })
 
   const open = defineModel<boolean>('open', { default: false })
+
+  const { isOpen: isDialogOpen } = useDialogService()
+
+  /**
+   * A dialog opened from inside the sheet would otherwise sit on top of
+   * it, so any dialog opening closes the sheet the same way a link does.
+   */
+  watch(isDialogOpen, (value) => {
+    if (value) {
+      open.value = false
+    }
+  })
 
   function onContentClick(e: MouseEvent) {
     if ((e.target as HTMLElement).closest('a')) {
