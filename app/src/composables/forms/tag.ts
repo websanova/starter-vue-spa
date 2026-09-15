@@ -9,26 +9,18 @@ export function useTagForm(tag?: Tag, onSuccess?: () => void) {
     ? useUpdateTag(tag.id)
     : useCreateTag()
 
-  const form = useValidatedForm({
-    rules: {
-      name: TagRules.name(),
-    },
-    initial: {
-      name: tag?.name ?? '',
-    },
-    onSubmit: mutation.mutateAsync,
-    onSuccess,
-    reset: !tag,
-  })
-
-  function reset() {
-    form.resetForm()
-    mutation.reset()
-  }
-
   return {
-    ...form,
+    ...useValidatedForm({
+      rules: {
+        name: TagRules.name(),
+      },
+      initial: {
+        name: tag?.name ?? '',
+      },
+      onSubmit: mutation.mutateAsync,
+      onSuccess,
+      reset: !tag,
+    }),
     error: useMutationError(mutation),
-    reset,
   }
 }

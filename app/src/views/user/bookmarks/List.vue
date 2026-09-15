@@ -1,12 +1,11 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
   import { PlusIcon } from '@lucide/vue'
+  import { useDialogService } from '@shared/composables/services/dialog'
   import { Heading } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'
-  import BookmarkCreateDialog from '@/features/dialogs/BookmarkCreate.vue'
   import BookmarksList from '@/features/lists/Bookmarks.vue'
 
-  const isBookmarkCreateOpen = ref<boolean>(false)
+  const dialog = useDialogService()
 </script>
 
 <template>
@@ -14,14 +13,12 @@
     <Heading class="flex items-center justify-between">
       {{ $t('features.lbl.bookmarks') }}
 
-      <Button @click="isBookmarkCreateOpen = true">
+      <Button @click="dialog.open('bookmarkCreate')">
         <PlusIcon />
         {{ $t('features.lbl.create') }}
       </Button>
     </Heading>
 
     <BookmarksList />
-
-    <BookmarkCreateDialog v-model:open="isBookmarkCreateOpen" />
   </section>
 </template>

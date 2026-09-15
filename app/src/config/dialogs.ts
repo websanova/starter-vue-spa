@@ -1,3 +1,4 @@
+import BookmarkCreateDialog from '@/features/dialogs/BookmarkCreate.vue'
 import PaymentMethodDeleteDialog from '@/features/dialogs/PaymentMethodDelete.vue'
 import TagCreateDialog from '@/features/dialogs/TagCreate.vue'
 import TagDeleteDialog from '@/features/dialogs/TagDelete.vue'
@@ -8,6 +9,7 @@ import TagUpdateDialog from '@/features/dialogs/TagUpdate.vue'
  * takes are read off its own defineProps, so they are only declared once.
  */
 export const dialogs = {
+  bookmarkCreate: BookmarkCreateDialog,
   paymentMethodDelete: PaymentMethodDeleteDialog,
   tagCreate: TagCreateDialog,
   tagDelete: TagDeleteDialog,

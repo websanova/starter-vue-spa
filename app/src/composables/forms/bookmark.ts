@@ -9,30 +9,22 @@ export function useBookmarkForm(bookmark?: Bookmark, onSuccess?: () => void) {
     ? useUpdateBookmark(bookmark.id)
     : useCreateBookmark()
 
-  const form = useValidatedForm({
-    rules: {
-      title: BookmarkRules.title(),
-      url: BookmarkRules.url(),
-      description: BookmarkRules.description(),
-    },
-    initial: {
-      title: bookmark?.title ?? '',
-      url: bookmark?.url ?? '',
-      description: bookmark?.description ?? '',
-    },
-    onSubmit: mutation.mutateAsync,
-    onSuccess,
-    reset: !bookmark,
-  })
-
-  function reset() {
-    form.resetForm()
-    mutation.reset()
-  }
-
   return {
-    ...form,
+    ...useValidatedForm({
+      rules: {
+        title: BookmarkRules.title(),
+        url: BookmarkRules.url(),
+        description: BookmarkRules.description(),
+      },
+      initial: {
+        title: bookmark?.title ?? '',
+        url: bookmark?.url ?? '',
+        description: bookmark?.description ?? '',
+      },
+      onSubmit: mutation.mutateAsync,
+      onSuccess,
+      reset: !bookmark,
+    }),
     error: useMutationError(mutation),
-    reset,
   }
 }
