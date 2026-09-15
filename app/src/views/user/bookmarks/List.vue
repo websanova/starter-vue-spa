@@ -10,7 +10,10 @@
 
 <template>
   <section>
-    <Heading class="flex items-center justify-between">
+    <Heading
+      class="flex items-center justify-between"
+      :margin="false"
+    >
       {{ $t('features.lbl.bookmarks') }}
 
       <Button @click="dialog.open('bookmarkCreate')">
