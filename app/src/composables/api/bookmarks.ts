@@ -31,19 +31,10 @@ export function useUpdateBookmark(id: number) {
   })
 }
 
-/**
- * Local shorthand for a fieldless action that hits an endpoint and then
- * invalidates the bookmarks list. Keeps the named action hooks below to
- * a single line each without introducing a cross domain helper.
- */
-function action(fn: (id: number) => Promise<unknown>) {
+export function useDeleteBookmark() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: fn,
+    mutationFn: (id: number) => useHttp().delete(`bookmarks/${id}`),
     onSuccess: () => qc.invalidateQueries({ queryKey: key }),
   })
 }
-
-export const useDeleteBookmark = () => action((id) => useHttp().delete(`bookmarks/${id}`))
-export const useArchiveBookmark = () => action((id) => useHttp().post(`bookmarks/${id}/archive`))
-export const useFavoriteBookmark = () => action((id) => useHttp().post(`bookmarks/${id}/favorite`))

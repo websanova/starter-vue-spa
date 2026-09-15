@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  import { useArchiveBookmark, useBookmarks, useDeleteBookmark } from '@/composables/api/bookmarks'
-  import { Button } from '@shared/components/ui/button'
+  import { useBookmarks } from '@/composables/api/bookmarks'
 
   const { data: bookmarks, isPending, error } = useBookmarks()
-  const { mutate: deleteBookmark, isPending: deleting } = useDeleteBookmark()
-  const { mutate: archiveBookmark, isPending: archiving } = useArchiveBookmark()
 </script>
 
 <template>
@@ -18,21 +15,6 @@
         :key="bookmark.id"
       >
         {{ bookmark.title }}
-
-        <Button
-          :disabled="archiving"
-          @click="archiveBookmark(bookmark.id)"
-        >
-          {{ $t('features.lbl.archive') }}
-        </Button>
-
-        <Button
-          color="destructive"
-          :disabled="deleting"
-          @click="deleteBookmark(bookmark.id)"
-        >
-          {{ $t('features.lbl.delete') }}
-        </Button>
       </li>
     </ul>
   </div>
