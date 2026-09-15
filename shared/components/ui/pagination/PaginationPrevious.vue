@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<PaginationPrevProps & {
   size?: ButtonVariants["size"]
   class?: HTMLAttributes["class"]
 }>(), {
-  size: "default",
+  size: "md",
 })
 
 const delegatedProps = reactiveOmit(props, "class", "size")
@@ -27,7 +27,6 @@ const forwarded = useForwardProps(delegatedProps)
   >
     <slot>
       <ChevronLeftIcon />
-      <span class="hidden sm:block">Previous</span>
     </slot>
   </PaginationPrev>
 </template>
