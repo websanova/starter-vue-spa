@@ -4,7 +4,7 @@
     width?: string
   }>(), {
     side: 'left',
-    width: 'w-40',
+    width: 'w-50',
   })
 </script>
 

@@ -15,8 +15,8 @@
 </script>
 
 <template>
-  <Item class="flex-nowrap">
-    <ItemMedia>
+  <Item class="flex-nowrap not-last:border-b-border">
+    <ItemMedia class="self-center! translate-y-0!">
       <BookmarkIcon />
     </ItemMedia>
 
@@ -50,7 +50,10 @@
         </Badge>
       </div>
 
-      <ItemDescription v-if="bookmark.description">
+      <ItemDescription
+        v-if="bookmark.description"
+        class="line-clamp-none"
+      >
         {{ bookmark.description }}
       </ItemDescription>
     </ItemContent>

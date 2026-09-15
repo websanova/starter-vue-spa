@@ -8,7 +8,7 @@
 
 <template>
   <main
-    class="flex-1"
+    class="flex-1 min-w-0"
     :class="centered ? 'flex items-center' : ''"
   >
     <div class="w-full px-3">
