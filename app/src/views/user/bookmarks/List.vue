@@ -1,11 +1,14 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
-
-  // TODO: list bookmarks (in page transtion under title).
+  import BookmarksList from '@/features/lists/Bookmarks.vue'
 </script>
 
 <template>
-  <Heading>
-    Bookmarks List
-  </Heading>
+  <section>
+    <Heading>
+      {{ $t('features.lbl.bookmarks') }}
+    </Heading>
+
+    <BookmarksList />
+  </section>
 </template>
