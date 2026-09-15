@@ -50,5 +50,5 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
     }
   })
 
-  return { submit, isPending: isSubmitting, isSuccess }
+  return { submit, isPending: isSubmitting, isSuccess, resetForm }
 }

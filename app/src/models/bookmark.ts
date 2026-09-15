@@ -18,6 +18,7 @@ export interface Bookmark {
 }
 
 export interface BookmarkInput {
+  description?: string
   title: string
   url: string
 }

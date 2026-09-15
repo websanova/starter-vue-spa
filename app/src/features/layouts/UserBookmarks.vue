@@ -1,9 +1,13 @@
 <script setup lang="ts">
+  import { ref } from 'vue'
   import { PlusIcon } from '@lucide/vue'
   import { LayoutBody, LayoutBodyAside, LayoutBodyContent } from '@shared/components/common/Layout'
+  import TagCreateDialog from '@/features/dialogs/TagCreate.vue'
   import TagsNav from '@/features/navs/Tags.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
   import { Button } from '@shared/components/ui/button'
+
+  const isTagCreateOpen = ref<boolean>(false)
 </script>
 
 <template>
@@ -13,7 +17,10 @@
       side="left"
     >
       <div class="my-3">
-        <Button class="w-full">
+        <Button
+          class="w-full"
+          @click="isTagCreateOpen = true"
+        >
           <PlusIcon />
           {{ $t('features.lbl.create') }}
         </Button>
@@ -29,5 +36,7 @@
         </PageTransition>
       </RouterView>
     </LayoutBodyContent>
+
+    <TagCreateDialog v-model:open="isTagCreateOpen" />
   </LayoutBody>
 </template>

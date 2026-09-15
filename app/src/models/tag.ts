@@ -10,6 +10,10 @@ export interface Tag {
   slug: string
 }
 
+export interface TagInput {
+  name: string
+}
+
 export function toTag(dto: TagDto): Tag {
   return {
     id: dto.id,

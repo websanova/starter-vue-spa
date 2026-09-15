@@ -26,6 +26,7 @@
     "create": "Create",
     "dark": "Dark",
     "delete": "Delete",
+    "description": "Description",
     "email": "Email",
     "first_name": "First Name",
     "language": "Language",
@@ -52,8 +53,10 @@
     "system": "System",
     "theme": "Theme",
     "timezone": "Timezone",
+    "title": "Title",
     "update": "Update",
     "upload": "Upload",
+    "url": "URL",
     "verify": "Verify"
   },
   "ph": {
@@ -87,11 +90,17 @@
     }
   },
   "dialog": {
+    "bookmark_create": {
+      "title": "Create bookmark"
+    },
     "payment_method_delete": {
       "note": "This removes your payment method for good. Subscribing again later means entering your card from scratch.",
       "note_blocked": "Your payment method cannot be removed while your subscription is active. Cancel your subscription first, then remove it once the current term ends.",
       "note_failed": "Your payment method could not be removed. Please try again.",
       "title": "Remove payment method"
+    },
+    "tag_create": {
+      "title": "Create tag"
     }
   },
   "display": {

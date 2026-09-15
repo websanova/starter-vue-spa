@@ -26,6 +26,7 @@
     "create": "Créer",
     "dark": "Sombre",
     "delete": "Supprimer",
+    "description": "Description",
     "email": "Courriel",
     "first_name": "Prénom",
     "language": "Langue",
@@ -52,8 +53,10 @@
     "system": "Système",
     "theme": "Thème",
     "timezone": "Fuseau horaire",
+    "title": "Titre",
     "update": "Mettre à jour",
     "upload": "Téléverser",
+    "url": "URL",
     "verify": "Vérifier"
   },
   "ph": {
@@ -87,11 +90,17 @@
     }
   },
   "dialog": {
+    "bookmark_create": {
+      "title": "Créer un signet"
+    },
     "payment_method_delete": {
       "note": "Cette suppression est définitive. Si vous vous réabonnez plus tard, vous devrez saisir votre carte de nouveau.",
       "note_blocked": "Votre moyen de paiement ne peut pas être supprimé tant que votre abonnement est actif. Annulez d'abord votre abonnement, puis supprimez-le une fois la période en cours terminée.",
       "note_failed": "Votre moyen de paiement n'a pas pu être supprimé. Veuillez réessayer.",
       "title": "Supprimer le moyen de paiement"
+    },
+    "tag_create": {
+      "title": "Créer une étiquette"
     }
   },
   "display": {
