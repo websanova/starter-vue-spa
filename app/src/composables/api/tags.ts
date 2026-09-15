@@ -22,3 +22,33 @@ export function useCreateTag() {
     onSuccess: () => qc.invalidateQueries({ queryKey: key }),
   })
 }
+
+/**
+ * Bookmarks carry their tags, so a renamed tag leaves the bookmarks
+ * list stale as well as the tags list.
+ */
+export function useUpdateTag(id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (input: TagInput) => useHttp().patch(`tags/${id}`, input),
+    onSuccess: () => Promise.all([
+      qc.invalidateQueries({ queryKey: key }),
+      qc.invalidateQueries({ queryKey: ['bookmarks'] }),
+    ]),
+  })
+}
+
+/**
+ * Bookmarks carry their tags, so a deleted tag leaves the bookmarks
+ * list stale as well as the tags list.
+ */
+export function useDeleteTag() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => useHttp().delete(`tags/${id}`),
+    onSuccess: () => Promise.all([
+      qc.invalidateQueries({ queryKey: key }),
+      qc.invalidateQueries({ queryKey: ['bookmarks'] }),
+    ]),
+  })
+}

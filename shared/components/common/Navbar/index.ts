@@ -5,6 +5,7 @@ export { default as Navbar } from "./Navbar.vue"
 export { default as NavItem } from "./NavItem.vue"
 export { default as NavDivider } from "./NavDivider.vue"
 export { default as NavDropdown } from "./NavDropdown.vue"
+export { default as NavItemMenu } from "./NavItemMenu.vue"
 
 export type NavOrientation = "horizontal" | "vertical"
 

@@ -27,6 +27,7 @@
     "dark": "Dark",
     "delete": "Delete",
     "description": "Description",
+    "edit": "Edit",
     "email": "Email",
     "first_name": "First Name",
     "language": "Language",
@@ -72,6 +73,7 @@
     "timezone": "Select a timezone"
   },
   "sr": {
+    "actions": "Actions",
     "dark_mode_toggle": "Toggle dark mode",
     "mark_read": "Mark as read",
     "menu_account": "Account menu",
@@ -101,6 +103,14 @@
     },
     "tag_create": {
       "title": "Create tag"
+    },
+    "tag_delete": {
+      "note": "Are you sure you want to delete tag {0}?",
+      "note_failed": "The tag could not be deleted. Please try again.",
+      "title": "Delete tag"
+    },
+    "tag_update": {
+      "title": "Edit tag"
     }
   },
   "display": {

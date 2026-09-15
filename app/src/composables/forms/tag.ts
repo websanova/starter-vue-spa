@@ -1,21 +1,24 @@
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
-import { useCreateTag } from '@/composables/api/tags'
+import { useCreateTag, useUpdateTag } from '@/composables/api/tags'
 import { TagRules } from '@/rules/tag'
+import type { Tag } from '@/models/tag'
 
-export function useTagForm(onSuccess?: () => void) {
-  const mutation = useCreateTag()
+export function useTagForm(tag?: Tag, onSuccess?: () => void) {
+  const mutation = tag
+    ? useUpdateTag(tag.id)
+    : useCreateTag()
 
   const form = useValidatedForm({
     rules: {
       name: TagRules.name(),
     },
     initial: {
-      name: '',
+      name: tag?.name ?? '',
     },
     onSubmit: mutation.mutateAsync,
     onSuccess,
-    reset: true,
+    reset: !tag,
   })
 
   function reset() {
