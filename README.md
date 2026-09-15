@@ -62,6 +62,12 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 **Components**
 - shadcn-vue plus custom components, drop in and customize
 
+**Dialog Manager**
+- One host renders every dialog, open one from anywhere by name with typed props
+- Only one dialog shows at a time, switching waits for the close animation
+- Every open mounts the dialog fresh, so forms never carry over stale values or errors
+- Slide-out menus close on their own when a dialog opens
+
 **Cover Loading**
 - Branded loading screen shown before the app bundle loads
 - Seamless startup for heavier apps with a large initial payload
