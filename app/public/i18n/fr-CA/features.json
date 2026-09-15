@@ -95,6 +95,14 @@
     "bookmark_create": {
       "title": "Créer un signet"
     },
+    "bookmark_delete": {
+      "note": "Voulez-vous vraiment supprimer le signet {0}?",
+      "note_failed": "Le signet n'a pas pu être supprimé. Veuillez réessayer.",
+      "title": "Supprimer le signet"
+    },
+    "bookmark_update": {
+      "title": "Modifier le signet"
+    },
     "payment_method_delete": {
       "note": "Cette suppression est définitive. Si vous vous réabonnez plus tard, vous devrez saisir votre carte de nouveau.",
       "note_blocked": "Votre moyen de paiement ne peut pas être supprimé tant que votre abonnement est actif. Annulez d'abord votre abonnement, puis supprimez-le une fois la période en cours terminée.",

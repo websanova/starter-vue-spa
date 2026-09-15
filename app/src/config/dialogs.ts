@@ -1,4 +1,6 @@
 import BookmarkCreateDialog from '@/features/dialogs/BookmarkCreate.vue'
+import BookmarkDeleteDialog from '@/features/dialogs/BookmarkDelete.vue'
+import BookmarkUpdateDialog from '@/features/dialogs/BookmarkUpdate.vue'
 import PaymentMethodDeleteDialog from '@/features/dialogs/PaymentMethodDelete.vue'
 import TagCreateDialog from '@/features/dialogs/TagCreate.vue'
 import TagDeleteDialog from '@/features/dialogs/TagDelete.vue'
@@ -10,6 +12,8 @@ import TagUpdateDialog from '@/features/dialogs/TagUpdate.vue'
  */
 export const dialogs = {
   bookmarkCreate: BookmarkCreateDialog,
+  bookmarkDelete: BookmarkDeleteDialog,
+  bookmarkUpdate: BookmarkUpdateDialog,
   paymentMethodDelete: PaymentMethodDeleteDialog,
   tagCreate: TagCreateDialog,
   tagDelete: TagDeleteDialog,

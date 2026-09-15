@@ -2,7 +2,9 @@
   import { computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
+  import BookmarkItem from '@/features/items/Bookmark.vue'
   import { PaginationNumbered } from '@shared/components/common/PaginationNumbered'
+  import { ItemGroup } from '@shared/components/ui/item'
 
   const route = useRoute()
   const router = useRouter()
@@ -21,14 +23,13 @@
     <p v-else-if="error">{{ error.message }}</p>
 
     <template v-else-if="data">
-      <ul>
-        <li
+      <ItemGroup>
+        <BookmarkItem
           v-for="bookmark in data.bookmarks"
           :key="bookmark.id"
-        >
-          {{ bookmark.title }}
-        </li>
-      </ul>
+          :bookmark="bookmark"
+        />
+      </ItemGroup>
 
       <PaginationNumbered
         v-model:page="page"

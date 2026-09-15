@@ -95,6 +95,14 @@
     "bookmark_create": {
       "title": "Create bookmark"
     },
+    "bookmark_delete": {
+      "note": "Are you sure you want to delete bookmark {0}?",
+      "note_failed": "The bookmark could not be deleted. Please try again.",
+      "title": "Delete bookmark"
+    },
+    "bookmark_update": {
+      "title": "Edit bookmark"
+    },
     "payment_method_delete": {
       "note": "This removes your payment method for good. Subscribing again later means entering your card from scratch.",
       "note_blocked": "Your payment method cannot be removed while your subscription is active. Cancel your subscription first, then remove it once the current term ends.",
