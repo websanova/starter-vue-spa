@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { PlusIcon } from '@lucide/vue'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
-  import BookmarksNav from '@/features/navs/Bookmarks.vue'
+  import TagsNav from '@/features/navs/Tags.vue'
   import { Button } from '@shared/components/ui/button'
 
   withDefaults(defineProps<{
@@ -30,6 +30,6 @@
       </Button>
     </div>
 
-    <BookmarksNav />
+    <TagsNav />
   </SheetMenu>
 </template>

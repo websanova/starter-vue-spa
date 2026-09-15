@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { PlusIcon } from '@lucide/vue'
   import { LayoutBody, LayoutBodyAside, LayoutBodyContent } from '@shared/components/common/Layout'
-  import BookmarksNav from '@/features/navs/Bookmarks.vue'
+  import TagsNav from '@/features/navs/Tags.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'
   import { Button } from '@shared/components/ui/button'
 </script>
@@ -19,7 +19,7 @@
         </Button>
       </div>
 
-      <BookmarksNav />
+      <TagsNav />
     </LayoutBodyAside>
 
     <LayoutBodyContent class="pb-15">
