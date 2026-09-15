@@ -1,17 +1,26 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 import { toBookmark } from '@/models/bookmark'
+import { toPaginationMeta } from '@shared/models/pagination'
 import type { BookmarkDto, BookmarkInput } from '@/models/bookmark'
+import type { PaginationMetaDto } from '@shared/models/pagination'
+import type { Ref } from 'vue'
 
 const key = ['bookmarks']
 
-export function useBookmarks() {
+export function useBookmarks(page: Ref<number>) {
   return useQuery({
-    queryKey: key,
+    queryKey: [...key, { page }],
     queryFn: async () => {
-      const { data } = await useHttp().get<{ data: BookmarkDto[] }>('bookmarks')
-      return data.map(toBookmark)
+      const { data, meta } = await useHttp().get<{ data: BookmarkDto[], meta: PaginationMetaDto }>('bookmarks', {
+        params: { page: page.value },
+      })
+      return {
+        bookmarks: data.map(toBookmark),
+        meta: toPaginationMeta(meta),
+      }
     },
+    placeholderData: keepPreviousData,
   })
 }
 
