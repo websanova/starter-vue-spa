@@ -2,18 +2,17 @@
   import { computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
-  import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationNext, PaginationPrevious } from '@shared/components/ui/pagination'
+  import { PaginationNumbered } from '@shared/components/common/PaginationNumbered'
 
   const route = useRoute()
   const router = useRouter()
 
-  const page = computed(() => Number(route.query.page) || 1)
+  const page = computed({
+    get: () => Number(route.query.page) || 1,
+    set: (value) => router.push({ query: { ...route.query, page: value } }),
+  })
 
   const { data, isPending, error } = useBookmarks(page)
-
-  function onPage(value: number) {
-    router.push({ query: { ...route.query, page: value } })
-  }
 </script>
 
 <template>
@@ -31,33 +30,11 @@
         </li>
       </ul>
 
-      <Pagination
-        :page="page"
+      <PaginationNumbered
+        v-model:page="page"
         :total="data.meta.total"
-        :items-per-page="data.meta.perPage"
-        @update:page="onPage"
-      >
-        <PaginationContent v-slot="{ items }">
-          <PaginationPrevious />
-
-          <template
-            v-for="(item, index) in items"
-            :key="index"
-          >
-            <PaginationItem
-              v-if="item.type === 'page'"
-              :value="item.value"
-              :is-active="item.value === page"
-            >
-              {{ item.value }}
-            </PaginationItem>
-
-            <PaginationEllipsis v-else />
-          </template>
-
-          <PaginationNext />
-        </PaginationContent>
-      </Pagination>
+        :per-page="data.meta.perPage"
+      />
     </template>
   </div>
 </template>
