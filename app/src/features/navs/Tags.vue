@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router'
-  import { FolderIcon, TagIcon } from '@lucide/vue'
+  import { TagIcon } from '@lucide/vue'
   import { useTags } from '@/composables/api/tags'
   import { Loading } from '@shared/components/common/Loading'
   import { Navbar, NavDivider, NavItem } from '@shared/components/common/Navbar'
@@ -19,11 +19,11 @@
       :class="{ 'router-link-exact-active': !route.query.tag_id }"
       :to="{ name: 'user-bookmarks', query: { tag_id: undefined } }"
     >
-      <FolderIcon />
+      <TagIcon />
       {{ $t('features.lbl.all') }}
     </NavItem>
 
-    <NavDivider />
+    <!-- <NavDivider /> -->
 
     <Loading v-if="isPending" />
 
