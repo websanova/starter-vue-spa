@@ -20,7 +20,7 @@
    * would otherwise carry values and errors into the next open.
    */
   watch(open, (value) => {
-    if (!value) {
+    if (value) {
       reset()
     }
   })
