@@ -17,6 +17,11 @@ export interface Bookmark {
   url: string
 }
 
+export interface BookmarkFilters {
+  page?: number
+  tag_id?: string
+}
+
 export interface BookmarkInput {
   description?: string
   tag_ids?: number[]

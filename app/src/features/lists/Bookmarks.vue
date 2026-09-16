@@ -5,6 +5,7 @@
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { PaginationNumbered } from '@shared/components/common/PaginationNumbered'
   import { ItemGroup } from '@shared/components/ui/item'
+  import type { BookmarkFilters } from '@/models/bookmark'
 
   const route = useRoute()
   const router = useRouter()
@@ -14,9 +15,12 @@
     set: (value) => router.push({ query: { ...route.query, page: value } }),
   })
 
-  const tagId = computed(() => route.query.tag_id as string | undefined)
+  const filters = computed<BookmarkFilters>(() => ({
+    page: page.value,
+    tag_id: route.query.tag_id as string | undefined,
+  }))
 
-  const { data, isPending, error } = useBookmarks(page, tagId)
+  const { data, isPending, error } = useBookmarks(filters)
 </script>
 
 <template>
