@@ -40,10 +40,14 @@
     }
   },
   "heading": {
+    "plans": "Plans",
     "sign_in": "Sign in",
     "users": "Users"
   },
   "list": {
+    "plans": {
+      "no_results": "No plans here."
+    },
     "users": {
       "no_results": "No users here."
     }
