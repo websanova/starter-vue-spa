@@ -2,9 +2,9 @@
   import { BookmarkIcon, PencilIcon, Trash2Icon } from '@lucide/vue'
   import { useDialogService } from '@shared/composables/services/dialog'
   import { DropdownActions } from '@shared/components/common/DropdownActions'
+  import { Item } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
-  import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@shared/components/ui/item'
   import type { Bookmark } from '@/models/bookmark'
 
   const props = defineProps<{
@@ -15,50 +15,48 @@
 </script>
 
 <template>
-  <Item class="flex-nowrap not-last:border-b-border">
-    <ItemMedia class="self-center! translate-y-0!">
+  <Item>
+    <template #icon>
       <BookmarkIcon />
-    </ItemMedia>
+    </template>
 
-    <ItemContent class="min-w-0">
-      <ItemTitle class="max-w-full">
-        <span class="truncate">{{ bookmark.title }}</span>
-      </ItemTitle>
+    <template #title>
+      {{ bookmark.title }}
+    </template>
 
-      <a
-        class="block truncate text-sm text-link"
-        :href="bookmark.url"
-        target="_blank"
-        rel="noopener noreferrer"
+    <a
+      class="block truncate text-sm text-link"
+      :href="bookmark.url"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ bookmark.url }}
+    </a>
+
+    <div
+      v-if="bookmark.tags.length"
+      class="flex flex-wrap gap-1"
+    >
+      <Badge
+        v-for="tag in bookmark.tags"
+        as-child
+        variant="secondary"
+        :key="tag.id"
       >
-        {{ bookmark.url }}
-      </a>
+        <RouterLink :to="{ name: 'user-bookmarks', query: { tag_id: tag.id } }">
+          {{ tag.name }}
+        </RouterLink>
+      </Badge>
+    </div>
 
-      <div
-        v-if="bookmark.tags.length"
-        class="flex flex-wrap gap-1"
-      >
-        <Badge
-          v-for="tag in bookmark.tags"
-          as-child
-          variant="secondary"
-          :key="tag.id"
-        >
-          <RouterLink :to="{ name: 'user-bookmarks', query: { tag_id: tag.id } }">
-            {{ tag.name }}
-          </RouterLink>
-        </Badge>
-      </div>
+    <p
+      v-if="bookmark.description"
+      class="text-sm text-muted-foreground"
+    >
+      {{ bookmark.description }}
+    </p>
 
-      <ItemDescription
-        v-if="bookmark.description"
-        class="line-clamp-none"
-      >
-        {{ bookmark.description }}
-      </ItemDescription>
-    </ItemContent>
-
-    <ItemActions>
+    <template #actions>
       <DropdownActions>
         <DropdownMenuItem @select="dialog.open('bookmarkUpdate', { bookmark: props.bookmark })">
           <PencilIcon />
@@ -70,6 +68,6 @@
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>
       </DropdownActions>
-    </ItemActions>
+    </template>
   </Item>
 </template>
