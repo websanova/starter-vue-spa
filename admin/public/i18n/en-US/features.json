@@ -39,7 +39,8 @@
     }
   },
   "heading": {
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "users": "Users"
   },
   "list": {
     "users": {

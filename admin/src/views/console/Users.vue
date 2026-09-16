@@ -5,8 +5,8 @@
 
 <template>
   <div>
-    <Heading>
-      User Users
+    <Heading :margin="false">
+      {{ $t('features.heading.users') }}
     </Heading>
 
     <UsersList />
