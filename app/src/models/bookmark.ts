@@ -17,7 +17,7 @@ export interface Bookmark {
   url: string
 }
 
-export interface BookmarkFilters {
+export type BookmarkFilters = {
   page?: number
   tag_id?: string
 }
