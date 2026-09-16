@@ -40,6 +40,7 @@
     }
   },
   "heading": {
+    "icons": "Icons",
     "plans": "Plans",
     "sign_in": "Sign in",
     "users": "Users"

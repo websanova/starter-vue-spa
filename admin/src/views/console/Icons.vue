@@ -1,11 +1,14 @@
 <script setup lang="ts">
   import { Heading } from '@shared/components/common/Heading'
+  import IconsList from '@/features/lists/Icons.vue'
 </script>
 
 <template>
   <div>
     <Heading>
-      User Icons
+      {{ $t('features.heading.icons') }}
     </Heading>
+
+    <IconsList />
   </div>
 </template>
