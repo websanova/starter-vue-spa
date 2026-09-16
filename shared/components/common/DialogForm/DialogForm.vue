@@ -3,10 +3,12 @@
   import { Form } from '@shared/components/common/Form'
   import { Button } from '@shared/components/ui/button'
   import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@shared/components/ui/dialog'
+  import type { ButtonVariants } from '@shared/components/ui/button'
 
   const props = defineProps<{
     title: string
     cancelLabel?: string
+    color?: ButtonVariants['color']
     error?: string
     okLabel?: string
     pending?: boolean
@@ -69,6 +71,7 @@
 
           <ButtonLoading
             type="submit"
+            :color="color"
             :pending="pending"
           >
             {{ okLabel ?? $t('features.lbl.submit') }}

@@ -34,8 +34,8 @@
   },
   "dialog": {
     "user_delete": {
+      "confirm": "Type the user's email to confirm",
       "note": "Are you sure you want to delete user {0}?",
-      "note_failed": "The user could not be deleted. Please try again.",
       "title": "Delete user"
     }
   },

@@ -24,10 +24,10 @@ export function useUsers(filters: Ref<UserFilters>) {
   })
 }
 
-export function useDeleteUser() {
+export function useDeleteUser(id: number) {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (id: number) => useHttp().delete(`users/${id}`),
+    mutationFn: (input: { email: string }) => useHttp().delete(`users/${id}`, input),
     onSuccess: () => qc.invalidateQueries({ queryKey: key }),
   })
 }

@@ -30,7 +30,7 @@ export interface HttpClient {
   post: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
   put: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
   patch: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
-  delete: <T>(url: string, options?: RequestOptions) => Promise<T>
+  delete: <T>(url: string, body?: unknown, options?: RequestOptions) => Promise<T>
   interceptors: {
     request: { use: (fn: RequestInterceptor) => void }
     response: { use: (success?: ResponseSuccess | null, error?: ResponseError | null) => void }
@@ -182,7 +182,7 @@ export function createClient(config: ClientConfig): HttpClient {
     post: (url, body, options) => request('POST', url, body, options),
     put: (url, body, options) => request('PUT', url, body, options),
     patch: (url, body, options) => request('PATCH', url, body, options),
-    delete: (url, options) => request('DELETE', url, undefined, options),
+    delete: (url, body, options) => request('DELETE', url, body, options),
     interceptors: {
       request: {
         use: (fn) => {
