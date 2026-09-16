@@ -29,7 +29,14 @@
     <p v-else-if="error">{{ error.message }}</p>
 
     <template v-else-if="data">
-      <ItemGroup>
+      <p
+        v-if="!data.bookmarks.length"
+        class="my-3 text-muted-foreground"
+      >
+        {{ $t('features.list.bookmarks.no_results') }}
+      </p>
+
+      <ItemGroup v-else>
         <BookmarkItem
           v-for="bookmark in data.bookmarks"
           :key="bookmark.id"

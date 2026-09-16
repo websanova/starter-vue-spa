@@ -218,6 +218,9 @@
     }
   },
   "list": {
+    "bookmarks": {
+      "no_results": "No bookmarks here."
+    },
     "plans": {
       "action": {
         "cancel": "Cancel",
