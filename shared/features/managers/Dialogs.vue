@@ -2,6 +2,7 @@
   import { computed } from 'vue'
   import { dialogs } from '@/config/dialogs'
   import { useDialogService } from '@shared/composables/services/dialog'
+  import type { Component } from 'vue'
 
   const { active, isOpen, close } = useDialogService()
 
@@ -23,7 +24,7 @@
   <component
     v-if="active"
     v-model:open="open"
-    :is="dialogs[active.name]"
+    :is="dialogs[active.name] as Component"
     v-bind="active.props"
   />
 </template>

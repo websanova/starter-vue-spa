@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { DialogName } from '@/config/dialogs'
+import type { DialogName } from '@shared/models/dialog'
 
 interface ActiveDialog {
   name: DialogName

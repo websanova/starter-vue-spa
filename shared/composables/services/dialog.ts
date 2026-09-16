@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { useDialogStore } from '@shared/stores/dialog'
-import type { DialogName, DialogProps } from '@/config/dialogs'
+import type { DialogName, DialogProps } from '@shared/models/dialog'
 
 /**
  * How long a closed dialog stays mounted before it is removed. It has to

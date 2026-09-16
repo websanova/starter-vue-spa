@@ -7,7 +7,3 @@ import UserDeleteDialog from '@/features/dialogs/UserDelete.vue'
 export const dialogs = {
   userDelete: UserDeleteDialog,
 }
-
-export type DialogName = keyof typeof dialogs
-
-export type DialogProps<K extends DialogName> = Omit<InstanceType<(typeof dialogs)[K]>['$props'], 'open' | 'onUpdate:open'>
