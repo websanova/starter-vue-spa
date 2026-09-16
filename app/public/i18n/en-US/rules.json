@@ -8,6 +8,7 @@
     "name": "Name",
     "password": "Password",
     "phone": "Phone Number",
+    "tags": "Tags",
     "timezone": "Timezone",
     "title": "Title",
     "url": "URL"
@@ -15,6 +16,7 @@
   "confirmed": "The {attribute} confirmation does not match.",
   "email": "The {attribute} field must be a valid email address.",
   "max": {
+    "array": "The {attribute} field must not have more than {max} items.",
     "numeric": "The {attribute} field must not be greater than {max}.",
     "string": "The {attribute} field must not be greater than {max} characters."
   },

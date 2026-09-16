@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { useI18n } from '@shared/plugins/i18n'
+import { useSettingsStore } from '@shared/stores/settings'
 
 export const BookmarkRules = {
   description() {
@@ -7,6 +8,16 @@ export const BookmarkRules = {
 
     return z.string()
       .max(1000, i18n.t('rules.max.string', { attribute: i18n.t('rules.attr.description'), max: 1000 }))
+  },
+
+  tagIds() {
+    const i18n = useI18n()
+    const settings = useSettingsStore()
+
+    const max = settings.data.bookmarkMaxTags
+
+    return z.array(z.number())
+      .max(max, i18n.t('rules.max.array', { attribute: i18n.t('rules.attr.tags'), max }))
   },
 
   title() {

@@ -35,6 +35,7 @@
     "light": "Light",
     "mark_all_read": "Mark all read",
     "name": "Name",
+    "no_results": "No results",
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm password",
@@ -52,6 +53,7 @@
     "sign_up": "Sign up",
     "submit": "Submit",
     "system": "System",
+    "tags": "Tags",
     "theme": "Theme",
     "timezone": "Timezone",
     "title": "Title",
@@ -70,6 +72,7 @@
     "password_confirmation": "Confirm password",
     "phone": "Your phone number",
     "promotion_code": "Promotion code",
+    "tags": "Select tags",
     "timezone": "Select a timezone"
   },
   "sr": {

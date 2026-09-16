@@ -8,6 +8,7 @@
     "name": "Nom",
     "password": "Mot de passe",
     "phone": "Numéro de téléphone",
+    "tags": "Étiquettes",
     "timezone": "Fuseau horaire",
     "title": "Titre",
     "url": "URL"
@@ -15,6 +16,7 @@
   "confirmed": "La confirmation du champ {attribute} ne correspond pas.",
   "email": "Le champ {attribute} doit être une adresse courriel valide.",
   "max": {
+    "array": "Le champ {attribute} ne doit pas contenir plus de {max} éléments.",
     "numeric": "Le champ {attribute} ne doit pas être supérieur à {max}.",
     "string": "Le champ {attribute} ne doit pas dépasser {max} caractères."
   },

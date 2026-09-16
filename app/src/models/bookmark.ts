@@ -19,6 +19,7 @@ export interface Bookmark {
 
 export interface BookmarkInput {
   description?: string
+  tag_ids?: number[]
   title: string
   url: string
 }

@@ -1,6 +1,7 @@
 export type SubscriptionMode = 'freemium' | 'trial' | 'required'
 
 export interface SettingsDto {
+  bookmark_max_tags: number
   subscription_card_upfront: boolean
   subscription_mode: SubscriptionMode
   subscription_trial_days: number
@@ -9,6 +10,7 @@ export interface SettingsDto {
 }
 
 export interface Settings {
+  bookmarkMaxTags: number
   locales: string[]
   defaultLocale: string
   defaultTimezone: string
@@ -21,6 +23,7 @@ export interface Settings {
 
 export function toSettings(dto: SettingsDto): Partial<Settings> {
   return {
+    bookmarkMaxTags: dto.bookmark_max_tags,
     subscriptionCardUpfront: dto.subscription_card_upfront,
     subscriptionMode: dto.subscription_mode,
     subscriptionTrialDays: dto.subscription_trial_days,
