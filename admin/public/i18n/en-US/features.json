@@ -1,6 +1,7 @@
 {
   "lbl": {
     "dark_mode": "Dark mode",
+    "delete": "Delete",
     "email": "Email",
     "icons": "Icons",
     "light_mode": "Light mode",
@@ -30,7 +31,19 @@
       "message": "The app has been updated."
     }
   },
+  "dialog": {
+    "user_delete": {
+      "note": "Are you sure you want to delete user {0}?",
+      "note_failed": "The user could not be deleted. Please try again.",
+      "title": "Delete user"
+    }
+  },
   "heading": {
     "sign_in": "Sign in"
+  },
+  "list": {
+    "users": {
+      "no_results": "No users here."
+    }
   }
 }
