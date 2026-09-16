@@ -14,7 +14,9 @@
     set: (value) => router.push({ query: { ...route.query, page: value } }),
   })
 
-  const { data, isPending, error } = useBookmarks(page)
+  const tagId = computed(() => route.query.tag_id as string | undefined)
+
+  const { data, isPending, error } = useBookmarks(page, tagId)
 </script>
 
 <template>
