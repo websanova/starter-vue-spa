@@ -24,6 +24,16 @@ export function useUsers(filters: Ref<UserFilters>) {
   })
 }
 
+export function useUser(id: Ref<number>) {
+  return useQuery({
+    queryKey: [...key, id],
+    queryFn: async () => {
+      const { data } = await useHttp().get<{ data: UserDto }>(`users/${id.value}`)
+      return toUser(data)
+    },
+  })
+}
+
 export function useDeleteUser(id: number) {
   const qc = useQueryClient()
   return useMutation({

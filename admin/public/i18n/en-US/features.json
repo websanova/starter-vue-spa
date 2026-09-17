@@ -39,10 +39,14 @@
       "title": "Delete user"
     }
   },
+  "error": {
+    "user_load": "Error loading user: {0}"
+  },
   "heading": {
     "icons": "Icons",
     "plans": "Plans",
     "sign_in": "Sign in",
+    "user": "User #{0}",
     "users": "Users"
   },
   "list": {
