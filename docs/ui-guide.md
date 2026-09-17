@@ -1,4 +1,4 @@
-# UI Components
+# UI Guide
 
 shadcn-vue (Vue 3 port of shadcn) for components, built on reka-ui (Vue port of
 Radix). Components are copied into `shared/components/ui/` and shared by both apps.

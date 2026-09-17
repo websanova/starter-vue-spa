@@ -7,8 +7,8 @@ A Vite + Vue 3 starter with two apps - `app` and `admin` - sharing a central
 
 Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com/docs/starter-vue-spa).
 
-- [Docker Setup](docs/docker-setup.md)
-- [shadcn/ui](docs/shadcn-ui.md)
+- [Docker Guide](docs/docker-guide.md)
+- [UI Guide](docs/ui-guide.md)
 
 ## Projects
 
