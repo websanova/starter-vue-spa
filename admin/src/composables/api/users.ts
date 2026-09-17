@@ -34,6 +34,14 @@ export function useUser(id: Ref<number>) {
   })
 }
 
+export function useUpdateUser(id: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (input: { first_name: string, last_name: string }) => useHttp().patch(`users/${id}`, input),
+    onSuccess: () => qc.invalidateQueries({ queryKey: key }),
+  })
+}
+
 export function useDeleteUser(id: number) {
   const qc = useQueryClient()
   return useMutation({

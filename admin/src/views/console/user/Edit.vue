@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import UserUpdateForm from '@/features/forms/UserUpdate.vue'
   import { Heading } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 
@@ -9,6 +10,6 @@
 
 <template>
   <div>
-    Coming soon...
+    <UserUpdateForm :user="user" />
   </div>
 </template>

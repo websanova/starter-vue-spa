@@ -7,8 +7,10 @@
     "delete": "Delete",
     "edit": "Edit",
     "email": "Email",
+    "first_name": "First name",
     "icons": "Icons",
     "info": "Info",
+    "last_name": "Last name",
     "light_mode": "Light mode",
     "link": "Link",
     "mark_all_read": "Mark all read",
@@ -18,11 +20,14 @@
     "refresh": "Refresh",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
+    "update": "Update",
     "users": "Users",
     "yes": "Yes"
   },
   "ph": {
     "email": "you{'@'}example.com",
+    "first_name": "First name",
+    "last_name": "Last name",
     "password": "Password"
   },
   "sr": {
