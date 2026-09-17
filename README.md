@@ -5,7 +5,7 @@ A Vite + Vue 3 starter with two apps - `app` and `admin` - sharing a central
 
 ## Docs
 
-Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com/docs/starter-vue-spa).
+Full documentation at [websanova.com/docs/starter-app](https://websanova.com/docs/starter-app).
 
 - [Docker Guide](docs/docker-guide.md)
 - [UI Guide](docs/ui-guide.md)
@@ -20,76 +20,23 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 ## Features
 
-**Auth**
-- Route-level access for guest, logged-in, and role-based pages
-- Login refreshes automatically and extends as you use the app
-- Sign back in only after a real stretch of inactivity
+* **Auth** - Route-level access for guest, logged-in, and role-based pages, with sessions that refresh as you use the app and only expire after real inactivity.
+* **Account Verification** - Users held on a verify screen until confirmed, multiple verifications worked through one at a time, with an optional grace period and reminder banner.
+* **Settings** - App config loaded from the API with local per-app overrides, centralizing front-end options like auto-login.
+* **Components (shadcn-vue)** - shadcn-vue plus custom components copied into `shared/components/ui/`, not a dependency.
+* **Layouts** - Layout builder with drop-in blocks for header, footer, body, and asides, covering auth pages, error pages, and centered empty states.
+* **Mobile** - Mobile-friendly out of the box with slide-out menus and responsive navigation.
+* **Dark Mode** - Light and dark themes remembered across visits, applied immediately with no flash on load.
+* **Accessibility (reka-ui)** - Accessible primitives with keyboard nav, focus management, and ARIA, plus screen-reader labels on icon-only controls. Work in progress, not yet fully audited.
+* **Dialog Manager** - One host renders every dialog, opened from anywhere by name with typed props, mounted fresh each time so forms never carry stale state.
+* **Page Transitions** - Smooth site, layout, and page transitions where only the part that actually changed re-transitions, on one shared loading mechanism.
+* **Cover Loading** - Branded loading screen shown before the app bundle loads, so heavier apps start seamlessly instead of flashing a spinner after boot.
+* **Scroll Behavior (Vue Router)** - Scroll resets on navigation with back and forward restoring position, plus route grouping to hold scroll across tabbed sections.
+* **Localization (vue-i18n)** - Translations loaded and cached per page, locale auto detected on first visit, and signed-in users pulling their saved locale from the API.
+* **Timezones** - Times shown in the user's timezone and adjusted on the fly, auto detected at registration and restored from the API across devices.
+* **Dev Environment** - Dockerized dev environment on Node 22 with a simple `./dev` script for container commands.
 
-**Account Verification**
-- Unverified users held on a verify screen until they confirm
-- Supports more than one verification, worked through one at a time
-- Optional grace period lets users in early, with a reminder banner until they finish
-- Registration asks for a phone number only when the API enables it
-
-**Settings**
-- App config loaded from the API, with local overrides per app
-- Centralize front-end options like auto-login in one place
-
-**Localization (vue-i18n)**
-- Translations loaded per page and cached, only what's needed
-- Locale auto detected on first visit, then stored in local storage and restored on refresh
-- Signed-in users load their saved locale from the API, so it follows them across devices
-
-**Timezones**
-- Times displayed in the user's selected timezone, adjusted on the fly
-- Timezone auto detected during registration
-- Signed-in users load their saved timezone from the API, so it follows them across devices
-
-**Layouts**
-- Layout builder with drop-in blocks: header, footer, body, asides
-- Left/right asides, centered content, with or without header/footer
-- Covers the common cases: auth pages, error pages, centered empty states
-
-**Components (shadcn-vue)**
-- shadcn-vue plus custom components, drop in and customize
-- Copied into `shared/components/ui/`, not a dependency
-
-**Dialog Manager**
-- One host renders every dialog, open one from anywhere by name with typed props
-- Only one dialog shows at a time, switching waits for the close animation
-- Every open mounts the dialog fresh, so forms never carry over stale values or errors
-- Slide-out menus close on their own when a dialog opens
-
-**Page Transitions**
-- Smooth transitions across site, layout, and page changes
-- Only the part that actually changed re-transitions
-- One shared loading mechanism instead of scattered spinners
-
-**Cover Loading**
-- Branded loading screen shown before the app bundle loads, not a spinner after boot
-- Seamless startup for heavier apps with a large initial payload
-
-**Scroll Behavior (Vue Router)**
-- Scroll resets to the top on navigation, with back and forward restoring where you left off
-- Routes can be grouped so moving between them keeps the scroll position, handy for tabbed sections
-- Built on Vue Router's own scroll handling, just with the grouping added on top
-
-**Mobile**
-- Fully mobile-friendly out of the box
-- Slide-out menus and responsive navigation
-
-**Dark Mode**
-- Light and dark themes, remembered across visits
-- Correct theme shown immediately, no flash on load
-
-**Accessibility (reka-ui)**
-- Accessible component primitives via reka-ui - keyboard nav, focus management, and ARIA out of the box
-- Icon-only controls and dialogs carry screen-reader labels
-- Work in progress, not yet fully audited - more support coming soon
-
-**Dev Environment**
-- Dockerized dev environment (Node 22)
-- Simple `./dev` script for container commands
+For the full breakdown, see the [features overview](https://websanova.com/docs/starter-app/intro/overview).
 
 ## License
 
