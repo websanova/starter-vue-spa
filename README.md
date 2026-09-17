@@ -26,23 +26,23 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Sign back in only after a real stretch of inactivity
 
 **Account Verification**
-- Unverified users are held on a verify screen until they confirm
+- Unverified users held on a verify screen until they confirm
 - Supports more than one verification, worked through one at a time
 - Optional grace period lets users in early, with a reminder banner until they finish
-- Registration asks for a phone number only when api enables it
+- Registration asks for a phone number only when the API enables it
 
 **Settings**
 - App config loaded from the API, with local overrides per app
 - Centralize front-end options like auto-login in one place
 
-**Localization**
+**Localization (vue-i18n)**
 - Translations loaded per page and cached, only what's needed
 - Locale auto detected on first visit, then stored in local storage and restored on refresh
 - Signed-in users load their saved locale from the API, so it follows them across devices
 
 **Timezones**
-- All times display in the user's selected timezone, adjusted on the fly
-- Timezone auto detected during registration.
+- Times displayed in the user's selected timezone, adjusted on the fly
+- Timezone auto detected during registration
 - Signed-in users load their saved timezone from the API, so it follows them across devices
 
 **Layouts**
@@ -50,8 +50,9 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Left/right asides, centered content, with or without header/footer
 - Covers the common cases: auth pages, error pages, centered empty states
 
-**Components**
+**Components (shadcn-vue)**
 - shadcn-vue plus custom components, drop in and customize
+- Copied into `shared/components/ui/`, not a dependency
 
 **Dialog Manager**
 - One host renders every dialog, open one from anywhere by name with typed props
@@ -61,14 +62,14 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 
 **Page Transitions**
 - Smooth transitions across site, layout, and page changes
-- Only the part of the page that actually changed re-transitions
+- Only the part that actually changed re-transitions
 - One shared loading mechanism instead of scattered spinners
 
 **Cover Loading**
-- Branded loading screen shown before the app bundle loads
+- Branded loading screen shown before the app bundle loads, not a spinner after boot
 - Seamless startup for heavier apps with a large initial payload
 
-**Scroll Behavior**
+**Scroll Behavior (Vue Router)**
 - Scroll resets to the top on navigation, with back and forward restoring where you left off
 - Routes can be grouped so moving between them keeps the scroll position, handy for tabbed sections
 - Built on Vue Router's own scroll handling, just with the grouping added on top
@@ -81,7 +82,7 @@ Full documentation at [websanova.com/docs/starter-vue-spa](https://websanova.com
 - Light and dark themes, remembered across visits
 - Correct theme shown immediately, no flash on load
 
-**Accessibility**
+**Accessibility (reka-ui)**
 - Accessible component primitives via reka-ui - keyboard nav, focus management, and ARIA out of the box
 - Icon-only controls and dialogs carry screen-reader labels
 - Work in progress, not yet fully audited - more support coming soon
