@@ -8,6 +8,7 @@
   import type { PaginationMeta } from "@shared/models/pagination"
 
   const props = defineProps<{
+    center?: boolean
     error: Error | null
     filters?: Record<string, string | undefined>
     isPending: boolean
@@ -45,6 +46,7 @@
 
 <template>
   <Load
+    :center="center"
     :error="error"
     :is-pending="isPending"
     :model="model"
@@ -54,6 +56,7 @@
         :keypath="resultsKey"
         tag="p"
         class="my-3"
+        :class="{ 'text-center': center }"
       >
         <template #query>
           <strong>"{{ query }}"</strong>
@@ -78,6 +81,7 @@
     <p
       v-else-if="!isFiltered"
       class="my-3 text-muted-foreground"
+      :class="{ 'text-center': center }"
     >
       {{ $t('features.load.messages.no_results', { model: $t(`features.load.models.${model}`) }) }}
     </p>
