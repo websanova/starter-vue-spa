@@ -244,6 +244,16 @@
       "unlimited": "Illimité"
     }
   },
+  "load": {
+    "messages": {
+      "error": "Erreur lors du chargement de {model} : {error}",
+      "no_query_results": "Aucun {model} ne correspond à votre recherche.",
+      "no_results": "Aucun {model} ici.",
+      "results_filters": "Résultats pour les filtres {filters}",
+      "results_query": "Résultats de recherche pour {query}",
+      "results_query_filters": "Résultats pour la recherche {query} filtrés par {filters}"
+    }
+  },
   "notification": {
     "email": {
       "title": "Vérifiez votre courriel",

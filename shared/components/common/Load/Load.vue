@@ -3,8 +3,8 @@
 
   defineProps<{
     error: Error | null
-    i18nKey: string
     isPending: boolean
+    model: string
   }>()
 </script>
 
@@ -12,7 +12,7 @@
   <Loading v-if="isPending" />
 
   <p v-else-if="error">
-    {{ $t(`${i18nKey}.error`, [error.message]) }}
+    {{ $t('features.load.messages.error', { model: $t(`features.load.models.${model}`), error: error.message }) }}
   </p>
 
   <slot v-else />

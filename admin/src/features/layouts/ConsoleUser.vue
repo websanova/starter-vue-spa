@@ -26,7 +26,7 @@
     </Heading>
 
     <Load
-      i18n-key="features.load.user"
+      model="user"
       :error="error"
       :is-pending="isPending"
     >

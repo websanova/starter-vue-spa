@@ -244,6 +244,16 @@
       "unlimited": "Unlimited"
     }
   },
+  "load": {
+    "messages": {
+      "error": "Error loading {model}: {error}",
+      "no_query_results": "No {model} match your search.",
+      "no_results": "No {model} here.",
+      "results_filters": "Showing results for filters {filters}",
+      "results_query": "Showing search results for {query}",
+      "results_query_filters": "Showing results for query {query} filtered by {filters}"
+    }
+  },
   "notification": {
     "email": {
       "title": "Verify your email",
