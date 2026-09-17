@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import BookmarksList from '@/features/lists/Bookmarks.vue'
   import { Heading } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 
@@ -9,6 +10,6 @@
 
 <template>
   <div>
-    Coming soon...
+    <BookmarksList :user="user" />
   </div>
 </template>

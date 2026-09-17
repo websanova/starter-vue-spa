@@ -68,6 +68,7 @@
       "results_query_filters": "Showing results for query {query} filtered by {filters}"
     },
     "models": {
+      "bookmarks": "bookmarks",
       "plans": "plans",
       "user": "user",
       "users": "users"
