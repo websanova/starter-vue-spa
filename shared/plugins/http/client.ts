@@ -46,7 +46,7 @@ export class HttpError extends Error {
   readonly response: { status: number; data: unknown; headers: Headers }
 
   constructor(status: number, data: unknown, headers: Headers) {
-    super(`HTTP ${status}`)
+    super((data as { message?: string } | null)?.message || `HTTP ${status}`)
     this.name = 'HttpError'
     this.response = { status, data, headers }
   }
