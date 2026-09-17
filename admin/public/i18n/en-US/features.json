@@ -19,6 +19,7 @@
     "password": "Password"
   },
   "sr": {
+    "actions": "Actions",
     "menu_account": "Account menu",
     "menu_main": "Main menu",
     "menu_notifications": "Notifications menu",
