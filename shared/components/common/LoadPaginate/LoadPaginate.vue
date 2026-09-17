@@ -30,17 +30,15 @@
   const isFiltered = computed(() => !!query.value || filterValues.value.length > 0)
 
   const resultsKey = computed(() => {
-    const prefix = props.meta?.total ? "results" : "no_results"
-
     if (query.value && filterValues.value.length) {
-      return `features.load.messages.${prefix}_query_filters`
+      return "features.load.messages.results_query_filters"
     }
 
     if (query.value) {
-      return `features.load.messages.${prefix}_query`
+      return "features.load.messages.results_query"
     }
 
-    return `features.load.messages.${prefix}_filters`
+    return "features.load.messages.results_filters"
   })
 </script>
 
@@ -79,7 +77,7 @@
     <slot v-if="meta?.total" />
 
     <p
-      v-else-if="!isFiltered"
+      v-else
       class="my-3 text-muted-foreground"
       :class="{ 'text-center': center }"
     >
