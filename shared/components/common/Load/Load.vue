@@ -12,7 +12,7 @@
   <Loading v-if="isPending" />
 
   <p v-else-if="error">
-    {{ $t(`${i18nKey}.no_results`, [error.message]) }}
+    {{ $t(`${i18nKey}.error`, [error.message]) }}
   </p>
 
   <slot v-else />
