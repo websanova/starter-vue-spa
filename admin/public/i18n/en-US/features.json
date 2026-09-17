@@ -39,9 +39,6 @@
       "title": "Delete user"
     }
   },
-  "error": {
-    "user_load": "Error loading user: {0}"
-  },
   "heading": {
     "icons": "Icons",
     "plans": "Plans",
@@ -55,6 +52,11 @@
     },
     "users": {
       "no_results": "No users here."
+    }
+  },
+  "load": {
+    "user": {
+      "no_results": "Error loading user: {0}"
     }
   }
 }

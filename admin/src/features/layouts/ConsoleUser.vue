@@ -3,7 +3,7 @@
   import { useRoute } from 'vue-router'
   import { useUser } from '@/composables/api/users'
   import { Heading } from '@shared/components/common/Heading'
-  import { Loading } from '@shared/components/common/Loading'
+  import { Load } from '@shared/components/common/Load'
   import PageTransition from '@shared/features/transitions/Page.vue'
 
   const route = useRoute()
@@ -25,22 +25,19 @@
       </template>
     </Heading>
 
-    <Loading v-if="isPending" />
-
-    <p v-else-if="error">
-      {{ $t('features.error.user_load', [error.message]) }}
-    </p>
-
-    <RouterView
-      v-else
-      v-slot="{ Component }"
+    <Load
+      i18n-key="features.load.user"
+      :error="error"
+      :is-pending="isPending"
     >
-      <PageTransition>
-        <component
-          :is="Component"
-          :user="user"
-        />
-      </PageTransition>
-    </RouterView>
+      <RouterView v-slot="{ Component }">
+        <PageTransition>
+          <component
+            :is="Component"
+            :user="user"
+          />
+        </PageTransition>
+      </RouterView>
+    </Load>
   </div>
 </template>
