@@ -1,10 +1,14 @@
 {
   "lbl": {
+    "billing": "Billing",
+    "bookmarks": "Bookmarks",
     "cancel": "Cancel",
     "dark_mode": "Dark mode",
     "delete": "Delete",
+    "edit": "Edit",
     "email": "Email",
     "icons": "Icons",
+    "info": "Info",
     "light_mode": "Light mode",
     "mark_all_read": "Mark all read",
     "password": "Password",
