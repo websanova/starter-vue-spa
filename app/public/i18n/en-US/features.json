@@ -218,9 +218,6 @@
     }
   },
   "list": {
-    "bookmarks": {
-      "no_results": "No bookmarks here."
-    },
     "plans": {
       "action": {
         "cancel": "Cancel",
@@ -254,6 +251,9 @@
       "results_filters": "Showing results for filters {filters}",
       "results_query": "Showing results for query {query}",
       "results_query_filters": "Showing results for query {query} filtered by {filters}"
+    },
+    "models": {
+      "bookmarks": "bookmarks"
     }
   },
   "notification": {

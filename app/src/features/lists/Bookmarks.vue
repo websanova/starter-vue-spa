@@ -1,19 +1,17 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
+  import { useTags } from '@/composables/api/tags'
+  import { usePagination } from '@shared/composables/support/usePagination'
   import BookmarkItem from '@/features/items/Bookmark.vue'
-  import { PaginationNumbered } from '@shared/components/common/PaginationNumbered'
+  import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
   import type { BookmarkFilters } from '@/models/bookmark'
 
   const route = useRoute()
-  const router = useRouter()
 
-  const page = computed({
-    get: () => Number(route.query.page) || 1,
-    set: (value) => router.push({ query: { ...route.query, page: value } }),
-  })
+  const { page } = usePagination()
 
   const filters = computed<BookmarkFilters>(() => ({
     page: page.value,
@@ -21,34 +19,30 @@
   }))
 
   const { data, isPending, error } = useBookmarks(filters)
+
+  const { data: tags } = useTags()
+
+  const tagName = computed(() => {
+    return tags.value?.find((tag) => String(tag.id) === filters.value.tag_id)?.name
+  })
 </script>
 
 <template>
   <div>
-    <p v-if="isPending">Loading...</p>
-    <p v-else-if="error">{{ error.message }}</p>
-
-    <template v-else-if="data">
-      <p
-        v-if="!data.bookmarks.length"
-        class="my-3 text-muted-foreground"
-      >
-        {{ $t('features.list.bookmarks.no_results') }}
-      </p>
-
-      <ItemGroup v-else>
+    <LoadPaginate
+      model="bookmarks"
+      :error="error"
+      :filters="{ tag: tagName }"
+      :is-pending="isPending"
+      :meta="data?.meta"
+    >
+      <ItemGroup>
         <BookmarkItem
-          v-for="bookmark in data.bookmarks"
+          v-for="bookmark in data?.bookmarks"
           :key="bookmark.id"
           :bookmark="bookmark"
         />
       </ItemGroup>
-
-      <PaginationNumbered
-        v-model:page="page"
-        :total="data.meta.total"
-        :per-page="data.meta.perPage"
-      />
-    </template>
+    </LoadPaginate>
   </div>
 </template>

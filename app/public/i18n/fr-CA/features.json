@@ -218,9 +218,6 @@
     }
   },
   "list": {
-    "bookmarks": {
-      "no_results": "Aucun signet ici."
-    },
     "plans": {
       "action": {
         "cancel": "Annuler",
@@ -254,6 +251,9 @@
       "results_filters": "Résultats pour les filtres {filters}",
       "results_query": "Résultats pour la recherche {query}",
       "results_query_filters": "Résultats pour la recherche {query} filtrés par {filters}"
+    },
+    "models": {
+      "bookmarks": "signets"
     }
   },
   "notification": {
