@@ -20,7 +20,12 @@
     </template>
 
     <template #title>
-      {{ user.firstName }} {{ user.lastName }}
+      <RouterLink
+        class="text-link"
+        :to="{ name: 'user-users-show', params: { user_id: user.id } }"
+      >
+        {{ user.firstName }} {{ user.lastName }}
+      </RouterLink>
     </template>
 
     <p class="truncate text-sm text-muted-foreground">
