@@ -253,7 +253,8 @@
       "results_query_filters": "Showing results for query {query} filtered by {filters}"
     },
     "models": {
-      "bookmarks": "bookmarks"
+      "bookmarks": "bookmarks",
+      "plans": "plans"
     }
   },
   "notification": {

@@ -8,7 +8,7 @@
   import PlanCard from '@/components/cards/Plan.vue'
   import { Button } from '@shared/components/ui/button'
   import { Inline } from '@shared/components/common/Inline'
-  import { Loading } from '@shared/components/common/Loading'
+  import { Load } from '@shared/components/common/Load'
   import { Stack } from '@shared/components/common/Stack'
   import type { Interval, Plan } from '@/models/plan'
 
@@ -47,69 +47,62 @@
 
 <template>
   <div>
-    <div
-      v-if="isPending"
-      class="flex justify-center"
+    <Load
+      center
+      model="plans"
+      :error="error"
+      :is-pending="isPending"
     >
-      <Loading />
-    </div>
+      <Stack>
+        <div class="text-center">
+          <p v-if="isTrialEligible">
+            {{ $t('features.list.plans.note_trial', { days: settings.data.subscriptionTrialDays }) }}
+          </p>
 
-    <p
-      v-else-if="error"
-      class="text-center"
-    >
-      {{ error.message }}
-    </p>
+          <p v-else>
+            {{ $t('features.list.plans.note_choose') }}
+          </p>
 
-    <Stack v-else>
-      <div class="text-center">
-        <p v-if="isTrialEligible">
-          {{ $t('features.list.plans.note_trial', { days: settings.data.subscriptionTrialDays }) }}
-        </p>
+          <p class="text-sm text-muted-foreground">
+            {{ $t('features.list.plans.note_cancel') }}
+          </p>
+        </div>
 
-        <p v-else>
-          {{ $t('features.list.plans.note_choose') }}
-        </p>
-
-        <p class="text-sm text-muted-foreground">
-          {{ $t('features.list.plans.note_cancel') }}
-        </p>
-      </div>
-
-      <Inline
-        gap="sm"
-        class="justify-center"
-      >
-        <Button
-          v-for="value in intervals"
-          :key="value"
-          size="sm"
-          :variant="interval === value ? 'solid' : 'outline'"
-          @click="interval = value"
+        <Inline
+          gap="sm"
+          class="justify-center"
         >
-          {{ $t(`site.units.interval.label.${value}`) }}
-        </Button>
-      </Inline>
+          <Button
+            v-for="value in intervals"
+            :key="value"
+            size="sm"
+            :variant="interval === value ? 'solid' : 'outline'"
+            @click="interval = value"
+          >
+            {{ $t(`site.units.interval.label.${value}`) }}
+          </Button>
+        </Inline>
 
-      <Inline
-        gap="lg"
-        class="justify-center"
-      >
-        <PlanCard
-          v-for="plan in plans"
-          class="w-full sm:max-w-60"
-          :key="plan.id"
-          :plan="plan"
-          :interval="interval"
-          :action="planAction(plan, interval)"
-          @cancel="onCancel"
-          @downgrade="onUpdate(plan)"
-          @resume="onResume"
-          @subscribe="onCheckout(plan)"
-          @switch="onUpdate(plan)"
-          @upgrade="onUpdate(plan)"
-        />
-      </Inline>
-    </Stack>
+        <Inline
+          gap="lg"
+          class="justify-center"
+        >
+          <PlanCard
+            v-for="plan in plans"
+            class="w-full sm:max-w-60"
+            :key="plan.id"
+            :plan="plan"
+            :interval="interval"
+            :action="planAction(plan, interval)"
+            @cancel="onCancel"
+            @downgrade="onUpdate(plan)"
+            @resume="onResume"
+            @subscribe="onCheckout(plan)"
+            @switch="onUpdate(plan)"
+            @upgrade="onUpdate(plan)"
+          />
+        </Inline>
+      </Stack>
+    </Load>
   </div>
 </template>

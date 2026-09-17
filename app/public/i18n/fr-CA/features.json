@@ -253,7 +253,8 @@
       "results_query_filters": "Résultats pour la recherche {query} filtrés par {filters}"
     },
     "models": {
-      "bookmarks": "signets"
+      "bookmarks": "signets",
+      "plans": "forfaits"
     }
   },
   "notification": {
