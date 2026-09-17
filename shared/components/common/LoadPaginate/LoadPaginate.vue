@@ -29,15 +29,17 @@
   const isFiltered = computed(() => !!query.value || filterValues.value.length > 0)
 
   const resultsKey = computed(() => {
+    const prefix = props.meta?.total ? "results" : "no_results"
+
     if (query.value && filterValues.value.length) {
-      return "features.load.messages.results_query_filters"
+      return `features.load.messages.${prefix}_query_filters`
     }
 
     if (query.value) {
-      return "features.load.messages.results_query"
+      return `features.load.messages.${prefix}_query`
     }
 
-    return "features.load.messages.results_filters"
+    return `features.load.messages.${prefix}_filters`
   })
 </script>
 
@@ -54,9 +56,7 @@
         class="my-3"
       >
         <template #query>
-          <Badge variant="secondary">
-            {{ query }}
-          </Badge>
+          <strong>"{{ query }}"</strong>
         </template>
 
         <template #filters>
@@ -73,20 +73,14 @@
       <Separator />
     </div>
 
+    <slot v-if="meta?.total" />
+
     <p
-      v-if="!meta?.total"
+      v-else-if="!isFiltered"
       class="my-3 text-muted-foreground"
     >
-      <template v-if="isFiltered">
-        {{ $t('features.load.messages.no_query_results', { model: $t(`features.load.models.${model}`) }) }}
-      </template>
-
-      <template v-else>
-        {{ $t('features.load.messages.no_results', { model: $t(`features.load.models.${model}`) }) }}
-      </template>
+      {{ $t('features.load.messages.no_results', { model: $t(`features.load.models.${model}`) }) }}
     </p>
-
-    <slot v-else />
 
     <PaginationNumbered
       v-if="meta"

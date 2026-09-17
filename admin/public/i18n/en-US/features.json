@@ -49,10 +49,12 @@
   "load": {
     "messages": {
       "error": "Error loading {model}: {error}",
-      "no_query_results": "No {model} match your search.",
       "no_results": "No {model} here.",
+      "no_results_filters": "No results for filters {filters}",
+      "no_results_query": "No results for query {query}",
+      "no_results_query_filters": "No results for query {query} filtered by {filters}",
       "results_filters": "Showing results for filters {filters}",
-      "results_query": "Showing search results for {query}",
+      "results_query": "Showing results for query {query}",
       "results_query_filters": "Showing results for query {query} filtered by {filters}"
     },
     "models": {

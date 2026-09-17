@@ -247,10 +247,12 @@
   "load": {
     "messages": {
       "error": "Erreur lors du chargement de {model} : {error}",
-      "no_query_results": "Aucun {model} ne correspond à votre recherche.",
       "no_results": "Aucun {model} ici.",
+      "no_results_filters": "Aucun résultat pour les filtres {filters}",
+      "no_results_query": "Aucun résultat pour la recherche {query}",
+      "no_results_query_filters": "Aucun résultat pour la recherche {query} filtré par {filters}",
       "results_filters": "Résultats pour les filtres {filters}",
-      "results_query": "Résultats de recherche pour {query}",
+      "results_query": "Résultats pour la recherche {query}",
       "results_query_filters": "Résultats pour la recherche {query} filtrés par {filters}"
     }
   },
