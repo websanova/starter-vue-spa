@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import UserTable from '@/features/tables/User.vue'
   import { Heading } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 
@@ -9,6 +10,6 @@
 
 <template>
   <div>
-    Coming soon...
+    <UserTable :user="user" />
   </div>
 </template>

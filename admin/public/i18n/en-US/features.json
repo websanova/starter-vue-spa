@@ -10,13 +10,16 @@
     "icons": "Icons",
     "info": "Info",
     "light_mode": "Light mode",
+    "link": "Link",
     "mark_all_read": "Mark all read",
+    "no": "No",
     "password": "Password",
     "plans": "Plans",
     "refresh": "Refresh",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
-    "users": "Users"
+    "users": "Users",
+    "yes": "Yes"
   },
   "ph": {
     "email": "you{'@'}example.com",
@@ -63,6 +66,38 @@
       "plans": "plans",
       "user": "user",
       "users": "users"
+    }
+  },
+  "table": {
+    "user": {
+      "fields": {
+        "avatar_url": "Avatar",
+        "created_at": "Created",
+        "deleted_at": "Deleted",
+        "email": "Email",
+        "email_verified_at": "Email verified",
+        "first_name": "First name",
+        "is_on_grace_period": "Grace period",
+        "is_on_trial": "On trial",
+        "is_password_reset_required": "Password reset required",
+        "is_subscribed": "Subscribed",
+        "last_active_at": "Last active",
+        "last_name": "Last name",
+        "locale": "Locale",
+        "phone": "Phone",
+        "phone_verified_at": "Phone verified",
+        "plan": "Plan",
+        "role": "Role",
+        "timezone": "Timezone",
+        "trial_ends_at": "Trial ends",
+        "updated_at": "Updated"
+      },
+      "sections": {
+        "activity": "Activity",
+        "profile": "Profile",
+        "subscription": "Subscription",
+        "verification": "Verification"
+      }
     }
   }
 }
