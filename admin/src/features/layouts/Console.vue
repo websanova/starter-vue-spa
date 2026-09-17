@@ -47,7 +47,6 @@
     />
 
     <LayoutBody
-       class="pb-15"
        size="full"
       >
       <LayoutBodyAside
@@ -57,7 +56,7 @@
         <ConsoleNav />
       </LayoutBodyAside>
 
-      <LayoutBodyContent>
+      <LayoutBodyContent class="pb-15">
         <RouterView v-slot="{ Component }" >
           <LayoutTransition>
             <component :is="Component" />
