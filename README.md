@@ -36,7 +36,7 @@ Full documentation at [websanova.com/docs/starter-app](https://websanova.com/doc
 * **Timezones** - Times shown in the user's timezone and adjusted on the fly, auto detected at registration and restored from the API across devices.
 * **Dev Environment** - Dockerized dev environment on Node 22 with a simple `./dev` script for container commands.
 
-For the full breakdown, see the [features overview](https://websanova.com/docs/starter-app/intro/overview).
+For the full breakdown, see the [features overview](https://websanova.com/docs/starter-app/intro/features).
 
 ## License
 
