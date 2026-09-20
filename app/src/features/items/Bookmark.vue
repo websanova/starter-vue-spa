@@ -15,7 +15,7 @@
 </script>
 
 <template>
-  <Item>
+  <Item :class="condensed && 'py-0'">
     <template #icon>
       <BookmarkIcon />
     </template>

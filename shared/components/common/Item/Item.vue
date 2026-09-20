@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <Item class="flex-nowrap px-0 not-last:border-b-border">
+  <Item class="flex-nowrap px-0 py-3 not-last:border-b-border">
     <ItemMedia
       v-if="$slots.icon"
       class="self-center! translate-y-0!"
