@@ -2,6 +2,7 @@ import { computed } from 'vue'
 
 import { useI18nService } from '@shared/composables/services/i18n'
 import { useHttp } from '@shared/plugins/http'
+import { useQueryClient } from '@shared/plugins/query'
 import { useAuthStore } from '@shared/stores/auth'
 import { toAuth } from '@/models/auth'
 import { deleteToken, getToken, setToken } from '@shared/lib/authToken'
@@ -44,10 +45,19 @@ export const useAuthService = function() {
   }
 
   /**
-   * Clears all local auth state: deletes the token, unsets
-   * the user, and resets the ready flag.
+   * Clears all local auth state: drops the query cache, deletes the
+   * token, unsets the user, and resets the ready flag. Without the
+   * cache drop the next user sees the previous user's data.
    */
   function flush() {
+    const queryClient = useQueryClient()
+
+    // Not awaited so flush stays sync for the 401 interceptor. The abort
+    // itself is synchronous, so nothing in flight can write back after the
+    // clear.
+    queryClient.cancelQueries()
+    queryClient.clear()
+
     deleteToken()
     store.user = null
     store.isReady = false
