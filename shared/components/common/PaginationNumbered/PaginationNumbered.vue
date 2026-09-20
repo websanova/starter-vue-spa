@@ -18,6 +18,7 @@
 
 <template>
   <Pagination
+    class="mt-3"
     v-if="total > perPage"
     v-model:page="page"
     :total="total"
