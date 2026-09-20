@@ -40,12 +40,5 @@
         {{ tag.name }}
       </Badge>
     </div>
-
-    <p
-      v-if="bookmark.description"
-      class="text-sm text-muted-foreground"
-    >
-      {{ bookmark.description }}
-    </p>
   </Item>
 </template>

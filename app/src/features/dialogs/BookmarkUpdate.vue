@@ -40,12 +40,6 @@
       :label="$t('features.lbl.url')"
     />
 
-    <FormInputText
-      name="description"
-      :label="$t('features.lbl.description')"
-      optional
-    />
-
     <FormInputTags
       name="tag_ids"
       :label="$t('features.lbl.tags')"

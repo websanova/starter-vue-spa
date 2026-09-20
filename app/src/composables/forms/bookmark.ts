@@ -14,13 +14,11 @@ export function useBookmarkForm(bookmark?: Bookmark, onSuccess?: () => void) {
       rules: {
         title: BookmarkRules.title(),
         url: BookmarkRules.url(),
-        description: BookmarkRules.description(),
         tag_ids: BookmarkRules.tagIds(),
       },
       initial: {
         title: bookmark?.title ?? '',
         url: bookmark?.url ?? '',
-        description: bookmark?.description ?? '',
         tag_ids: bookmark?.tags.map((tag) => tag.id) ?? [],
       },
       onSubmit: mutation.mutateAsync,
