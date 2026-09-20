@@ -40,9 +40,7 @@ export const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) =>
     return false
   }
 
-  if (to.path === from.path) {
-    return false
-  }
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  return {top: 0}
+  return {top: 0, behavior: reduced ? 'instant' : 'smooth'}
 }
