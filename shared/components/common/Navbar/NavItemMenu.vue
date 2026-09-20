@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { RouteLocationRaw } from "vue-router"
-  import { DropdownActions } from "@shared/components/common/DropdownActions"
+  import { EllipsisVerticalIcon } from "@lucide/vue"
+  import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@shared/components/ui/dropdown-menu"
   import NavItem from "./NavItem.vue"
 
   defineOptions({ inheritAttrs: false })
@@ -26,9 +27,21 @@
     </NavItem>
 
     <div class="absolute inset-y-0 right-1 flex items-center pointer-fine:opacity-0 group-hover:opacity-100 focus-within:opacity-100 has-data-[state=open]:opacity-100">
-      <DropdownActions>
-        <slot name="actions" />
-      </DropdownActions>
+      <DropdownMenu :modal="false">
+        <DropdownMenuTrigger as-child>
+          <button
+            type="button"
+            class="flex size-6 cursor-pointer items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground [&_svg]:size-4"
+          >
+            <EllipsisVerticalIcon />
+            <span class="sr-only">{{ $t('features.sr.actions') }}</span>
+          </button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent align="end">
+          <slot name="actions" />
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   </div>
 </template>

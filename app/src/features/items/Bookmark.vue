@@ -1,8 +1,7 @@
 <script setup lang="ts">
   import { BookmarkIcon, PencilIcon, Trash2Icon } from '@lucide/vue'
   import { useDialogService } from '@shared/composables/services/dialog'
-  import { DropdownActions } from '@shared/components/common/DropdownActions'
-  import { Item } from '@shared/components/common/Item'
+  import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import type { Bookmark } from '@/models/bookmark'
@@ -58,7 +57,7 @@
     </div>
 
     <template #actions>
-      <DropdownActions>
+      <ItemDropdown>
         <DropdownMenuItem @select="dialog.open('bookmarkUpdate', { bookmark: props.bookmark })">
           <PencilIcon />
           {{ $t('features.lbl.edit') }}
@@ -68,7 +67,7 @@
           <Trash2Icon />
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>
-      </DropdownActions>
+      </ItemDropdown>
     </template>
   </Item>
 </template>

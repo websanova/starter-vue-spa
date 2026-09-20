@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import { computed } from "vue"
+  import { XIcon } from "@lucide/vue"
   import { usePagination } from "@shared/composables/support/usePagination"
   import { Load } from "@shared/components/common/Load"
   import { PaginationNumbered } from "@shared/components/common/PaginationNumbered"
   import { Badge } from "@shared/components/ui/badge"
+  import { Button } from "@shared/components/ui/button"
   import { Separator } from "@shared/components/ui/separator"
   import type { PaginationMeta } from "@shared/models/pagination"
 
@@ -14,6 +16,10 @@
     isPending: boolean
     meta?: PaginationMeta
     model: string
+  }>()
+
+  const emit = defineEmits<{
+    clear: []
   }>()
 
   const { page } = usePagination()
@@ -50,26 +56,36 @@
     :model="model"
   >
     <div v-if="isFiltered">
-      <i18n-t
-        :keypath="resultsKey"
-        tag="p"
-        class="my-3"
-        :class="{ 'text-center': center }"
-      >
-        <template #query>
-          <strong>"{{ query }}"</strong>
-        </template>
+      <div class="my-3 flex items-center gap-2">
+        <i18n-t
+          :keypath="resultsKey"
+          tag="p"
+          class="flex-1"
+          :class="{ 'text-center': center }"
+        >
+          <template #query>
+            <strong>"{{ query }}"</strong>
+          </template>
 
-        <template #filters>
-          <Badge
-            v-for="(value, index) in filterValues"
-            variant="secondary"
-            :key="index"
-          >
-            {{ value }}
-          </Badge>
-        </template>
-      </i18n-t>
+          <template #filters>
+            <Badge
+              v-for="(value, index) in filterValues"
+              variant="secondary"
+              :key="index"
+            >
+              {{ value }}
+            </Badge>
+          </template>
+        </i18n-t>
+
+        <Button
+          size="icon"
+          variant="ghost"
+          @click="emit('clear')"
+        >
+          <XIcon />
+        </Button>
+      </div>
 
       <Separator />
     </div>

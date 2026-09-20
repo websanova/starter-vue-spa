@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
   import { usePagination } from '@shared/composables/support/usePagination'
@@ -14,6 +14,7 @@
   }>()
 
   const route = useRoute()
+  const router = useRouter()
 
   const { page } = usePagination()
 
@@ -29,6 +30,10 @@
   const tagName = computed(() => {
     return tags.value?.find((tag) => String(tag.id) === filters.value.tag_id)?.name
   })
+
+  function onClear() {
+    router.push({ query: {} })
+  }
 </script>
 
 <template>
@@ -39,6 +44,7 @@
       :filters="{ tag: tagName }"
       :is-pending="isPending"
       :meta="data?.meta"
+      @clear="onClear"
     >
       <ItemGroup>
         <BookmarkItem

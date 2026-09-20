@@ -1,8 +1,7 @@
 <script setup lang="ts">
   import { Trash2Icon, UserIcon } from '@lucide/vue'
   import { useDialogService } from '@shared/composables/services/dialog'
-  import { DropdownActions } from '@shared/components/common/DropdownActions'
-  import { Item } from '@shared/components/common/Item'
+  import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import type { User } from '@/models/user'
 
@@ -33,12 +32,12 @@
     </p>
 
     <template #actions>
-      <DropdownActions>
+      <ItemDropdown>
         <DropdownMenuItem @select="dialog.open('userDelete', { user: props.user })">
           <Trash2Icon />
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>
-      </DropdownActions>
+      </ItemDropdown>
     </template>
   </Item>
 </template>
