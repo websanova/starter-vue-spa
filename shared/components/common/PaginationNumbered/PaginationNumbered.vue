@@ -3,7 +3,9 @@
     Pagination,
     PaginationContent,
     PaginationEllipsis,
+    PaginationFirst,
     PaginationItem,
+    PaginationLast,
     PaginationNext,
     PaginationPrevious,
   } from '@shared/components/ui/pagination'
@@ -25,6 +27,8 @@
     :items-per-page="perPage"
   >
     <PaginationContent v-slot="{ items }">
+      <PaginationFirst />
+
       <PaginationPrevious />
 
       <template
@@ -43,6 +47,8 @@
       </template>
 
       <PaginationNext />
+
+      <PaginationLast />
     </PaginationContent>
   </Pagination>
 </template>
