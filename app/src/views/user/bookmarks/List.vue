@@ -16,9 +16,11 @@
     >
       {{ $t('features.lbl.bookmarks') }}
 
-      <Button @click="dialog.open('bookmarkCreate')">
+      <Button
+        size="icon"
+        @click="dialog.open('bookmarkCreate')"
+      >
         <PlusIcon />
-        {{ $t('features.lbl.create') }}
       </Button>
     </Heading>
 
