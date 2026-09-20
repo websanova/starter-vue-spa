@@ -1,6 +1,7 @@
 <script setup lang="ts">
-  import { Trash2Icon, UserIcon } from '@lucide/vue'
+  import { Trash2Icon } from '@lucide/vue'
   import { useDialogService } from '@shared/composables/services/dialog'
+  import { Avatar } from '@shared/components/common/Avatar'
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import type { User } from '@/models/user'
@@ -15,7 +16,11 @@
 <template>
   <Item>
     <template #icon>
-      <UserIcon />
+      <Avatar
+        class="size-9 text-xl  "
+        :src="user.avatarUrl"
+        :fallback="user.firstName || user.email"
+      />
     </template>
 
     <template #title>

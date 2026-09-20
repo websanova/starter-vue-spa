@@ -1,16 +1,13 @@
 <script setup lang="ts">
   import { useAuthService } from '@shared/composables/services/auth'
-  import { Avatar, AvatarFallback, AvatarImage } from '@shared/components/ui/avatar'
+  import { Avatar } from '@shared/components/common/Avatar'
 
   const { user } = useAuthService()
 </script>
 
 <template>
-  <Avatar>
-    <AvatarImage :src="user?.avatarUrl ?? ''" />
-
-    <AvatarFallback>
-      {{ (user?.firstName || user?.email)?.charAt(0).toUpperCase() }}
-    </AvatarFallback>
-  </Avatar>
+  <Avatar
+    :src="user?.avatarUrl"
+    :fallback="user?.firstName || user?.email"
+  />
 </template>
