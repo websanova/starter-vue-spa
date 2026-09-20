@@ -9,6 +9,7 @@
 
   const props = defineProps<{
     bookmark: Bookmark
+    condensed?: boolean
   }>()
 
   const dialog = useDialogService()
@@ -21,10 +22,17 @@
     </template>
 
     <template #title>
-      {{ bookmark.title }}
+      <a
+        :href="bookmark.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ bookmark.title }}
+      </a>
     </template>
 
     <a
+      v-if="!condensed"
       class="block truncate text-sm text-link"
       :href="bookmark.url"
       target="_blank"
@@ -34,7 +42,7 @@
     </a>
 
     <div
-      v-if="bookmark.tags.length"
+      v-if="!condensed && bookmark.tags.length"
       class="flex flex-wrap gap-1"
     >
       <Badge

@@ -1,29 +1,15 @@
 <script setup lang="ts">
-  import { PlusIcon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
-  import { Heading } from '@shared/components/common/Heading'
-  import { Button } from '@shared/components/ui/button'
+  import { ref } from 'vue'
+  import BookmarksHeading from '@/features/headings/Bookmarks.vue'
   import BookmarksList from '@/features/lists/Bookmarks.vue'
 
-  const dialog = useDialogService()
+  const condensed = ref(false)
 </script>
 
 <template>
   <section>
-    <Heading
-      class="flex items-center justify-between"
-      :margin="false"
-    >
-      {{ $t('features.lbl.bookmarks') }}
+    <BookmarksHeading v-model:condensed="condensed" />
 
-      <Button
-        size="icon"
-        @click="dialog.open('bookmarkCreate')"
-      >
-        <PlusIcon />
-      </Button>
-    </Heading>
-
-    <BookmarksList />
+    <BookmarksList :condensed="condensed" />
   </section>
 </template>

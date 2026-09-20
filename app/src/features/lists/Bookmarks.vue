@@ -9,6 +9,10 @@
   import { ItemGroup } from '@shared/components/ui/item'
   import type { BookmarkFilters } from '@/models/bookmark'
 
+  defineProps<{
+    condensed?: boolean
+  }>()
+
   const route = useRoute()
 
   const { page } = usePagination()
@@ -41,6 +45,7 @@
           v-for="bookmark in data?.bookmarks"
           :key="bookmark.id"
           :bookmark="bookmark"
+          :condensed="condensed"
         />
       </ItemGroup>
     </LoadPaginate>
