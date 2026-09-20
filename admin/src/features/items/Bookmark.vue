@@ -20,7 +20,7 @@
     </template>
 
     <a
-      class="block truncate text-sm text-link"
+      class="w-fit max-w-full truncate text-sm text-link"
       :href="bookmark.url"
       target="_blank"
       rel="noopener noreferrer"
