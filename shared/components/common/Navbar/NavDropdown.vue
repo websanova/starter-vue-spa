@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <DropdownMenu>
+  <DropdownMenu :modal="false">
     <DropdownMenuTrigger as-child>
       <NavItem :class="props.class">
         <slot name="trigger" />
