@@ -62,7 +62,7 @@
       <Notification
         v-for="notification in notifications"
         :key="notification.id"
-        dismissible
+        show-dismiss
         :title="notification.title"
         :body="notification.body"
         @dismiss="readNotification(notification.id)"

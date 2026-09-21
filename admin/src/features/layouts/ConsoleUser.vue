@@ -2,9 +2,9 @@
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
   import { useUser } from '@/composables/api/users'
-  import { Heading } from '@shared/components/common/Heading'
+  import UserHeading from '@/features/headings/User.vue'
+  import UserNavTabs from '@/features/nav-tabs/User.vue'
   import { Load } from '@shared/components/common/Load'
-  import { NavTab, NavTabs } from '@shared/components/common/NavTabs'
   import PageTransition from '@shared/features/transitions/Page.vue'
 
   const route = useRoute()
@@ -16,38 +16,18 @@
 
 <template>
   <div>
-    <Heading>
-      <template v-if="user">
-        {{ user.firstName }} {{ user.lastName }}
-      </template>
-
-      <template v-else>
-        {{ $t('features.heading.user', [id]) }}
-      </template>
-    </Heading>
+    <UserHeading
+      :placeholder="$t('features.heading.user', [id])"
+      :show-search="route.name === 'user-users-show-bookmarks'"
+      :user="user"
+    />
 
     <Load
       model="user"
       :error="error"
       :is-pending="isPending"
     >
-      <NavTabs class="mb-3">
-        <NavTab :to="{ name: 'user-users-show-edit' }">
-          {{ $t('features.lbl.edit') }}
-        </NavTab>
-
-        <NavTab :to="{ name: 'user-users-show-info' }">
-          {{ $t('features.lbl.info') }}
-        </NavTab>
-
-        <NavTab :to="{ name: 'user-users-show-billing' }">
-          {{ $t('features.lbl.billing') }}
-        </NavTab>
-
-        <NavTab :to="{ name: 'user-users-show-bookmarks' }">
-          {{ $t('features.lbl.bookmarks') }}
-        </NavTab>
-      </NavTabs>
+      <UserNavTabs />
 
       <RouterView v-slot="{ Component }">
         <PageTransition>

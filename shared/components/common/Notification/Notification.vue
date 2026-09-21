@@ -6,7 +6,7 @@
     title: string
     body: string
     variant?: NotificationVariants["variant"]
-    dismissible?: boolean
+    showDismiss?: boolean
   }>()
 
   defineEmits<{
@@ -31,7 +31,7 @@
     </div>
 
     <button
-      v-if="dismissible"
+      v-if="showDismiss"
       type="button"
       class="shrink-0 cursor-pointer opacity-70 transition-opacity hover:opacity-100"
       @click.stop="$emit('dismiss')"
