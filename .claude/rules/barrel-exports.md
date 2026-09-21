@@ -10,13 +10,12 @@ Use a barrel (`index.ts`) when the folder is the unit of consumption - the calle
 
 Skip the barrel when the folder is just organization grouping independent things - the caller knows which file it wants.
 
-## Tests
+## Rules
 
 - Is the folder name the concept (plugin, component, feature)? Barrel.
 - Would a caller ever need more than one export from this folder? Barrel.
 - Is the folder just a namespace grouping independent things? No barrel.
-
-Every component folder has an `index.ts` barrel.
+- Every component folder has an `index.ts` barrel.
 
 ## Examples
 

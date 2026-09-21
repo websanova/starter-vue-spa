@@ -20,24 +20,21 @@ When editing or generating files, enforce the following import order and groupin
 6. Types / interfaces (TypeScript-only)
 7. Side-effect imports (e.g., CSS/SCSS, polyfills)
 
-Rules:
+## Rules
+
 - Always group imports in the above order
 - No blank lines between groups
 - Within each group, sort imports alphabetically by module path
 - Prefer absolute imports (e.g., '@/...') for internal modules when available
 - Do not mix groups
 - Side-effect imports must always be last
-
-Behavior:
 - If imports are out of order, automatically reorder them
 - If groups are mixed, separate and normalize them
-
-Notes:
 - In Vue (`<script setup>`), this ordering still applies
 - Components should come after app logic but before utilities
 - Types should be grouped separately when using TypeScript
 
-Example:
+## Examples
 
 ```ts
 import { ref } from 'vue'
