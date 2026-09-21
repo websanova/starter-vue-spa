@@ -1,9 +1,13 @@
 <script setup lang="ts">
   import { NavTab, NavTabs } from '@shared/components/common/NavTabs'
+
+  defineProps<{
+    margin?: boolean
+  }>()
 </script>
 
 <template>
-  <NavTabs class="mb-3">
+  <NavTabs :margin="margin">
     <NavTab :to="{ name: 'user-users-show-edit' }">
       {{ $t('features.lbl.edit') }}
     </NavTab>

@@ -11,6 +11,8 @@
 
   const id = computed(() => Number(route.params.user_id))
 
+  const isBookmarks = computed(() => route.name === 'user-users-show-bookmarks')
+
   const { data: user, isPending, error } = useUser(id)
 </script>
 
@@ -18,7 +20,7 @@
   <div>
     <UserHeading
       :placeholder="$t('features.heading.user', [id])"
-      :show-search="route.name === 'user-users-show-bookmarks'"
+      :show-search="isBookmarks"
       :user="user"
     />
 
@@ -27,7 +29,7 @@
       :error="error"
       :is-pending="isPending"
     >
-      <UserNavTabs />
+      <UserNavTabs :margin="!isBookmarks" />
 
       <RouterView v-slot="{ Component }">
         <PageTransition>
