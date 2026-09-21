@@ -246,8 +246,8 @@
       "error": "Erreur lors du chargement de {model} : {error}",
       "no_results": "Aucun {model} trouvé.",
       "results_filters": "Résultats pour les filtres {filters}",
-      "results_query": "Résultats pour la recherche {query}",
-      "results_query_filters": "Résultats pour la recherche {query} filtrés par {filters}"
+      "results_search": "Résultats pour la recherche {search}",
+      "results_search_filters": "Résultats pour la recherche {search} filtrés par {filters}"
     },
     "models": {
       "bookmarks": "signets",

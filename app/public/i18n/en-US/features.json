@@ -246,8 +246,8 @@
       "error": "Error loading {model}: {error}",
       "no_results": "No {model} found.",
       "results_filters": "Showing results for filters {filters}",
-      "results_query": "Showing results for query {query}",
-      "results_query_filters": "Showing results for query {query} filtered by {filters}"
+      "results_search": "Showing results for query {search}",
+      "results_search_filters": "Showing results for query {search} filtered by {filters}"
     },
     "models": {
       "bookmarks": "bookmarks",

@@ -6,4 +6,5 @@ import type { Settings } from '@shared/models/settings'
 export const settings: Partial<Settings> = {
   locales: ['en-US'],
   defaultLocale: 'en-US',
+  searchMinLength: 3,
 }

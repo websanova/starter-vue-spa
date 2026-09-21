@@ -16,10 +16,11 @@
   const route = useRoute()
   const router = useRouter()
 
-  const { page } = usePagination()
+  const { page, search } = usePagination()
 
   const filters = computed<BookmarkFilters>(() => ({
     page: page.value,
+    search: search.value,
     tag_id: route.query.tag_id as string | undefined,
   }))
 
@@ -41,7 +42,7 @@
     <LoadPaginate
       model="bookmarks"
       :error="error"
-      :filters="{ tag: tagName }"
+      :filters="{ search, tag: tagName }"
       :is-pending="isPending"
       :meta="data?.meta"
       @clear="onClear"

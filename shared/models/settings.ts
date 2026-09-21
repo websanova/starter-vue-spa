@@ -14,6 +14,7 @@ export interface Settings {
   locales: string[]
   defaultLocale: string
   defaultTimezone: string
+  searchMinLength: number
   subscriptionCardUpfront: boolean
   subscriptionMode: SubscriptionMode
   subscriptionTrialDays: number

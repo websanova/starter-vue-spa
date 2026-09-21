@@ -24,24 +24,24 @@
 
   const { page } = usePagination()
 
-  const query = computed(() => props.filters?.query)
+  const search = computed(() => props.filters?.search)
 
-  // Every filter except query, which gets its own wording.
+  // Every filter except search, which gets its own wording.
   const filterValues = computed(() => {
     return Object.entries(props.filters ?? {})
-      .filter(([key, value]) => key !== "query" && value)
+      .filter(([key, value]) => key !== "search" && value)
       .map(([, value]) => value)
   })
 
-  const isFiltered = computed(() => !!query.value || filterValues.value.length > 0)
+  const isFiltered = computed(() => !!search.value || filterValues.value.length > 0)
 
   const resultsKey = computed(() => {
-    if (query.value && filterValues.value.length) {
-      return "features.load.messages.results_query_filters"
+    if (search.value && filterValues.value.length) {
+      return "features.load.messages.results_search_filters"
     }
 
-    if (query.value) {
-      return "features.load.messages.results_query"
+    if (search.value) {
+      return "features.load.messages.results_search"
     }
 
     return "features.load.messages.results_filters"
@@ -63,8 +63,8 @@
           class="flex-1"
           :class="{ 'text-center': center }"
         >
-          <template #query>
-            <strong>"{{ query }}"</strong>
+          <template #search>
+            <strong>"{{ search }}"</strong>
           </template>
 
           <template #filters>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-  import { nextTick, ref } from 'vue'
+  import { nextTick, ref, watch } from 'vue'
   import { SearchIcon, XIcon } from '@lucide/vue'
-  import { onClickOutside, useElementBounding } from '@vueuse/core'
+  import { onClickOutside, useElementBounding, watchDebounced } from '@vueuse/core'
+  import { useSettingsStore } from '@shared/stores/settings'
   import { Button } from '@shared/components/ui/button'
   import { Input } from '@shared/components/ui/input'
 
@@ -9,13 +10,39 @@
     placeholder?: string
   }>()
 
-  const value = defineModel<string>({ default: '' })
+  const model = defineModel<string>({ default: '' })
+
+  const settings = useSettingsStore()
+
+  // The inputs bind to a local ref so typing stays instant, and the model
+  // only catches up once the user pauses. The watch back the other way keeps
+  // the inputs in step when the term is cleared from outside.
+  const value = ref(model.value)
+
+  // What this component last wrote, so the sync back can tell an outside
+  // clear from its own echo and leave a half typed term alone.
+  let pushed = model.value
 
   const open = ref(false)
   const root = ref<HTMLElement>()
   const input = ref<InstanceType<typeof Input>>()
 
   const { bottom } = useElementBounding(root)
+
+  // Anything under the minimum writes an empty term rather than skipping, so
+  // backspacing out of a search drops the filter instead of leaving stale results.
+  watchDebounced(value, (next) => {
+    pushed = next.length >= settings.data.searchMinLength ? next : ''
+    model.value = pushed
+  }, { debounce: 300 })
+
+  watch(model, (next) => {
+    if (next === pushed) {
+      return
+    }
+
+    value.value = next ?? ''
+  })
 
   onClickOutside(root, () => {
     open.value = false
@@ -33,6 +60,8 @@
   function onClose() {
     open.value = false
     value.value = ''
+    pushed = ''
+    model.value = ''
   }
 </script>
 
