@@ -51,6 +51,7 @@ export interface User {
 
 export type UserFilters = {
   page?: number
+  search?: string
 }
 
 export function toUser(dto: UserDto): User {
