@@ -6,7 +6,6 @@ globs:
   - "**/*.js"
   - "**/*.jsx"
   - "**/*.vue"
-alwaysApply: false
 ---
 
 # Import Ordering

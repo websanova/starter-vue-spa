@@ -1,3 +1,9 @@
+---
+description: When a folder gets an index.ts barrel
+globs:
+  - "**/*.ts"
+---
+
 # Barrel Exports
 
 Use a barrel (`index.ts`) when the folder is the unit of consumption - the caller imports the folder, not a specific file inside it.
@@ -9,6 +15,8 @@ Skip the barrel when the folder is just organization grouping independent things
 - Is the folder name the concept (plugin, component, feature)? Barrel.
 - Would a caller ever need more than one export from this folder? Barrel.
 - Is the folder just a namespace grouping independent things? No barrel.
+
+Every component folder has an `index.ts` barrel.
 
 ## Examples
 

@@ -1,3 +1,13 @@
+---
+description: Alias versus relative import paths
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.vue"
+---
+
 # Import Aliases
 
 Use aliases (`@/`, `@shared/`) whenever an import crosses a folder boundary. Use relative imports (`./ `) only for files within the same folder or a subfolder of it. Never use `../` to go up a directory - use an alias instead.
