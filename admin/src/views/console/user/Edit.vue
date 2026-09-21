@@ -10,6 +10,8 @@
 
 <template>
   <div>
+    <Heading>{{ $t('features.table.user.sections.profile') }}</Heading>
+
     <UserUpdateForm :user="user" />
   </div>
 </template>
