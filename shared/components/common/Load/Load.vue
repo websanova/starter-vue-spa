@@ -4,8 +4,8 @@
   defineProps<{
     center?: boolean
     error: Error | null
+    i18nKey: string
     isPending: boolean
-    model: string
   }>()
 </script>
 
@@ -23,7 +23,7 @@
     class="my-3"
     :class="{ 'text-center': center }"
   >
-    {{ $t('features.load.messages.error', { model: $t(`features.load.models.${model}`), error: error.message }) }}
+    {{ $t('features.load.messages.error', { noun: $t(i18nKey), error: error.message }) }}
   </p>
 
   <slot v-else />

@@ -25,7 +25,7 @@
     />
 
     <Load
-      model="user"
+      i18n-key="features.load.nouns.user"
       :error="error"
       :is-pending="isPending"
     >

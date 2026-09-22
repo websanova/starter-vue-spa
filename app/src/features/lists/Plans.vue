@@ -49,7 +49,7 @@
   <div>
     <Load
       center
-      model="plans"
+      i18n-key="features.load.nouns.plans"
       :error="error"
       :is-pending="isPending"
     >

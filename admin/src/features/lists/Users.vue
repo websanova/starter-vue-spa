@@ -9,7 +9,7 @@
   const router = useRouter()
 
   const params = useUserParams()
-  const { search } = params
+  const { page, search } = params
 
   const { data, isPending, error } = useUsers(params)
 
@@ -21,7 +21,8 @@
 <template>
   <div>
     <LoadPaginate
-      model="users"
+      v-model:page="page"
+      i18n-key="features.load.nouns.users"
       :error="error"
       :filters="{ search }"
       :is-pending="isPending"

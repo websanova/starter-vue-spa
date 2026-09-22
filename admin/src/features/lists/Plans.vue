@@ -6,6 +6,7 @@
   import { ItemGroup } from '@shared/components/ui/item'
 
   const params = usePlanParams()
+  const { page } = params
 
   const { data, isPending, error } = usePlans(params)
 </script>
@@ -13,7 +14,8 @@
 <template>
   <div>
     <LoadPaginate
-      model="plans"
+      v-model:page="page"
+      i18n-key="features.load.nouns.plans"
       :error="error"
       :is-pending="isPending"
       :meta="data?.meta"

@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { computed } from "vue"
   import { XIcon } from "@lucide/vue"
-  import { useQueryParam } from "@shared/composables/support/useQueryParam"
   import { Load } from "@shared/components/common/Load"
   import { PaginationNumbered } from "@shared/components/common/PaginationNumbered"
   import { Badge } from "@shared/components/ui/badge"
@@ -13,16 +12,16 @@
     center?: boolean
     error: Error | null
     filters?: Record<string, string | undefined>
+    i18nKey: string
     isPending: boolean
     meta?: PaginationMeta
-    model: string
   }>()
 
   const emit = defineEmits<{
     clear: []
   }>()
 
-  const page = useQueryParam("page", { default: 1 })
+  const page = defineModel<number>("page", { required: true })
 
   const search = computed(() => props.filters?.search)
 
@@ -53,7 +52,7 @@
     :center="center"
     :error="error"
     :is-pending="isPending"
-    :model="model"
+    :i18n-key="i18nKey"
   >
     <div v-if="isFiltered">
       <div class="my-3 flex items-center gap-2">
@@ -97,7 +96,7 @@
       class="my-3 text-muted-foreground"
       :class="{ 'text-center': center }"
     >
-      {{ $t('features.load.messages.no_results', { model: $t(`features.load.models.${model}`) }) }}
+      {{ $t('features.load.messages.no_results', { noun: $t(i18nKey) }) }}
     </p>
 
     <PaginationNumbered

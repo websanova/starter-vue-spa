@@ -245,13 +245,13 @@
   },
   "load": {
     "messages": {
-      "error": "Erreur lors du chargement de {model} : {error}",
-      "no_results": "Aucun {model} trouvé.",
+      "error": "Erreur lors du chargement de {noun} : {error}",
+      "no_results": "Aucun {noun} trouvé.",
       "results_filters": "Résultats pour les filtres {filters}",
       "results_search": "Résultats pour la recherche {search}",
       "results_search_filters": "Résultats pour la recherche {search} filtrés par {filters}"
     },
-    "models": {
+    "nouns": {
       "bookmarks": "signets",
       "plans": "forfaits"
     }

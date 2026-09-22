@@ -15,7 +15,7 @@
   const router = useRouter()
 
   const params = useBookmarkParams()
-  const { search, tagId } = params
+  const { page, search, tagId } = params
 
   const { data, isPending, error } = useBookmarks(params)
 
@@ -33,7 +33,8 @@
 <template>
   <div>
     <LoadPaginate
-      model="bookmarks"
+      v-model:page="page"
+      i18n-key="features.load.nouns.bookmarks"
       :error="error"
       :filters="{ search, tag: tagName }"
       :is-pending="isPending"

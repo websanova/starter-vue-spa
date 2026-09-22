@@ -72,13 +72,13 @@
   },
   "load": {
     "messages": {
-      "error": "Error loading {model}: {error}",
-      "no_results": "No {model} found.",
+      "error": "Error loading {noun}: {error}",
+      "no_results": "No {noun} found.",
       "results_filters": "Showing results for filters {filters}",
       "results_search": "Showing results for query {search}",
       "results_search_filters": "Showing results for query {search} filtered by {filters}"
     },
-    "models": {
+    "nouns": {
       "bookmarks": "bookmarks",
       "plans": "plans",
       "user": "user",
