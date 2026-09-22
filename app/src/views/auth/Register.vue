@@ -11,7 +11,7 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t('features.heading.register') }}
+      {{ $t('features.heading.title.register') }}
     </Heading>
 
     <AuthRegisterForm />

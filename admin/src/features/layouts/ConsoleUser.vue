@@ -19,7 +19,7 @@
 <template>
   <div>
     <UserHeading
-      :placeholder="$t('features.heading.user', [id])"
+      :placeholder="$t('features.heading.title.user', [id])"
       :show-search="isBookmarks"
       :user="user"
     />

@@ -8,7 +8,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.heading.payment_method') }}
+        {{ $t('features.heading.title.payment_method') }}
       </Heading>
 
       <StripePaymentMethodForm />

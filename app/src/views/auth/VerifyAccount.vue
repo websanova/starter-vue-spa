@@ -14,7 +14,7 @@
       class="text-center"
       :divider="false"
     >
-      {{ $t(`features.heading.verify_${channel}`) }}
+      {{ $t(`features.heading.title.verify_${channel}`) }}
     </Heading>
 
     <AuthVerifyAccountForm />

@@ -23,7 +23,7 @@
     class="flex items-center justify-between gap-2"
     :margin="false"
   >
-    {{ $t('features.heading.users') }}
+    {{ $t('features.heading.title.users') }}
 
     <div class="flex items-center gap-2">
       <Search

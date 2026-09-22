@@ -116,7 +116,7 @@
         </p>
 
         <WizardStep
-          :heading="$t('features.heading.billing_address')"
+          :heading="$t('features.heading.title.billing_address')"
           :open="step === 'address'"
           :summary="addressSummary"
           @change="goTo('address')"
@@ -127,7 +127,7 @@
         <Transition name="fade-in">
           <WizardStep
             v-show="step === 'payment'"
-            :heading="$t('features.heading.payment_method')"
+            :heading="$t('features.heading.title.payment_method')"
             :open="!cardSummary"
             :summary="cardSummary"
             @change="changeCard"

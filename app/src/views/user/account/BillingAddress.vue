@@ -8,7 +8,7 @@
   <Stack>
     <section>
       <Heading>
-        {{ $t('features.heading.billing_address') }}
+        {{ $t('features.heading.title.billing_address') }}
       </Heading>
 
       <StripeBillingAddressForm />

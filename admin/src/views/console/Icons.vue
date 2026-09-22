@@ -6,7 +6,7 @@
 <template>
   <div>
     <Heading>
-      {{ $t('features.heading.icons') }}
+      {{ $t('features.heading.title.icons') }}
     </Heading>
 
     <IconsList />

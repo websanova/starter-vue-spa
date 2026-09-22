@@ -6,7 +6,7 @@
 <template>
   <div>
     <Heading :margin="false">
-      {{ $t('features.heading.plans') }}
+      {{ $t('features.heading.title.plans') }}
     </Heading>
 
     <PlansList />

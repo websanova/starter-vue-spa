@@ -54,11 +54,13 @@
     }
   },
   "heading": {
-    "icons": "Icons",
-    "plans": "Plans",
-    "sign_in": "Sign in",
-    "user": "User #{0}",
-    "users": "Users"
+    "title": {
+      "icons": "Icons",
+      "plans": "Plans",
+      "sign_in": "Sign in",
+      "user": "User #{0}",
+      "users": "Users"
+    }
   },
   "load": {
     "messages": {
