@@ -2,8 +2,7 @@
   import { LayoutListIcon, ListIcon, PlusIcon } from '@lucide/vue'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
   import { useDialogService } from '@shared/composables/services/dialog'
-  import { Heading } from '@shared/components/common/Heading'
-  import { Search } from '@shared/components/common/Search'
+  import { Heading, HeadingSearch } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'
 
   const condensed = defineModel<boolean>('condensed')
@@ -21,7 +20,7 @@
     {{ $t('features.lbl.bookmarks') }}
 
     <div class="flex items-center gap-2">
-      <Search
+      <HeadingSearch
         v-model="search"
         :placeholder="$t('features.ph.search')"
       />

@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { useBookmarkParams } from '@/composables/params/bookmarks'
-  import { Heading } from '@shared/components/common/Heading'
-  import { Search } from '@shared/components/common/Search'
+  import { Heading, HeadingSearch } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 
   defineProps<{
@@ -23,7 +22,7 @@
       {{ placeholder }}
     </template>
 
-    <Search
+    <HeadingSearch
       v-if="showSearch"
       v-model="search"
       :placeholder="$t('features.ph.search')"

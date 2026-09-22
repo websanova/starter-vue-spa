@@ -3,8 +3,7 @@
   import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
   import { useUserParams } from '@/composables/params/users'
   import { useI18n } from '@shared/plugins/i18n'
-  import { Heading, HeadingSort } from '@shared/components/common/Heading'
-  import { Search } from '@shared/components/common/Search'
+  import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
 
   const { search, sortBy, sortDir } = useUserParams()
   const i18n = useI18n()
@@ -25,7 +24,7 @@
     {{ $t('features.heading.title.users') }}
 
     <div class="flex items-center gap-2">
-      <Search
+      <HeadingSearch
         v-model="search"
         :placeholder="$t('features.ph.search')"
       />
