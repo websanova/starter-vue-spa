@@ -1,12 +1,10 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useUserBookmarks } from '@/composables/api/bookmarks'
-  import { usePagination } from '@shared/composables/support/usePagination'
+  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
-  import type { BookmarkFilters } from '@/models/bookmark'
   import type { User } from '@/models/user'
 
   const props = defineProps<{
@@ -15,12 +13,7 @@
 
   const router = useRouter()
 
-  const { page, search } = usePagination()
-
-  const filters = computed<BookmarkFilters>(() => ({
-    page: page.value,
-    search: search.value,
-  }))
+  const { filters, search } = useBookmarkFilters()
 
   const { data, isPending, error } = useUserBookmarks(props.user.id, filters)
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { usePagination } from '@shared/composables/support/usePagination'
+  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
   import { Heading } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
   import type { User } from '@/models/user'
@@ -10,7 +10,7 @@
     user?: User
   }>()
 
-  const { search } = usePagination()
+  const { search } = useBookmarkFilters()
 </script>
 
 <template>

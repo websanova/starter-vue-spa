@@ -1,18 +1,13 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
-  import { usePagination } from '@shared/composables/support/usePagination'
+  import { useUserFilters } from '@/composables/filters/users'
   import { useI18n } from '@shared/plugins/i18n'
-  import { useSettingsStore } from '@shared/stores/settings'
   import { Heading, HeadingSort } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
 
-  const { search } = usePagination()
+  const { search, sortBy, sortDir } = useUserFilters()
   const i18n = useI18n()
-  const settings = useSettingsStore()
-
-  const sortBy = ref(settings.data.defaultUsersSortBy)
-  const sortDir = ref(settings.data.defaultUsersSortDir)
 
   const sortFields = computed(() => [
     { value: 'name', label: i18n.t('features.heading.sort.name'), icon: UserIcon },

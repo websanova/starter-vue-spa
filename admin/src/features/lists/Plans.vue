@@ -1,17 +1,11 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
   import { usePlans } from '@/composables/api/plans'
-  import { usePagination } from '@shared/composables/support/usePagination'
+  import { usePlanFilters } from '@/composables/filters/plans'
   import PlanItem from '@/features/items/Plan.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
-  import type { PlanFilters } from '@/models/plan'
 
-  const { page } = usePagination()
-
-  const filters = computed<PlanFilters>(() => ({
-    page: page.value,
-  }))
+  const { filters } = usePlanFilters()
 
   const { data, isPending, error } = usePlans(filters)
 </script>

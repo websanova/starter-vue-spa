@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from "vue"
   import { XIcon } from "@lucide/vue"
-  import { usePagination } from "@shared/composables/support/usePagination"
+  import { useQueryParam } from "@shared/composables/support/useQueryParam"
   import { Load } from "@shared/components/common/Load"
   import { PaginationNumbered } from "@shared/components/common/PaginationNumbered"
   import { Badge } from "@shared/components/ui/badge"
@@ -22,7 +22,7 @@
     clear: []
   }>()
 
-  const { page } = usePagination()
+  const page = useQueryParam("page", { default: 1 })
 
   const search = computed(() => props.filters?.search)
 

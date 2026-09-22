@@ -1,35 +1,27 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRouter } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
-  import { usePagination } from '@shared/composables/support/usePagination'
+  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
-  import type { BookmarkFilters } from '@/models/bookmark'
 
   defineProps<{
     condensed?: boolean
   }>()
 
-  const route = useRoute()
   const router = useRouter()
 
-  const { page, search } = usePagination()
-
-  const filters = computed<BookmarkFilters>(() => ({
-    page: page.value,
-    search: search.value,
-    tag_id: route.query.tag_id as string | undefined,
-  }))
+  const { filters, search, tagId } = useBookmarkFilters()
 
   const { data, isPending, error } = useBookmarks(filters)
 
   const { data: tags } = useTags()
 
   const tagName = computed(() => {
-    return tags.value?.find((tag) => String(tag.id) === filters.value.tag_id)?.name
+    return tags.value?.find((tag) => String(tag.id) === tagId.value)?.name
   })
 
   function onClear() {

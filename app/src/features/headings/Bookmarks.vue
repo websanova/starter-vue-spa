@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { LayoutListIcon, ListIcon, PlusIcon } from '@lucide/vue'
+  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
   import { useDialogService } from '@shared/composables/services/dialog'
-  import { usePagination } from '@shared/composables/support/usePagination'
   import { Heading } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
   import { Button } from '@shared/components/ui/button'
@@ -10,7 +10,7 @@
 
   const dialog = useDialogService()
 
-  const { search } = usePagination()
+  const { search } = useBookmarkFilters()
 </script>
 
 <template>
