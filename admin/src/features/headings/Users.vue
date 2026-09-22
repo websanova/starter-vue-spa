@@ -1,16 +1,21 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { ArrowDownWideNarrowIcon, ArrowUpNarrowWideIcon, CalendarIcon, ClockIcon, ListFilterIcon, MailIcon, UserIcon } from '@lucide/vue'
+  import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
   import { usePagination } from '@shared/composables/support/usePagination'
-  import { Heading } from '@shared/components/common/Heading'
+  import { Heading, HeadingSort } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
-  import { Button } from '@shared/components/ui/button'
-  import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@shared/components/ui/dropdown-menu'
 
   const { search } = usePagination()
 
   const sortBy = ref('created_at')
   const sortDir = ref('desc')
+
+  const sortFields = [
+    { value: 'name', label: 'Name', icon: UserIcon },
+    { value: 'created_at', label: 'Created', icon: CalendarIcon },
+    { value: 'last_active_at', label: 'Last Active', icon: ClockIcon },
+    { value: 'email', label: 'Email', icon: MailIcon },
+  ]
 </script>
 
 <template>
@@ -26,54 +31,11 @@
         :placeholder="$t('features.ph.search')"
       />
 
-      <DropdownMenu :modal="false">
-        <DropdownMenuTrigger as-child>
-          <Button
-            size="icon"
-            variant="outline"
-          >
-            <ListFilterIcon />
-          </Button>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent align="end">
-          <DropdownMenuRadioGroup v-model="sortBy">
-            <DropdownMenuRadioItem value="name">
-              <UserIcon />
-              Name
-            </DropdownMenuRadioItem>
-
-            <DropdownMenuRadioItem value="created_at">
-              <CalendarIcon />
-              Created
-            </DropdownMenuRadioItem>
-
-            <DropdownMenuRadioItem value="last_active_at">
-              <ClockIcon />
-              Last Active
-            </DropdownMenuRadioItem>
-
-            <DropdownMenuRadioItem value="email">
-              <MailIcon />
-              Email
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-
-          <DropdownMenuSeparator />
-
-          <DropdownMenuRadioGroup v-model="sortDir">
-            <DropdownMenuRadioItem value="asc">
-              <ArrowUpNarrowWideIcon />
-              Ascending
-            </DropdownMenuRadioItem>
-
-            <DropdownMenuRadioItem value="desc">
-              <ArrowDownWideNarrowIcon />
-              Descending
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <HeadingSort
+        v-model:sort-by="sortBy"
+        v-model:sort-dir="sortDir"
+        :fields="sortFields"
+      />
     </div>
   </Heading>
 </template>
