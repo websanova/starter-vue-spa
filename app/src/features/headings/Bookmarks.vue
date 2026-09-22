@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { LayoutListIcon, ListIcon, PlusIcon } from '@lucide/vue'
-  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/bookmarks'
   import { useDialogService } from '@shared/composables/services/dialog'
   import { Heading } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
@@ -10,7 +10,7 @@
 
   const dialog = useDialogService()
 
-  const { search } = useBookmarkFilters()
+  const { search } = useBookmarkParams()
 </script>
 
 <template>

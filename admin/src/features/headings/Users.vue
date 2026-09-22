@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
-  import { useUserFilters } from '@/composables/filters/users'
+  import { useUserParams } from '@/composables/params/users'
   import { useI18n } from '@shared/plugins/i18n'
   import { Heading, HeadingSort } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
 
-  const { search, sortBy, sortDir } = useUserFilters()
+  const { search, sortBy, sortDir } = useUserParams()
   const i18n = useI18n()
 
   const sortFields = computed(() => [

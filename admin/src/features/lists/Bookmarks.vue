@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
   import { useUserBookmarks } from '@/composables/api/bookmarks'
-  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/bookmarks'
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
@@ -13,9 +13,10 @@
 
   const router = useRouter()
 
-  const { filters, search } = useBookmarkFilters()
+  const params = useBookmarkParams()
+  const { search } = params
 
-  const { data, isPending, error } = useUserBookmarks(props.user.id, filters)
+  const { data, isPending, error } = useUserBookmarks(props.user.id, params)
 
   function onClear() {
     router.push({ query: {} })

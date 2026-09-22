@@ -15,11 +15,6 @@ export interface Bookmark {
   url: string
 }
 
-export type BookmarkFilters = {
-  page?: number
-  search?: string
-}
-
 export function toBookmark(dto: BookmarkDto): Bookmark {
   return {
     id: dto.id,

@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router'
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
-  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/bookmarks'
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
@@ -14,9 +14,10 @@
 
   const router = useRouter()
 
-  const { filters, search, tagId } = useBookmarkFilters()
+  const params = useBookmarkParams()
+  const { search, tagId } = params
 
-  const { data, isPending, error } = useBookmarks(filters)
+  const { data, isPending, error } = useBookmarks(params)
 
   const { data: tags } = useTags()
 

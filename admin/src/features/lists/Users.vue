@@ -1,16 +1,17 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
   import { useUsers } from '@/composables/api/users'
-  import { useUserFilters } from '@/composables/filters/users'
+  import { useUserParams } from '@/composables/params/users'
   import UserItem from '@/features/items/User.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
 
   const router = useRouter()
 
-  const { filters, search } = useUserFilters()
+  const params = useUserParams()
+  const { search } = params
 
-  const { data, isPending, error } = useUsers(filters)
+  const { data, isPending, error } = useUsers(params)
 
   function onClear() {
     router.push({ query: {} })

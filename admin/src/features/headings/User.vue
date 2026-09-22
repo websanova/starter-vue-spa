@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useBookmarkFilters } from '@/composables/filters/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/bookmarks'
   import { Heading } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
   import type { User } from '@/models/user'
@@ -10,7 +10,7 @@
     user?: User
   }>()
 
-  const { search } = useBookmarkFilters()
+  const { search } = useBookmarkParams()
 </script>
 
 <template>

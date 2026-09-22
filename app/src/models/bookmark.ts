@@ -15,12 +15,6 @@ export interface Bookmark {
   url: string
 }
 
-export type BookmarkFilters = {
-  page?: number
-  search?: string
-  tag_id?: string
-}
-
 export interface BookmarkInput {
   tag_ids?: number[]
   title: string

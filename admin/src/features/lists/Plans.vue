@@ -1,13 +1,13 @@
 <script setup lang="ts">
   import { usePlans } from '@/composables/api/plans'
-  import { usePlanFilters } from '@/composables/filters/plans'
+  import { usePlanParams } from '@/composables/params/plans'
   import PlanItem from '@/features/items/Plan.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
 
-  const { filters } = usePlanFilters()
+  const params = usePlanParams()
 
-  const { data, isPending, error } = usePlans(filters)
+  const { data, isPending, error } = usePlans(params)
 </script>
 
 <template>

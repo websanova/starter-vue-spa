@@ -49,13 +49,6 @@ export interface User {
   updatedAt: string
 }
 
-export type UserFilters = {
-  page?: number
-  search?: string
-  sort_by?: string
-  sort_dir?: string
-}
-
 export function toUser(dto: UserDto): User {
   return {
     avatarUrl: dto.avatar_url,
