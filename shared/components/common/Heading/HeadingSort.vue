@@ -40,12 +40,12 @@
       <DropdownMenuRadioGroup v-model="sortDir">
         <DropdownMenuRadioItem value="asc">
           <ArrowUpNarrowWideIcon />
-          Ascending
+          {{ $t('features.heading.sort.asc') }}
         </DropdownMenuRadioItem>
 
         <DropdownMenuRadioItem value="desc">
           <ArrowDownWideNarrowIcon />
-          Descending
+          {{ $t('features.heading.sort.desc') }}
         </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
     </DropdownMenuContent>

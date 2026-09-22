@@ -60,6 +60,14 @@
       "sign_in": "Sign in",
       "user": "User #{0}",
       "users": "Users"
+    },
+    "sort": {
+      "name": "Name",
+      "created_at": "Created",
+      "last_active_at": "Last Active",
+      "email": "Email",
+      "asc": "Ascending",
+      "desc": "Descending"
     }
   },
   "load": {

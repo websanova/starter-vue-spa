@@ -1,21 +1,25 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
   import { usePagination } from '@shared/composables/support/usePagination'
+  import { useI18n } from '@shared/plugins/i18n'
+  import { useSettingsStore } from '@shared/stores/settings'
   import { Heading, HeadingSort } from '@shared/components/common/Heading'
   import { Search } from '@shared/components/common/Search'
 
   const { search } = usePagination()
+  const i18n = useI18n()
+  const settings = useSettingsStore()
 
-  const sortBy = ref('created_at')
-  const sortDir = ref('desc')
+  const sortBy = ref(settings.data.defaultUsersSortBy)
+  const sortDir = ref(settings.data.defaultUsersSortDir)
 
-  const sortFields = [
-    { value: 'name', label: 'Name', icon: UserIcon },
-    { value: 'created_at', label: 'Created', icon: CalendarIcon },
-    { value: 'last_active_at', label: 'Last Active', icon: ClockIcon },
-    { value: 'email', label: 'Email', icon: MailIcon },
-  ]
+  const sortFields = computed(() => [
+    { value: 'name', label: i18n.t('features.heading.sort.name'), icon: UserIcon },
+    { value: 'created_at', label: i18n.t('features.heading.sort.created_at'), icon: CalendarIcon },
+    { value: 'last_active_at', label: i18n.t('features.heading.sort.last_active_at'), icon: ClockIcon },
+    { value: 'email', label: i18n.t('features.heading.sort.email'), icon: MailIcon },
+  ])
 </script>
 
 <template>
