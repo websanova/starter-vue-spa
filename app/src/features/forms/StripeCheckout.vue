@@ -152,6 +152,8 @@
         </template>
 
         <template v-else>
+          <!-- TODO: promotion code disabled until promo handling is decided -->
+          <!--
           <Stack gap="sm">
             <div class="flex gap-2">
               <Input
@@ -176,6 +178,7 @@
               {{ promotionError }}
             </p>
           </Stack>
+          -->
 
           <ButtonLoading
             class="w-full"
