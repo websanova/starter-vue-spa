@@ -1,8 +1,6 @@
 <script setup lang="ts">
-  import { useStats } from '@/composables/api/stats'
   import { Heading } from '@shared/components/common/Heading'
-
-  useStats()
+  import StatsList from '@/features/lists/Stats.vue'
 </script>
 
 <template>
@@ -10,5 +8,7 @@
     <Heading>
       {{ $t('features.heading.title.stats') }}
     </Heading>
+
+    <StatsList />
   </div>
 </template>

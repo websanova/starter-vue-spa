@@ -83,6 +83,7 @@
     "nouns": {
       "bookmarks": "bookmarks",
       "plans": "plans",
+      "stats": "stats",
       "user": "user",
       "users": "users"
     }
@@ -118,6 +119,30 @@
         "verification": "Verification"
       }
     }
+  },
+  "stats": {
+    "labels": {
+      "bookmarks": {
+        "total": "Bookmarks"
+      },
+      "subscriptions": {
+        "signups_free": "Free signups",
+        "signups_pro": "Pro signups"
+      },
+      "tags": {
+        "total": "Tags"
+      },
+      "users": {
+        "active": "Active users",
+        "registrations": "Registrations"
+      }
+    },
+    "periods": {
+      "all": "All time",
+      "day_before": "Day before",
+      "yesterday": "Yesterday"
+    },
+    "updated": "Updated {date}"
   },
   "manager": {
     "test_users": {

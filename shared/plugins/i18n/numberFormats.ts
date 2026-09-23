@@ -7,6 +7,7 @@ export default {
     },
     number: {
       style: 'decimal',
+      useGrouping: 'min2',
     },
   },
   'en-CA': {
@@ -17,6 +18,7 @@ export default {
     },
     number: {
       style: 'decimal',
+      useGrouping: 'min2',
     },
   },
   'fr-CA': {
@@ -27,6 +29,7 @@ export default {
     },
     number: {
       style: 'decimal',
+      useGrouping: 'min2',
     },
   },
 } as const
