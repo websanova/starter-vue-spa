@@ -1,3 +1,4 @@
+import type { BookmarkView } from '@/models/bookmark'
 import type { Interval } from '@/models/plan'
 import type { SubscriptionStatus } from '@/models/subscription'
 
@@ -18,6 +19,7 @@ export interface AuthDto {
   payment_method: AuthPaymentMethodDto | null
   phone: string | null
   plan: AuthPlanDto | null
+  preferences: AuthPreferencesDto
   role?: string
   subscription: AuthSubscriptionDto | null
   timezone: string
@@ -48,6 +50,12 @@ export interface AuthPlanDto {
   tier: number
 }
 
+export interface AuthPreferencesDto {
+  bookmarks_sort_by?: string
+  bookmarks_sort_dir?: string
+  bookmarks_view?: BookmarkView
+}
+
 export interface AuthSubscriptionDto {
   ends_at: string | null
   interval: Interval
@@ -75,6 +83,7 @@ export interface Auth {
   paymentMethod: AuthPaymentMethod | null
   phone: string | null
   plan: AuthPlan | null
+  preferences: AuthPreferences
   role?: string
   subscription: AuthSubscription | null
   timezone: string
@@ -107,6 +116,12 @@ export interface AuthPlan {
   tier: number
 }
 
+export interface AuthPreferences {
+  bookmarksSortBy?: string
+  bookmarksSortDir?: string
+  bookmarksView?: BookmarkView
+}
+
 export interface AuthSubscription {
   endsAt: string | null
   interval: Interval
@@ -135,6 +150,7 @@ export function toAuth(dto: AuthDto): Auth {
     paymentMethod: dto.payment_method ? toAuthPaymentMethod(dto.payment_method) : null,
     phone: dto.phone,
     plan: dto.plan ? toAuthPlan(dto.plan) : null,
+    preferences: toAuthPreferences(dto.preferences),
     role: dto.role,
     subscription: dto.subscription ? toAuthSubscription(dto.subscription) : null,
     timezone: dto.timezone,
@@ -171,6 +187,14 @@ export function toAuthPlan(dto: AuthPlanDto): AuthPlan {
     name: dto.name,
     slug: dto.slug,
     tier: dto.tier,
+  }
+}
+
+export function toAuthPreferences(dto: AuthPreferencesDto): AuthPreferences {
+  return {
+    bookmarksSortBy: dto.bookmarks_sort_by,
+    bookmarksSortDir: dto.bookmarks_sort_dir,
+    bookmarksView: dto.bookmarks_view,
   }
 }
 

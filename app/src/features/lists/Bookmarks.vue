@@ -9,9 +9,10 @@
   import BookmarksEmpty from '@/features/empties/Bookmarks.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
+  import type { BookmarkView } from '@/models/bookmark'
 
   defineProps<{
-    condensed?: boolean
+    view?: BookmarkView
   }>()
 
   const router = useRouter()
@@ -50,7 +51,7 @@
           v-for="bookmark in data?.bookmarks"
           :key="bookmark.id"
           :bookmark="bookmark"
-          :condensed="condensed"
+          :view="view"
           @edit="dialog.open('bookmarkUpdate', { bookmark })"
           @delete="dialog.open('bookmarkDelete', { bookmark })"
         />

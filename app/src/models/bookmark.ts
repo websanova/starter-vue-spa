@@ -1,6 +1,8 @@
 import { toTag } from '@/models/tag'
 import type { Tag, TagDto } from '@/models/tag'
 
+export type BookmarkView = 'expanded' | 'condensed'
+
 export interface BookmarkDto {
   id: number
   tags: TagDto[]

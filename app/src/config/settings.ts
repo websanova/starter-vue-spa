@@ -6,6 +6,7 @@ import type { Settings } from '@shared/models/settings'
 export const settings: Partial<Settings> = {
   defaultBookmarksSortBy: 'created_at',
   defaultBookmarksSortDir: 'desc',
+  defaultBookmarksView: 'expanded',
   defaultLocale: 'en-US',
   defaultTimezone: 'America/New_York',
   locales: ['en-US', 'en-CA', 'fr-CA'],

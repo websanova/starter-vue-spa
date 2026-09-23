@@ -3,11 +3,11 @@
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
-  import type { Bookmark } from '@/models/bookmark'
+  import type { Bookmark, BookmarkView } from '@/models/bookmark'
 
   defineProps<{
     bookmark: Bookmark
-    condensed?: boolean
+    view?: BookmarkView
   }>()
 
   const emit = defineEmits<{
@@ -17,7 +17,7 @@
 </script>
 
 <template>
-  <Item :class="condensed && 'py-0'">
+  <Item :class="view === 'condensed' && 'py-0'">
     <template #icon>
       <BookmarkIcon />
     </template>
@@ -33,7 +33,7 @@
     </template>
 
     <a
-      v-if="!condensed"
+      v-if="view !== 'condensed'"
       class="w-fit max-w-full truncate text-sm text-link"
       :href="bookmark.url"
       target="_blank"
@@ -43,7 +43,7 @@
     </a>
 
     <div
-      v-if="!condensed && bookmark.tags.length"
+      v-if="view !== 'condensed' && bookmark.tags.length"
       class="flex flex-wrap gap-1"
     >
       <Badge

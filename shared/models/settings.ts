@@ -14,6 +14,7 @@ export interface Settings {
   locales: string[]
   defaultBookmarksSortBy: string
   defaultBookmarksSortDir: string
+  defaultBookmarksView: string
   defaultLocale: string
   defaultTimezone: string
   defaultUsersSortBy: string
