@@ -17,6 +17,8 @@ export function useBookmarks(params: BookmarkParams) {
           page: params.page.value,
           search: params.search.value,
           tag_id: params.tagId.value,
+          sort_by: params.sortBy.value,
+          sort_dir: params.sortDir.value,
         },
       })
       return {

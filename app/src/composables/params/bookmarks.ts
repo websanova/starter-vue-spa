@@ -6,9 +6,11 @@ export function useBookmarkParams() {
 
   const page = useQueryParam('page', { default: 1 })
   const search = useQueryParam<string>('search', { min: settings.data.searchMinLength, replace: true })
+  const sortBy = useQueryParam('sort_by', { default: settings.data.defaultBookmarksSortBy })
+  const sortDir = useQueryParam('sort_dir', { default: settings.data.defaultBookmarksSortDir })
   const tagId = useQueryParam<string>('tag_id')
 
-  return { page, search, tagId }
+  return { page, search, sortBy, sortDir, tagId }
 }
 
 export type BookmarkParams = ReturnType<typeof useBookmarkParams>

@@ -1,15 +1,23 @@
 <script setup lang="ts">
-  import { LayoutListIcon, ListIcon, PlusIcon } from '@lucide/vue'
+  import { computed } from 'vue'
+  import { CalendarIcon, LayoutListIcon, ListIcon, PlusIcon, TypeIcon } from '@lucide/vue'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
   import { useDialogService } from '@shared/composables/services/dialog'
-  import { Heading, HeadingSearch } from '@shared/components/common/Heading'
+  import { useI18n } from '@shared/plugins/i18n'
+  import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'
 
   const condensed = defineModel<boolean>('condensed')
 
   const dialog = useDialogService()
+  const i18n = useI18n()
 
-  const { search } = useBookmarkParams()
+  const { search, sortBy, sortDir } = useBookmarkParams()
+
+  const sortFields = computed(() => [
+    { value: 'title', label: i18n.t('features.heading.sort.title'), icon: TypeIcon },
+    { value: 'created_at', label: i18n.t('features.heading.sort.created_at'), icon: CalendarIcon },
+  ])
 </script>
 
 <template>
@@ -33,6 +41,12 @@
         <LayoutListIcon v-if="condensed" />
         <ListIcon v-else />
       </Button>
+
+      <HeadingSort
+        v-model:sort-by="sortBy"
+        v-model:sort-dir="sortDir"
+        :fields="sortFields"
+      />
 
       <Button
         size="icon"

@@ -14,6 +14,12 @@
       "settings_locale": "Paramètres régionaux",
       "verify_email": "Vérifier le courriel",
       "verify_phone": "Vérifier le numéro de téléphone"
+    },
+    "sort": {
+      "title": "Titre",
+      "created_at": "Créé",
+      "asc": "Croissant",
+      "desc": "Décroissant"
     }
   },
   "lbl": {

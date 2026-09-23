@@ -12,6 +12,8 @@ export interface SettingsDto {
 export interface Settings {
   bookmarkMaxTags: number
   locales: string[]
+  defaultBookmarksSortBy: string
+  defaultBookmarksSortDir: string
   defaultLocale: string
   defaultTimezone: string
   defaultUsersSortBy: string

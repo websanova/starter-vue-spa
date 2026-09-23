@@ -14,6 +14,12 @@
       "settings_locale": "Locale",
       "verify_email": "Verify Email",
       "verify_phone": "Verify Phone Number"
+    },
+    "sort": {
+      "title": "Title",
+      "created_at": "Created",
+      "asc": "Ascending",
+      "desc": "Descending"
     }
   },
   "lbl": {
