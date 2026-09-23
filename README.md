@@ -9,6 +9,7 @@ Full documentation at [websanova.com/docs/starter-app](https://websanova.com/doc
 
 - [Docker Guide](docs/docker-guide.md)
 - [UI Guide](docs/ui-guide.md)
+- [Flows Guide](docs/flows-guide.md)
 
 ## Projects
 
@@ -17,6 +18,10 @@ Full documentation at [websanova.com/docs/starter-app](https://websanova.com/doc
 | Starter Flows | [starter-flows](https://github.com/websanova/starter-flows) | [flows](https://starter-flows.websanova.com) |
 | Starter Laravel API | [starter-laravel-api](https://github.com/websanova/starter-laravel-api) | [api](https://starter-laravel-api.websanova.com) |
 | Starter Vue SPA | [starter-vue-spa](https://github.com/websanova/starter-vue-spa) | [app](https://starter-vue-spa-app.websanova.com), [admin](https://starter-vue-spa-admin.websanova.com) |
+
+## Flows
+
+The starter-flows repo is a separate set of feature specs, implementation-agnostic so one spec covers both the API and the app. Nothing here depends on it, but if you point your `CLAUDE.local.md` at a local clone, the `/flow` command will compare any flow against this repo and tell you what's built, what's missing, and what the API still needs.
 
 ## Features
 
