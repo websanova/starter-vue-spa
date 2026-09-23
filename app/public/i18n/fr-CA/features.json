@@ -271,5 +271,14 @@
       "title": "Vérifiez votre numéro de téléphone",
       "body": "Confirmez votre numéro de téléphone pour sécuriser votre compte."
     }
+  },
+  "manager": {
+    "test_users": {
+      "title": "Choisir un utilisateur de test",
+      "empty": "Un compte vierge sans donnees",
+      "small": "Pour consulter de petits ensembles de donnees",
+      "medium": "Pour consulter des ensembles de donnees moyens",
+      "large": "Pour consulter de grands ensembles de donnees"
+    }
   }
 }

@@ -116,5 +116,12 @@
         "verification": "Verification"
       }
     }
+  },
+  "manager": {
+    "test_users": {
+      "title": "Select test user",
+      "super": "Full access to everything",
+      "admin": "Standard admin access"
+    }
   }
 }

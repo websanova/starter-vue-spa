@@ -271,5 +271,14 @@
       "title": "Verify your phone number",
       "body": "Confirm your phone number to secure your account."
     }
+  },
+  "manager": {
+    "test_users": {
+      "title": "Select test user",
+      "empty": "A fresh account with no data yet",
+      "small": "For viewing small sized data sets",
+      "medium": "For viewing medium sized data sets",
+      "large": "For viewing large sized data sets"
+    }
   }
 }
