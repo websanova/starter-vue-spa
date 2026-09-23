@@ -155,6 +155,13 @@
       }
     }
   },
+  "empty": {
+    "bookmarks": {
+      "title": "Aucun signet pour l'instant",
+      "note": "Vous n'avez pas encore créé de signets. Commencez par créer votre premier signet.",
+      "action": "Créer un signet"
+    }
+  },
   "form": {
     "auth_login": {
       "reset_password": "Réinitialiser le mot de passe"

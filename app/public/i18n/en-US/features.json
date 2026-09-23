@@ -155,6 +155,13 @@
       }
     }
   },
+  "empty": {
+    "bookmarks": {
+      "title": "No bookmarks yet",
+      "note": "You haven't created any bookmarks yet. Get started by creating your first bookmark.",
+      "action": "Create bookmark"
+    }
+  },
   "form": {
     "auth_login": {
       "reset_password": "Reset password"

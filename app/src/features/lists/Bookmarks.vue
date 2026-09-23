@@ -4,6 +4,7 @@
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import BookmarksEmpty from '@/features/empties/Bookmarks.vue'
   import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
@@ -49,6 +50,10 @@
           :condensed="condensed"
         />
       </ItemGroup>
+
+      <template #empty>
+        <BookmarksEmpty />
+      </template>
     </LoadPaginate>
   </div>
 </template>

@@ -91,6 +91,11 @@
 
     <slot v-if="meta?.total" />
 
+    <slot
+      v-else-if="!isFiltered && $slots.empty"
+      name="empty"
+    />
+
     <p
       v-else
       class="my-3 text-muted-foreground"
