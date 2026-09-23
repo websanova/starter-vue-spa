@@ -3,9 +3,11 @@
 A Vite + Vue 3 starter with two apps - `app` and `admin` - sharing a central
 `shared/` codebase. TypeScript, Tailwind v4, shadcn-vue, Vue Router, yarn workspaces.
 
+Part of the Starters, built at [Websanova](https://www.websanova.com).
+
 ## Docs
 
-Full documentation at [websanova.com/docs/starter-app](https://websanova.com/docs/starter-app).
+Full documentation at [websanova.com/docs/starter-app](https://www.websanova.com/docs/starter-app).
 
 - [Docker Guide](docs/docker-guide.md)
 - [UI Guide](docs/ui-guide.md)
@@ -51,4 +53,4 @@ MIT - see [LICENSE](LICENSE).
 
 ---
 
-Built and maintained by [Rob](https://www.websanova.com/about). I take freelance and contract work, including MVP projects built on the Starters. Check out the [hire page](https://www.websanova.com/hire) for more info.
+Built and maintained by Rob at [Websanova](https://www.websanova.com). I take freelance and contract work, including MVP projects built on the Starters. Check out the [hire page](https://www.websanova.com/hire) for more info.
