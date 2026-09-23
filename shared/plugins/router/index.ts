@@ -1,13 +1,13 @@
 import type { App } from "vue"
 import { createRouter as createVueRouter, createWebHistory, type NavigationGuard, type NavigationHookAfter, type Router } from "vue-router"
 
-import * as auth from './interceptors/auth'
-import * as content from './interceptors/content'
-import * as i18n from './interceptors/i18n'
-import * as ready from './interceptors/ready'
+import * as auth from './middleware/auth'
+import * as content from './middleware/content'
+import * as i18n from './middleware/i18n'
+import * as ready from './middleware/ready'
 import { scrollBehavior } from './scrollBehavior'
 
-import interceptors from "@router/interceptors"
+import interceptors from "@router/middleware"
 import routes from "@router/routes"
 
 /**

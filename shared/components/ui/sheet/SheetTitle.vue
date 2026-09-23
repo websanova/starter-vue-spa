@@ -3,7 +3,7 @@
   import type { HTMLAttributes } from "vue"
   import { reactiveOmit } from "@vueuse/core"
   import { DialogTitle } from "reka-ui"
-  import { cn } from '@shared/lib/utils'
+  import { cn } from '@shared/utils/utils'
 
   const props = defineProps<DialogTitleProps & { class?: HTMLAttributes["class"] }>()
 

@@ -1,7 +1,7 @@
 import { watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { useColorScheme } from '@shared/composables/support/useColorScheme'
-import { appearanceBreakpoint, stripeAppearance } from '@shared/lib/stripe'
+import { appearanceBreakpoint, stripeAppearance } from '@shared/utils/stripe'
 import type { StripeElements } from '@stripe/stripe-js'
 
 /**

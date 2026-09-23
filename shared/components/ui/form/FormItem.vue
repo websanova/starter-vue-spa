@@ -2,7 +2,7 @@
   import type { HTMLAttributes } from "vue"
   import { useId } from "reka-ui"
   import { provide } from "vue"
-  import { cn } from '@shared/lib/utils'
+  import { cn } from '@shared/utils/utils'
   import { FORM_ITEM_INJECTION_KEY } from "./injectionKeys"
 
   const props = defineProps<{

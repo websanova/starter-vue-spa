@@ -4,7 +4,7 @@ import { useValidatedForm } from '@shared/composables/primitives/useValidatedFor
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'
 import { useUpdateProfile, useUploadAvatar } from '@/composables/api/profile'
-import { byteToMb } from '@shared/lib/bytes'
+import { byteToMb } from '@shared/utils/bytes'
 
 export function useProfileForm() {
   const store = useAuthStore()

@@ -1,6 +1,6 @@
 import { nextTick, onBeforeUnmount } from 'vue'
 import { useStripeAppearance } from '@shared/composables/primitives/useStripeAppearance'
-import { stripeAppearance, stripeClient, stripeLocale } from '@shared/lib/stripe'
+import { stripeAppearance, stripeClient, stripeLocale } from '@shared/utils/stripe'
 import type { Ref } from 'vue'
 import type { StripeElements, StripeError, StripePaymentElement } from '@stripe/stripe-js'
 

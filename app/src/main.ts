@@ -7,7 +7,7 @@ import { createQueryClient } from "@shared/plugins/query"
 import { createRouter } from "@shared/plugins/router"
 import { createStore } from "@shared/plugins/store"
 import { createValidation } from "@shared/plugins/validation"
-import { registerModuleReload } from "@shared/lib/moduleReload"
+import { registerModuleReload } from "@shared/utils/moduleReload"
 
 /**
  * Imported for its side effects only. Evaluating the module starts the

@@ -4,7 +4,7 @@
   import { SelectContent, type SelectContentEmits, type SelectContentProps, SelectPortal, SelectViewport, useForwardPropsEmits } from "reka-ui"
   import SelectScrollDownButton from "./SelectScrollDownButton.vue"
   import SelectScrollUpButton from "./SelectScrollUpButton.vue"
-  import { cn } from "@shared/lib/utils"
+  import { cn } from "@shared/utils/utils"
 
   const props = withDefaults(defineProps<SelectContentProps & { class?: HTMLAttributes["class"] }>(), {
     position: "popper",

@@ -1,4 +1,4 @@
-import { getLocale } from '@shared/lib/locale'
+import { getLocale } from '@shared/utils/locale'
 
 import type { RequestInterceptor } from '@shared/plugins/http/client'
 
