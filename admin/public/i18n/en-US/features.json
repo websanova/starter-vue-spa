@@ -20,6 +20,7 @@
     "refresh": "Refresh",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
+    "stats": "Stats",
     "update": "Update",
     "users": "Users",
     "yes": "Yes"
@@ -58,6 +59,7 @@
       "icons": "Icons",
       "plans": "Plans",
       "sign_in": "Sign in",
+      "stats": "Stats",
       "user": "User #{0}",
       "users": "Users"
     },

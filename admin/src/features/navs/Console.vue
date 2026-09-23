@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { LayersIcon, ShapesIcon, UsersIcon } from '@lucide/vue'
+  import { ChartColumnIcon, LayersIcon, ShapesIcon, UsersIcon } from '@lucide/vue'
   import { Navbar, NavItem } from '@shared/components/common/Navbar'
 </script>
 
@@ -15,6 +15,11 @@
     <NavItem :to="{ name: 'user-plans' }">
       <LayersIcon />
       {{ $t('features.lbl.plans') }}
+    </NavItem>
+
+    <NavItem :to="{ name: 'user-stats' }">
+      <ChartColumnIcon />
+      {{ $t('features.lbl.stats') }}
     </NavItem>
 
     <NavItem :to="{ name: 'user-icons' }">

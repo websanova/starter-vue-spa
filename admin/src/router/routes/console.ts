@@ -3,6 +3,7 @@ const LayoutConsole = () => import('@/features/layouts/ConsoleUser.vue')
 
 const Icons         = () => import('@/views/console/Icons.vue')
 const Plans         = () => import('@/views/console/Plans.vue')
+const Stats         = () => import('@/views/console/Stats.vue')
 const Users         = () => import('@/views/console/Users.vue')
 
 const UserBilling   = () => import('@/views/console/user/Billing.vue')
@@ -47,6 +48,15 @@ export default [{
     meta: {
       content: {
         layout: 'plans'
+      }
+    }
+  }, {
+    path: 'stats',
+    name: 'user-stats',
+    component: Stats,
+    meta: {
+      content: {
+        layout: 'stats'
       }
     }
   }, {
