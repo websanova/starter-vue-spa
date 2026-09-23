@@ -43,6 +43,7 @@ The starter-flows repo is a separate set of feature specs, implementation-agnost
 * **Scroll Behavior (Vue Router)** - Scroll resets on navigation with back and forward restoring position, plus route grouping to hold scroll across tabbed sections.
 * **Localization (vue-i18n)** - Translations loaded and cached per page, locale auto detected on first visit, and signed-in users pulling their saved locale from the API.
 * **Timezones** - Times shown in the user's timezone and adjusted on the fly, auto detected at registration and restored from the API across devices.
+* **Test Users** - Dev-only control on the login screen that fills the form with a seeded account, with separate rosters for app and admin behind a single env variable.
 * **Dev Environment** - Dockerized dev environment on Node 22 with a simple `./dev` script for container commands.
 
 For the full breakdown, see the [features overview](https://websanova.com/docs/starter-app/intro/features).
