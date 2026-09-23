@@ -1,20 +1,17 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { CalendarIcon, LayoutListIcon, ListIcon, PlusIcon, TypeIcon } from '@lucide/vue'
-  import { useUpdatePreferences } from '@/composables/api/preferences'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import { usePreferences } from '@/composables/support/preferences'
   import { useDialogService } from '@shared/composables/services/dialog'
   import { useI18n } from '@shared/plugins/i18n'
   import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'
-  import type { BookmarkView } from '@/models/bookmark'
-
-  const view = defineModel<BookmarkView>('view')
 
   const dialog = useDialogService()
   const i18n = useI18n()
 
-  const { mutate: updatePreferences } = useUpdatePreferences()
+  const { bookmarksView } = usePreferences()
 
   const { search, sortBy, sortDir } = useBookmarkParams()
 
@@ -24,10 +21,7 @@
   ])
 
   function onToggleView() {
-    const next = view.value === 'condensed' ? 'expanded' : 'condensed'
-
-    view.value = next
-    updatePreferences({ bookmarks_view: next })
+    bookmarksView.value = bookmarksView.value === 'condensed' ? 'expanded' : 'condensed'
   }
 </script>
 
@@ -49,7 +43,7 @@
         variant="outline"
         @click="onToggleView"
       >
-        <LayoutListIcon v-if="view === 'condensed'" />
+        <LayoutListIcon v-if="bookmarksView === 'condensed'" />
         <ListIcon v-else />
       </Button>
 

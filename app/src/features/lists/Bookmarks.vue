@@ -4,20 +4,18 @@
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import { usePreferences } from '@/composables/support/preferences'
   import { useDialogService } from '@shared/composables/services/dialog'
   import BookmarkItem from '@/components/items/Bookmark.vue'
   import BookmarksEmpty from '@/features/empties/Bookmarks.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
-  import type { BookmarkView } from '@/models/bookmark'
-
-  defineProps<{
-    view?: BookmarkView
-  }>()
 
   const router = useRouter()
 
   const dialog = useDialogService()
+
+  const { bookmarksView } = usePreferences()
 
   const params = useBookmarkParams()
   const { page, search, tagId } = params
@@ -51,7 +49,7 @@
           v-for="bookmark in data?.bookmarks"
           :key="bookmark.id"
           :bookmark="bookmark"
-          :view="view"
+          :view="bookmarksView"
           @edit="dialog.open('bookmarkUpdate', { bookmark })"
           @delete="dialog.open('bookmarkDelete', { bookmark })"
         />
