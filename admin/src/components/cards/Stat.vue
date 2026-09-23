@@ -1,6 +1,8 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
+  import { MinusIcon, TrendingDownIcon, TrendingUpIcon } from '@lucide/vue'
   import { useI18n } from '@shared/plugins/i18n'
-  import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@shared/components/ui/card'
+  import { Card, CardContent, CardHeader, CardTitle } from '@shared/components/ui/card'
   import type { StatMetric } from '@/models/stat'
 
   const props = defineProps<{
@@ -8,6 +10,14 @@
   }>()
 
   const { n } = useI18n()
+
+  const delta = computed(() => {
+    if (props.metric.today === null || props.metric.yesterday === null) {
+      return null
+    }
+
+    return props.metric.today - props.metric.yesterday
+  })
 
   function format(value: number | null) {
     return value === null ? '-' : n(value, 'number')
@@ -20,25 +30,57 @@
       <CardTitle class="text-sm font-medium text-muted-foreground">
         {{ $t(`features.stats.labels.${props.metric.group}.${props.metric.name}`) }}
       </CardTitle>
-
-      <CardDescription>
-        {{ $t('features.stats.periods.all') }} {{ format(props.metric.all) }}
-      </CardDescription>
     </CardHeader>
 
     <CardContent class="px-4">
-      <p class="text-2xl font-bold">
-        {{ format(props.metric.today) }}
-      </p>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <p class="text-2xl font-bold">
+          {{ format(props.metric.today) }}
+        </p>
 
-      <div class="mt-1 flex gap-4 text-xs text-muted-foreground">
-        <span>
-          {{ $t('features.stats.periods.yesterday') }} {{ format(props.metric.yesterday) }}
-        </span>
+        <p
+          v-if="delta !== null"
+          class="flex items-center gap-1 text-xs"
+          :class="{
+            'text-green-600 dark:text-green-400': delta > 0,
+            'text-red-600 dark:text-red-400': delta < 0,
+            'text-muted-foreground': delta === 0
+          }"
+        >
+          <TrendingUpIcon
+            v-if="delta > 0"
+            class="size-3"
+          />
 
-        <span>
-          {{ $t('features.stats.periods.day_before') }} {{ format(props.metric.dayBefore) }}
-        </span>
+          <TrendingDownIcon
+            v-else-if="delta < 0"
+            class="size-3"
+          />
+
+          <MinusIcon
+            v-else
+            class="size-3"
+          />
+
+          {{ $t('features.stats.delta', { change: `${delta > 0 ? '+' : ''}${format(delta)}` }) }}
+        </p>
+      </div>
+
+      <div class="mt-3 grid grid-cols-3 gap-2 text-xs text-muted-foreground">
+        <div>
+          <p>{{ $t('features.stats.periods.yesterday') }}</p>
+          <p>{{ format(props.metric.yesterday) }}</p>
+        </div>
+
+        <div>
+          <p>{{ $t('features.stats.periods.day_before') }}</p>
+          <p>{{ format(props.metric.dayBefore) }}</p>
+        </div>
+
+        <div>
+          <p>{{ $t('features.stats.periods.all') }}</p>
+          <p>{{ format(props.metric.all) }}</p>
+        </div>
       </div>
     </CardContent>
   </Card>

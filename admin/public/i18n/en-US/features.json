@@ -137,6 +137,7 @@
         "registrations": "Registrations"
       }
     },
+    "delta": "{change} vs yesterday",
     "periods": {
       "all": "All time",
       "day_before": "Day before",
