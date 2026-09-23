@@ -4,8 +4,9 @@
   import { useBookmarks } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import { useDialogService } from '@shared/composables/services/dialog'
+  import BookmarkItem from '@/components/items/Bookmark.vue'
   import BookmarksEmpty from '@/features/empties/Bookmarks.vue'
-  import BookmarkItem from '@/features/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
 
@@ -14,6 +15,8 @@
   }>()
 
   const router = useRouter()
+
+  const dialog = useDialogService()
 
   const params = useBookmarkParams()
   const { page, search, tagId } = params
@@ -48,6 +51,8 @@
           :key="bookmark.id"
           :bookmark="bookmark"
           :condensed="condensed"
+          @edit="dialog.open('bookmarkUpdate', { bookmark })"
+          @delete="dialog.open('bookmarkDelete', { bookmark })"
         />
       </ItemGroup>
 

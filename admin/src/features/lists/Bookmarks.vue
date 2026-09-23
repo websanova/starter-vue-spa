@@ -2,7 +2,7 @@
   import { useRouter } from 'vue-router'
   import { useUserBookmarks } from '@/composables/api/bookmarks'
   import { useBookmarkParams } from '@/composables/params/bookmarks'
-  import BookmarkItem from '@/features/items/Bookmark.vue'
+  import BookmarkItem from '@/components/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'
   import type { User } from '@/models/user'

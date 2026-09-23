@@ -1,16 +1,17 @@
 <script setup lang="ts">
   import { Trash2Icon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
   import { Avatar } from '@shared/components/common/Avatar'
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import type { User } from '@/models/user'
 
-  const props = defineProps<{
+  defineProps<{
     user: User
   }>()
 
-  const dialog = useDialogService()
+  const emit = defineEmits<{
+    (e: 'delete'): void
+  }>()
 </script>
 
 <template>
@@ -38,7 +39,7 @@
 
     <template #actions>
       <ItemDropdown>
-        <DropdownMenuItem @select="dialog.open('userDelete', { user: props.user })">
+        <DropdownMenuItem @select="emit('delete')">
           <Trash2Icon />
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>

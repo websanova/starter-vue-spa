@@ -1,17 +1,19 @@
 <script setup lang="ts">
   import { BookmarkIcon, PencilIcon, Trash2Icon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
   import type { Bookmark } from '@/models/bookmark'
 
-  const props = defineProps<{
+  defineProps<{
     bookmark: Bookmark
     condensed?: boolean
   }>()
 
-  const dialog = useDialogService()
+  const emit = defineEmits<{
+    (e: 'edit'): void
+    (e: 'delete'): void
+  }>()
 </script>
 
 <template>
@@ -58,12 +60,12 @@
 
     <template #actions>
       <ItemDropdown>
-        <DropdownMenuItem @select="dialog.open('bookmarkUpdate', { bookmark: props.bookmark })">
+        <DropdownMenuItem @select="emit('edit')">
           <PencilIcon />
           {{ $t('features.lbl.edit') }}
         </DropdownMenuItem>
 
-        <DropdownMenuItem @select="dialog.open('bookmarkDelete', { bookmark: props.bookmark })">
+        <DropdownMenuItem @select="emit('delete')">
           <Trash2Icon />
           {{ $t('features.lbl.delete') }}
         </DropdownMenuItem>
