@@ -23,6 +23,8 @@ Full documentation at [websanova.com/docs/starter-app](https://websanova.com/doc
 * **Auth** - Route-level access for guest, logged-in, and role-based pages, with sessions that refresh as you use the app and only expire after real inactivity.
 * **Account Verification** - Users held on a verify screen until confirmed, multiple verifications worked through one at a time, with an optional grace period and reminder banner.
 * **Settings** - App config loaded from the API with local per-app overrides, centralizing front-end options like auto-login.
+* **Sample CRUD (Bookmarks & Tags)** - Reference list/detail/form views showing the full loop against the API, with ownership scoping and validation errors wired up.
+* **Query Params (Search, Filter, Sort, Pagination)** - A reusable composable setup for driving state off the route query, wired up for these out of the box and ready to take any param you add.
 * **Components (shadcn-vue)** - shadcn-vue plus custom components copied into `shared/components/ui/`, not a dependency.
 * **Layouts** - Layout builder with drop-in blocks for header, footer, body, and asides, covering auth pages, error pages, and centered empty states.
 * **Mobile** - Mobile-friendly out of the box with slide-out menus and responsive navigation.
