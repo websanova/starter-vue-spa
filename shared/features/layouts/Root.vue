@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import { onMounted } from 'vue'
-  import Head from '@shared/features/meta/Head.vue'
+  import { useSiteHead } from '@shared/composables/support/useSiteHead'
   import SiteTransition from '@shared/features/transitions/Site.vue'
   import { removeInitCover } from '@shared/lib/initCover'
   import "@shared/assets/main.css"
+
+  useSiteHead()
 
   onMounted(() => {
     removeInitCover()
@@ -12,8 +14,6 @@
 
 <template>
   <SiteTransition>
-      <Head />
-
       <RouterView />
   </SiteTransition>
 </template>
