@@ -13,6 +13,10 @@ type QueryParamOptions<T> = {
  * A single list param kept in the route query, so the components on a page
  * read and write the same value without syncing. A value matching the
  * default drops back out of the query to keep the URL clean.
+ *
+ * The two overloads are purely for the return type. Passing a default means
+ * the value can never read as undefined, so callers like `page` get a plain
+ * `number` instead of having to re-assert the default at every use site.
  */
 export function useQueryParam<T extends string | number>(key: string, options: QueryParamOptions<T> & { default: T }): WritableComputedRef<T>
 export function useQueryParam<T extends string | number>(key: string, options?: QueryParamOptions<T>): WritableComputedRef<T | undefined>
