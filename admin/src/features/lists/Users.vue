@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
   import { useUsers } from '@/composables/api/users'
-  import { useUserParams } from '@/composables/params/users'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useUserParams } from '@/composables/params/useUserParams'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import UserItem from '@/components/items/User.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'

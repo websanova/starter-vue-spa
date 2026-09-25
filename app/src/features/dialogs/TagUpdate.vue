@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useTagForm } from '@/composables/forms/tag'
+  import { useTagForm } from '@/composables/forms/useTagForm'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputText } from '@shared/components/common/Form'
   import type { Tag } from '@/models/tag'

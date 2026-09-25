@@ -1,5 +1,5 @@
-import { useAuthService } from '@shared/composables/services/auth'
-import { useSettingsService } from '@shared/composables/services/settings'
+import { useAuthService } from '@shared/composables/services/useAuthService'
+import { useSettingsService } from '@shared/composables/services/useSettingsService'
 
 /**
  * Ready gate. Resolves app critical state before any downstream guard

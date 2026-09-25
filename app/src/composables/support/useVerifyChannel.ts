@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 
 /**
  * Resolves the active verification channel. A valid channel query param

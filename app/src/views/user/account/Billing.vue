@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
   import BillingAddressDisplay from '@/features/displays/BillingAddress.vue'

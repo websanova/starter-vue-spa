@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { MapPinIcon } from '@lucide/vue'
-  import { useBillingAddress } from '@/composables/support/billing'
+  import { useBillingAddress } from '@/composables/support/useBillingAddress'
   import { Inline } from '@shared/components/common/Inline'
 
   const address = useBillingAddress()

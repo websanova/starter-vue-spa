@@ -2,7 +2,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 import { useHttp } from '@shared/plugins/http'
 import { toUser } from '@/models/user'
 import { toPaginationMeta } from '@shared/models/pagination'
-import type { UserParams } from '@/composables/params/users'
+import type { UserParams } from '@/composables/params/useUserParams'
 import type { UserDto } from '@/models/user'
 import type { PaginationMetaDto } from '@shared/models/pagination'
 import type { Ref } from 'vue'

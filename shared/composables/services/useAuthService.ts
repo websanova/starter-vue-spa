@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 
-import { useI18nService } from '@shared/composables/services/i18n'
+import { useI18nService } from '@shared/composables/services/useI18nService'
 import { useHttp } from '@shared/plugins/http'
 import { useQueryClient } from '@shared/plugins/query'
 import { useAuthStore } from '@shared/stores/auth'

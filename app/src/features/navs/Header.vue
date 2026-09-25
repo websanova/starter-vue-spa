@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, UserIcon } from '@lucide/vue'
-  import { useNotificationsUnread } from '@/composables/support/notificationsUnread'
-  import { useLogout } from '@shared/composables/support/logout'
+  import { useNotificationsUnread } from '@/composables/support/useNotificationsUnread'
+  import { useLogout } from '@shared/composables/support/useLogout'
   import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'

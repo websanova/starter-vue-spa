@@ -2,7 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 import { toPlan } from '@/models/plan'
 import { toPaginationMeta } from '@shared/models/pagination'
-import type { PlanParams } from '@/composables/params/plans'
+import type { PlanParams } from '@/composables/params/usePlanParams'
 import type { PlanDto } from '@/models/plan'
 import type { PaginationMetaDto } from '@shared/models/pagination'
 

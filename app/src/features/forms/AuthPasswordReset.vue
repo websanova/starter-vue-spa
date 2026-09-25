@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import { usePasswordResetForm } from '@/composables/forms/password'
+  import { usePasswordResetForm } from '@/composables/forms/usePasswordResetForm'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const route = useRoute()

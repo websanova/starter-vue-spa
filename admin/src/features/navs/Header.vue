@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { LogOutIcon, MoonIcon, SunIcon } from '@lucide/vue'
   import { useColorScheme } from '@shared/composables/support/useColorScheme'
-  import { useLogout } from '@shared/composables/support/logout'
+  import { useLogout } from '@shared/composables/support/useLogout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'

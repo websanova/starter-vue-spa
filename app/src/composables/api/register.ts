@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/vue-query'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import { useI18n } from '@shared/plugins/i18n'
 import { useHttp } from '@shared/plugins/http'
 

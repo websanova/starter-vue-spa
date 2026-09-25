@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { CreditCardIcon } from '@lucide/vue'
-  import { usePaymentMethod } from '@/composables/support/billing'
+  import { usePaymentMethod } from '@/composables/support/usePaymentMethod'
   import { Inline } from '@shared/components/common/Inline'
 
   defineEmits<{

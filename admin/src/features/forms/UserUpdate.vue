@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useUserUpdateForm } from '@/composables/forms/user'
+  import { useUserUpdateForm } from '@/composables/forms/useUserUpdateForm'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
   import type { User } from '@/models/user'
 

@@ -1,24 +1,10 @@
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { AuthRules } from '@shared/rules/auth'
-import { usePasswordForgot, usePasswordReset } from '@/composables/api/password'
+import { usePasswordReset } from '@/composables/api/password'
 
 interface UpdateOptions {
   email: string
   token: string
-}
-
-export function usePasswordForgotForm() {
-  const passwordForgot = usePasswordForgot()
-
-  return useValidatedForm({
-    rules: {
-      email: AuthRules.email(),
-    },
-    initial: {
-      email: '',
-    },
-    onSubmit: passwordForgot.mutateAsync,
-  })
 }
 
 export function usePasswordResetForm(options: UpdateOptions) {

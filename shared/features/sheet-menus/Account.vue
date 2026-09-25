@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { LogOutIcon } from '@lucide/vue'
-  import { useLogout } from '@shared/composables/support/logout'
+  import { useLogout } from '@shared/composables/support/useLogout'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
   import { Button } from '@shared/components/ui/button'
 

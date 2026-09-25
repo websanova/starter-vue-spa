@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { PlusIcon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { SheetMenu } from '@shared/components/common/SheetMenu'
   import TagsNav from '@/features/navs/Tags.vue'
   import { Button } from '@shared/components/ui/button'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { useAuthService } from '@shared/composables/services/auth'
+  import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useDeleteAvatar } from '@/composables/api/profile'
-  import { useProfileAvatar } from '@/composables/forms/profile'
+  import { useProfileAvatar } from '@/composables/forms/useProfileAvatar'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form } from '@shared/components/common/Form'
   import { Inline } from '@shared/components/common/Inline'

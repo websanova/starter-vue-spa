@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { usePaymentMethodForm } from '@/composables/support/paymentMethod'
+  import { usePaymentMethodForm } from '@/composables/support/usePaymentMethodForm'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import StripeLogo from '@shared/components/logos/Stripe.vue'

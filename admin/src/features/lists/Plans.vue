@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { usePlans } from '@/composables/api/plans'
-  import { usePlanParams } from '@/composables/params/plans'
+  import { usePlanParams } from '@/composables/params/usePlanParams'
   import PlanItem from '@/components/items/Plan.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'

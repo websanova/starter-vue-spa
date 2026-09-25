@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { GlobeIcon } from '@lucide/vue'
-  import { useI18nService } from '@shared/composables/services/i18n'
+  import { useI18nService } from '@shared/composables/services/useI18nService'
   import { useLocaleOptions } from '@shared/composables/support/useLocaleOptions'
   import { useI18n } from '@shared/plugins/i18n'
   import { Navbar, NavDropdown } from '@shared/components/common/Navbar'

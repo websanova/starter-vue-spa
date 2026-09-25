@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/vue-query'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import { useHttp } from '@shared/plugins/http'
 import { toSubscriptionPayment, toSubscriptionSession } from '@/models/subscription'
 import type { Interval } from '@/models/plan'

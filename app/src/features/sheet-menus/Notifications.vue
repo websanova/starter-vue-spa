@@ -2,7 +2,7 @@
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useNotifications, useReadAllNotifications, useReadNotification } from '@/composables/api/notifications'
-  import { useAuthService } from '@shared/composables/services/auth'
+  import { useAuthService } from '@shared/composables/services/useAuthService'
   import { Notification } from '@shared/components/common/Notification'
   import NotificationsSheetMenu from '@shared/features/sheet-menus/Notifications.vue'
 

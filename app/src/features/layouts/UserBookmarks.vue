@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { PlusIcon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { LayoutBody, LayoutBodyAside, LayoutBodyContent } from '@shared/components/common/Layout'
   import TagsNav from '@/features/navs/Tags.vue'
   import PageTransition from '@shared/features/transitions/Page.vue'

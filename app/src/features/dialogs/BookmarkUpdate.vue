@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useTags } from '@/composables/api/tags'
-  import { useBookmarkForm } from '@/composables/forms/bookmark'
+  import { useBookmarkForm } from '@/composables/forms/useBookmarkForm'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputTags, FormInputText } from '@shared/components/common/Form'
   import type { Bookmark } from '@/models/bookmark'

@@ -1,5 +1,5 @@
 import { useRouter } from 'vue-router'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 
 export const useLogout = function() {
   const { logout } = useAuthService()

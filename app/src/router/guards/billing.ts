@@ -1,4 +1,4 @@
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import type { RouteLocationRaw } from 'vue-router'
 
 const redirect: RouteLocationRaw = { name: 'user-account-billing' }

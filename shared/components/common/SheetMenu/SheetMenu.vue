@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { watch } from 'vue'
   import { XIcon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import StarterTextLogo from '@shared/components/logos/StarterText.vue'
   import { Sheet, SheetClose, SheetContent, SheetTitle } from '@shared/components/ui/sheet'
 

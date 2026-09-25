@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { usePasswordForgotForm } from '@/composables/forms/password'
+  import { usePasswordForgotForm } from '@/composables/forms/usePasswordForgotForm'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const { submit, isPending, isSuccess } = usePasswordForgotForm()

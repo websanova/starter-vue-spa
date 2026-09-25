@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { CalendarIcon, ClockIcon, MailIcon, UserIcon } from '@lucide/vue'
-  import { useUserParams } from '@/composables/params/users'
+  import { useUserParams } from '@/composables/params/useUserParams'
   import { useI18n } from '@shared/plugins/i18n'
   import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
 

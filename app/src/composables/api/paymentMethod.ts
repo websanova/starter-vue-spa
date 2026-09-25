@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/vue-query'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import { useHttp } from '@shared/plugins/http'
 import { toPaymentMethodIntent } from '@/models/paymentMethod'
 import type { PaymentMethodIntentDto } from '@/models/paymentMethod'

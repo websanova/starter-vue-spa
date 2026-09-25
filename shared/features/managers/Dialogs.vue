@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { dialogs } from '@/config/dialogs'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import type { Component } from 'vue'
 
   const { active, isOpen, close } = useDialogService()

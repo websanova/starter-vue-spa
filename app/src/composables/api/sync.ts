@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/vue-query'
 import { toSync } from '@/models/sync'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import { useHttp } from '@shared/plugins/http'
 import type { SyncDto } from '@/models/sync'
 

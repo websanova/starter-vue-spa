@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/vue-query'
 import { settings } from '@/config/settings'
-import { useI18nService } from '@shared/composables/services/i18n'
+import { useI18nService } from '@shared/composables/services/useI18nService'
 import { useValidatedForm } from '@shared/composables/primitives/useValidatedForm'
 import { UserRules } from '@shared/rules/user'
 import { useAuthStore } from '@shared/stores/auth'

@@ -2,7 +2,7 @@
   import { useRoute } from 'vue-router'
   import { PencilIcon, TagIcon, Trash2Icon } from '@lucide/vue'
   import { useTags } from '@/composables/api/tags'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { Loading } from '@shared/components/common/Loading'
   import { Navbar, NavDivider, NavItem, NavItemMenu } from '@shared/components/common/Navbar'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'

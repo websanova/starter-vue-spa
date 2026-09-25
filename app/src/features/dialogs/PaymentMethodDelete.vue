@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
   import { useDeletePaymentMethod } from '@/composables/api/paymentMethod'
-  import { useSubscription } from '@/composables/support/subscription'
+  import { useSubscription } from '@/composables/support/useSubscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useI18n } from '@shared/plugins/i18n'
   import { DialogAlert } from '@shared/components/common/DialogAlert'

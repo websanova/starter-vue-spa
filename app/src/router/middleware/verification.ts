@@ -1,4 +1,4 @@
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 
 /**

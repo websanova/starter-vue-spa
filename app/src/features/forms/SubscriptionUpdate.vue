@@ -4,7 +4,7 @@
   import { usePlans } from '@/composables/api/plans'
   import { useUpdateSubscription } from '@/composables/api/subscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
-  import { useAuthService } from '@shared/composables/services/auth'
+  import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'

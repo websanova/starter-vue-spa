@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
   import { useUserBookmarks } from '@/composables/api/bookmarks'
-  import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
   import BookmarkItem from '@/components/items/Bookmark.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
   import { ItemGroup } from '@shared/components/ui/item'

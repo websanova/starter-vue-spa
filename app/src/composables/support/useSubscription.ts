@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 import { useI18n } from '@shared/plugins/i18n'
 import { useSettingsStore } from '@shared/stores/settings'
 import type { Interval, Plan } from '@/models/plan'

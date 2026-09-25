@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { CalendarIcon, LayoutListIcon, ListIcon, PlusIcon, TypeIcon } from '@lucide/vue'
-  import { useBookmarkParams } from '@/composables/params/bookmarks'
-  import { usePreferences } from '@/composables/support/preferences'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
+  import { usePreferences } from '@/composables/support/usePreferences'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { useI18n } from '@shared/plugins/i18n'
   import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'

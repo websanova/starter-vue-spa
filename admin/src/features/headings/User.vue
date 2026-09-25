@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useBookmarkParams } from '@/composables/params/bookmarks'
+  import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
   import { Heading, HeadingSearch } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 

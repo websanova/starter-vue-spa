@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useUserDeleteForm } from '@/composables/forms/userDelete'
+  import { useUserDeleteForm } from '@/composables/forms/useUserDeleteForm'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputText } from '@shared/components/common/Form'
   import type { User } from '@/models/user'

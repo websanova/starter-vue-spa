@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { useSync } from '@/composables/api/sync'
-import { useAuthService } from '@shared/composables/services/auth'
+import { useAuthService } from '@shared/composables/services/useAuthService'
 
 /**
  * Totals everything waiting in the notifications menu for the bell

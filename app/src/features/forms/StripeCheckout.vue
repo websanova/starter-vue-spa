@@ -2,7 +2,7 @@
   import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
-  import { useCheckout } from '@/composables/support/checkout'
+  import { useCheckout } from '@/composables/support/useCheckout'
   import { useSettingsStore } from '@shared/stores/settings'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'

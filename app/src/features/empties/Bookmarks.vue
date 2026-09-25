@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { BookmarkIcon } from '@lucide/vue'
-  import { useDialogService } from '@shared/composables/services/dialog'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import { Button } from '@shared/components/ui/button'
   import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@shared/components/ui/empty'
 

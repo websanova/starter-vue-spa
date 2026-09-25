@@ -2,7 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 import { toBookmark } from '@/models/bookmark'
 import { toPaginationMeta } from '@shared/models/pagination'
-import type { BookmarkParams } from '@/composables/params/bookmarks'
+import type { BookmarkParams } from '@/composables/params/useBookmarkParams'
 import type { BookmarkDto } from '@/models/bookmark'
 import type { PaginationMetaDto } from '@shared/models/pagination'
 

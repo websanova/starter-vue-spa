@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
-  import { useSubscription } from '@/composables/support/subscription'
+  import { useSubscription } from '@/composables/support/useSubscription'
   import { Button } from '@shared/components/ui/button'
   import { Inline } from '@shared/components/common/Inline'
   import { Stack } from '@shared/components/common/Stack'
-  import type { StatusAction } from '@/composables/support/subscription'
+  import type { StatusAction } from '@/composables/support/useSubscription'
 
   /**
    * Each action lands on the subscribe route guarded for the same state,

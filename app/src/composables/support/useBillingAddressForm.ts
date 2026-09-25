@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUpdateBillingAddress } from '@/composables/api/billing'
-import { useBillingAddressDefaults } from '@/composables/support/billing'
+import { useBillingAddressDefaults } from '@/composables/support/useBillingAddressDefaults'
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
 import { useStripeAddress } from '@shared/composables/primitives/useStripeAddress'
 import { useI18n } from '@shared/plugins/i18n'
