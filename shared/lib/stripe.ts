@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js/pure'
+import { useEnv } from '@shared/config/env'
 import { useI18n } from '@shared/plugins/i18n'
 import { oklchToColor } from '@shared/utils/color'
 import type { Appearance, Stripe, StripeElementLocale } from '@stripe/stripe-js'
@@ -43,7 +44,7 @@ let stripe: Promise<Stripe | null> | null = null
  */
 export function stripeClient() {
   if (!stripe) {
-    stripe = loadStripe(import.meta.env.VITE_STRIPE_KEY)
+    stripe = loadStripe(useEnv().stripeKey)
   }
 
   return stripe

@@ -1,9 +1,8 @@
+import { useEnv } from '@shared/config/env'
 import { HttpError } from '@shared/plugins/http/client'
 import { useAppStore } from '@shared/stores/app'
 
 import type { ResponseError, ResponseSuccess } from '@shared/plugins/http/client'
-
-const version = import.meta.env.VITE_APP_VERSION
 
 /**
  * Flags update required when the API advertises a newer client version on an error response.
@@ -12,7 +11,7 @@ export const responseError: ResponseError = (err) => {
   if (err instanceof HttpError) {
     const clientVersion = err.response.headers.get('x-client-version')
 
-    if (clientVersion && clientVersion !== version) {
+    if (clientVersion && clientVersion !== useEnv().appVersion) {
       useAppStore().interrupt = { type: 'update' }
     }
   }
@@ -26,7 +25,7 @@ export const responseError: ResponseError = (err) => {
 export const responseSuccess: ResponseSuccess = (res) => {
   const clientVersion = res.headers.get('x-client-version')
 
-  if (clientVersion && clientVersion !== version) {
+  if (clientVersion && clientVersion !== useEnv().appVersion) {
     useAppStore().interrupt = { type: 'update' }
   }
 

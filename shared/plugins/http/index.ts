@@ -1,5 +1,6 @@
 import type { App } from 'vue'
 
+import { useEnv } from '@shared/config/env'
 import { createClient, type HttpClient } from './client'
 import * as auth from './interceptors/auth'
 import * as locale from './interceptors/locale'
@@ -16,7 +17,7 @@ let instance: HttpClient
  */
 function createHttp(_app: App) {
   instance = createClient({
-    baseURL: import.meta.env.VITE_API_URL ?? '',
+    baseURL: useEnv().apiUrl,
   })
 
   instance.interceptors.request.use(auth.request)

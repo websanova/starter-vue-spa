@@ -2,6 +2,7 @@
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
   import { FlaskConicalIcon } from '@lucide/vue'
+  import { useEnv } from '@shared/config/env'
   import { Button } from '@shared/components/ui/button'
   import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@shared/components/ui/dropdown-menu'
 
@@ -48,7 +49,7 @@
     },
   }
 
-  const testUsers = computed(() => rosters[import.meta.env.VITE_TEST_USERS]?.[route.name as string] ?? [])
+  const testUsers = computed(() => rosters[useEnv().testUsers]?.[route.name as string] ?? [])
 
   const isVisible = computed(() => testUsers.value.length > 0)
 

@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 
 import { settings } from '@/config/settings'
+import { useEnv } from '@shared/config/env'
 import { useI18n as useI18nPlugin, type Locale } from '@shared/plugins/i18n'
 import { useI18nStore, type I18nTier } from '@shared/stores/i18n'
 import { setLocale } from '@shared/lib/locale'
@@ -41,7 +42,7 @@ export const useI18nService = function() {
     store.localesLoaded[tier][locale][name] = false
     store[loadedKeys[tier]] = false
 
-    const v = import.meta.env.PROD ? __I18N_VERSION__ : Date.now()
+    const v = useEnv().i18nVersion
 
     fetch(`/i18n/${locale}/${name}.json?v=${v}`)
       .then((res) => {
