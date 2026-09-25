@@ -1,5 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js/pure'
-import { useEnv } from '@shared/config/env'
+import { useEnv } from '@shared/composables/support/useEnv'
 import { useI18n } from '@shared/plugins/i18n'
 import { oklchToColor } from '@shared/utils/color'
 import type { Appearance, Stripe, StripeElementLocale } from '@stripe/stripe-js'

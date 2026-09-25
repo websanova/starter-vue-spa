@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 
 import { settings } from '@/config/settings'
-import { useEnv } from '@shared/config/env'
+import { useEnv } from '@shared/composables/support/useEnv'
 import { useI18n as useI18nPlugin, type Locale } from '@shared/plugins/i18n'
 import { useI18nStore, type I18nTier } from '@shared/stores/i18n'
 import { setLocale } from '@shared/lib/locale'

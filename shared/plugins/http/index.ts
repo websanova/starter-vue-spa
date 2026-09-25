@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import { useEnv } from '@shared/config/env'
+import { useEnv } from '@shared/composables/support/useEnv'
 import { createClient, type HttpClient } from './client'
 import * as auth from './interceptors/auth'
 import * as locale from './interceptors/locale'

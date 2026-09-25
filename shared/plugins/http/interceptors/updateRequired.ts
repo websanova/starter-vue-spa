@@ -1,4 +1,4 @@
-import { useEnv } from '@shared/config/env'
+import { useEnv } from '@shared/composables/support/useEnv'
 import { HttpError } from '@shared/plugins/http/client'
 import { useAppStore } from '@shared/stores/app'
 

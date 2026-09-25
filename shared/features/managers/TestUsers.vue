@@ -2,7 +2,7 @@
   import { computed } from 'vue'
   import { useRoute } from 'vue-router'
   import { FlaskConicalIcon } from '@lucide/vue'
-  import { useEnv } from '@shared/config/env'
+  import { useEnv } from '@shared/composables/support/useEnv'
   import { Button } from '@shared/components/ui/button'
   import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@shared/components/ui/dropdown-menu'
 
