@@ -19,12 +19,13 @@ function useSiteHead() {
     })
   }
 
-  const title = metaText('meta.title')
+  const pageTitle = metaText('meta.title')
   const description = metaText('meta.description')
   const keywords = metaText('meta.keywords')
 
+  const title = computed(() => (pageTitle.value ? `${i18n.t('site.name')} | ${pageTitle.value}` : null))
+
   useHead({
-    titleTemplate: computed(() => (i18n.te('site.name') ? `${i18n.t('site.name')} | %s` : '%s')),
     title,
     meta: [
       { name: 'description', content: description },
