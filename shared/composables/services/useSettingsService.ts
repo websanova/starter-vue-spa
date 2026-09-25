@@ -1,11 +1,12 @@
 import { computed } from 'vue'
 
 import { settings as localConfig } from '@/config/settings'
+import { toSettings } from '@/models/settings'
 import { settings as sharedConfig } from '@shared/config/settings'
-import { toSettings } from '@shared/models/settings'
 import { useHttp } from '@shared/plugins/http'
 import { useSettingsStore } from '@shared/stores/settings'
-import type { Settings, SettingsDto } from '@shared/models/settings'
+import type { SettingsDto } from '@/models/settings'
+import type { Settings } from '@shared/models/settings'
 
 export const useSettingsService = function() {
   const store = useSettingsStore()
