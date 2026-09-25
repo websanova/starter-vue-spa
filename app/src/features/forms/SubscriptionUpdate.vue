@@ -9,7 +9,7 @@
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
-  import { stripeClient } from '@shared/utils/stripe'
+  import { stripeClient } from '@shared/lib/stripe'
   import type { Interval } from '@/models/plan'
 
   const auth = useAuthService()

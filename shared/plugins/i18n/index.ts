@@ -2,7 +2,7 @@ import type { App } from 'vue'
 
 import { createI18n as createVueI18n } from 'vue-i18n'
 import { settings } from '@/config/settings'
-import { resolveLocale } from '@shared/utils/locale'
+import { resolveLocale } from '@shared/lib/locale'
 import datetimeFormats from './datetimeFormats'
 import numberFormats from './numberFormats'
 

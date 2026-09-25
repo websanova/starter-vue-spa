@@ -1,5 +1,5 @@
 import { nextTick, onBeforeUnmount, ref, shallowRef } from 'vue'
-import { stripeAppearance, stripeClient } from '@shared/utils/stripe'
+import { stripeAppearance, stripeClient } from '@shared/lib/stripe'
 import type { Ref } from 'vue'
 import type {
   StripeAddressElement,

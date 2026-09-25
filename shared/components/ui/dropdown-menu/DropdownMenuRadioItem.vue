@@ -2,7 +2,7 @@
   import type { HTMLAttributes } from "vue"
   import { reactiveOmit } from "@vueuse/core"
   import { DropdownMenuRadioItem, type DropdownMenuRadioItemProps, useForwardProps } from "reka-ui"
-  import { cn } from "@shared/utils/utils"
+  import { cn } from "@shared/utils/cn"
 
   const props = defineProps<DropdownMenuRadioItemProps & { class?: HTMLAttributes["class"] }>()
 

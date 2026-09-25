@@ -1,6 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useI18n } from '@shared/plugins/i18n'
-import { oklchToColor } from './color'
+import { oklchToColor } from '@shared/utils/color'
 import type { Appearance, Stripe, StripeElementLocale } from '@stripe/stripe-js'
 
 /**

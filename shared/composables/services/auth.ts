@@ -5,7 +5,7 @@ import { useHttp } from '@shared/plugins/http'
 import { useQueryClient } from '@shared/plugins/query'
 import { useAuthStore } from '@shared/stores/auth'
 import { toAuth } from '@/models/auth'
-import { deleteToken, getToken, setToken } from '@shared/utils/authToken'
+import { deleteToken, getToken, setToken } from '@shared/lib/authToken'
 import type { AuthDto } from '@/models/auth'
 import type { Locale } from '@shared/plugins/i18n'
 

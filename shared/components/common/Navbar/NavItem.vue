@@ -3,7 +3,7 @@
   import { inject } from "vue"
   import { RouterLink, type RouteLocationRaw } from "vue-router"
   import { navItemVariants, navOrientationKey } from "."
-  import { cn } from "@shared/utils/utils"
+  import { cn } from "@shared/utils/cn"
 
   const props = defineProps<{
     to?: RouteLocationRaw

@@ -3,7 +3,7 @@
   import { reactiveOmit } from "@vueuse/core"
   import { CheckIcon } from "@lucide/vue"
   import { SelectItem, type SelectItemProps, SelectItemIndicator, SelectItemText, useForwardProps } from "reka-ui"
-  import { cn } from "@shared/utils/utils"
+  import { cn } from "@shared/utils/cn"
 
   const props = defineProps<SelectItemProps & { class?: HTMLAttributes["class"] }>()
 

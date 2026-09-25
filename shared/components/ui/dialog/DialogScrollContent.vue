@@ -10,7 +10,7 @@ import {
   DialogPortal,
   useForwardPropsEmits,
 } from "reka-ui"
-import { cn } from '@shared/utils/utils'
+import { cn } from '@shared/utils/cn'
 
 defineOptions({
   inheritAttrs: false,

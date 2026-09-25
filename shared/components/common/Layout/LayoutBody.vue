@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { type LayoutContainerVariants, layoutContainerVariants } from '.'
-  import { cn } from '@shared/utils/utils'
+  import { cn } from '@shared/utils/cn'
 
   defineProps<{
     size?: LayoutContainerVariants['size']

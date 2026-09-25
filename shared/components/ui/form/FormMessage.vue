@@ -2,7 +2,7 @@
   import type { HTMLAttributes } from "vue"
   import { ErrorMessage } from "vee-validate"
   import { toValue } from "vue"
-  import { cn } from '@shared/utils/utils'
+  import { cn } from '@shared/utils/cn'
   import { useFormField } from "./useFormField"
 
   const props = defineProps<{
