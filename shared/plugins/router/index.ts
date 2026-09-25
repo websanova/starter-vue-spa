@@ -7,14 +7,14 @@ import * as i18n from './middleware/i18n'
 import * as ready from './middleware/ready'
 import { scrollBehavior } from './scrollBehavior'
 
-import interceptors from "@router/middleware"
+import middleware from "@router/middleware"
 import routes from "@router/routes"
 
 /**
- * Shape an app level interceptor module exports. Both hooks are optional
+ * Shape an app level middleware module exports. Both hooks are optional
  * so a module only declares the ones it uses.
  */
-export interface RouterInterceptor {
+export interface RouterMiddleware {
   afterEach?: NavigationHookAfter
   beforeEach?: NavigationGuard
 }
@@ -48,13 +48,13 @@ function createRouter(app: App) {
 
   // App level guards. Registered last so they can depend on everything the
   // shared chain resolved.
-  interceptors.forEach((interceptor) => {
-    if (interceptor.beforeEach) {
-      instance.beforeEach(interceptor.beforeEach)
+  middleware.forEach((entry) => {
+    if (entry.beforeEach) {
+      instance.beforeEach(entry.beforeEach)
     }
 
-    if (interceptor.afterEach) {
-      instance.afterEach(interceptor.afterEach)
+    if (entry.afterEach) {
+      instance.afterEach(entry.afterEach)
     }
   })
 
