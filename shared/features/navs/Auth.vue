@@ -5,6 +5,7 @@
   import { useI18n } from '@shared/plugins/i18n'
   import { Navbar, NavDropdown } from '@shared/components/common/Navbar'
   import { DropdownMenuRadioGroup, DropdownMenuRadioItem } from '@shared/components/ui/dropdown-menu'
+  import GithubNavItem from '@shared/features/nav-items/Github.vue'
   import DarkModeToggle from '@shared/features/toggles/DarkMode.vue'
   import type { Locale } from '@shared/plugins/i18n'
 
@@ -15,6 +16,8 @@
 
 <template>
   <Navbar>
+    <GithubNavItem />
+
     <NavDropdown
       v-if="locales.length > 1"
       align="end"

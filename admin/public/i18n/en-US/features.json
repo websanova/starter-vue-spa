@@ -34,6 +34,7 @@
   },
   "sr": {
     "actions": "Actions",
+    "github": "GitHub repository",
     "menu_account": "Account menu",
     "menu_main": "Main menu",
     "menu_notifications": "Notifications menu",

@@ -86,6 +86,7 @@
   "sr": {
     "actions": "Actions",
     "dark_mode_toggle": "Toggle dark mode",
+    "github": "GitHub repository",
     "mark_read": "Mark as read",
     "menu_account": "Account menu",
     "menu_bookmarks": "Bookmarks menu",

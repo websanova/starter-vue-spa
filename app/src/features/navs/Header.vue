@@ -5,6 +5,7 @@
   import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
+  import GithubNavItem from '@shared/features/nav-items/Github.vue'
   import { DropdownMenuItem, DropdownMenuSeparator } from '@shared/components/ui/dropdown-menu'
 
   const emit = defineEmits<{
@@ -19,6 +20,8 @@
 
 <template>
   <Navbar>
+    <GithubNavItem />
+
     <NavItem @click="emit('notifications')">
       <Indicator :show="unread > 0">
         <BellIcon />

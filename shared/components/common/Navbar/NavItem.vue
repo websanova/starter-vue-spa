@@ -7,6 +7,7 @@
 
   const props = defineProps<{
     to?: RouteLocationRaw
+    href?: string
     class?: HTMLAttributes["class"]
   }>()
 
@@ -21,6 +22,16 @@
   >
     <slot />
   </RouterLink>
+
+  <a
+    v-else-if="href"
+    :href="href"
+    :class="cn(navItemVariants({ orientation }), props.class)"
+    rel="noopener"
+    target="_blank"
+  >
+    <slot />
+  </a>
 
   <div
     v-else

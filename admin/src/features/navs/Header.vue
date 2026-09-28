@@ -4,6 +4,7 @@
   import { useLogout } from '@shared/composables/support/useLogout'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'
   import AccountAvatar from '@shared/features/avatars/Account.vue'
+  import GithubNavItem from '@shared/features/nav-items/Github.vue'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
 
   const emit = defineEmits<{
@@ -16,6 +17,8 @@
 
 <template>
   <Navbar>
+    <GithubNavItem />
+
     <NavDropdown
       align="end"
       class="sm:unhidden"

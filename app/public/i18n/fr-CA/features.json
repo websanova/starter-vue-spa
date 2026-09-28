@@ -86,6 +86,7 @@
   "sr": {
     "actions": "Actions",
     "dark_mode_toggle": "Basculer le mode sombre",
+    "github": "Dépôt GitHub",
     "mark_read": "Marquer comme lu",
     "menu_account": "Menu du compte",
     "menu_bookmarks": "Menu des signets",
