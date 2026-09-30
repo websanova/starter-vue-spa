@@ -39,7 +39,6 @@
     next,
     part,
     step,
-    toConfirm,
     total,
   } = useCheckout({
     addressTarget,
@@ -136,9 +135,8 @@
           </Transition>
         </template>
 
-        <template v-if="step === 'payment-method'">
+        <template v-if="step === 'payment-method' && part === 'address'">
           <ButtonLoading
-            v-if="part === 'address'"
             class="w-full"
             :disabled="!isAddressComplete"
             :pending="isContinuing"
@@ -147,18 +145,7 @@
             {{ $t('features.lbl.continue') }}
           </ButtonLoading>
 
-          <ButtonLoading
-            v-else
-            class="w-full"
-            @click="toConfirm"
-          >
-            {{ $t('features.lbl.continue') }}
-          </ButtonLoading>
-
-          <p
-            v-if="part === 'address'"
-            class="text-center text-sm text-muted-foreground"
-          >
+          <p class="text-center text-sm text-muted-foreground">
             * {{ $t('features.form.stripe_checkout.note_address') }}
           </p>
         </template>

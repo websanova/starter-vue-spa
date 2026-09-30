@@ -64,6 +64,13 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const step = ref<CheckoutStep>('payment-method')
   const part = ref<CheckoutPart>('address')
 
+  /**
+   * Whether the card on file has been refused. From that point it is
+   * out of play, so the summary gives way to the element and the retry
+   * confirms without its id.
+   */
+  const isCardRefused = ref<boolean>(false)
+
   function storageKey(): string {
     return `${storagePrefix}.${auth.user.value?.id ?? ''}`
   }
@@ -141,7 +148,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const cardSummary = computed(() => {
     const card = savedCard.value
 
-    if (!card) {
+    if (!card || isCardRefused.value) {
       return ''
     }
 
@@ -242,6 +249,8 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     }
 
     if (session.status.type === 'complete') {
+      sessionStorage.removeItem(storageKey())
+
       await sync()
       return true
     }
@@ -291,14 +300,6 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   /**
-   * Moves off the payment method step. Nothing is pushed, the element
-   * holds the card until the confirm reads it.
-   */
-  function toConfirm() {
-    step.value = 'confirm'
-  }
-
-  /**
    * Going back to the address puts its element up again, since leaving
    * it took it down.
    */
@@ -327,11 +328,15 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     sessionStorage.setItem(storageKey(), secret)
 
     try {
-      const { message, session } = await checkout.confirm(savedCard.value?.id)
+      const { message, session } = await checkout.confirm(
+        isCardRefused.value ? undefined : savedCard.value?.id
+      )
+
+      sessionStorage.removeItem(storageKey())
 
       if (!session || session.status.type !== 'complete') {
-        sessionStorage.removeItem(storageKey())
         stripeError.value = message
+        await collectCard()
         isConfirming.value = false
         return
       }
@@ -344,6 +349,26 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     }
 
     await sync()
+  }
+
+  /**
+   * A refusal against the card on file has nothing on screen for the
+   * customer to correct, since the confirm step stands with no element
+   * behind it. The payment method step opens and its elements are
+   * created at that moment, on the same session, and it lands on the
+   * address when the session is not already carrying one.
+   */
+  async function collectCard() {
+    if (!savedCard.value || isCardRefused.value) {
+      return
+    }
+
+    isCardRefused.value = true
+
+    part.value = addressSummary.value ? 'card' : 'address'
+    step.value = 'payment-method'
+
+    await checkout.mount()
   }
 
 
@@ -363,7 +388,6 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     try {
       await syncSubscription.mutateAsync({ session: session.id })
 
-      sessionStorage.removeItem(storageKey())
       checkout.destroy()
 
       router.replace({ name: 'user-account-billing' })
@@ -392,7 +416,6 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     part,
     session: checkout.session,
     step,
-    toConfirm,
     total,
   }
 }
