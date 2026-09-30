@@ -2,7 +2,6 @@
   import { useDialogService } from '@shared/composables/services/useDialogService'
   import { Heading } from '@shared/components/common/Heading'
   import { Stack } from '@shared/components/common/Stack'
-  import BillingAddressDisplay from '@/features/displays/BillingAddress.vue'
   import BillingPaymentMethodDisplay from '@/features/displays/BillingPaymentMethod.vue'
   import BillingSubscriptionDisplay from '@/features/displays/BillingSubscription.vue'
 
@@ -19,8 +18,6 @@
       </Heading>
 
       <Stack gap="sm">
-        <BillingAddressDisplay />
-
         <BillingPaymentMethodDisplay @delete="dialog.open('paymentMethodDelete')" />
 
         <BillingSubscriptionDisplay />

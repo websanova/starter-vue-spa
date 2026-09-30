@@ -35,11 +35,21 @@
       </button>
     </p>
 
-    <p
-      v-else
-      class="text-muted-foreground"
-    >
-      {{ $t('features.display.billing_payment_method.card_none') }}
+    <!--
+      The link stands whether or not a card is on file, since the page
+      takes an addition and a replacement on the same path.
+    -->
+    <p v-else>
+      <span class="text-muted-foreground">
+        {{ $t('features.display.billing_payment_method.card_none') }}
+      </span>
+
+      <RouterLink
+        :to="{ name: 'user-account-payment-method' }"
+        class="text-link"
+      >
+        {{ $t('features.lbl.update') }}
+      </RouterLink>
     </p>
   </Inline>
 </template>

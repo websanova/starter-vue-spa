@@ -1,13 +1,27 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { usePaymentMethodForm } from '@/composables/support/usePaymentMethodForm'
-  import { Form, FormButton } from '@shared/components/common/Form'
+  import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'
+  import { Stack } from '@shared/components/common/Stack'
+  import { WizardStep } from '@shared/components/common/WizardStep'
   import StripeLogo from '@shared/components/logos/Stripe.vue'
 
-  const target = ref<HTMLElement | null>(null)
+  const addressTarget = ref<HTMLElement | null>(null)
+  const cardTarget = ref<HTMLElement | null>(null)
 
-  const { error, isLoading, isPending, submit } = usePaymentMethodForm({ target })
+  const {
+    addressSummary,
+    error,
+    goTo,
+    isAddressComplete,
+    isContinuing,
+    isLoading,
+    isPending,
+    next,
+    step,
+    submit,
+  } = usePaymentMethodForm({ addressTarget, cardTarget })
 </script>
 
 <template>
@@ -17,14 +31,11 @@
   />
 
   <!--
-    Hidden rather than removed. The element is mounted into this target
-    before the loading state drops, and taking it out of the document
-    tears the mount down.
+    Hidden rather than removed. Both elements are mounted into these
+    targets before the step they belong to opens, and taking one out of
+    the document tears the mount down.
   -->
-  <Form
-    v-show="!isLoading"
-    @submit="submit"
-  >
+  <Stack v-show="!isLoading">
     <p
       v-if="error"
       class="text-center text-destructive"
@@ -32,7 +43,22 @@
       {{ error }}
     </p>
 
-    <div ref="target" />
+    <WizardStep
+      :heading="$t('features.heading.title.billing_address')"
+      :open="step === 'address'"
+      :summary="addressSummary"
+      @change="goTo('address')"
+    >
+      <div ref="addressTarget" />
+    </WizardStep>
+
+    <WizardStep
+      v-show="step === 'payment'"
+      :heading="$t('features.heading.title.payment_method')"
+      open
+    >
+      <div ref="cardTarget" />
+    </WizardStep>
 
     <a
       class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
@@ -44,8 +70,23 @@
       <StripeLogo class="h-4" />
     </a>
 
-    <FormButton :pending="isPending">
+    <ButtonLoading
+      v-if="step === 'address'"
+      class="w-full"
+      :disabled="!isAddressComplete"
+      :pending="isContinuing"
+      @click="next"
+    >
+      {{ $t('features.lbl.continue') }}
+    </ButtonLoading>
+
+    <ButtonLoading
+      v-else
+      class="w-full"
+      :pending="isPending"
+      @click="submit"
+    >
       {{ $t('features.lbl.update') }}
-    </FormButton>
-  </Form>
+    </ButtonLoading>
+  </Stack>
 </template>

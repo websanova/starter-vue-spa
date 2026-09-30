@@ -1,15 +1,21 @@
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useCreatePaymentMethodIntent, useSyncPaymentMethod } from '@/composables/api/paymentMethod'
+import { useCreatePaymentMethodIntent, useSyncPaymentMethod, useUpdateBillingAddress } from '@/composables/api/paymentMethod'
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
+import { useStripeAddress } from '@shared/composables/primitives/useStripeAddress'
 import { useStripePayment } from '@shared/composables/primitives/useStripePayment'
 import { useI18n } from '@shared/plugins/i18n'
 import type { StripeIntent } from '@shared/composables/primitives/useStripePayment'
 import type { Ref } from 'vue'
 
 interface PaymentMethodOptions {
-  target: Ref<HTMLElement | null>
+  addressTarget: Ref<HTMLElement | null>
+  cardTarget: Ref<HTMLElement | null>
 }
+
+export type PaymentMethodStep =
+  | 'address'
+  | 'payment'
 
 /**
  * Stripe appends these to the return url once the user comes back from
@@ -24,26 +30,44 @@ const returnKeys = [
 ]
 
 /**
- * Drives the payment method page. The intent is opened on load rather
- * than behind a button, since a page dedicated to this one job is the
- * user declaring intent already and the element cannot mount without a
- * secret. Nothing is charged, the card entered here is what the next
- * renewal bills.
+ * Drives the payment method page, the address first and the card after.
+ * The address element needs no secret, so the page opens on a step that
+ * costs no call at all, and the intent is only opened once the address
+ * is saved to the customer. Nothing is charged, the card entered here is
+ * what the next renewal bills.
  */
-export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
+export function usePaymentMethodForm({ addressTarget, cardTarget }: PaymentMethodOptions) {
   const i18n = useI18n()
   const route = useRoute()
   const router = useRouter()
 
+  const updateAddress = useUpdateBillingAddress()
   const create = useCreatePaymentMethodIntent()
   const sync = useSyncPaymentMethod()
 
-  const payment = useStripePayment({ target, returnUrl: buildReturnUrl() })
+  const address = useStripeAddress({ target: addressTarget })
+  const payment = useStripePayment({ target: cardTarget, returnUrl: buildReturnUrl() })
 
   const isLoading = ref<boolean>(true)
+  const isContinuing = ref<boolean>(false)
   const isPending = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
   const stripeError = ref<string>('')
+
+  const step = ref<PaymentMethodStep>('address')
+
+  /**
+   * What the collapsed address step shows, built from the value that
+   * was sent rather than read back, since nothing about the address is
+   * stored on our side and the customer at Stripe holds the only copy.
+   */
+  const addressSummary = ref<string>('')
+
+  /**
+   * The intent carries no address, so a second trip through the address
+   * step reuses the one already held rather than opening another.
+   */
+  let secret = ''
 
   /**
    * A confirmed intent is spent, so a submit after one lands retries
@@ -51,7 +75,7 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
    */
   let confirmedId = ''
 
-  const mutationError = useMutationError(create, sync)
+  const mutationError = useMutationError(updateAddress, create, sync)
 
   /**
    * Anything that is not an HTTP error carries no message of its own, a
@@ -102,9 +126,12 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
    * create on an intent nothing mounts and bury a confirm they already
    * completed behind its error.
    *
-   * The element mounts while the loading state is still up, so its
-   * target has to be in the document from the first render rather than
-   * behind the loader.
+   * Every other visit opens the address step, which the element mounts
+   * into with no secret and nothing prefilled.
+   *
+   * The elements mount while the loading state is still up, so their
+   * targets have to be in the document from the first render rather
+   * than behind the loader.
    */
   async function start() {
     const returned = returnedIntent()
@@ -115,9 +142,9 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
         return
       }
 
-      const { clientSecret } = await create.mutateAsync()
+      const mounted = await address.mount()
 
-      await payment.mount({ clientSecret, type: 'setup' })
+      isFailed.value = !mounted
     } catch (err) {
       console.error(err)
       isFailed.value = true
@@ -128,14 +155,13 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
 
   /**
    * Reads how the authentication the user was sent away for ended. A
-   * refusal leaves the intent confirmable, so the element goes back up
-   * against the same secret and they try again without opening a second
-   * one.
+   * refusal leaves the intent confirmable, so the page comes back up on
+   * the payment step against the same secret and they try again without
+   * opening a second one. The address is already on the customer by
+   * this point, so there is nothing there left to collect.
    */
   async function resume(intent: StripeIntent) {
     const { id, status, message } = await payment.retrieve(intent)
-
-    isLoading.value = false
 
     if (status === 'succeeded') {
       await settle(id)
@@ -145,7 +171,73 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
     isFailed.value = true
     stripeError.value = message
 
+    secret = intent.clientSecret
+    step.value = 'payment'
+
+    await address.mount()
     await payment.mount(intent)
+  }
+
+  /**
+   * Saves the address before any intent exists, since a bank challenge
+   * that never comes back would otherwise leave the card stored and the
+   * address the user came to change sitting in a dead browser. Stripe
+   * rejecting it lands on the step that owns the fields.
+   */
+  async function next() {
+    const value = await address.getValue()
+
+    if (!value) {
+      return
+    }
+
+    isContinuing.value = true
+    isFailed.value = false
+    stripeError.value = ''
+
+    try {
+      await updateAddress.mutateAsync({
+        city: value.address.city,
+        country: value.address.country,
+        line1: value.address.line1,
+        line2: value.address.line2 || undefined,
+        name: value.name ?? '',
+        postal_code: value.address.postal_code,
+        state: value.address.state || undefined,
+      })
+
+      addressSummary.value = [
+        value.address.line1,
+        value.address.line2,
+        value.address.city,
+        value.address.state,
+        value.address.postal_code,
+        value.address.country,
+      ].filter(Boolean).join(', ')
+
+      if (!secret) {
+        const intent = await create.mutateAsync()
+
+        secret = intent.clientSecret
+
+        await payment.mount({ clientSecret: secret, type: 'setup' })
+      }
+
+      step.value = 'payment'
+    } catch (err) {
+      console.error(err)
+      isFailed.value = true
+    } finally {
+      isContinuing.value = false
+    }
+  }
+
+  /**
+   * Going back leaves both elements standing, so the address comes back
+   * with everything typed into it and the intent is untouched.
+   */
+  function goTo(value: PaymentMethodStep) {
+    step.value = value
   }
 
   /**
@@ -199,9 +291,15 @@ export function usePaymentMethodForm({ target }: PaymentMethodOptions) {
   }
 
   return {
+    addressSummary,
     error,
+    goTo,
+    isAddressComplete: address.isComplete,
+    isContinuing,
     isLoading,
     isPending,
+    next,
+    step,
     submit,
   }
 }

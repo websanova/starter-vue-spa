@@ -134,9 +134,6 @@
     }
   },
   "display": {
-    "billing_address": {
-      "none": "No billing address on file."
-    },
     "billing_payment_method": {
       "card": "{brand} ending in {last_four}",
       "card_none": "No payment method on file."
@@ -191,9 +188,6 @@
     },
     "settings_locale": {
       "local_time": "Local time"
-    },
-    "stripe_billing_address": {
-      "failed": "Your billing address could not be saved. Please try again."
     },
     "stripe_checkout": {
       "activating": "Payment received. Activating your plan...",

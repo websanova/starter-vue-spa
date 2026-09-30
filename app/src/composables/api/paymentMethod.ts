@@ -8,6 +8,16 @@ interface SyncPaymentMethodData {
   setup_intent: string
 }
 
+interface UpdateBillingAddressData {
+  city: string
+  country: string
+  line1: string
+  line2?: string
+  name: string
+  postal_code: string
+  state?: string
+}
+
 /**
  * Opens the setup intent the payment element mounts against. It carries
  * no amount and nothing about the plan, since a setup intent only ever
@@ -56,6 +66,24 @@ export function useSyncPaymentMethod() {
     mutationFn: async (data: SyncPaymentMethodData) => {
       await useHttp().post('payment-method/sync', data)
       await fetchUser()
+    },
+  })
+}
+
+/**
+ * Writes the billing address to the customer at Stripe. Nothing is
+ * stored on our side, the customer holds it and every renewal invoice
+ * computes tax off it, so there is nothing to read back and the
+ * response is the answer.
+ *
+ * An address Stripe cannot place comes back as an error, which is what
+ * makes this the call the payment method page runs before it asks for
+ * an intent.
+ */
+export function useUpdateBillingAddress() {
+  return useMutation({
+    mutationFn: async (data: UpdateBillingAddressData) => {
+      await useHttp().put('payment-method/address', data)
     },
   })
 }

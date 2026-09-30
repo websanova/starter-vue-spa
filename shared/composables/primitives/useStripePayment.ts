@@ -106,8 +106,20 @@ export function useStripePayment({ target, returnUrl }: StripePaymentOptions) {
       redirect: 'if_required' as const,
     }
 
+    /**
+     * Marking the payment method for redisplay is what lets subscribe
+     * offer it back later. Stripe only returns a saved one to a checkout
+     * session when allow_redisplay is always, so left at the default it
+     * bills renewals correctly while subscribe cannot see it.
+     */
     if (intentType === 'setup') {
-      const { setupIntent, error } = await stripe.confirmSetup(params)
+      const { setupIntent, error } = await stripe.confirmSetup({
+        ...params,
+        confirmParams: {
+          return_url: returnUrl,
+          payment_method_data: { allow_redisplay: 'always' },
+        },
+      })
 
       return toResult(setupIntent?.id, setupIntent?.status, error)
     }

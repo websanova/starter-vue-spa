@@ -134,9 +134,6 @@
     }
   },
   "display": {
-    "billing_address": {
-      "none": "Aucune adresse de facturation enregistrée."
-    },
     "billing_payment_method": {
       "card": "{brand} se terminant par {last_four}",
       "card_none": "Aucun moyen de paiement enregistré."
@@ -191,9 +188,6 @@
     },
     "settings_locale": {
       "local_time": "Heure locale"
-    },
-    "stripe_billing_address": {
-      "failed": "Votre adresse de facturation n'a pas pu être enregistrée. Veuillez réessayer."
     },
     "stripe_checkout": {
       "activating": "Paiement reçu. Activation de votre forfait...",
