@@ -25,6 +25,7 @@
 
   const {
     addressSummary,
+    canConfirm,
     cardSummary,
     confirm,
     error,
@@ -36,7 +37,9 @@
     isTaxPending,
     lineItems,
     next,
+    part,
     step,
+    toConfirm,
     total,
   } = useCheckout({
     addressTarget,
@@ -106,19 +109,25 @@
           {{ cardSummary }}
         </p>
 
+        <!--
+          Both stay in the document once the confirm step is open. The
+          elements are mounted into them and taking one out tears the
+          mount down.
+        -->
         <template v-else>
           <WizardStep
+            v-show="step === 'payment-method'"
             :heading="$t('features.heading.title.billing_address')"
-            :open="step === 'payment-method'"
+            :open="part === 'address'"
             :summary="addressSummary"
-            @change="goTo('payment-method')"
+            @change="goTo('address')"
           >
             <div ref="addressTarget" />
           </WizardStep>
 
           <Transition name="fade-in">
             <WizardStep
-              v-show="step === 'confirm'"
+              v-show="step === 'payment-method' && part === 'card'"
               :heading="$t('features.heading.title.payment_method')"
               open
             >
@@ -129,6 +138,7 @@
 
         <template v-if="step === 'payment-method'">
           <ButtonLoading
+            v-if="part === 'address'"
             class="w-full"
             :disabled="!isAddressComplete"
             :pending="isContinuing"
@@ -137,7 +147,18 @@
             {{ $t('features.lbl.continue') }}
           </ButtonLoading>
 
-          <p class="text-center text-sm text-muted-foreground">
+          <ButtonLoading
+            v-else
+            class="w-full"
+            @click="toConfirm"
+          >
+            {{ $t('features.lbl.continue') }}
+          </ButtonLoading>
+
+          <p
+            v-if="part === 'address'"
+            class="text-center text-sm text-muted-foreground"
+          >
             * {{ $t('features.form.stripe_checkout.note_address') }}
           </p>
         </template>
@@ -145,6 +166,7 @@
         <ButtonLoading
           v-else
           class="w-full"
+          :disabled="!canConfirm"
           :pending="isConfirming"
           @click="confirm"
         >

@@ -21,6 +21,14 @@ export type CheckoutStep =
   | 'confirm'
 
 /**
+ * The payment method is one step collecting several things, so what is
+ * open inside it is its own state rather than a step of its own.
+ */
+export type CheckoutPart =
+  | 'address'
+  | 'card'
+
+/**
  * Survives the trip to a bank and back. Stripe returns the customer to
  * a freshly loaded page, and the session being confirmed has to be the
  * one they left on rather than a replacement. Written on the way into
@@ -54,6 +62,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const stripeError = ref<string>('')
 
   const step = ref<CheckoutStep>('payment-method')
+  const part = ref<CheckoutPart>('address')
 
   function storageKey(): string {
     return `${storagePrefix}.${auth.user.value?.id ?? ''}`
@@ -105,6 +114,13 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * be redisplayed and that is the same card the confirm runs against.
    */
   const savedCard = computed(() => checkout.session.value?.savedPaymentMethods?.[0] ?? null)
+
+  /**
+   * Stripe is the one that knows whether enough has been collected to
+   * confirm, so the subscribe button is gated on its answer rather than
+   * on anything worked out here.
+   */
+  const canConfirm = computed(() => !!checkout.session.value?.canConfirm)
 
   /**
    * What the address step shows once it is settled, which is whatever
@@ -248,9 +264,9 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   /**
-   * Moves off the address step. The value is pushed onto the session on
-   * the way, so the totals on the payment step carry tax for the
-   * address just entered rather than for whatever the session had.
+   * Moves off the address. The value is pushed onto the session on the
+   * way, so the totals from here on carry tax for the address just
+   * entered rather than for whatever the session had.
    */
   async function next() {
     isContinuing.value = true
@@ -265,7 +281,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
         return
       }
 
-      step.value = 'confirm'
+      part.value = 'card'
     } catch (err) {
       console.error(err)
       isFailed.value = true
@@ -275,13 +291,21 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   /**
-   * Going back to the address puts its element up again, since leaving
-   * the step took it down.
+   * Moves off the payment method step. Nothing is pushed, the element
+   * holds the card until the confirm reads it.
    */
-  function goTo(value: CheckoutStep) {
-    step.value = value
+  function toConfirm() {
+    step.value = 'confirm'
+  }
 
-    if (value === 'payment-method') {
+  /**
+   * Going back to the address puts its element up again, since leaving
+   * it took it down.
+   */
+  function goTo(value: CheckoutPart) {
+    part.value = value
+
+    if (value === 'address') {
       checkout.mountAddress()
     }
   }
@@ -353,6 +377,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   return {
     addressSummary,
+    canConfirm,
     cardSummary,
     confirm,
     error,
@@ -364,8 +389,10 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     isTaxPending,
     lineItems,
     next,
+    part,
     session: checkout.session,
     step,
+    toConfirm,
     total,
   }
 }
