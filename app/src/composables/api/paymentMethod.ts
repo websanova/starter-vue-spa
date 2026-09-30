@@ -45,7 +45,7 @@ export function useDeletePaymentMethod() {
 
   return useMutation({
     mutationFn: async () => {
-      await useHttp().delete('billing/payment-method')
+      await useHttp().delete('payment-method')
       await fetchUser()
     },
   })
