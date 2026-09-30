@@ -3,17 +3,14 @@
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useCheckout } from '@/composables/support/useCheckout'
-  import { useSettingsStore } from '@shared/stores/settings'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
   import { WizardStep } from '@shared/components/common/WizardStep'
-  import { Input } from '@shared/components/ui/input'
   import type { Interval } from '@/models/plan'
 
   const route = useRoute()
   const router = useRouter()
-  const settings = useSettingsStore()
   const { t } = useI18n()
 
   const plan = route.query.plan as string | undefined
@@ -25,26 +22,20 @@
 
   const addressTarget = ref<HTMLElement | null>(null)
   const paymentTarget = ref<HTMLElement | null>(null)
-  const promotionCode = ref<string>('')
 
   const {
     addressSummary,
-    applyPromotionCode,
     cardSummary,
-    changeCard,
     confirm,
     error,
     goTo,
     isAddressComplete,
-    isApplying,
     isConfirming,
     isContinuing,
     isLoading,
     isTaxPending,
-    isTrial,
     lineItems,
     next,
-    promotionError,
     step,
     total,
   } = useCheckout({
@@ -60,21 +51,10 @@
    * already carries whatever tax and discount apply.
    */
   const summary = computed(() => ({
-    days: settings.data.subscriptionTrialDays,
     interval: t(`site.units.interval.billed.${interval}`),
     plan: lineItems.value[0]?.name ?? '',
     price: total.value,
   }))
-
-  /**
-   * A trial signup charges nothing today, so it needs the sentence that
-   * dates the first payment rather than the one that claims it is being
-   * taken now.
-   */
-  const summaryKey = computed(() => isTrial.value
-    ? 'features.form.stripe_checkout.note_summary_trial'
-    : 'features.form.stripe_checkout.note_summary'
-  )
 </script>
 
 <template>
@@ -89,7 +69,7 @@
           v-if="!isLoading"
           class="text-lg text-muted-foreground"
         >
-          {{ $t(summaryKey, summary) }}
+          {{ $t('features.form.stripe_checkout.note_summary', summary) }}
 
           <span
             v-if="isTaxPending"
@@ -115,28 +95,39 @@
           {{ error }}
         </p>
 
-        <WizardStep
-          :heading="$t('features.heading.title.billing_address')"
-          :open="step === 'address'"
-          :summary="addressSummary"
-          @change="goTo('address')"
+        <!--
+          A card on file leaves nothing to collect, so no element is
+          created and the step is a line of our own text.
+        -->
+        <p
+          v-if="cardSummary"
+          class="text-sm text-muted-foreground"
         >
-          <div ref="addressTarget" />
-        </WizardStep>
+          {{ cardSummary }}
+        </p>
 
-        <Transition name="fade-in">
+        <template v-else>
           <WizardStep
-            v-show="step === 'payment'"
-            :heading="$t('features.heading.title.payment_method')"
-            :open="!cardSummary"
-            :summary="cardSummary"
-            @change="changeCard"
+            :heading="$t('features.heading.title.billing_address')"
+            :open="step === 'payment-method'"
+            :summary="addressSummary"
+            @change="goTo('payment-method')"
           >
-            <div ref="paymentTarget" />
+            <div ref="addressTarget" />
           </WizardStep>
-        </Transition>
 
-        <template v-if="step === 'address'">
+          <Transition name="fade-in">
+            <WizardStep
+              v-show="step === 'confirm'"
+              :heading="$t('features.heading.title.payment_method')"
+              open
+            >
+              <div ref="paymentTarget" />
+            </WizardStep>
+          </Transition>
+        </template>
+
+        <template v-if="step === 'payment-method'">
           <ButtonLoading
             class="w-full"
             :disabled="!isAddressComplete"
@@ -151,50 +142,14 @@
           </p>
         </template>
 
-        <template v-else>
-          <!-- TODO: promotion code disabled until promo handling is decided -->
-          <!--
-          <Stack gap="sm">
-            <div class="flex gap-2">
-              <Input
-                v-model="promotionCode"
-                :placeholder="$t('features.ph.promotion_code')"
-              />
-
-              <ButtonLoading
-                variant="outline"
-                :disabled="!promotionCode"
-                :pending="isApplying"
-                @click="applyPromotionCode(promotionCode)"
-              >
-                {{ $t('features.lbl.apply') }}
-              </ButtonLoading>
-            </div>
-
-            <p
-              v-if="promotionError"
-              class="text-sm text-destructive"
-            >
-              {{ promotionError }}
-            </p>
-          </Stack>
-          -->
-
-          <ButtonLoading
-            class="w-full"
-            :pending="isConfirming"
-            @click="confirm"
-          >
-            {{ $t('features.form.stripe_checkout.submit') }}
-          </ButtonLoading>
-
-          <p
-            v-if="isTrial"
-            class="text-center text-sm text-muted-foreground"
-          >
-            * {{ $t('features.form.stripe_checkout.note_payment_method') }}
-          </p>
-        </template>
+        <ButtonLoading
+          v-else
+          class="w-full"
+          :pending="isConfirming"
+          @click="confirm"
+        >
+          {{ $t('features.form.stripe_checkout.submit') }}
+        </ButtonLoading>
       </template>
     </Stack>
   </div>

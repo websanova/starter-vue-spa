@@ -1,7 +1,6 @@
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCreateSubscriptionSession, useSyncSubscription } from '@/composables/api/subscription'
-import { useBillingAddressDefaults } from '@/composables/support/useBillingAddressDefaults'
 import { useMutationError } from '@shared/composables/primitives/useMutationError'
 import { useStripeCheckout } from '@shared/composables/primitives/useStripeCheckout'
 import { useAuthService } from '@shared/composables/services/useAuthService'
@@ -18,8 +17,8 @@ interface CheckoutOptions {
 }
 
 export type CheckoutStep =
-  | 'address'
-  | 'payment'
+  | 'payment-method'
+  | 'confirm'
 
 /**
  * Survives the trip to a bank and back. Stripe returns the customer to
@@ -33,8 +32,8 @@ const storagePrefix = 'subscribe.session'
 
 /**
  * Drives the subscribe page. One checkout session carries the address,
- * the card, the promotion code and the totals, so there are no steps to
- * sequence and nothing exists at Stripe until the customer confirms.
+ * the card and the totals, so there are no steps to sequence and
+ * nothing exists at Stripe until the customer confirms.
  */
 export function useCheckout({ addressTarget, interval, paymentTarget, plan }: CheckoutOptions) {
   const auth = useAuthService()
@@ -46,30 +45,15 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   const checkout = useStripeCheckout({ addressTarget, paymentTarget })
 
-  /**
-   * The address on file is a prefill and nothing more. It is not written
-   * to the customer and the element is free to be edited over it, since
-   * the address that counts is whatever is in the element at confirm.
-   */
-  const billingAddressDefaults = useBillingAddressDefaults()
-
   let secret = ''
 
   const isLoading = ref<boolean>(true)
   const isConfirming = ref<boolean>(false)
-  const isApplying = ref<boolean>(false)
   const isContinuing = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
-  const promotionError = ref<string>('')
   const stripeError = ref<string>('')
 
-  /**
-   * Which step is open, and whether the card already on the customer is
-   * the one being subscribed with. Hitting change on the card drops it,
-   * since from that point the element is the source.
-   */
-  const step = ref<CheckoutStep>('address')
-  const isSavedCard = ref<boolean>(true)
+  const step = ref<CheckoutStep>('payment-method')
 
   function storageKey(): string {
     return `${storagePrefix}.${auth.user.value?.id ?? ''}`
@@ -94,19 +78,12 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   /**
    * The session is the only thing that knows what this costs. Tax comes
-   * off the address and the discount off the promotion code, both
-   * calculated by Stripe, so nothing is priced or estimated here.
+   * off the address, calculated by Stripe, so nothing is priced or
+   * estimated here.
    */
   const total = computed(() => checkout.session.value?.total.total.amount ?? '')
 
   const lineItems = computed(() => checkout.session.value?.lineItems ?? [])
-
-  /**
-   * Whether this signup carries a trial. The API decided that when it
-   * created the session, so the client reads the answer off it rather
-   * than working out eligibility of its own.
-   */
-  const isTrial = computed(() => !!checkout.session.value?.recurring?.trial)
 
   /**
    * Tax reports as pending until the session carries an address to
@@ -123,14 +100,15 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   /**
    * The card already on the customer, read off the session rather than
    * the local row, since confirming against it needs the id and only
-   * the session carries one.
+   * the session carries one. Its presence is also what decides the step
+   * the form opens on, since the session only carries a card that can
+   * be redisplayed and that is the same card the confirm runs against.
    */
   const savedCard = computed(() => checkout.session.value?.savedPaymentMethods?.[0] ?? null)
 
   /**
-   * What each step shows once it is settled. An empty address summary
-   * is what keeps the wizard on the address step, since it means the
-   * session is carrying nothing to move on from.
+   * What the address step shows once it is settled, which is whatever
+   * was pushed onto the session on the way out of it.
    */
   const addressSummary = computed(() => {
     const value = checkout.session.value?.billingAddress?.address
@@ -147,7 +125,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const cardSummary = computed(() => {
     const card = savedCard.value
 
-    if (!card || !isSavedCard.value) {
+    if (!card) {
       return ''
     }
 
@@ -237,7 +215,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
    * targets first exist in.
    */
   async function open(clientSecret: string): Promise<boolean> {
-    const { message, session } = await checkout.load(clientSecret, billingAddressDefaults.value)
+    const { message, session } = await checkout.load(clientSecret)
 
     isLoading.value = false
 
@@ -252,9 +230,17 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
       return true
     }
 
-    // An address already on the session is a step with nothing left to
-    // collect, so the wizard opens past it.
-    step.value = addressSummary.value ? 'payment' : 'address'
+    /**
+     * A card on the session means the customer already has both a card
+     * and an address on file, so there is nothing to collect and no
+     * element to create. Everyone else starts on the address.
+     */
+    if (savedCard.value) {
+      step.value = 'confirm'
+      return true
+    }
+
+    step.value = 'payment-method'
 
     await checkout.mount()
 
@@ -279,7 +265,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
         return
       }
 
-      step.value = 'payment'
+      step.value = 'confirm'
     } catch (err) {
       console.error(err)
       isFailed.value = true
@@ -295,31 +281,9 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   function goTo(value: CheckoutStep) {
     step.value = value
 
-    if (value === 'address') {
+    if (value === 'payment-method') {
       checkout.mountAddress()
     }
-  }
-
-  /**
-   * Replacing the card takes the saved one out of play, so the element
-   * becomes what confirm reads and the summary gives way to it.
-   */
-  function changeCard() {
-    isSavedCard.value = false
-  }
-
-  /**
-   * A rejected code belongs to the field it was typed into rather than
-   * to the page, since nothing else about the checkout has gone wrong.
-   */
-  async function applyPromotionCode(code: string) {
-    isApplying.value = true
-    promotionError.value = ''
-
-    const { message } = await checkout.applyPromotionCode(code)
-
-    promotionError.value = message
-    isApplying.value = false
   }
 
   /**
@@ -339,9 +303,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     sessionStorage.setItem(storageKey(), secret)
 
     try {
-      const { message, session } = await checkout.confirm(
-        isSavedCard.value ? savedCard.value?.id : undefined
-      )
+      const { message, session } = await checkout.confirm(savedCard.value?.id)
 
       if (!session || session.status.type !== 'complete') {
         sessionStorage.removeItem(storageKey())
@@ -391,22 +353,17 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   return {
     addressSummary,
-    applyPromotionCode,
     cardSummary,
-    changeCard,
     confirm,
     error,
     goTo,
     isAddressComplete: checkout.isAddressComplete,
-    isApplying,
     isConfirming,
     isContinuing,
     isLoading,
     isTaxPending,
-    isTrial,
     lineItems,
     next,
-    promotionError,
     session: checkout.session,
     step,
     total,

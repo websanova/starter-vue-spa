@@ -22,9 +22,9 @@ export interface StripeCheckoutResult {
 
 /**
  * Drives a Checkout Session against its client secret. One session
- * carries the address, the card, the promotion code and the totals, so
- * both elements and every action come off the same instance rather than
- * being sequenced through separate intents.
+ * carries the address, the card and the totals, so both elements and
+ * every action come off the same instance rather than being sequenced
+ * through separate intents.
  */
 export function useStripeCheckout({ addressTarget, paymentTarget }: StripeCheckoutOptions) {
   let actions: StripeCheckoutLoadActionsSuccess | null = null
@@ -40,18 +40,14 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   /**
    * Loads the session and the actions the page runs on, and reports its
    * opening state. The change event keeps the session in step after
-   * that, since a promotion code moves the totals and the elements
-   * report their own readiness to confirm through it.
+   * that, since the elements report their own readiness to confirm
+   * through it.
    *
    * Nothing is mounted here. The caller is still showing a loading
    * state at this point, so the targets the elements go into are not in
    * the document yet.
-   *
-   * The address is only ever a prefill. The element does not write
-   * itself onto the session, so what the customer leaves in it is read
-   * at confirm rather than as they type.
    */
-  async function load(clientSecret: string, billingAddress?: StripeCheckoutContact | null): Promise<StripeCheckoutResult> {
+  async function load(clientSecret: string): Promise<StripeCheckoutResult> {
     const stripe = await stripeClient()
 
     if (!stripe) {
@@ -61,7 +57,6 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
     sdk = stripe.initCheckoutElementsSdk({
       clientSecret,
       elementsOptions: { appearance: stripeAppearance() },
-      defaultValues: billingAddress ? { billingAddress } : undefined,
     })
 
     const result = await sdk.loadActions()
@@ -121,25 +116,6 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
     if (paymentTarget.value) {
       paymentElement.mount(paymentTarget.value)
     }
-  }
-
-  /**
-   * Applies a promotion code to the session. The code belongs to the
-   * session rather than to a payload of our own, so Stripe resolves it
-   * and the totals move with it.
-   */
-  async function applyPromotionCode(code: string): Promise<StripeCheckoutResult> {
-    if (!actions) {
-      return { message: '', session: null }
-    }
-
-    const result = await actions.applyPromotionCode(code)
-
-    if (result.type === 'error') {
-      return { message: result.error.message, session: session.value }
-    }
-
-    return { message: '', session: result.session }
   }
 
   /**
@@ -217,7 +193,6 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   onBeforeUnmount(destroy)
 
   return {
-    applyPromotionCode,
     confirm,
     destroy,
     isAddressComplete,
