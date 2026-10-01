@@ -6,7 +6,7 @@
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
-  import { Stack } from '@shared/components/common/Stack'
+  import { Form } from '@shared/components/common/Form'
 
   const auth = useAuthService()
   const i18n = useI18n()
@@ -63,32 +63,30 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <Stack class="w-full sm:max-w-[25rem]">
-      <div class="text-center">
-        <p class="text-2xl font-bold">
-          {{ $t('features.form.subscription_resume.title') }}
-        </p>
-
-        <p class="text-lg text-muted-foreground">
-          {{ note }}
-        </p>
-      </div>
-
-      <p
-        v-if="error"
-        class="text-center text-destructive"
-      >
-        {{ error }}
+  <Form>
+    <div class="text-center">
+      <p class="text-2xl font-bold">
+        {{ $t('features.form.subscription_resume.title') }}
       </p>
 
-      <ButtonLoading
-        class="w-full"
-        :pending="isPending"
-        @click="submit"
-      >
-        {{ $t('features.form.subscription_resume.submit') }}
-      </ButtonLoading>
-    </Stack>
-  </div>
+      <p class="text-lg text-muted-foreground">
+        {{ note }}
+      </p>
+    </div>
+
+    <p
+      v-if="error"
+      class="text-center text-destructive"
+    >
+      {{ error }}
+    </p>
+
+    <ButtonLoading
+      class="w-full"
+      :pending="isPending"
+      @click="submit"
+    >
+      {{ $t('features.form.subscription_resume.submit') }}
+    </ButtonLoading>
+  </Form>
 </template>

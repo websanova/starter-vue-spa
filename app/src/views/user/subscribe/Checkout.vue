@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <StripeCheckoutForm />
+  <StripeCheckoutForm size="full" />
 </template>

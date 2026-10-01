@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <SubscriptionCancelForm />
+  <SubscriptionCancelForm size="full" />
 </template>

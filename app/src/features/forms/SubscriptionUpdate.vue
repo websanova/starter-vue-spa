@@ -7,6 +7,7 @@
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
+  import { Form } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
   import { stripeClient } from '@shared/lib/stripe'
@@ -146,55 +147,53 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <Stack class="w-full sm:max-w-[25rem]">
-      <div class="text-center">
-        <p class="text-2xl font-bold">
-          {{ $t('features.form.subscription_update.title') }}
-        </p>
-      </div>
+  <Form>
+    <div class="text-center">
+      <p class="text-2xl font-bold">
+        {{ $t('features.form.subscription_update.title') }}
+      </p>
+    </div>
 
-      <div
-        v-if="isLoading"
-        class="flex justify-center"
+    <div
+      v-if="isLoading"
+      class="flex justify-center"
+    >
+      <Loading />
+    </div>
+
+    <template v-else>
+      <Stack gap="sm">
+        <div>
+          <p class="text-sm text-muted-foreground">
+            {{ $t('features.form.subscription_update.from') }}
+          </p>
+
+          <p>{{ from }}</p>
+        </div>
+
+        <div>
+          <p class="text-sm text-muted-foreground">
+            {{ $t('features.form.subscription_update.to') }}
+          </p>
+
+          <p>{{ to }}</p>
+        </div>
+      </Stack>
+
+      <p
+        v-if="error"
+        class="text-center text-destructive"
       >
-        <Loading />
-      </div>
+        {{ error }}
+      </p>
 
-      <template v-else>
-        <Stack gap="sm">
-          <div>
-            <p class="text-sm text-muted-foreground">
-              {{ $t('features.form.subscription_update.from') }}
-            </p>
-
-            <p>{{ from }}</p>
-          </div>
-
-          <div>
-            <p class="text-sm text-muted-foreground">
-              {{ $t('features.form.subscription_update.to') }}
-            </p>
-
-            <p>{{ to }}</p>
-          </div>
-        </Stack>
-
-        <p
-          v-if="error"
-          class="text-center text-destructive"
-        >
-          {{ error }}
-        </p>
-
-        <ButtonLoading
-          class="w-full"
-          :pending="isConfirming"
-          @click="submit"
-        >
-          {{ $t('features.form.subscription_update.submit') }}
-        </ButtonLoading>
-      </template>
-    </Stack>
-  </div>
+      <ButtonLoading
+        class="w-full"
+        :pending="isConfirming"
+        @click="submit"
+      >
+        {{ $t('features.form.subscription_update.submit') }}
+      </ButtonLoading>
+    </template>
+  </Form>
 </template>

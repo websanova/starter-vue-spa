@@ -4,8 +4,8 @@
   import { useRoute, useRouter } from 'vue-router'
   import { useCheckout } from '@/composables/support/useCheckout'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
+  import { Form } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
-  import { Stack } from '@shared/components/common/Stack'
   import { WizardStep } from '@shared/components/common/WizardStep'
   import type { Interval } from '@/models/plan'
 
@@ -60,106 +60,104 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <Stack class="w-full sm:max-w-[25rem]">
-      <div class="text-center">
-        <p class="text-2xl font-bold">
-          {{ $t('features.form.stripe_checkout.note_complete') }}
-        </p>
+  <Form>
+    <div class="text-center">
+      <p class="text-2xl font-bold">
+        {{ $t('features.form.stripe_checkout.note_complete') }}
+      </p>
 
-        <p
-          v-if="!isLoading"
-          class="text-lg text-muted-foreground"
-        >
-          {{ $t('features.form.stripe_checkout.note_summary', summary) }}
-
-          <span
-            v-if="isTaxPending"
-            class="text-xs"
-          >
-            {{ $t('features.form.stripe_checkout.note_tax') }}
-          </span>
-        </p>
-      </div>
-
-      <div
-        v-if="isLoading"
-        class="flex justify-center"
+      <p
+        v-if="!isLoading"
+        class="text-lg text-muted-foreground"
       >
-        <Loading />
-      </div>
+        {{ $t('features.form.stripe_checkout.note_summary', summary) }}
 
+        <span
+          v-if="isTaxPending"
+          class="text-xs"
+        >
+          {{ $t('features.form.stripe_checkout.note_tax') }}
+        </span>
+      </p>
+    </div>
+
+    <div
+      v-if="isLoading"
+      class="flex justify-center"
+    >
+      <Loading />
+    </div>
+
+    <template v-else>
+      <p
+        v-if="error"
+        class="text-center text-destructive"
+      >
+        {{ error }}
+      </p>
+
+      <!--
+        A card on file leaves nothing to collect, so no element is
+        created and the step is a line of our own text.
+      -->
+      <p
+        v-if="cardSummary"
+        class="text-sm text-muted-foreground"
+      >
+        {{ cardSummary }}
+      </p>
+
+      <!--
+        Both stay in the document once the confirm step is open. The
+        elements are mounted into them and taking one out tears the
+        mount down.
+      -->
       <template v-else>
-        <p
-          v-if="error"
-          class="text-center text-destructive"
+        <WizardStep
+          v-show="step === 'payment-method'"
+          :heading="$t('features.lbl.billing_address')"
+          :open="part === 'address'"
+          :summary="addressSummary"
+          @change="goTo('address')"
         >
-          {{ error }}
-        </p>
+          <div ref="addressTarget" />
+        </WizardStep>
 
-        <!--
-          A card on file leaves nothing to collect, so no element is
-          created and the step is a line of our own text.
-        -->
-        <p
-          v-if="cardSummary"
-          class="text-sm text-muted-foreground"
-        >
-          {{ cardSummary }}
-        </p>
-
-        <!--
-          Both stay in the document once the confirm step is open. The
-          elements are mounted into them and taking one out tears the
-          mount down.
-        -->
-        <template v-else>
+        <Transition name="fade-in">
           <WizardStep
-            v-show="step === 'payment-method'"
-            :heading="$t('features.lbl.billing_address')"
-            :open="part === 'address'"
-            :summary="addressSummary"
-            @change="goTo('address')"
+            v-show="step === 'payment-method' && part === 'card'"
+            :heading="$t('features.lbl.payment_method')"
+            open
           >
-            <div ref="addressTarget" />
+            <div ref="paymentTarget" />
           </WizardStep>
-
-          <Transition name="fade-in">
-            <WizardStep
-              v-show="step === 'payment-method' && part === 'card'"
-              :heading="$t('features.lbl.payment_method')"
-              open
-            >
-              <div ref="paymentTarget" />
-            </WizardStep>
-          </Transition>
-        </template>
-
-        <template v-if="step === 'payment-method' && part === 'address'">
-          <ButtonLoading
-            class="w-full"
-            :disabled="!isAddressComplete"
-            :pending="isContinuing"
-            @click="next"
-          >
-            {{ $t('features.lbl.continue') }}
-          </ButtonLoading>
-
-          <p class="text-center text-sm text-muted-foreground">
-            * {{ $t('features.form.stripe_checkout.note_address') }}
-          </p>
-        </template>
-
-        <ButtonLoading
-          v-else
-          class="w-full"
-          :disabled="!canConfirm"
-          :pending="isConfirming"
-          @click="confirm"
-        >
-          {{ $t('features.form.stripe_checkout.submit') }}
-        </ButtonLoading>
+        </Transition>
       </template>
-    </Stack>
-  </div>
+
+      <template v-if="step === 'payment-method' && part === 'address'">
+        <ButtonLoading
+          class="w-full"
+          :disabled="!isAddressComplete"
+          :pending="isContinuing"
+          @click="next"
+        >
+          {{ $t('features.lbl.continue') }}
+        </ButtonLoading>
+
+        <p class="text-center text-sm text-muted-foreground">
+          * {{ $t('features.form.stripe_checkout.note_address') }}
+        </p>
+      </template>
+
+      <ButtonLoading
+        v-else
+        class="w-full"
+        :disabled="!canConfirm"
+        :pending="isConfirming"
+        @click="confirm"
+      >
+        {{ $t('features.form.stripe_checkout.submit') }}
+      </ButtonLoading>
+    </template>
+  </Form>
 </template>
