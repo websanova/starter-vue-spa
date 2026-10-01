@@ -2,11 +2,10 @@
   "heading": {
     "title": {
       "billing": "Billing",
-      "billing_address": "Billing Address",
       "login": "Sign In",
       "password_reset": "Reset Password",
       "password_update": "Update Password",
-      "payment_method": "Payment Method",
+      "payment_method_update": "Update Payment Method",
       "profile_avatar": "Avatar",
       "profile_info": "Info",
       "register": "Sign Up",
@@ -27,6 +26,7 @@
     "all": "All",
     "apply": "Apply",
     "billing": "Billing",
+    "billing_address": "Billing Address",
     "bookmarks": "Bookmarks",
     "cancel": "Cancel",
     "change": "Change",
@@ -46,6 +46,7 @@
     "optional": "Optional",
     "password": "Password",
     "password_confirmation": "Confirm password",
+    "payment_method": "Payment Method",
     "phone": "Phone Number",
     "plans": "Plans",
     "profile": "Profile",

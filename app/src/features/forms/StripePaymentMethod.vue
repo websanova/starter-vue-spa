@@ -44,7 +44,7 @@
     </p>
 
     <WizardStep
-      :heading="$t('features.heading.title.billing_address')"
+      :heading="$t('features.lbl.billing_address')"
       :open="step === 'address'"
       :summary="addressSummary"
       @change="goTo('address')"
@@ -54,7 +54,7 @@
 
     <WizardStep
       v-show="step === 'payment'"
-      :heading="$t('features.heading.title.payment_method')"
+      :heading="$t('features.lbl.payment_method')"
       open
     >
       <div ref="cardTarget" />
