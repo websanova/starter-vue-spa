@@ -15,50 +15,49 @@
 </script>
 
 <template>
-  <p
-    v-if="!isValidLink"
-    class="text-center"
-  >
-    {{ $t('features.form.auth_password_reset.note_invalid') }}
-  </p>
-
-  <i18n-t
-    v-else-if="isSuccess"
-    keypath="features.form.auth_password_reset.note_success"
-    tag="p"
-    class="text-center"
-  >
-    <RouterLink
-      :to="{ name: 'auth-login' }"
-      class="text-link"
+  <Form @submit="submit">
+    <p
+      v-if="!isValidLink"
+      class="text-center"
     >
-      {{ $t('features.lbl.sign_in') }}
-    </RouterLink>
-  </i18n-t>
+      {{ $t('features.form.auth_password_reset.note_invalid') }}
+    </p>
 
-  <Form
-    v-else
-    @submit="submit"
-  >
-    <FormInputText
-      name="password"
-      type="password"
-      :label="$t('features.lbl.password')"
-      :placeholder="$t('features.ph.password')"
-    />
-
-    <FormInputText
-      name="password_confirmation"
-      type="password"
-      :label="$t('features.lbl.password_confirmation')"
-      :placeholder="$t('features.ph.password_confirmation')"
-    />
-
-    <FormButton
-      class="w-full"
-      :pending="isPending"
+    <i18n-t
+      v-else-if="isSuccess"
+      keypath="features.form.auth_password_reset.note_success"
+      tag="p"
+      class="text-center"
     >
-      {{ $t('features.lbl.update') }}
-    </FormButton>
+      <RouterLink
+        :to="{ name: 'auth-login' }"
+        class="text-link"
+      >
+        {{ $t('features.lbl.sign_in') }}
+      </RouterLink>
+    </i18n-t>
+
+    <template v-else>
+      <FormInputText
+        name="password"
+        type="password"
+        :label="$t('features.lbl.password')"
+        :placeholder="$t('features.ph.password')"
+      />
+
+      <FormInputText
+        name="password_confirmation"
+        type="password"
+        :label="$t('features.lbl.password_confirmation')"
+        :placeholder="$t('features.ph.password_confirmation')"
+      />
+
+      <FormButton
+        class="w-full"
+        :pending="isPending"
+      >
+        {{ $t('features.lbl.update') }}
+      </FormButton>
+    </template>
   </Form>
 </template>
