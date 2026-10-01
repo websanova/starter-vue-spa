@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <SubscriptionUpdateForm size="full" />
+  <SubscriptionUpdateForm class="mx-auto" />
 </template>

@@ -104,7 +104,7 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
      */
     paymentElement = sdk.createPaymentElement({
       layout: { type: 'tabs' },
-      fields: { billingDetails: { name: 'never' } },
+      fields: { billingDetails: { name: 'never', address: 'never' } },
     })
 
     await nextTick()

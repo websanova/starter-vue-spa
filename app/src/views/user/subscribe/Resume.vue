@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <SubscriptionResumeForm size="full" />
+  <SubscriptionResumeForm class="mx-auto" />
 </template>
