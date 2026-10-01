@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { BellIcon, BookmarkIcon, LayersIcon, LogOutIcon, UserIcon } from '@lucide/vue'
-  import { useNotificationsUnread } from '@/composables/support/useNotificationsUnread'
+  import { useNotificationsUnread } from '@/composables/current/useNotificationsUnread'
   import { useLogout } from '@shared/composables/support/useLogout'
   import { Indicator } from '@shared/components/common/Indicator'
   import { Navbar, NavDropdown, NavItem } from '@shared/components/common/Navbar'

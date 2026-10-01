@@ -2,7 +2,7 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { usePlans } from '@/composables/api/plans'
-  import { useSubscription } from '@/composables/support/useSubscription'
+  import { useSubscription } from '@/composables/current/useSubscription'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useSettingsStore } from '@shared/stores/settings'
   import PlanCard from '@/components/cards/Plan.vue'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useVerifyChannel } from '@/composables/support/useVerifyChannel'
+  import { useVerifyChannel } from '@/composables/current/useVerifyChannel'
   import AuthVerifyAccountForm from '@/features/forms/AuthVerifyAccount.vue'
   import { Heading } from '@shared/components/common/Heading'
 

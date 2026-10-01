@@ -2,7 +2,7 @@
   import { computed, ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { useCancelSubscription } from '@/composables/api/subscription'
-  import { useSubscription } from '@/composables/support/useSubscription'
+  import { useSubscription } from '@/composables/current/useSubscription'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'

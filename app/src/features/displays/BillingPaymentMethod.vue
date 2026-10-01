@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { CreditCardIcon } from '@lucide/vue'
-  import { usePaymentMethod } from '@/composables/support/usePaymentMethod'
+  import { usePaymentMethod } from '@/composables/current/usePaymentMethod'
   import { Inline } from '@shared/components/common/Inline'
 
   defineEmits<{
@@ -14,7 +14,7 @@
   <Inline>
     <CreditCardIcon class="size-5 shrink-0 text-muted-foreground" />
 
-    <p v-if="card">
+    <div v-if="card">
       {{ $t('features.display.billing_payment_method.card', card) }}
 
       <RouterLink
@@ -33,16 +33,17 @@
       >
         {{ $t('features.lbl.delete') }}
       </button>
-    </p>
+    </div>
 
     <!--
       The link stands whether or not a card is on file, since the page
       takes an addition and a replacement on the same path.
     -->
-    <p v-else>
-      <span class="text-muted-foreground">
-        {{ $t('features.display.billing_payment_method.card_none') }}
-      </span>
+    <div
+      v-else
+      class="text-muted-foreground"
+    >
+      {{ $t('features.display.billing_payment_method.card_none') }}
 
       <RouterLink
         :to="{ name: 'user-account-payment-method' }"
@@ -50,6 +51,6 @@
       >
         {{ $t('features.lbl.update') }}
       </RouterLink>
-    </p>
+    </div>
   </Inline>
 </template>

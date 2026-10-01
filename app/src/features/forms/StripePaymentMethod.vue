@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { usePaymentMethodForm } from '@/composables/support/usePaymentMethodForm'
+  import { usePaymentMethod } from '@/composables/support/usePaymentMethod'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
+  import { Form } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
-  import { Stack } from '@shared/components/common/Stack'
   import { WizardStep } from '@shared/components/common/WizardStep'
   import StripeLogo from '@shared/components/logos/Stripe.vue'
 
@@ -21,7 +21,7 @@
     next,
     step,
     submit,
-  } = usePaymentMethodForm({ addressTarget, cardTarget })
+  } = usePaymentMethod({ addressTarget, cardTarget })
 </script>
 
 <template>
@@ -35,7 +35,7 @@
     targets before the step they belong to opens, and taking one out of
     the document tears the mount down.
   -->
-  <Stack v-show="!isLoading">
+  <Form v-show="!isLoading">
     <p
       v-if="error"
       class="text-center text-destructive"
@@ -88,5 +88,5 @@
     >
       {{ $t('features.lbl.update') }}
     </ButtonLoading>
-  </Stack>
+  </Form>
 </template>
