@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed, ref, watch } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
   import { useVerifyChannel } from '@/composables/current/useVerifyChannel'
   import { useMutationError } from '@shared/composables/primitives/useMutationError'
@@ -11,7 +11,9 @@
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
+  import { getRedirect } from '@shared/lib/redirect'
 
+  const route = useRoute()
   const router = useRouter()
   const auth = useAuthService()
   const settings = useSettingsStore()
@@ -31,7 +33,7 @@
     verificationConfirm.mutate({ code: code.value, channel: channel.value }, {
       onSuccess: () => {
         if (!auth.user.value?.isVerificationRequired) {
-          router.push({ name: 'user-landing' })
+          router.push(getRedirect(route.query) ?? { name: 'user-landing' })
         }
       },
     })

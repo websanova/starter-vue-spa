@@ -1,12 +1,14 @@
 <script setup lang="ts">
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { useLoginForm } from '@shared/composables/forms/useLoginForm'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
+  import { getRedirect } from '@shared/lib/redirect'
 
+  const route = useRoute()
   const router = useRouter()
 
   const { submit, isPending } = useLoginForm({
-    onSuccess: () => router.push({ name: 'user-landing' }),
+    onSuccess: () => router.push(getRedirect(route.query) ?? { name: 'user-landing' }),
   })
 </script>
 

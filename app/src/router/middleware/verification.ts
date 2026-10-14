@@ -1,4 +1,5 @@
 import { useAuthService } from '@shared/composables/services/useAuthService'
+import { getRedirect } from '@shared/lib/redirect'
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 
 /**
@@ -27,7 +28,7 @@ export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | unde
     auth.user.value?.isVerificationRequired &&
     to.name !== 'auth-verify-account'
   ) {
-    return { name: 'auth-verify-account' }
+    return { name: 'auth-verify-account', query: { redirect: to.fullPath } }
   }
 
   if (
@@ -36,6 +37,6 @@ export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | unde
     !auth.user.value.verificationPending.includes(to.query.channel as string) &&
     to.name === 'auth-verify-account'
   ) {
-    return { name: 'user-landing' }
+    return getRedirect(to.query) ?? { name: 'user-landing' }
   }
 }

@@ -46,6 +46,12 @@ export function beforeEach(to: RouteLocationNormalized): RouteLocationRaw | unde
     Array.isArray(meta.roles) &&
     !meta.roles.includes(auth.user.value?.role as string)
   )) {
+    // Only a logged out visit carries the destination, so login can send the
+    // user back to it. Guest only and wrong role redirects carry nothing.
+    if (meta.roles === true && typeof meta.redirect === 'object') {
+      return { ...meta.redirect, query: { ...meta.redirect.query, redirect: to.fullPath } }
+    }
+
     return meta.redirect
   }
 }
