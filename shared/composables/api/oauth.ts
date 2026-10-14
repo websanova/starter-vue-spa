@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/vue-query'
+import { useMutation, useQuery } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 import { toOAuthConsent } from '@shared/models/oauth'
 import type { OAuthConsentDto } from '@shared/models/oauth'
@@ -22,6 +22,23 @@ export function useOAuthConsent(query: LocationQuery) {
         },
       })
       return toOAuthConsent(data)
+    },
+  })
+}
+
+export function useOAuthConsentDecision(query: LocationQuery) {
+  return useMutation({
+    mutationFn: async (approve: boolean) => {
+      const { data } = await useHttp().post<{ data: { redirect_uri: string } }>('oauth/consent', {
+        approve,
+        client_id: query.client_id,
+        redirect_uri: query.redirect_uri,
+        scope: query.scope,
+        state: query.state,
+        code_challenge: query.code_challenge,
+        code_challenge_method: query.code_challenge_method,
+      })
+      return data.redirect_uri
     },
   })
 }

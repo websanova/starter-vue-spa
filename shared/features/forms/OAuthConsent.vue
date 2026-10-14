@@ -1,9 +1,13 @@
 <script setup lang="ts">
   import { watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import { useOAuthConsent } from '@shared/composables/api/oauth'
+  import { useOAuthConsent, useOAuthConsentDecision } from '@shared/composables/api/oauth'
+  import { useMutationError } from '@shared/composables/primitives/useMutationError'
   import { useAuthService } from '@shared/composables/services/useAuthService'
+  import { ButtonLoading } from '@shared/components/common/ButtonLoading'
+  import { Form } from '@shared/components/common/Form'
   import { Heading } from '@shared/components/common/Heading'
+  import { Inline } from '@shared/components/common/Inline'
   import { Load } from '@shared/components/common/Load'
 
   const route = useRoute()
@@ -11,6 +15,17 @@
   const auth = useAuthService()
 
   const { data, isPending, error } = useOAuthConsent(route.query)
+
+  const decision = useOAuthConsentDecision(route.query)
+  const decisionError = useMutationError(decision)
+
+  function onDecide(approve: boolean) {
+    decision.mutate(approve, {
+      onSuccess: (redirectUri) => {
+        window.location.href = redirectUri
+      },
+    })
+  }
 
   // Replace so Back doesn't land on this page and bounce straight to login again.
   watch(data, (consent) => {
@@ -21,7 +36,7 @@
 </script>
 
 <template>
-  <div class="flex w-full flex-col">
+  <Form>
     <Heading
       class="text-center"
       :divider="false"
@@ -35,13 +50,37 @@
       :error="error"
       :is-pending="isPending"
     >
-      <p class="my-3 text-center">
+      <p class="text-center">
         {{ $t('features.form.oauth_consent.note', { client: data?.clientName }) }}
       </p>
 
       <p class="text-center text-sm text-muted-foreground">
         {{ $t('features.form.oauth_consent.scope', { scope: data?.scope }) }}
       </p>
+
+      <p
+        v-if="decisionError"
+        class="text-center text-sm text-destructive"
+      >
+        {{ decisionError }}
+      </p>
+
+      <Inline class="justify-center">
+        <ButtonLoading
+          :pending="decision.isPending.value"
+          @click="onDecide(true)"
+        >
+          {{ $t('features.lbl.approve') }}
+        </ButtonLoading>
+
+        <ButtonLoading
+          variant="outline"
+          :pending="decision.isPending.value"
+          @click="onDecide(false)"
+        >
+          {{ $t('features.lbl.deny') }}
+        </ButtonLoading>
+      </Inline>
     </Load>
-  </div>
+  </Form>
 </template>
