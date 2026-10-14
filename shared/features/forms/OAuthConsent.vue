@@ -1,12 +1,23 @@
 <script setup lang="ts">
-  import { useRoute } from 'vue-router'
+  import { watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
   import { useOAuthConsent } from '@shared/composables/api/oauth'
+  import { useAuthService } from '@shared/composables/services/useAuthService'
   import { Heading } from '@shared/components/common/Heading'
   import { Load } from '@shared/components/common/Load'
 
   const route = useRoute()
+  const router = useRouter()
+  const auth = useAuthService()
 
   const { data, isPending, error } = useOAuthConsent(route.query)
+
+  // Replace so Back doesn't land on this page and bounce straight to login again.
+  watch(data, (consent) => {
+    if (consent && !auth.isLoggedIn.value) {
+      router.replace({ name: 'auth-login', query: { redirect: route.fullPath } })
+    }
+  }, { immediate: true })
 </script>
 
 <template>
