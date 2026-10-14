@@ -55,9 +55,16 @@
       "title": "Delete user"
     }
   },
+  "form": {
+    "oauth_consent": {
+      "note": "{client} is asking for access to your account.",
+      "scope": "Access requested: {scope}"
+    }
+  },
   "heading": {
     "title": {
       "icons": "Icons",
+      "oauth_authorize": "Authorize access",
       "plans": "Plans",
       "sign_in": "Sign in",
       "stats": "Stats",
@@ -83,6 +90,7 @@
     },
     "nouns": {
       "bookmarks": "bookmarks",
+      "oauth": "authorization request",
       "plans": "plans",
       "stats": "stats",
       "user": "user",

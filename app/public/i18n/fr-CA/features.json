@@ -3,6 +3,7 @@
     "title": {
       "billing": "Facturation",
       "login": "Se connecter",
+      "oauth_authorize": "Autoriser l'accès",
       "password_reset": "Réinitialiser le mot de passe",
       "password_update": "Mettre à jour le mot de passe",
       "payment_method_update": "Mettre à jour le moyen de paiement",
@@ -181,6 +182,10 @@
       "note_phone": "Entrez le NIP envoyé à votre numéro de téléphone se terminant par {digits}.",
       "resend_code": "Renvoyer le code"
     },
+    "oauth_consent": {
+      "note": "{client} demande l'accès à votre compte.",
+      "scope": "Accès demandé : {scope}"
+    },
     "profile_avatar": {
       "error_failed": "Impossible de téléverser l'avatar. Veuillez réessayer.",
       "error_invalid_type": "Veuillez choisir une image {0}.",
@@ -260,6 +265,7 @@
     },
     "nouns": {
       "bookmarks": "signets",
+      "oauth": "demande d'autorisation",
       "plans": "forfaits"
     }
   },

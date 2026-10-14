@@ -3,6 +3,7 @@
     "title": {
       "billing": "Billing",
       "login": "Sign In",
+      "oauth_authorize": "Authorize access",
       "password_reset": "Reset Password",
       "password_update": "Update Password",
       "payment_method_update": "Update Payment Method",
@@ -181,6 +182,10 @@
       "note_phone": "Enter the pin sent to your phone number ending in {digits}.",
       "resend_code": "Resend code"
     },
+    "oauth_consent": {
+      "note": "{client} is asking for access to your account.",
+      "scope": "Access requested: {scope}"
+    },
     "profile_avatar": {
       "error_failed": "Could not upload avatar. Please try again.",
       "error_invalid_type": "Please choose a {0} image.",
@@ -260,6 +265,7 @@
     },
     "nouns": {
       "bookmarks": "bookmarks",
+      "oauth": "authorization request",
       "plans": "plans"
     }
   },
