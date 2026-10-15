@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useTags } from '@/composables/api/tags'
-  import { useBookmarkForm } from '@/composables/forms/useBookmarkForm'
+  import { useUpdateBookmarkForm } from '@/composables/forms/bookmarks'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputTags, FormInputText } from '@shared/components/common/Form'
   import type { Bookmark } from '@/models/bookmark'
@@ -16,7 +16,7 @@
 
   const tagOptions = computed(() => (tags.value ?? []).map((tag) => ({ value: tag.id, label: tag.name })))
 
-  const { submit, isPending, error } = useBookmarkForm(props.bookmark, () => {
+  const { submit, isPending, error } = useUpdateBookmarkForm(props.bookmark, () => {
     open.value = false
   })
 </script>
