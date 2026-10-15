@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
-  import { useRegisterForm } from '@/composables/forms/useRegisterForm'
+  import { useRegisterForm } from '@/composables/forms/register'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
 
   const router = useRouter()

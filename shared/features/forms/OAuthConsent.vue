@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import { useOAuthConsent, useOAuthConsentDecision } from '@shared/composables/api/oauth'
-  import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { useOAuthConsent } from '@shared/composables/api/oauth'
+  import { useOAuthConsentForm } from '@shared/composables/forms/oauth'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form } from '@shared/components/common/Form'
@@ -16,16 +16,7 @@
 
   const { data, isPending, error } = useOAuthConsent(route.query)
 
-  const decision = useOAuthConsentDecision(route.query)
-  const decisionError = useMutationError(decision)
-
-  function onDecide(approve: boolean) {
-    decision.mutate(approve, {
-      onSuccess: (redirectUri) => {
-        window.location.href = redirectUri
-      },
-    })
-  }
+  const { submit: onDecide, isPending: isDeciding, error: decisionError } = useOAuthConsentForm(route.query)
 
   // Replace so Back doesn't land on this page and bounce straight to login again.
   watch(data, (consent) => {
@@ -67,7 +58,7 @@
 
       <Inline class="justify-center">
         <ButtonLoading
-          :pending="decision.isPending.value"
+          :pending="isDeciding"
           @click="onDecide(true)"
         >
           {{ $t('features.lbl.approve') }}
@@ -75,7 +66,7 @@
 
         <ButtonLoading
           variant="outline"
-          :pending="decision.isPending.value"
+          :pending="isDeciding"
           @click="onDecide(false)"
         >
           {{ $t('features.lbl.deny') }}

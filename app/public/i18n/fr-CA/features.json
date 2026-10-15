@@ -113,7 +113,6 @@
     },
     "bookmark_delete": {
       "note": "Voulez-vous vraiment supprimer le signet {0}?",
-      "note_failed": "Le signet n'a pas pu être supprimé. Veuillez réessayer.",
       "title": "Supprimer le signet"
     },
     "bookmark_update": {
@@ -130,7 +129,6 @@
     },
     "tag_delete": {
       "note": "Voulez-vous vraiment supprimer l'étiquette {0}?",
-      "note_failed": "L'étiquette n'a pas pu être supprimée. Veuillez réessayer.",
       "title": "Supprimer l'étiquette"
     },
     "tag_update": {

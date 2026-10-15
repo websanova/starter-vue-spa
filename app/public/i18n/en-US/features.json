@@ -113,7 +113,6 @@
     },
     "bookmark_delete": {
       "note": "Are you sure you want to delete bookmark {0}?",
-      "note_failed": "The bookmark could not be deleted. Please try again.",
       "title": "Delete bookmark"
     },
     "bookmark_update": {
@@ -130,7 +129,6 @@
     },
     "tag_delete": {
       "note": "Are you sure you want to delete tag {0}?",
-      "note_failed": "The tag could not be deleted. Please try again.",
       "title": "Delete tag"
     },
     "tag_update": {

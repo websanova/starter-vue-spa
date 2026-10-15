@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { useTagForm } from '@/composables/forms/useTagForm'
+  import { useCreateTagForm } from '@/composables/forms/tags'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputText } from '@shared/components/common/Form'
 
   const open = defineModel<boolean>('open', { default: false })
 
-  const { submit, isPending, error } = useTagForm(undefined, () => {
+  const { submit, isPending, error } = useCreateTagForm(() => {
     open.value = false
   })
 </script>

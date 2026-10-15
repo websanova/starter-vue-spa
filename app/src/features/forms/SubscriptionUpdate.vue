@@ -1,16 +1,14 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { usePlans } from '@/composables/api/plans'
-  import { useUpdateSubscription } from '@/composables/api/subscription'
-  import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { useUpdateSubscriptionForm } from '@/composables/forms/subscription'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import { Stack } from '@shared/components/common/Stack'
-  import { stripeClient } from '@shared/lib/stripe'
   import type { Interval } from '@/models/plan'
 
   const auth = useAuthService()
@@ -27,33 +25,7 @@
 
   const { data: plans, isPending: isLoading } = usePlans()
 
-  const update = useUpdateSubscription()
-
-  /**
-   * Spans the confirm and the bank challenge that can follow it, since
-   * the two are one wait as far as the user is concerned.
-   */
-  const isConfirming = ref<boolean>(false)
-  const isFailed = ref<boolean>(false)
-  const paymentError = ref<string>('')
-
-  const mutationError = useMutationError(update)
-
-  /**
-   * A refusal comes back as an HTTP error and carries its own sentence.
-   * Anything else, a dead stripe.js and a dropped connection among them,
-   * still gets a line rather than a page that looks like nothing
-   * happened.
-   */
-  const error = computed(() => {
-    const message = paymentError.value || mutationError.value
-
-    if (message) {
-      return message
-    }
-
-    return isFailed.value ? i18n.t('features.form.subscription_update.note_failed') : ''
-  })
+  const { submit, isPending: isConfirming, error } = useUpdateSubscriptionForm({ interval, plan })
 
   /**
    * The page is opened with a slug, and the user carries one too, so the
@@ -77,73 +49,6 @@
   const from = computed(() => summary(auth.user.value?.plan?.slug, auth.user.value?.subscription?.interval))
 
   const to = computed(() => summary(plan, interval))
-
-  async function submit() {
-    // Not reachable. The page redirects itself off a query missing
-    // either half of the change it is confirming.
-    if (!plan || !interval) {
-      return
-    }
-
-    isConfirming.value = true
-    isFailed.value = false
-    paymentError.value = ''
-
-    try {
-      const payment = await update.mutateAsync({ interval, plan })
-
-      if (payment.status === 'requires_action') {
-        await authenticate(payment.clientSecret)
-        return
-      }
-
-      if (payment.status === 'failed') {
-        paymentError.value = i18n.t('features.form.subscription_update.note_declined')
-        isConfirming.value = false
-        return
-      }
-
-      router.push({ name: 'user-account-billing' })
-    } catch (err) {
-      console.error(err)
-      isFailed.value = true
-      isConfirming.value = false
-    }
-  }
-
-  /**
-   * The bank is asking the user to prove they are the cardholder, not
-   * asking for a different card, so the secret goes straight to
-   * stripe.js and no element is mounted. A card collected here would be
-   * a second, unrelated change riding on the confirm.
-   *
-   * Failing leaves the user on the page with the plan already changed
-   * and the invoice open, which is the same place a decline leaves them.
-   */
-  async function authenticate(clientSecret: string) {
-    try {
-      const stripe = await stripeClient()
-
-      if (!stripe) {
-        throw new Error('Stripe failed to load.')
-      }
-
-      const { error: stripeError } = await stripe.handleNextAction({ clientSecret })
-
-      if (stripeError) {
-        paymentError.value = stripeError.message ?? ''
-        isFailed.value = true
-        isConfirming.value = false
-        return
-      }
-
-      router.push({ name: 'user-account-billing' })
-    } catch (err) {
-      console.error(err)
-      isFailed.value = true
-      isConfirming.value = false
-    }
-  }
 </script>
 
 <template>

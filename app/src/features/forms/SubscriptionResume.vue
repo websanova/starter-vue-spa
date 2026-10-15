@@ -1,8 +1,7 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useResumeSubscription } from '@/composables/api/subscription'
-  import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { useResumeSubscriptionForm } from '@/composables/forms/subscription'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useI18n } from '@shared/plugins/i18n'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
@@ -12,24 +11,8 @@
   const i18n = useI18n()
   const router = useRouter()
 
-  const resume = useResumeSubscription()
-
-  const isFailed = ref<boolean>(false)
-  const isPending = resume.isPending
-
-  const mutationError = useMutationError(resume)
-
-  /**
-   * A refusal comes back as an HTTP error and carries its own sentence.
-   * Anything else, a dropped connection among them, still gets a line
-   * rather than a page that looks like nothing happened.
-   */
-  const error = computed(() => {
-    if (mutationError.value) {
-      return mutationError.value
-    }
-
-    return isFailed.value ? i18n.t('features.form.subscription_resume.note_failed') : ''
+  const { submit, isPending, error } = useResumeSubscriptionForm(() => {
+    router.push({ name: 'user-account-billing' })
   })
 
   /**
@@ -47,19 +30,6 @@
       date: endsAt ? i18n.d(new Date(endsAt), 'short') : '',
     })
   })
-
-  async function submit() {
-    isFailed.value = false
-
-    try {
-      await resume.mutateAsync()
-
-      router.push({ name: 'user-account-billing' })
-    } catch (err) {
-      console.error(err)
-      isFailed.value = true
-    }
-  }
 </script>
 
 <template>

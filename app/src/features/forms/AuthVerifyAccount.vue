@@ -1,9 +1,6 @@
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import { useVerificationConfirm, useVerificationResend } from '@/composables/api/verification'
-  import { useVerifyChannel } from '@/composables/current/useVerifyChannel'
-  import { useMutationError } from '@shared/composables/primitives/useMutationError'
+  import { computed } from 'vue'
+  import { useVerificationForm } from '@/composables/forms/verification'
   import { useAuthService } from '@shared/composables/services/useAuthService'
   import { useLogout } from '@shared/composables/support/useLogout'
   import { useSettingsStore } from '@shared/stores/settings'
@@ -11,52 +8,19 @@
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form, FormButton } from '@shared/components/common/Form'
   import { InputOTP, InputOTPGroup, InputOTPSlot } from '@shared/components/ui/input-otp'
-  import { getRedirect } from '@shared/lib/redirect'
 
-  const route = useRoute()
-  const router = useRouter()
   const auth = useAuthService()
   const settings = useSettingsStore()
   const onLogout = useLogout()
-  const verificationConfirm = useVerificationConfirm()
-  const verificationResend = useVerificationResend()
 
-  const { channel } = useVerifyChannel()
+  const { channel, code, error, isPending, isResending, resend, submit } = useVerificationForm()
 
-  const code = ref('')
-  const error = useMutationError([verificationConfirm, verificationResend])
   const length = computed(() => settings.data.verificationCodeLength)
   const digits = computed(() => auth.user.value?.phone?.slice(-2) ?? '')
-
-  function onVerify() {
-    verificationResend.reset()
-    verificationConfirm.mutate({ code: code.value, channel: channel.value }, {
-      onSuccess: () => {
-        if (!auth.user.value?.isVerificationRequired) {
-          router.push(getRedirect(route.query) ?? { name: 'user-landing' })
-        }
-      },
-    })
-  }
-
-  function onResend() {
-    verificationConfirm.reset()
-    verificationResend.mutate({ channel: channel.value })
-  }
-
-  // Send a code whenever the active channel resolves or advances. Silent,
-  // resetting on error so a throttle message never displays on its own.
-  watch(channel, (value) => {
-    if (!value) return
-    code.value = ''
-    verificationResend.mutate({ channel: value }, {
-      onError: () => verificationResend.reset(),
-    })
-  }, { immediate: true })
 </script>
 
 <template>
-  <Form @submit="onVerify">
+  <Form @submit="submit">
     <p class="text-center">
       {{ $t(`features.form.auth_verify_account.note_${channel}`, { digits }) }}
     </p>
@@ -84,7 +48,7 @@
 
     <FormButton
       class="w-full"
-      :pending="verificationConfirm.isPending.value"
+      :pending="isPending"
     >
       {{ $t('features.lbl.verify') }}
     </FormButton>
@@ -92,9 +56,9 @@
     <p class="self-end text-sm text-muted-foreground">
       <ButtonLoading
         class="h-auto p-0 text-link"
-        :pending="verificationResend.isPending.value"
+        :pending="isResending"
         variant="link"
-        @click="onResend()"
+        @click="resend()"
       >
         {{ $t('features.form.auth_verify_account.resend_code') }}
       </ButtonLoading>

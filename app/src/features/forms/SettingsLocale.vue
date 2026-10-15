@@ -3,7 +3,7 @@
   import { useDateTime } from '@shared/composables/support/useDateTime'
   import { useLocaleOptions } from '@shared/composables/support/useLocaleOptions'
   import { useTimezoneOptions } from '@shared/composables/support/useTimezoneOptions'
-  import { useSettingsLocaleForm } from '@/composables/forms/useSettingsLocaleForm'
+  import { useSettingsLocaleForm } from '@/composables/forms/settings'
   import { Form, FormButton, FormInputSelect } from '@shared/components/common/Form'
 
   const { submit, isPending } = useSettingsLocaleForm()

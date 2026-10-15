@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRoute, useRouter } from 'vue-router'
-  import { useLoginForm } from '@shared/composables/forms/useLoginForm'
+  import { useLoginForm } from '@shared/composables/forms/login'
   import { Form, FormButton, FormInputText } from '@shared/components/common/Form'
   import { getRedirect } from '@shared/lib/redirect'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useTagForm } from '@/composables/forms/useTagForm'
+  import { useUpdateTagForm } from '@/composables/forms/tags'
   import { DialogForm } from '@shared/components/common/DialogForm'
   import { FormInputText } from '@shared/components/common/Form'
   import type { Tag } from '@/models/tag'
@@ -10,7 +10,7 @@
 
   const open = defineModel<boolean>('open', { default: false })
 
-  const { submit, isPending, error } = useTagForm(props.tag, () => {
+  const { submit, isPending, error } = useUpdateTagForm(props.tag, () => {
     open.value = false
   })
 </script>
