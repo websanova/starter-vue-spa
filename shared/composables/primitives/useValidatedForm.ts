@@ -36,16 +36,22 @@ export function useValidatedForm<TShape extends ZodRawShape>(options: Options<TS
 
   const submit = handleSubmit(async (values) => {
     isSuccess.value = false
+
     try {
       await onSubmit(values)
       if (reset) resetForm()
       isSuccess.value = true
       onSuccess?.(values)
     } catch (err) {
+
+      // Format error response into vee-validate format.
       if (err instanceof HttpError && err.response.status === 422) {
         setErrors((err.response.data as { errors: Parameters<typeof setErrors>[0] }).errors)
         return
       }
+
+      // Anything that is not a 422 is rethrown so callers can handle it
+      // themselves. The message for display comes from useMutationError.
       throw err
     }
   })
