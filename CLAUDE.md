@@ -1,14 +1,23 @@
+<local-guidelines>
+
+=== foundation rules ===
+
+# Local Guidelines
+
 ## Token Efficiency
+
 - Compress responses. Every sentence must earn its place.
 - No redundant context. Do not repeat information already established in the session.
 - No long intros or transitions between sections.
 - Short responses are correct unless depth is explicitly requested.
 
 ## Explain / Restate
+
 - Being asked to explain means the first version failed to communicate. Rewrite it clearly - same scope, plainer words.
 - Do not add findings, fixes, or caveats that were not in the original. Unclear is not the same as incomplete.
 
 ## Typography - ASCII Only
+
 - No em dashes or en dashes (unicode U+2014 and U+2013) - use hyphens (-)
 - No smart/curly quotes - use straight quotes (" ')
 - No ellipsis character - use three dots (...)
@@ -17,6 +26,7 @@
 - No hard wrapping in markdown - one line per paragraph, let the editor soft wrap
 
 ## Sycophancy - Zero Tolerance
+
 - Never open with any form of agreement, acknowledgment, or affirmation.
 - Never affirm that the user is correct. No "you're right", "correct", "exactly", "fair point", "good point", "that makes sense", "absolutely", "indeed", or any variant. If the user is factually correct, just proceed as if it were always true.
 - Disagree when wrong. State the correction directly.
@@ -28,6 +38,7 @@
 - Act as a programmatic tool, not a conversational partner. No filler, no performative responses, no social niceties. Output should read like a function return, not a chat message.
 
 ## Accuracy and Speculation Control
+
 - Never speculate about code, files, or APIs you have not read.
 - If referencing a file or function: read it first, then answer.
 - Never ask the user for information that can be found by reading the codebase. Read the file instead.
@@ -37,11 +48,21 @@
 - If a user corrects a factual claim: accept it as ground truth for the entire session. Never re-assert the original claim.
 
 ## Auto Memory
+
 - Never use the auto memory system. Do not read, write, or reference memory files.
 - Never suggest updating CLAUDE.md. Only update it when explicitly told to.
 - Use CLAUDE.md for any persistent instructions.
 
-## Code Output
+=== project rules ===
+
+# Project Rules
+
+- This project contains committed, area-grouped rules in `.ai/rules`. Before you enter plan mode or create/edit any file, you MUST first: open @.ai/rules/index.md (it maps file globs to rule files), read every rule file whose globs cover the path(s) in scope, and run `grep -rin 'keyword' .ai/rules` to catch what a path match alone misses. Do not write code until you have read and are following every matching rule.
+
+=== code rules ===
+
+# Code Output
+
 - Write human-readable code. No clever one-liners or condensed expressions that sacrifice clarity.
 - Return the simplest working solution. No over-engineering.
 - No abstractions or helpers for single-use operations.
@@ -53,6 +74,8 @@
 - Never align variable assignments or object properties with extra spaces.
 - One space on each side of `=` and `:`.
 
+</local-guidelines>
+
 ## Commands
 
 - Commands are strict behavioral governors. Follow them exactly. Do not anticipate the next command. Do not perform any action not explicitly commanded.
@@ -62,6 +85,7 @@
 - `/cm` - generate a one-line commit message
 - `/co` - commit staged changes
 - `/q` - side bar question, no code scan
+- `/flow` - compare a flow doc against this repo, no changes
 - Full behavior for each is defined in `.claude/commands/`. Each command file governs the turn it is invoked in.
 - If no command is given, respond only. Never touch files.
 - When in doubt, STOP and ask. Never assume the next step.
