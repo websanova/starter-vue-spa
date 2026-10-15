@@ -6,6 +6,9 @@
     "fr-CA": "Français (Canada)"
   },
   "common": {
+    "error": {
+      "request_failed": "La requête a échoué."
+    },
     "loading": {
       "text": "Chargement..."
     }

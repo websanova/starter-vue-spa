@@ -1,6 +1,9 @@
 {
   "name": "Starter",
   "common": {
+    "error": {
+      "request_failed": "Request failed."
+    },
     "loading": {
       "text": "Loading..."
     }
