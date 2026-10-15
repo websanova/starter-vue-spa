@@ -23,5 +23,9 @@
     <NavTab :to="{ name: 'user-users-show-bookmarks' }">
       {{ $t('features.lbl.bookmarks') }}
     </NavTab>
+
+    <NavTab :to="{ name: 'user-users-show-tokens' }">
+      {{ $t('features.lbl.tokens') }}
+    </NavTab>
   </NavTabs>
 </template>

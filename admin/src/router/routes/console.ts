@@ -10,6 +10,7 @@ const UserBilling   = () => import('@/views/console/user/Billing.vue')
 const UserBookmarks = () => import('@/views/console/user/Bookmarks.vue')
 const UserEdit      = () => import('@/views/console/user/Edit.vue')
 const UserInfo      = () => import('@/views/console/user/Info.vue')
+const UserTokens    = () => import('@/views/console/user/Tokens.vue')
 
 export default [{
   path: '/',
@@ -96,6 +97,10 @@ export default [{
       path: 'info',
       name: 'user-users-show-info',
       component: UserInfo,
+    }, {
+      path: 'tokens',
+      name: 'user-users-show-tokens',
+      component: UserTokens,
     }]
   }]
 }]
