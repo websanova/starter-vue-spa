@@ -9,6 +9,7 @@ Part of the Starters, built at [Websanova](https://www.websanova.com).
 
 Full documentation at [websanova.com/docs/starter-app](https://www.websanova.com/docs/starter-app).
 
+- [Agent Guide](docs/agent-guide.md)
 - [Docker Guide](docs/docker-guide.md)
 - [UI Guide](docs/ui-guide.md)
 - [Flows Guide](docs/flows-guide.md)
