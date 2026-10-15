@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/vue-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import { useHttp } from '@shared/plugins/http'
 import { toAuthToken } from '@/models/authToken'
 import { toListMeta } from '@shared/models/list'
@@ -17,5 +17,13 @@ export function useUserAuthTokens(userId: number) {
         meta: toListMeta(meta),
       }
     },
+  })
+}
+
+export function useDeleteAuthToken(userId: number) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: number) => useHttp().delete(`users/${userId}/auth-tokens/${id}`),
+    onSuccess: () => qc.invalidateQueries({ queryKey: key }),
   })
 }

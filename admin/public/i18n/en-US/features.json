@@ -58,6 +58,14 @@
     }
   },
   "dialog": {
+    "auth_token_delete": {
+      "note": "Are you sure you want to delete auth token {0}?",
+      "title": "Delete auth token"
+    },
+    "oauth_token_delete": {
+      "note": "Are you sure you want to delete OAuth token {0}?",
+      "title": "Delete OAuth token"
+    },
     "user_delete": {
       "confirm": "Type the user's email to confirm",
       "note": "Are you sure you want to delete user {0}?",

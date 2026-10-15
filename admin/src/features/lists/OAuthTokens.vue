@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useUserOAuthTokens } from '@/composables/api/oauthTokens'
+  import { useDialogService } from '@shared/composables/services/useDialogService'
   import OAuthTokenItem from '@/components/items/OAuthToken.vue'
   import { LoadList } from '@shared/components/common/LoadList'
   import { ItemGroup } from '@shared/components/ui/item'
@@ -8,6 +9,8 @@
   const props = defineProps<{
     user: User
   }>()
+
+  const dialog = useDialogService()
 
   const { data, isPending, error } = useUserOAuthTokens(props.user.id)
 </script>
@@ -24,6 +27,7 @@
         v-for="oauthToken in data?.oauthTokens"
         :key="oauthToken.id"
         :oauth-token="oauthToken"
+        @delete="dialog.open('oauthTokenDelete', { userId: user.id, oauthToken })"
       />
     </ItemGroup>
   </LoadList>
