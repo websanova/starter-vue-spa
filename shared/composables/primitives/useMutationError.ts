@@ -10,25 +10,24 @@ interface MutationLike {
 /**
  * Maps one or more mutations onto a single display message. The first
  * mutation holding an HttpError wins, so sibling actions that share an
- * error spot pass themselves together and reset each other on fire.
- * Non HTTP errors, and HTTP errors with no message, show the optional
- * trailing fallback string. Without one they show a generic request
+ * error spot pass themselves together as an array and reset each other
+ * on fire. Non HTTP errors, and HTTP errors with no message, show the
+ * optional fallback string. Without one they show a generic request
  * failed line.
  */
-export function useMutationError(...args: [...MutationLike[], string] | MutationLike[]) {
+export function useMutationError(source: MutationLike | MutationLike[], fallback?: string) {
   const i18n = useI18n()
 
-  const mutations = args.filter((arg): arg is MutationLike => typeof arg !== 'string')
-  const custom = args.find((arg): arg is string => typeof arg === 'string')
+  const mutations = Array.isArray(source) ? source : [source]
 
   return computed(() => {
     const err = mutations.map((m) => m.error.value).find(Boolean)
-    const fallback = custom ?? i18n.t('site.common.error.request_failed')
+    const failed = fallback ?? i18n.t('site.common.error.request_failed')
 
     if (err instanceof HttpError) {
-      return (err.response.data as { message?: string } | null)?.message ?? fallback
+      return (err.response.data as { message?: string } | null)?.message ?? failed
     }
 
-    return err ? fallback : ''
+    return err ? failed : ''
   })
 }

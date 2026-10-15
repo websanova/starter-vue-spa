@@ -75,7 +75,7 @@ export function usePaymentMethod({ addressTarget, cardTarget }: PaymentMethodOpt
    */
   let confirmedId = ''
 
-  const mutationError = useMutationError(updateAddress, create, sync)
+  const mutationError = useMutationError([updateAddress, create, sync])
 
   /**
    * Anything that is not an HTTP error carries no message of its own, a

@@ -24,7 +24,7 @@
   const { channel } = useVerifyChannel()
 
   const code = ref('')
-  const error = useMutationError(verificationConfirm, verificationResend)
+  const error = useMutationError([verificationConfirm, verificationResend])
   const length = computed(() => settings.data.verificationCodeLength)
   const digits = computed(() => auth.user.value?.phone?.slice(-2) ?? '')
 

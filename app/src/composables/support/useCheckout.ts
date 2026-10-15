@@ -75,7 +75,7 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     return `${storagePrefix}.${auth.user.value?.id ?? ''}`
   }
 
-  const mutationError = useMutationError(createSubscriptionSession, syncSubscription)
+  const mutationError = useMutationError([createSubscriptionSession, syncSubscription])
 
   /**
    * Anything that is not an HTTP error carries no message of its own, a
