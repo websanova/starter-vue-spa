@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import AuthTokensList from '@/features/lists/AuthTokens.vue'
   import OAuthTokensList from '@/features/lists/OAuthTokens.vue'
+  import { Stack } from '@shared/components/common/Stack'
+  import { Subheading } from '@shared/components/common/Subheading'
   import type { User } from '@/models/user'
 
   defineProps<{
@@ -9,21 +11,21 @@
 </script>
 
 <template>
-  <div class="space-y-8">
-    <div>
-      <h2 class="font-bold">
+  <Stack>
+    <section>
+      <Subheading>
         {{ $t('features.lbl.auth_tokens') }}
-      </h2>
+      </Subheading>
 
       <AuthTokensList :user="user" />
-    </div>
+    </section>
 
-    <div>
-      <h2 class="font-bold">
+    <section>
+      <Subheading>
         {{ $t('features.lbl.oauth_tokens') }}
-      </h2>
+      </Subheading>
 
       <OAuthTokensList :user="user" />
-    </div>
-  </div>
+    </section>
+  </Stack>
 </template>
