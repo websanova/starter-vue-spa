@@ -27,6 +27,7 @@
   >
     <i18n-t
       keypath="features.dialog.oauth_token_delete.note"
+      scope="global"
       tag="span"
     >
       <strong>"{{ oauthToken.clientName }}"</strong>

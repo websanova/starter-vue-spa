@@ -27,6 +27,7 @@
   >
     <i18n-t
       keypath="features.dialog.user_delete.note"
+      scope="global"
       tag="p"
       class="text-sm text-muted-foreground"
     >

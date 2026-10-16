@@ -38,6 +38,7 @@
   >
     <i18n-t
       keypath="features.dialog.tag_delete.note"
+      scope="global"
       tag="span"
     >
       <strong>"{{ tag.name }}"</strong>

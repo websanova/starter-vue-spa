@@ -26,6 +26,7 @@
   >
     <i18n-t
       keypath="features.dialog.bookmark_delete.note"
+      scope="global"
       tag="span"
     >
       <strong>"{{ bookmark.title }}"</strong>
