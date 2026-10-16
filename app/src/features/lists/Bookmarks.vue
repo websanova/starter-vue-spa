@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useBookmarks } from '@/composables/api/bookmarks'
+  import { useBookmarks, useFavoriteBookmark } from '@/composables/api/bookmarks'
   import { useTags } from '@/composables/api/tags'
   import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
   import { usePreferences } from '@/composables/support/usePreferences'
@@ -21,6 +21,8 @@
   const { page, search, tagId } = params
 
   const { data, isPending, error } = useBookmarks(params)
+
+  const { mutate: favorite } = useFavoriteBookmark()
 
   const { data: tags } = useTags()
 
@@ -52,7 +54,7 @@
           :view="bookmarksView"
           @edit="dialog.open('bookmarkUpdate', { bookmark })"
           @delete="dialog.open('bookmarkDelete', { bookmark })"
-        />
+          @favorite="favorite({ id: bookmark.id, isFavorited: !bookmark.isFavorited })"        />
       </ItemGroup>
 
       <template #empty>

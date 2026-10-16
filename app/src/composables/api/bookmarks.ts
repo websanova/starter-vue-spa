@@ -46,6 +46,14 @@ export function useUpdateBookmark(id: number) {
   })
 }
 
+export function useFavoriteBookmark() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, isFavorited }: { id: number, isFavorited: boolean }) => useHttp().patch(`bookmarks/${id}`, { is_favorited: isFavorited }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: key }),
+  })
+}
+
 export function useDeleteBookmark() {
   const qc = useQueryClient()
   return useMutation({

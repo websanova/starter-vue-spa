@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { BookmarkIcon, PencilIcon, Trash2Icon } from '@lucide/vue'
+  import { BookmarkIcon, PencilIcon, StarIcon, Trash2Icon } from '@lucide/vue'
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
   import { DropdownMenuItem } from '@shared/components/ui/dropdown-menu'
@@ -13,6 +13,7 @@
   const emit = defineEmits<{
     (e: 'edit'): void
     (e: 'delete'): void
+    (e: 'favorite'): void
   }>()
 </script>
 
@@ -23,6 +24,18 @@
     </template>
 
     <template #title>
+      <button
+        type="button"
+        class="mr-1 cursor-pointer align-middle"
+        :class="bookmark.isFavorited ? 'text-warning' : 'text-muted-foreground'"
+        @click="emit('favorite')"
+      >
+        <StarIcon
+          class="size-4"
+          fill="currentColor"
+        />
+      </button>
+
       <a
         :href="bookmark.url"
         target="_blank"

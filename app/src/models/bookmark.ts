@@ -5,6 +5,7 @@ export type BookmarkView = 'expanded' | 'condensed'
 
 export interface BookmarkDto {
   id: number
+  is_favorited: boolean
   tags: TagDto[]
   title: string
   url: string
@@ -12,6 +13,7 @@ export interface BookmarkDto {
 
 export interface Bookmark {
   id: number
+  isFavorited: boolean
   tags: Tag[]
   title: string
   url: string
@@ -26,6 +28,7 @@ export interface BookmarkInput {
 export function toBookmark(dto: BookmarkDto): Bookmark {
   return {
     id: dto.id,
+    isFavorited: dto.is_favorited,
     tags: dto.tags.map(toTag),
     title: dto.title,
     url: dto.url,
