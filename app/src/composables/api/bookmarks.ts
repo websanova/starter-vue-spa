@@ -16,6 +16,7 @@ export function useBookmarks(params: BookmarkParams) {
         params: {
           page: params.page.value,
           search: params.search.value,
+          favorited: params.favorited.value,
           tag_id: params.tagId.value,
           sort_by: params.sortBy.value,
           sort_dir: params.sortDir.value,

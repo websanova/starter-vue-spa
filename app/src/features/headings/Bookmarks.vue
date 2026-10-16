@@ -5,7 +5,7 @@
   import { usePreferences } from '@/composables/support/usePreferences'
   import { useDialogService } from '@shared/composables/services/useDialogService'
   import { useI18n } from '@shared/plugins/i18n'
-  import { Heading, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
+  import { Heading, HeadingFilter, HeadingSearch, HeadingSort } from '@shared/components/common/Heading'
   import { Button } from '@shared/components/ui/button'
 
   const dialog = useDialogService()
@@ -13,7 +13,13 @@
 
   const { bookmarksView } = usePreferences()
 
-  const { search, sortBy, sortDir } = useBookmarkParams()
+  const { favorited, search, sortBy, sortDir } = useBookmarkParams()
+
+  const filterOptions = computed(() => [
+    { value: '', label: i18n.t('features.lbl.all') },
+    { value: '1', label: i18n.t('features.heading.filter.favorited') },
+    { value: '0', label: i18n.t('features.heading.filter.unfavorited') },
+  ])
 
   const sortFields = computed(() => [
     { value: 'title', label: i18n.t('features.heading.sort.title'), icon: TypeIcon },
@@ -46,6 +52,11 @@
         <LayoutListIcon v-if="bookmarksView === 'condensed'" />
         <ListIcon v-else />
       </Button>
+
+      <HeadingFilter
+        v-model="favorited"
+        :options="filterOptions"
+      />
 
       <HeadingSort
         v-model:sort-by="sortBy"

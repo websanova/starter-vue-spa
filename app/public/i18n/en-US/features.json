@@ -15,6 +15,10 @@
       "verify_email": "Verify Email",
       "verify_phone": "Verify Phone Number"
     },
+    "filter": {
+      "favorited": "Favorites",
+      "unfavorited": "Not favorites"
+    },
     "sort": {
       "title": "Title",
       "created_at": "Created",

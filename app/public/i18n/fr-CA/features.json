@@ -15,6 +15,10 @@
       "verify_email": "Vérifier le courriel",
       "verify_phone": "Vérifier le numéro de téléphone"
     },
+    "filter": {
+      "favorited": "Favoris",
+      "unfavorited": "Non favoris"
+    },
     "sort": {
       "title": "Titre",
       "created_at": "Créé",
