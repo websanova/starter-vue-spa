@@ -15,10 +15,22 @@
 
   const { favorited, search, sortBy, sortDir } = useBookmarkParams()
 
-  const filterOptions = computed(() => [
-    { value: '', label: i18n.t('features.lbl.all') },
-    { value: '1', label: i18n.t('features.heading.filter.favorited') },
-    { value: '0', label: i18n.t('features.heading.filter.unfavorited') },
+  const filters = computed({
+    get: () => ({ favorited: favorited.value }),
+    set: (value) => {
+      favorited.value = value.favorited
+    },
+  })
+
+  const filterGroups = computed(() => [
+    {
+      name: 'favorited',
+      options: [
+        { value: '', label: i18n.t('features.lbl.all') },
+        { value: '1', label: i18n.t('features.heading.filter.favorited') },
+        { value: '0', label: i18n.t('features.heading.filter.unfavorited') },
+      ],
+    },
   ])
 
   const sortFields = computed(() => [
@@ -54,8 +66,8 @@
       </Button>
 
       <HeadingFilter
-        v-model="favorited"
-        :options="filterOptions"
+        v-model="filters"
+        :groups="filterGroups"
       />
 
       <HeadingSort
