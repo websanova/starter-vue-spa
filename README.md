@@ -51,6 +51,7 @@ The starter-flows repo is a separate set of feature specs, implementation-agnost
 * **Subscriptions (Stripe)** - A subscribe page the App renders itself, with the address and card as Stripe Elements on one Checkout Session and the totals read off Stripe rather than priced in the App.
 * **Automatic Tax** - Tax calculated by Stripe against the billing address and switched on from the API, with the address always collected so the App is ready for it.
 * **Promotion Codes** - An optional code field on the subscribe page, applied and validated by Stripe, with the discount shown as Stripe calculates it and removable before confirming.
+* **Trials** - An optional free trial on one plan, started at registration or at checkout depending on the API, with the checkout showing what is due today and when the first charge lands.
 * **Test Users** - Dev-only control on the login screen that fills the form with a seeded account, with separate rosters for app and admin behind a single env variable.
 * **Dev Environment** - Dockerized dev environment on Node 22 with a simple `./dev` script for container commands.
 
