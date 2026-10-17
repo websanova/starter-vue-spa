@@ -206,6 +206,7 @@
       "note_complete": "Complete your subscription",
       "note_summary": "{plan} plan, billed {interval} at {price}",
       "note_tax": "+ applicable taxes",
+      "note_trial": "{plan} plan, {today} today, then {price} billed {interval} from {date}",
       "promotion_failed": "Your promotion code could not be updated. Please try again.",
       "submit": "Subscribe"
     },
@@ -246,6 +247,7 @@
         "select": "Select",
         "subscribe": "Subscribe",
         "switch": "Switch",
+        "trial": "Start free trial",
         "upgrade": "Upgrade"
       },
       "features": {
@@ -256,7 +258,8 @@
       "free": "Free",
       "note_cancel": "Upgrade, downgrade, or cancel anytime.",
       "note_choose": "Choose the plan that fits.",
-      "note_trial": "Start your free {days} day trial now!",
+      "note_on_trial": "You are currently on a free trial that ends {date}.",
+      "trial": "Free for {days} days",
       "unlimited": "Unlimited"
     }
   },

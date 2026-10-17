@@ -60,14 +60,16 @@ export function useSubscription() {
   const isChargeable = computed(() => isSubscribed.value && !isCancelled.value)
 
   /**
-   * A trial is only ever offered once. The trial object stays set once
-   * one has been started, so its absence is what marks a user as never
-   * having taken one.
+   * A trial is only offered to someone who has never subscribed, and
+   * only where the card is collected up front, since otherwise the trial
+   * was already started at registration. A dead subscription still
+   * counts as having subscribed, so the test is whether one is set at
+   * all rather than whether it is live.
    */
   const isTrialEligible = computed(() =>
     settings.data.subscriptionMode === 'trial' &&
-    !isSubscribed.value &&
-    !auth.user.value?.trial
+    settings.data.subscriptionCardUpfront &&
+    !auth.user.value?.subscription
   )
 
   function formatDate(value: string | null | undefined): string {

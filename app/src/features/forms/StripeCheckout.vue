@@ -14,7 +14,7 @@
   const route = useRoute()
   const router = useRouter()
   const settings = useSettingsStore()
-  const { t } = useI18n()
+  const { d, t } = useI18n()
 
   const plan = route.query.plan as string | undefined
   const interval = route.query.interval as Interval | undefined
@@ -49,6 +49,7 @@
     removePromotionCode,
     step,
     total,
+    trial,
   } = useCheckout({
     addressTarget,
     interval,
@@ -59,13 +60,19 @@
   /**
    * The plan and the price come off the session rather than the plans
    * list, since the session is what was actually opened and its total
-   * already carries whatever tax and discount apply.
+   * already carries whatever tax and discount apply. On a trial the
+   * total is what is due today, so the price is the first real invoice
+   * and the total is named separately.
    */
   const summary = computed(() => ({
+    date: trial.value ? d(trial.value.endsAt, 'short') : '',
     interval: t(`site.units.interval.billed.${interval}`),
     plan: lineItems.value[0]?.name ?? '',
-    price: total.value,
+    price: trial.value?.price ?? total.value,
+    today: total.value,
   }))
+
+  const note = computed(() => trial.value ? 'note_trial' : 'note_summary')
 
   /**
    * Sits with the payment method, so it waits behind the address the way
@@ -88,7 +95,7 @@
         v-if="!isLoading"
         class="text-lg text-muted-foreground"
       >
-        {{ $t('features.form.stripe_checkout.note_summary', summary) }}
+        {{ $t(`features.form.stripe_checkout.${note}`, summary) }}
 
         <span
           v-if="isTaxPending"

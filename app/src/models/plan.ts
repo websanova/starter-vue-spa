@@ -10,6 +10,7 @@ export interface PriceDto {
 export interface PlanDto {
   features: Record<string, FeatureValue>
   id: number
+  is_trial: boolean
   name: string
   prices: Partial<Record<Interval, PriceDto>>
   slug: string
@@ -24,6 +25,7 @@ export interface Price {
 export interface Plan {
   features: Record<string, FeatureValue>
   id: number
+  isTrial: boolean
   name: string
   prices: Partial<Record<Interval, Price>>
   slug: string
@@ -34,6 +36,7 @@ export function toPlan(dto: PlanDto): Plan {
   return {
     features: dto.features,
     id: dto.id,
+    isTrial: dto.is_trial,
     name: dto.name,
     prices: dto.prices,
     slug: dto.slug,

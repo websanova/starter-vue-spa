@@ -206,6 +206,7 @@
       "note_complete": "Complétez votre abonnement",
       "note_summary": "Forfait {plan}, facturé {interval} à {price}",
       "note_tax": "+ taxes applicables",
+      "note_trial": "Forfait {plan}, {today} aujourd'hui, puis {price} facturé {interval} à partir du {date}",
       "promotion_failed": "Votre code promotionnel n'a pas pu être mis à jour. Veuillez réessayer.",
       "submit": "S'abonner"
     },
@@ -246,6 +247,7 @@
         "select": "Sélectionner",
         "subscribe": "S'abonner",
         "switch": "Changer",
+        "trial": "Commencer l'essai gratuit",
         "upgrade": "Améliorer"
       },
       "features": {
@@ -256,7 +258,8 @@
       "free": "Gratuit",
       "note_cancel": "Changez ou annulez à tout moment.",
       "note_choose": "Choisissez le forfait qui vous convient.",
-      "note_trial": "Commencez votre essai gratuit de {days} jours dès maintenant!",
+      "note_on_trial": "Vous êtes actuellement en période d'essai gratuite qui se termine le {date}.",
+      "trial": "Gratuit pendant {days} jours",
       "unlimited": "Illimité"
     }
   },

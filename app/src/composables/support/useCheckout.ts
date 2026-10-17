@@ -112,6 +112,25 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const discount = computed(() => checkout.session.value?.discountAmounts?.[0] ?? null)
 
   /**
+   * A trial charges nothing today, so the figure worth showing is what
+   * the first real invoice will be and when it lands. Both come off the
+   * session with tax and any discount already worked out.
+   */
+  const trial = computed(() => {
+    const recurring = checkout.session.value?.recurring
+    const trialEnd = recurring?.trial?.trialEnd
+
+    if (!trialEnd || !recurring?.dueNext) {
+      return null
+    }
+
+    return {
+      endsAt: new Date(trialEnd * 1000),
+      price: recurring.dueNext.total.amount,
+    }
+  })
+
+  /**
    * Tax reports as pending until the session carries an address to
    * calculate it against, and the address element does not push itself
    * onto the session before confirm. So the total on screen is the one
@@ -488,5 +507,6 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
     session: checkout.session,
     step,
     total,
+    trial,
   }
 }

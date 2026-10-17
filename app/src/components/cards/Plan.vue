@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { CheckIcon, XIcon } from '@lucide/vue'
   import { Button } from '@shared/components/ui/button'
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@shared/components/ui/card'
@@ -9,11 +10,22 @@
     plan: Plan
     interval: Interval
     action: PlanAction | null
+    trialDays?: number
   }>()
 
   const emit = defineEmits<{
     (e: PlanAction): void
   }>()
+
+  /**
+   * A trial changes what the subscribe button says, since nothing is
+   * charged when it is pressed. Every other action reads as it always did.
+   */
+  const label = computed(() =>
+    props.trialDays && props.action === 'subscribe'
+      ? 'features.list.plans.action.trial'
+      : `features.list.plans.action.${props.action}`
+  )
 </script>
 
 <template>
@@ -35,6 +47,13 @@
         <template v-else>
           {{ $t('features.list.plans.free') }}
         </template>
+      </p>
+
+      <p
+        v-if="props.trialDays"
+        class="text-center text-sm text-muted-foreground"
+      >
+        {{ $t('features.list.plans.trial', { days: props.trialDays }) }}
       </p>
     </CardHeader>
 
@@ -61,7 +80,7 @@
         :disabled="props.action === 'current'"
         @click="props.action && emit(props.action)"
       >
-        {{ $t(`features.list.plans.action.${props.action}`) }}
+        {{ $t(label) }}
       </Button>
     </CardFooter>
   </Card>
