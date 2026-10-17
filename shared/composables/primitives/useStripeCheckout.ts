@@ -119,6 +119,48 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   }
 
   /**
+   * Stripe validates the code and mutates the session, so nothing is
+   * priced here. The session is re-read once the action resolves, since
+   * that is where the discount lands and the subtotal, tax and total
+   * move with it.
+   */
+  async function applyPromotionCode(code: string): Promise<StripeCheckoutResult> {
+    if (!actions) {
+      return { message: '', session: null }
+    }
+
+    const result = await actions.applyPromotionCode(code)
+
+    if (result.type === 'error') {
+      return { message: result.error.message, session: session.value }
+    }
+
+    session.value = actions.getSession()
+
+    return { message: '', session: session.value }
+  }
+
+  /**
+   * Takes the applied code back off the session and re-reads it, so the
+   * totals return to what they were without reloading the page.
+   */
+  async function removePromotionCode(): Promise<StripeCheckoutResult> {
+    if (!actions) {
+      return { message: '', session: null }
+    }
+
+    const result = await actions.removePromotionCode()
+
+    if (result.type === 'error') {
+      return { message: result.error.message, session: session.value }
+    }
+
+    session.value = actions.getSession()
+
+    return { message: '', session: session.value }
+  }
+
+  /**
    * Pushes the address held from the element onto the session. Worth
    * doing on the way out of an address step, since it is what makes the
    * totals on the next step carry tax for the address just entered.
@@ -193,12 +235,14 @@ export function useStripeCheckout({ addressTarget, paymentTarget }: StripeChecko
   onBeforeUnmount(destroy)
 
   return {
+    applyPromotionCode,
     confirm,
     destroy,
     isAddressComplete,
     load,
     mount,
     mountAddress,
+    removePromotionCode,
     session,
     submitAddress,
   }

@@ -59,7 +59,11 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const isConfirming = ref<boolean>(false)
   const isContinuing = ref<boolean>(false)
   const isFailed = ref<boolean>(false)
+  const isPromotionCodePending = ref<boolean>(false)
   const stripeError = ref<string>('')
+
+  const promotionCode = ref<string>('')
+  const promotionError = ref<string>('')
 
   const step = ref<CheckoutStep>('payment-method')
   const part = ref<CheckoutPart>('address')
@@ -100,6 +104,12 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   const total = computed(() => checkout.session.value?.total.total.amount ?? '')
 
   const lineItems = computed(() => checkout.session.value?.lineItems ?? [])
+
+  /**
+   * The discount as Stripe worked it out, so nothing is subtracted here.
+   * Its presence is also what says a promotion code is applied.
+   */
+  const discount = computed(() => checkout.session.value?.discountAmounts?.[0] ?? null)
 
   /**
    * Tax reports as pending until the session carries an address to
@@ -312,6 +322,61 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
   }
 
   /**
+   * Stripe is the one that validates the code, so a refusal of any kind
+   * lands as the message on the field the code was typed into rather
+   * than on the page, and the customer types another or confirms
+   * without one.
+   */
+  async function applyPromotionCode() {
+    const code = promotionCode.value.trim()
+
+    if (!code) {
+      return
+    }
+
+    isPromotionCodePending.value = true
+    promotionError.value = ''
+
+    try {
+      const { message } = await checkout.applyPromotionCode(code)
+
+      if (message) {
+        promotionError.value = message
+        return
+      }
+
+      promotionCode.value = ''
+    } catch (err) {
+      console.error(err)
+      promotionError.value = i18n.t('features.form.stripe_checkout.promotion_failed')
+    } finally {
+      isPromotionCodePending.value = false
+    }
+  }
+
+  /**
+   * Takes an applied code back off so the customer reaches the
+   * undiscounted total without reloading the page.
+   */
+  async function removePromotionCode() {
+    isPromotionCodePending.value = true
+    promotionError.value = ''
+
+    try {
+      const { message } = await checkout.removePromotionCode()
+
+      if (message) {
+        promotionError.value = message
+      }
+    } catch (err) {
+      console.error(err)
+      promotionError.value = i18n.t('features.form.stripe_checkout.promotion_failed')
+    } finally {
+      isPromotionCodePending.value = false
+    }
+  }
+
+  /**
    * One call submits the address and the card, creates the subscription
    * and settles the first invoice. A refusal creates nothing, so the
    * elements stay up and the customer confirms again on the same
@@ -401,19 +466,25 @@ export function useCheckout({ addressTarget, interval, paymentTarget, plan }: Ch
 
   return {
     addressSummary,
+    applyPromotionCode,
     canConfirm,
     cardSummary,
     confirm,
+    discount,
     error,
     goTo,
     isAddressComplete: checkout.isAddressComplete,
     isConfirming,
     isContinuing,
     isLoading,
+    isPromotionCodePending,
     isTaxPending,
     lineItems,
     next,
     part,
+    promotionCode,
+    promotionError,
+    removePromotionCode,
     session: checkout.session,
     step,
     total,

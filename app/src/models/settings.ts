@@ -11,6 +11,7 @@ export interface SettingsDto {
   bookmark_max_tags: number
   subscription_card_upfront: boolean
   subscription_mode: SubscriptionMode
+  subscription_promotion_codes: boolean
   subscription_trial_days: number
   verification_code_length: number
   verification_required: string[]
@@ -25,6 +26,7 @@ declare module '@shared/models/settings' {
     defaultTimezone: string
     subscriptionCardUpfront: boolean
     subscriptionMode: SubscriptionMode
+    subscriptionPromotionCodes: boolean
     subscriptionTrialDays: number
     verificationCodeLength: number
     verificationRequired: string[]
@@ -36,6 +38,7 @@ export function toSettings(dto: SettingsDto) {
     bookmarkMaxTags: dto.bookmark_max_tags,
     subscriptionCardUpfront: dto.subscription_card_upfront,
     subscriptionMode: dto.subscription_mode,
+    subscriptionPromotionCodes: dto.subscription_promotion_codes,
     subscriptionTrialDays: dto.subscription_trial_days,
     verificationCodeLength: dto.verification_code_length,
     verificationRequired: dto.verification_required,

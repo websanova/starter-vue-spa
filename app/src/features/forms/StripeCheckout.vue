@@ -3,14 +3,17 @@
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
   import { useCheckout } from '@/composables/support/useCheckout'
+  import { useSettingsStore } from '@shared/stores/settings'
   import { ButtonLoading } from '@shared/components/common/ButtonLoading'
   import { Form } from '@shared/components/common/Form'
   import { Loading } from '@shared/components/common/Loading'
   import { WizardStep } from '@shared/components/common/WizardStep'
+  import { Input } from '@shared/components/ui/input'
   import type { Interval } from '@/models/plan'
 
   const route = useRoute()
   const router = useRouter()
+  const settings = useSettingsStore()
   const { t } = useI18n()
 
   const plan = route.query.plan as string | undefined
@@ -25,19 +28,25 @@
 
   const {
     addressSummary,
+    applyPromotionCode,
     canConfirm,
     cardSummary,
     confirm,
+    discount,
     error,
     goTo,
     isAddressComplete,
     isConfirming,
     isContinuing,
     isLoading,
+    isPromotionCodePending,
     isTaxPending,
     lineItems,
     next,
     part,
+    promotionCode,
+    promotionError,
+    removePromotionCode,
     step,
     total,
   } = useCheckout({
@@ -57,6 +66,15 @@
     plan: lineItems.value[0]?.name ?? '',
     price: total.value,
   }))
+
+  /**
+   * Sits with the payment method, so it waits behind the address the way
+   * the subscribe button does and stands on the saved card step too.
+   */
+  const showPromotionCode = computed(() =>
+    settings.data.subscriptionPromotionCodes &&
+    !(step.value === 'payment-method' && part.value === 'address')
+  )
 </script>
 
 <template>
@@ -133,6 +151,61 @@
           </WizardStep>
         </Transition>
       </template>
+
+      <div
+        v-if="showPromotionCode"
+        class="flex flex-col gap-2"
+      >
+        <div
+          v-if="discount"
+          class="flex items-center justify-between text-sm"
+        >
+          <span>
+            {{ discount.displayName }}
+
+            <button
+              type="button"
+              class="text-destructive cursor-pointer"
+              :disabled="isPromotionCodePending"
+              @click="removePromotionCode"
+            >
+              {{ $t('features.lbl.remove') }}
+            </button>
+          </span>
+
+          <span>{{ discount.amount }}</span>
+        </div>
+
+        <div
+          v-else
+          class="flex gap-2"
+        >
+          <Input
+            v-model="promotionCode"
+            class="flex-1"
+            type="text"
+            :aria-invalid="!!promotionError"
+            :placeholder="$t('features.ph.promotion_code')"
+            @keydown.enter="applyPromotionCode"
+          />
+
+          <ButtonLoading
+            variant="outline"
+            :disabled="!promotionCode.trim()"
+            :pending="isPromotionCodePending"
+            @click="applyPromotionCode"
+          >
+            {{ $t('features.lbl.apply') }}
+          </ButtonLoading>
+        </div>
+
+        <p
+          v-if="promotionError"
+          class="text-sm text-destructive"
+        >
+          {{ promotionError }}
+        </p>
+      </div>
 
       <template v-if="step === 'payment-method' && part === 'address'">
         <ButtonLoading

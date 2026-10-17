@@ -206,6 +206,7 @@
       "note_complete": "Complétez votre abonnement",
       "note_summary": "Forfait {plan}, facturé {interval} à {price}",
       "note_tax": "+ taxes applicables",
+      "promotion_failed": "Votre code promotionnel n'a pas pu être mis à jour. Veuillez réessayer.",
       "submit": "S'abonner"
     },
     "stripe_payment_method": {

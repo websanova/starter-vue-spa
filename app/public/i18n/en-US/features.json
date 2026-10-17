@@ -206,6 +206,7 @@
       "note_complete": "Complete your subscription",
       "note_summary": "{plan} plan, billed {interval} at {price}",
       "note_tax": "+ applicable taxes",
+      "promotion_failed": "Your promotion code could not be updated. Please try again.",
       "submit": "Subscribe"
     },
     "stripe_payment_method": {
