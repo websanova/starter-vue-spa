@@ -46,7 +46,8 @@ The starter-flows repo is a separate set of feature specs, implementation-agnost
 * **Localization (vue-i18n)** - Translations loaded and cached per page, locale auto detected on first visit, and signed-in users pulling their saved locale from the API.
 * **Timezones** - Times shown in the user's timezone and adjusted on the fly, auto detected at registration and restored from the API across devices.
 * **MCP Login** - The authorize page MCP clients like Claude send users to, one shared page for App and Admin that returns signed out users to it after sign in.
-* **Subscriptions (Stripe)** - Subscribe on a page the App renders itself, with the address and card as Stripe Elements on one Checkout Session and the totals read off Stripe rather than priced in the App.
+* **Plans** - Monthly and yearly plans from the API with prices and feature limits on each card, and each card's action worked out from where the user stands.
+* **Subscriptions (Stripe)** - A subscribe page the App renders itself, with the address and card as Stripe Elements on one Checkout Session and the totals read off Stripe rather than priced in the App.
 * **Automatic Tax** - Tax calculated by Stripe against the billing address and switched on from the API, with the address always collected so the App is ready for it.
 * **Promotion Codes** - An optional code field on the subscribe page, applied and validated by Stripe, with the discount shown as Stripe calculates it and removable before confirming.
 * **Test Users** - Dev-only control on the login screen that fills the form with a seeded account, with separate rosters for app and admin behind a single env variable.
