@@ -4,10 +4,9 @@
   import { Stack } from '@shared/components/common/Stack'
   import BillingPaymentMethodDisplay from '@/features/displays/BillingPaymentMethod.vue'
   import BillingSubscriptionDisplay from '@/features/displays/BillingSubscription.vue'
+  import InvoicesList from '@/features/lists/Invoices.vue'
 
   const dialog = useDialogService()
-
-  // TODO: invoices (paginated) (last 10 or whatever).
 </script>
 
 <template>
@@ -22,6 +21,14 @@
 
         <BillingSubscriptionDisplay />
       </Stack>
+    </section>
+
+    <section>
+      <Heading :margin="false">
+        {{ $t('features.heading.title.invoices') }}
+      </Heading>
+
+      <InvoicesList />
     </section>
   </Stack>
 </template>
