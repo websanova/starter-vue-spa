@@ -20,7 +20,7 @@
   const params = useBookmarkParams()
   const { page, search, tagId } = params
 
-  const { data, isPending, error } = useBookmarks(params)
+  const { data, isPending, isPlaceholderData, error } = useBookmarks(params)
 
   const { mutate: favorite } = useFavoriteBookmark()
 
@@ -42,7 +42,7 @@
       i18n-key="features.load.nouns.bookmarks"
       :error="error"
       :filters="{ search, tag: tagName }"
-      :is-pending="isPending"
+      :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
       @clear="onClear"
     >

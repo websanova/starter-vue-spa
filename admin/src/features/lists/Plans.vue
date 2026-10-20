@@ -8,7 +8,7 @@
   const params = usePlanParams()
   const { page } = params
 
-  const { data, isPending, error } = usePlans(params)
+  const { data, isPending, isPlaceholderData, error } = usePlans(params)
 </script>
 
 <template>
@@ -17,7 +17,7 @@
       v-model:page="page"
       i18n-key="features.load.nouns.plans"
       :error="error"
-      :is-pending="isPending"
+      :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
     >
       <ItemGroup>

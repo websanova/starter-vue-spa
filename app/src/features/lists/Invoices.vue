@@ -7,7 +7,7 @@
 
   const page = useQueryParam('page', { default: 1 })
 
-  const { data, isPending, error } = useInvoices(page)
+  const { data, isPending, isPlaceholderData, error } = useInvoices(page)
 
   const { mutate: download } = useDownloadInvoice()
 
@@ -27,7 +27,7 @@
       v-model:page="page"
       i18n-key="features.load.nouns.invoices"
       :error="error"
-      :is-pending="isPending"
+      :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
     >
       <ItemGroup>

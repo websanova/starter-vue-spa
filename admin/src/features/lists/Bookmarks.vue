@@ -16,7 +16,7 @@
   const params = useBookmarkParams()
   const { page, search } = params
 
-  const { data, isPending, error } = useUserBookmarks(props.user.id, params)
+  const { data, isPending, isPlaceholderData, error } = useUserBookmarks(props.user.id, params)
 
   function onClear() {
     router.push({ query: {} })
@@ -30,7 +30,7 @@
       i18n-key="features.load.nouns.bookmarks"
       :error="error"
       :filters="{ search }"
-      :is-pending="isPending"
+      :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
       @clear="onClear"
     >

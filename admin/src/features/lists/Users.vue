@@ -14,7 +14,7 @@
   const params = useUserParams()
   const { page, search } = params
 
-  const { data, isPending, error } = useUsers(params)
+  const { data, isPending, isPlaceholderData, error } = useUsers(params)
 
   function onClear() {
     router.push({ query: {} })
@@ -28,7 +28,7 @@
       i18n-key="features.load.nouns.users"
       :error="error"
       :filters="{ search }"
-      :is-pending="isPending"
+      :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
       @clear="onClear"
     >
