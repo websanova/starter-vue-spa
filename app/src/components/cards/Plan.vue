@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { CheckIcon, XIcon } from '@lucide/vue'
+  import { CheckIcon, InfinityIcon, XIcon } from '@lucide/vue'
   import { Button } from '@shared/components/ui/button'
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@shared/components/ui/card'
   import type { PlanAction } from '@/composables/current/useSubscription'
@@ -66,9 +66,19 @@
         >
           <span>{{ $t(`features.list.plans.features.${key}`) }}</span>
 
-          <CheckIcon v-if="value === true" />
-          <XIcon v-else-if="value === false" />
-          <span v-else-if="value === null">{{ $t('features.list.plans.unlimited') }}</span>
+          <CheckIcon
+            v-if="value === true"
+            class="text-success"
+          />
+          <XIcon
+            v-else-if="value === false"
+            class="text-destructive"
+          />
+          <InfinityIcon
+            v-else-if="value === null"
+            role="img"
+            :aria-label="$t('features.list.plans.unlimited')"
+          />
           <span v-else>{{ value }}</span>
         </li>
       </ul>
