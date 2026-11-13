@@ -29,6 +29,7 @@ export function useSettingsLocaleForm() {
       switchLocale(values.locale as Locale)
 
       if (values.locale !== initial.locale) {
+        queryClient.invalidateQueries({ queryKey: ['plans'] })
         queryClient.invalidateQueries({ queryKey: ['timezones'] })
       }
     },
