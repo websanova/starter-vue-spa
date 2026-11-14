@@ -70,7 +70,7 @@ docker compose down -v
 | `./dev down` | Stop the containers |
 | `./dev restart` | Down, then up |
 | `./dev install` | `yarn install` |
-| `./dev update` | `yarn install --immutable`, installs strictly from the lockfile |
+| `./dev update` | `yarn install --frozen-lockfile`, installs strictly from the lockfile |
 | `./dev yarn <args>` | Any other yarn command |
 | `./dev app <args>` | A yarn script in the app workspace |
 | `./dev admin <args>` | A yarn script in the admin workspace |

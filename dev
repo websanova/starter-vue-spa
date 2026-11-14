@@ -2,7 +2,7 @@
 
 case "$1" in
     install) docker compose exec node yarn install ;;
-    update) docker compose exec node yarn install --immutable ;;
+    update) docker compose exec node yarn install --frozen-lockfile ;;
     app) shift; docker compose exec app yarn workspace app "$@" ;;
     admin) shift; docker compose exec admin yarn workspace admin "$@" ;;
     yarn) shift; docker compose exec node yarn "$@" ;;
