@@ -27,8 +27,8 @@
       name: 'favorited',
       options: [
         { value: '', label: i18n.t('features.lbl.all') },
-        { value: '1', label: i18n.t('features.heading.filter.favorited') },
-        { value: '0', label: i18n.t('features.heading.filter.unfavorited') },
+        { value: '1', label: i18n.t('features.model.bookmark.is_favorited.favorited') },
+        { value: '0', label: i18n.t('features.model.bookmark.is_favorited.unfavorited') },
       ],
     },
   ])

@@ -1,32 +1,4 @@
 {
-  "heading": {
-    "title": {
-      "billing": "Facturation",
-      "invoices": "Factures",
-      "login": "Se connecter",
-      "oauth_authorize": "Autoriser l'accès",
-      "password_reset": "Réinitialiser le mot de passe",
-      "password_update": "Mettre à jour le mot de passe",
-      "payment_method_update": "Mettre à jour le moyen de paiement",
-      "profile_avatar": "Avatar",
-      "profile_info": "Renseignements",
-      "register": "S'inscrire",
-      "settings_appearance": "Apparence",
-      "settings_locale": "Paramètres régionaux",
-      "verify_email": "Vérifier le courriel",
-      "verify_phone": "Vérifier le numéro de téléphone"
-    },
-    "filter": {
-      "favorited": "Favoris",
-      "unfavorited": "Non favoris"
-    },
-    "sort": {
-      "title": "Titre",
-      "created_at": "Créé",
-      "asc": "Croissant",
-      "desc": "Décroissant"
-    }
-  },
   "lbl": {
     "account": "Compte",
     "all": "Tout",
@@ -239,6 +211,30 @@
       "to": "Nouveau forfait"
     }
   },
+  "heading": {
+    "title": {
+      "billing": "Facturation",
+      "invoices": "Factures",
+      "login": "Se connecter",
+      "oauth_authorize": "Autoriser l'accès",
+      "password_reset": "Réinitialiser le mot de passe",
+      "password_update": "Mettre à jour le mot de passe",
+      "payment_method_update": "Mettre à jour le moyen de paiement",
+      "profile_avatar": "Avatar",
+      "profile_info": "Renseignements",
+      "register": "S'inscrire",
+      "settings_appearance": "Apparence",
+      "settings_locale": "Paramètres régionaux",
+      "verify_email": "Vérifier le courriel",
+      "verify_phone": "Vérifier le numéro de téléphone"
+    },
+    "sort": {
+      "title": "Titre",
+      "created_at": "Créé",
+      "asc": "Croissant",
+      "desc": "Décroissant"
+    }
+  },
   "list": {
     "plans": {
       "action": {
@@ -278,6 +274,14 @@
       "invoices": "factures",
       "oauth": "demande d'autorisation",
       "plans": "forfaits"
+    }
+  },
+  "model": {
+    "bookmark": {
+      "is_favorited": {
+        "favorited": "Favoris",
+        "unfavorited": "Non favoris"
+      }
     }
   },
   "notification": {

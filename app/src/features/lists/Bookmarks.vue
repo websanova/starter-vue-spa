@@ -6,6 +6,7 @@
   import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
   import { usePreferences } from '@/composables/support/usePreferences'
   import { useDialogService } from '@shared/composables/services/useDialogService'
+  import { useI18n } from '@shared/plugins/i18n'
   import BookmarkItem from '@/components/items/Bookmark.vue'
   import BookmarksEmpty from '@/features/empties/Bookmarks.vue'
   import { LoadPaginate } from '@shared/components/common/LoadPaginate'
@@ -14,11 +15,12 @@
   const router = useRouter()
 
   const dialog = useDialogService()
+  const i18n = useI18n()
 
   const { bookmarksView } = usePreferences()
 
   const params = useBookmarkParams()
-  const { page, search, tagId } = params
+  const { favorited, page, search, tagId } = params
 
   const { data, isPending, isPlaceholderData, error } = useBookmarks(params)
 
@@ -28,6 +30,18 @@
 
   const tagName = computed(() => {
     return tags.value?.find((tag) => String(tag.id) === tagId.value)?.name
+  })
+
+  const favoritedLabel = computed(() => {
+    if (favorited.value === '1') {
+      return i18n.t('features.model.bookmark.is_favorited.favorited')
+    }
+
+    if (favorited.value === '0') {
+      return i18n.t('features.model.bookmark.is_favorited.unfavorited')
+    }
+
+    return undefined
   })
 
   function onClear() {
@@ -41,7 +55,7 @@
       v-model:page="page"
       i18n-key="features.load.nouns.bookmarks"
       :error="error"
-      :filters="{ search, tag: tagName }"
+      :filters="{ search, tag: tagName, favorited: favoritedLabel }"
       :is-pending="isPending || isPlaceholderData"
       :meta="data?.meta"
       @clear="onClear"
