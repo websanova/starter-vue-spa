@@ -1,23 +1,23 @@
 import { redirectCancelledToResume, requireActiveSubscription, requireCancelled, requireNotCancelled, requireUnsubscribed } from '@/router/guards/subscription'
 
-const Layout            = () => import('@/features/layouts/User.vue')
-const LayoutAccount     = () => import('@/features/layouts/UserAccount.vue')
-const LayoutBookmarks   = () => import('@/features/layouts/UserBookmarks.vue')
-const LayoutSubscribe   = () => import('@/features/layouts/UserSubscribe.vue')
+const Layout = () => import('@/features/layouts/User.vue')
+const LayoutAccount = () => import('@/features/layouts/UserAccount.vue')
+const LayoutBookmarks = () => import('@/features/layouts/UserBookmarks.vue')
+const LayoutSubscribe = () => import('@/features/layouts/UserSubscribe.vue')
 
-const AccountBilling    = () => import('@/views/user/account/Billing.vue')
+const AccountBilling = () => import('@/views/user/account/Billing.vue')
 const AccountPaymentMethod = () => import('@/views/user/account/PaymentMethod.vue')
-const AccountProfile    = () => import('@/views/user/account/Profile.vue')
-const AccountSecurity   = () => import('@/views/user/account/Security.vue')
-const AccountSettings   = () => import('@/views/user/account/Settings.vue')
+const AccountProfile = () => import('@/views/user/account/Profile.vue')
+const AccountSecurity = () => import('@/views/user/account/Security.vue')
+const AccountSettings = () => import('@/views/user/account/Settings.vue')
 
-const BookmarksList     = () => import('@/views/user/bookmarks/List.vue')
+const BookmarksList = () => import('@/views/user/bookmarks/List.vue')
 
-const SubscribeCancel   = () => import('@/views/user/subscribe/Cancel.vue')
+const SubscribeCancel = () => import('@/views/user/subscribe/Cancel.vue')
 const SubscribeCheckout = () => import('@/views/user/subscribe/Checkout.vue')
-const SubscribePlans    = () => import('@/views/user/subscribe/Plans.vue')
-const SubscribeResume   = () => import('@/views/user/subscribe/Resume.vue')
-const SubscribeUpdate   = () => import('@/views/user/subscribe/Update.vue')
+const SubscribePlans = () => import('@/views/user/subscribe/Plans.vue')
+const SubscribeResume = () => import('@/views/user/subscribe/Resume.vue')
+const SubscribeUpdate = () => import('@/views/user/subscribe/Update.vue')
 
 export default [{
   path: '/u/',

@@ -1,16 +1,16 @@
-const Layout        = () => import('@/features/layouts/Console.vue')
+const Layout = () => import('@/features/layouts/Console.vue')
 const LayoutConsole = () => import('@/features/layouts/ConsoleUser.vue')
 
-const Icons         = () => import('@/views/console/Icons.vue')
-const Plans         = () => import('@/views/console/Plans.vue')
-const Stats         = () => import('@/views/console/Stats.vue')
-const Users         = () => import('@/views/console/Users.vue')
+const Icons = () => import('@/views/console/Icons.vue')
+const Plans = () => import('@/views/console/Plans.vue')
+const Stats = () => import('@/views/console/Stats.vue')
+const Users = () => import('@/views/console/Users.vue')
 
-const UserBilling   = () => import('@/views/console/user/Billing.vue')
+const UserBilling = () => import('@/views/console/user/Billing.vue')
 const UserBookmarks = () => import('@/views/console/user/Bookmarks.vue')
-const UserEdit      = () => import('@/views/console/user/Edit.vue')
-const UserInfo      = () => import('@/views/console/user/Info.vue')
-const UserTokens    = () => import('@/views/console/user/Tokens.vue')
+const UserEdit = () => import('@/views/console/user/Edit.vue')
+const UserInfo = () => import('@/views/console/user/Info.vue')
+const UserTokens = () => import('@/views/console/user/Tokens.vue')
 
 export default [{
   path: '/',

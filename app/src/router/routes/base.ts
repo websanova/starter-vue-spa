@@ -1,5 +1,5 @@
-const Index          = () => import('@/views/base/Index.vue')
-const PrivacyPolicy  = () => import('@/views/base/PrivacyPolicy.vue')
+const Index = () => import('@/views/base/Index.vue')
+const PrivacyPolicy = () => import('@/views/base/PrivacyPolicy.vue')
 const TermsOfService = () => import('@/views/base/TermsOfService.vue')
 
 export default [{
