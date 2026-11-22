@@ -1,14 +1,26 @@
 <script setup lang="ts">
+  import { computed } from "vue"
   import { Load } from "@shared/components/common/Load"
+  import { LoadFilters } from "@shared/components/common/LoadFilters"
   import type { ListMeta } from "@shared/models/list"
 
-  defineProps<{
+  const props = withDefaults(defineProps<{
     center?: boolean
     error: Error | null
+    filters?: Record<string, string | undefined>
     i18nKey: string
     isPending: boolean
     meta?: ListMeta
+  }>(), {
+    filters: () => ({}),
+  })
+
+  const emit = defineEmits<{
+    clear: []
   }>()
+
+  // Search counts as a filter here. It only gets its own wording in the banner.
+  const isFiltered = computed(() => Object.values(props.filters).some((value) => !!value))
 </script>
 
 <template>
@@ -18,7 +30,19 @@
     :is-pending="isPending"
     :i18n-key="i18nKey"
   >
+    <LoadFilters
+      v-if="isFiltered"
+      :center="center"
+      :filters="filters"
+      @clear="emit('clear')"
+    />
+
     <slot v-if="meta?.total" />
+
+    <slot
+      v-else-if="!isFiltered && $slots.empty"
+      name="empty"
+    />
 
     <p
       v-else
