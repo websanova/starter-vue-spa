@@ -1,3 +1,5 @@
+const UserBookmarksActions = () => import('@/features/heading-actions/UserBookmarks.vue')
+
 const Layout = () => import('@/features/layouts/Console.vue')
 const LayoutConsole = () => import('@/features/layouts/ConsoleUser.vue')
 
@@ -88,7 +90,15 @@ export default [{
     }, {
       path: 'bookmarks',
       name: 'user-users-show-bookmarks',
-      component: UserBookmarks,
+      components: {
+        default: UserBookmarks,
+        actions: UserBookmarksActions,
+      },
+      meta: {
+        tabs: {
+          margin: false
+        }
+      },
     }, {
       path: 'edit',
       name: 'user-users-show-edit',

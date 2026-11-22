@@ -1,15 +1,11 @@
 <script setup lang="ts">
-  import { useBookmarkParams } from '@/composables/params/useBookmarkParams'
-  import { Heading, HeadingSearch } from '@shared/components/common/Heading'
+  import { Heading } from '@shared/components/common/Heading'
   import type { User } from '@/models/user'
 
   defineProps<{
     placeholder?: string
-    showSearch?: boolean
     user?: User
   }>()
-
-  const { search } = useBookmarkParams()
 </script>
 
 <template>
@@ -22,10 +18,11 @@
       {{ placeholder }}
     </template>
 
-    <HeadingSearch
-      v-if="showSearch"
-      v-model="search"
-      :placeholder="$t('features.ph.search')"
-    />
+    <div
+      v-if="$slots.actions"
+      class="flex items-center gap-2"
+    >
+      <slot name="actions" />
+    </div>
   </Heading>
 </template>
