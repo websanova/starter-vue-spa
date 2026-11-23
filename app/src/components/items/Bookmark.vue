@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { useRoute } from 'vue-router'
   import { BookmarkIcon, PencilIcon, StarIcon, Trash2Icon } from '@lucide/vue'
   import { Item, ItemDropdown } from '@shared/components/common/Item'
   import { Badge } from '@shared/components/ui/badge'
@@ -15,6 +16,8 @@
     (e: 'delete'): void
     (e: 'favorite'): void
   }>()
+
+  const route = useRoute()
 </script>
 
 <template>
@@ -65,7 +68,7 @@
         variant="secondary"
         :key="tag.id"
       >
-        <RouterLink :to="{ name: 'user-bookmarks', query: { tag_id: tag.id } }">
+        <RouterLink :to="{ name: 'user-bookmarks', query: { ...route.query, page: undefined, tag_id: tag.id } }">
           {{ tag.name }}
         </RouterLink>
       </Badge>
